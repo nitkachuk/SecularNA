@@ -54,11 +54,10 @@ def get_text():
 
 
 async def main():
-    bot_token = '6541742098:AAE-hirxm_Dtl-9kQMAcRjlWGpy_JwQ2rYQ'
     chat_id = '@SecularNA'
     message_to_send = get_text()
 
-    bot = Bot(token=bot_token)
+    bot = Bot( token = os.getenv('TELEGRAM_TOKEN') )
     await bot.send_message(chat_id=chat_id, text=message_to_send)
 
 asyncio.run(main())
