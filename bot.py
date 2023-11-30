@@ -5,26 +5,29 @@ import os
 import datetime
 
 def get_text():
-    # Получаем сегодняшний день и месяц
+    # Получаем сегодняшнюю дату
     today = datetime.date.today()
-    current_day = today.day
-    current_month = today.month
+    
+    # Добавляем один день к текущей дате, чтобы получить следующий день
+    next_day = today + datetime.timedelta(days=1)
+    next_day_day = next_day.day
+    next_day_month = next_day.month
 
     # Путь к папке "book"
     folder_path = 'book'
 
-    # Путь к папке текущего месяца
-    month_folder_path = os.path.join(folder_path, str(current_month))
+    # Путь к папке следующего месяца
+    month_folder_path = os.path.join(folder_path, str(next_day_month))
 
-    # Формируем имя файла сегодняшнего дня (например, "1.txt", "2.txt", ..., "31.txt")
-    today_file = f"{current_day}.txt"
+    # Формируем имя файла следующего дня (например, "1.txt", "2.txt", ..., "31.txt")
+    next_day_file = f"{next_day_day}.txt"
 
-    # Проверяем существование папки месяца
+    # Проверяем существование папки следующего месяца
     if os.path.exists(month_folder_path):
-        # Путь к файлу сегодняшнего дня в текущем месяце
-        file_path = os.path.join(month_folder_path, today_file)
+        # Путь к файлу следующего дня в следующем месяце
+        file_path = os.path.join(month_folder_path, next_day_file)
 
-        # Проверяем существование файла сегодняшнего дня
+        # Проверяем существование файла следующего дня
         if os.path.exists(file_path):
             # Открываем файл и считываем его содержимое
             with open(file_path, 'r', encoding='utf-8') as file:
@@ -48,16 +51,17 @@ def get_text():
                 # Возвращаем обработанный текст
                 return formatted_content
         else:
-            return f"Файл для {current_day} числа не найден в папке месяца {current_month}."
+            return f"Файл для {next_day_day} числа не найден в папке месяца {next_day_month}."
     else:
-        return f"Папка для месяца {current_month} не найдена в папке 'book'."
+        return f"Папка для месяца {next_day_month} не найдена в папке 'book'."
 
 
 async def main():
+    bot_token = '6541742098:AAE-hirxm_Dtl-9kQMAcRjlWGpy_JwQ2rYQ'
     chat_id = '@SecularNA'
     message_to_send = get_text()
 
-    bot = Bot( token = os.getenv('TELEGRAM_TOKEN') )
+    bot = Bot(token=bot_token)
     await bot.send_message(chat_id=chat_id, text=message_to_send)
 
 asyncio.run(main())
