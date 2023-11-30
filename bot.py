@@ -2,7 +2,8 @@ import asyncio
 from telegram import Bot
 
 import os
-os.getenv('TELEGRAM_TOKEN') 
+asd = os.getenv('TELEGRAM_TOKEN') 
+print( asd )
 import datetime
 
 def get_text():
