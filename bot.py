@@ -4,6 +4,8 @@ from telegram import Bot
 import os
 import datetime
 
+#asd
+
 def get_text():
     # Получаем сегодняшний день и месяц
     today = datetime.date.today()
