@@ -4,6 +4,8 @@ from telegram import Bot
 import os
 import datetime
 
+telegram_token = os.getenv('TELEGRAM_TOKEN')
+
 def get_text():
     # Получаем сегодняшний день и месяц
     today = datetime.date.today()
@@ -58,7 +60,7 @@ async def main():
     chat_id = '@SecularNA'
     message_to_send = get_text()
 
-    bot = Bot(token=bot_token)
+    bot = Bot(token=telegram_token)
     await bot.send_message(chat_id=chat_id, text=message_to_send)
 
 asyncio.run(main())
