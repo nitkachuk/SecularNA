@@ -2,7 +2,7 @@ name: Run Python script
 
 on:
   schedule:
-    - cron: '04 20 * * *' # Расписание (здесь - каждый день в 00:00 UTC)
+    - cron: '06 20 * * *' # Расписание (здесь - каждый день в 00:00 UTC)
 
 jobs:
   build:
@@ -15,7 +15,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.10' # Укажите вашу версию Python
+        python-version: '3.8' # Укажите вашу версию Python
 
     - name: Install dependencies
       run: |
