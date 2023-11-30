@@ -2,7 +2,7 @@ name: Run Python script
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Расписание (здесь - каждый день в 00:00 UTC)
+    - cron: '55 19 * * *' # Расписание (здесь - каждый день в 00:00 UTC)
 
 jobs:
   build:
