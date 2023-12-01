@@ -72,7 +72,11 @@ async def main():
     chat_id = '@SecularNA'
     message_to_send = get_text()
 
+    # Добавляем разметку Markdown для форматирования текста
+    formatted_message = f"*{message_to_send.splitlines()[0]}*\n\n_{message_to_send.splitlines()[1]}_\n\n**ТОЛЬКО СЕГОДНЯ:** {message_to_send.split('ТОЛЬКО СЕГОДНЯ:')[1]}"
+
     bot = Bot(token=bot_token)
-    await bot.send_message(chat_id=chat_id, text=message_to_send)
+    await bot.send_message(chat_id=chat_id, text=formatted_message)
 
 asyncio.run(main())
+
