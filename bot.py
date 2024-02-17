@@ -61,6 +61,7 @@ async def main():
     # постинг в канал "Реалисты"
     replacements = [
         {'keyword': 'АН', 'replaceword': 'АА'},
+        {'keyword': 'Базовый текст', 'replaceword': ''},
 
         {'keyword': 'Анонимные Наркоманы', 'replaceword': 'Анонимные Алкоголики'},
         {'keyword': 'Анонимные наркоманы', 'replaceword': 'Анонимные алкоголики'},
