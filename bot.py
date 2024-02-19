@@ -61,7 +61,6 @@ async def main():
     # постинг в канал "Реалисты"
     replacements = [
         {'keyword': 'АН', 'replaceword': 'АА'},
-        {'keyword': 'Базовый текст', 'replaceword': ''},
 
         {'keyword': 'Анонимные Наркоманы', 'replaceword': 'Анонимные Алкоголики'},
         {'keyword': 'Анонимные наркоманы', 'replaceword': 'Анонимные алкоголики'},
@@ -123,6 +122,11 @@ async def main():
         keyword = replacement['keyword']
         replaceword = replacement['replaceword']
         message_to_send_2 = message_to_send_2.replace(keyword, replaceword)
+
+    lines = message_to_send_2.split('\n')
+    lines.insert(0, "Атеистический ежедневник АА\n")
+    del lines[5]
+    message_to_send_2 = '\n'.join(lines)
 
     bot_token_2 = '6541742098:AAE-hirxm_Dtl-9kQMAcRjlWGpy_JwQ2rYQ'
     chat_id_2 = '-1002137516831'
