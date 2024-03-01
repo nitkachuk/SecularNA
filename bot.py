@@ -85,20 +85,24 @@ async def main():
         {'keyword': 'Наркоманов',   'replaceword': 'Алкоголиков'},
         {'keyword': 'Наркоманы',    'replaceword': 'Алкоголики'},
         {'keyword': 'Наркоман',     'replaceword': 'Алкоголик'},
+        {'keyword': 'Наркоманам',   'replaceword': 'Алкоголикам'},
 
         {'keyword': 'наркоманов',   'replaceword': 'алкоголиков'},
         {'keyword': 'наркоманы',    'replaceword': 'алкоголики'},
         {'keyword': 'наркоман',     'replaceword': 'алкоголик'},
+        {'keyword': 'наркоманам',   'replaceword': 'алкоголикам'},
 
         {'keyword': 'Наркотиков',       'replaceword': 'Алкоголя'},
         {'keyword': 'Наркотики',        'replaceword': 'Алкоголь'},
         {'keyword': 'Наркотиками',      'replaceword': 'Алкоголем'},
         {'keyword': 'Наркотик',         'replaceword': 'Алкоголь'},
+        {'keyword': 'Наркотикам',       'replaceword': 'Алкоголю'},
 
         {'keyword': 'наркотиков',       'replaceword': 'алкоголя'},
         {'keyword': 'наркотики',        'replaceword': 'алкоголь'},
         {'keyword': 'наркотиками',      'replaceword': 'алкоголем'},
         {'keyword': 'наркотик',         'replaceword': 'алкоголь'},
+        {'keyword': 'наркотикам',       'replaceword': 'алкоголю'},
 
         {'keyword': 'Наркозависимость',     'replaceword': 'Алкозависимость'},
         {'keyword': 'Наркозависимости',     'replaceword': 'Алкозависимости'},
@@ -106,6 +110,7 @@ async def main():
         {'keyword': 'Наркозависимых',       'replaceword': 'Алкозависимых'},
         {'keyword': 'Наркозависимому',      'replaceword': 'Алкозависимому'},
         {'keyword': 'Наркозависимыми',      'replaceword': 'Алкозависимыми'},
+        {'keyword': 'Наркозависимым',       'replaceword': 'Алкозависимым'},
 
         {'keyword': 'наркозависимость',     'replaceword': 'алкозависимость'},
         {'keyword': 'наркозависимости',     'replaceword': 'алкозависимости'},
@@ -113,6 +118,7 @@ async def main():
         {'keyword': 'наркозависимых',       'replaceword': 'алкозависимых'},
         {'keyword': 'наркозависимому',      'replaceword': 'алкозависимому'},
         {'keyword': 'наркозависимыми',      'replaceword': 'алкозависимыми'},
+        {'keyword': 'наркозависимым',       'replaceword': 'алкозависимым'},
 
         {'keyword': '', 'replaceword': ''}
     ]
