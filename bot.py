@@ -3,7 +3,7 @@ from telegram import Bot
 from g4f.client import Client
 
 import os
-import datetime
+import datetime 
 
 def get_text():
     # часы запуска скрипта на гитхабе (для выбора файла нужного дня - не вчерашнего, а завтрашнего)
