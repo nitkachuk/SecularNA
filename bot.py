@@ -1,5 +1,6 @@
 import asyncio
 from telegram import Bot
+from openai import OpenAI
 
 import os
 import datetime
@@ -52,12 +53,14 @@ def get_text():
 async def main():
     # постинг в канал "Светский ежедневник"
     bot_token = '6541742098:AAE-hirxm_Dtl-9kQMAcRjlWGpy_JwQ2rYQ'
+
     chat_id = '@SecularNA'
     message_to_send = get_text()
 
     bot = Bot(token=bot_token)
     await bot.send_message(chat_id=chat_id, text=message_to_send)
     
+
     # постинг в канал "Реалисты"
     replacements = [
         {'keyword': 'АН', 'replaceword': 'АА'},
@@ -133,13 +136,33 @@ async def main():
 
     lines = message_to_send_2.split('\n')
     lines.insert(0, "Атеистический ежедневник АА\n")
+    
     del lines[5]
     message_to_send_2 = '\n'.join(lines)
-
-    bot_token_2 = '6541742098:AAE-hirxm_Dtl-9kQMAcRjlWGpy_JwQ2rYQ'
     chat_id_2 = '-1002137516831'
 
-    bot = Bot(token=bot_token_2)
+    bot = Bot(token=bot_token)
     await bot.send_message(chat_id=chat_id_2, text=message_to_send_2)
+
+
+    # постинг в канал "Так говорил Билл"
+    chat_id_3 = '@soSaidBill'
+
+    client = OpenAI()
+    role_system = "Имитируй мышление анонимного зависимого, который проходит лечение от зависимости по программе 12 шагов. _Поделись опытом, силой и надеждой. Выскажись по Документу, который тебе предложат, исключая полностью бога, высшие силы, мифические существа, элементы культа, молитвы, медитации, слова по типу 'душа', 'духовность', 'дух'. Полностью светское высказывание. В высказывании придерживайся предложенного Документа на 20-50%. Говори от себя, про себя. избегая местоимений 'ты', 'вы', 'они', 'он', 'она', 'оно'. Формат вывода текста обязательно такой: сделай первую строку с точной датой из Документа, потом пустая строка, затем абзац сгенерированного тобой текста, затем пустая строка и последняя строчка сгенерированного тобой текста, без слов 'только сегодня', как завершение."
+    role_user = get_text()
+
+    completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": role_system},
+            {"role": "user", "content": role_user}
+        ]
+    )
+
+    message_to_send_3 = completion.choices[0].message.content
+
+    bot = Bot(token=bot_token)
+    await bot.send_message(chat_id=chat_id_3, text=message_to_send_3)
 
 asyncio.run(main())
