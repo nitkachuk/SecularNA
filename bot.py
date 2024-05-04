@@ -141,6 +141,7 @@ async def main():
     message_to_send_2 = '\n'.join(lines)
     chat_id_2 = '-1002137516831'
 
+    bot = Bot(token=bot_token)
     await bot.send_message(chat_id=chat_id_2, text=message_to_send_2)
 
 
