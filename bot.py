@@ -6,7 +6,7 @@ import os
 import datetime
 
 def get_text():
-    # часы запуска скрипта на гитхабе
+    # часы запуска скрипта на гитхабе (для выбора файла нужного дня - не вчерашнего, а завтрашнего)
     send_hour = 17
     send_minute = 0
     
@@ -52,13 +52,13 @@ def get_text():
 
 async def main():
     # постинг в канал "Светский ежедневник"
-    bot_token = '6541742098:AAE-hirxm_Dtl-9kQMAcRjlWGpy_JwQ2rYQ'
+    bot_token = os.environ.get('TELEGRAM_TOKEN')       # берем токен Светского бота из секрета github
 
     chat_id = '@SecularNA'
     message_to_send = get_text()
 
     bot = Bot(token=bot_token)
-    await bot.send_message(chat_id=chat_id, text=message_to_send)
+    #await bot.send_message(chat_id=chat_id, text=message_to_send)
     
 
     # постинг в канал "Реалисты"
@@ -142,7 +142,7 @@ async def main():
     chat_id_2 = '-1002137516831'
 
     bot = Bot(token=bot_token)
-    await bot.send_message(chat_id=chat_id_2, text=message_to_send_2)
+    #await bot.send_message(chat_id=chat_id_2, text=message_to_send_2)
 
 
     # постинг в канал "Так говорил Билл"
