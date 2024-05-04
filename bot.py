@@ -58,7 +58,7 @@ async def main():
     message_to_send = get_text()
 
     bot = Bot(token=bot_token)
-    #await bot.send_message(chat_id=chat_id, text=message_to_send)
+    await bot.send_message(chat_id=chat_id, text=message_to_send)
     return
 
     # постинг в канал "Реалисты"
@@ -141,7 +141,6 @@ async def main():
     message_to_send_2 = '\n'.join(lines)
     chat_id_2 = '-1002137516831'
 
-    bot = Bot(token=bot_token)
     #await bot.send_message(chat_id=chat_id_2, text=message_to_send_2)
 
 
@@ -164,8 +163,8 @@ async def main():
     )
 
     message_to_send_3 = completion.choices[0].message.content
+    print( message_to_send_3 )
 
-    bot = Bot(token=bot_token)
     await bot.send_message(chat_id=chat_id_3, text=message_to_send_3)
 
 asyncio.run(main())
