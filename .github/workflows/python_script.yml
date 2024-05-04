@@ -2,7 +2,7 @@ name: Run Python script
 
 on:
   schedule:
-    - cron: '03 15 * * *' 
+    - cron: '30 15 * * *' 
 
 jobs:
   build:
@@ -26,3 +26,4 @@ jobs:
       run: python bot.py 
       env:
         TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+        OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
