@@ -7,7 +7,7 @@ import datetime
 
 def get_text():
     # часы запуска скрипта на гитхабе (для выбора файла нужного дня - не вчерашнего, а завтрашнего)
-    send_hour = 17
+    send_hour = 17 
     send_minute = 0
     
     current_hour = datetime.datetime.now().hour
