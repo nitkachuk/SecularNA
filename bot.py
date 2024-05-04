@@ -146,6 +146,7 @@ async def main():
 
     # постинг в канал "Так говорил Билл"
     chat_id_3 = '@BillSpeaks'
+    await bot.send_message(chat_id=chat_id_3, text='test')
 
     openai_token = os.environ.get('OPENAI_TOKEN')       # берем токен нейросети из секрета github
     
@@ -163,7 +164,6 @@ async def main():
     )
 
     message_to_send_3 = completion.choices[0].message.content
-    print( message_to_send_3 )
 
     await bot.send_message(chat_id=chat_id_3, text=message_to_send_3)
 
