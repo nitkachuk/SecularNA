@@ -163,7 +163,7 @@ async def main():
     message_to_send_3 = message_to_send_3.replace(role_system, '')    # удаляем возможное присутствие системных настроек в выводе результата
     message_to_send_3 = message_to_send_3.replace('Assistant:', '')
     message_to_send_3 = message_to_send_3.replace('assistant:', '')
-    message_to_send_3 = message_to_send_3.cleaned_message = message_to_send_3.replace('\n\n', '\n')
+    message_to_send_3 = message_to_send_3.replace('\n\n', '\n')
 
     await bot.send_message( chat_id=chat_id_3, text=message_to_send_3 )
 
