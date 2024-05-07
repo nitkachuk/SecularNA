@@ -166,12 +166,13 @@ async def main():
 
     await bot.send_message( chat_id=chat_id_3, text=message_to_send_3 )
 
-
+    '''
     # тестировать ограничение по времени
     chat_id_4 = '@my_bot_test_666'
 
     while True:
         await bot.send_message( chat_id=chat_id_4, text="test message" )
         time.sleep(15 * 60)
+    '''
 
 asyncio.run(main())
