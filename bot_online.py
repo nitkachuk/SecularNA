@@ -2,7 +2,7 @@ import os
 import signal
 import asyncio
 from telegram import Bot, Update
-from telegram import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 from g4f.client import Client
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
