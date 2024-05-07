@@ -36,7 +36,7 @@ async def handle_message(update: Update, context: CallbackContext):
     await context.bot.send_message(chat_id=update.message.chat_id, text=generated_response)
 
 # Создаем и настраиваем бота
-updater = Updater(token=telegram_token, use_context=True)
+updater = Application.builder().token(telegram_token).build()
 dispatcher = updater.dispatcher
 
 # Регистрируем обработчик всех входящих сообщений от пользователя
