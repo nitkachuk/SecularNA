@@ -1,3 +1,4 @@
+import asyncio
 import telebot
 from g4f.client import Client
 
