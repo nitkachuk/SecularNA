@@ -1,23 +1,22 @@
-import os
-from telegram import Bot
+import telebot
+from g4f.client import Client
 
-# Получаем токен из переменной окружения
 telegram_token = os.getenv('TELEGRAM_TOKEN')
+bot = telebot.TeleBot( telegram_token )
+client = Client()
 
-# ID чата или канала, куда будем отправлять сообщения
-channel_id = '@my_bot_test_666'
+@bot.message_handler(func=lambda message: True)
+def echo_all(message):
+    sent_message = bot.reply_to(message, 'Секундочку...')  # ответ 1
 
-# Функция для отправки сообщения
-def send_message(message):
-    bot = Bot(token=telegram_token)
-    bot.send_message(chat_id=channel_id, text=message)
+    completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[ 
+            {"role": "user", "content": message.text}
+        ],
+    )
 
-# Отправляем сообщение "bot start" при запуске
-send_message("bot start")
+    bot.delete_message(message.chat.id, sent_message.message_id)  # удаление ответа 1
+    bot.reply_to(message, completion.choices[0].message.content)  # ответ 2
 
-# Действия бота...
-
-# Например, здесь можно добавить обработчики для ответа на сообщения пользователей
-
-# При выключении отправляем сообщение "bot stop"
-send_message("bot stop")
+bot.polling()
