@@ -3,6 +3,9 @@ import asyncio
 import telebot
 from g4f.client import Client
 
+# установка временной переменной среды для yml-файла с проверкой
+os.system('echo "::set-env name=MY_ENV_VAR::some_value"')
+
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot( telegram_token )
 client = Client()
