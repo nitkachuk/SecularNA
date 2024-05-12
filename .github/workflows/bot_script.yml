@@ -2,7 +2,7 @@ name: Scheduled Bot Run
 
 on:
   schedule:
-    - cron: '*/1 * * * *' # Запускать каждую минуту
+    - cron: '*/5 * * * *' # Запускать каждую минуту
 
 jobs:
   run_bot:
