@@ -2,6 +2,7 @@ name: Scheduled Bot Run
 
 on:
   schedule:
+    - cron: '*/5 * * * *' # Запускать каждые 6 часов
 
 jobs:
   run_bot:
@@ -22,7 +23,7 @@ jobs:
 
       - name: Check if BOT_ONLINE env variable exists
         run: |
-          if [ -z "$BOT_ONLINE" ]; then
+          if [ -z "${{ env.BOT_ONLINE }}" ]; then
             echo "BOT_ONLINE environment variable does not exist"
             python bot_online.py
           else
