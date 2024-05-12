@@ -2,7 +2,6 @@ name: Scheduled Bot Run
 
 on:
   schedule:
-    - cron: '0 */6 * * *' # Запускать каждые 6 часов
 
 jobs:
   run_bot:
