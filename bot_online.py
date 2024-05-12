@@ -4,7 +4,7 @@ import telebot
 from g4f.client import Client
 
 # установка временной переменной среды для yml-файла с проверкой
-os.system('echo "::set-env name=BOT_ONLINE::1"')
+os.environ['BOT_ONLINE'] = '1'
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot( telegram_token )
