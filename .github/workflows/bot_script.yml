@@ -21,14 +21,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Check if BOT_ONLINE env variable exists
-        run: |
-          if [ -z "${{ env.BOT_ONLINE }}" ]; then
-            echo "BOT_ONLINE environment variable does not exist"
-            python bot_online.py
-          else
-            echo "BOT_ONLINE environment variable exists, skipping bot execution"
-          fi
+      - name: Run the bot
+        run: python bot_online.py
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
