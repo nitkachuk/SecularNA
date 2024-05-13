@@ -46,6 +46,7 @@ def echo_all(message):
             # Обработка исключения, чтобы скрипт не завершался при ошибке API Telegram
             err = "Произошла ошибка API Telegram"
             print(err, e)
+    
             bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
             continue
 
@@ -53,6 +54,7 @@ def echo_all(message):
             # Другие исключения
             err = "Произошла неизвестная ошибка"
             print(err, e)
+            
             bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
             continue 
 
