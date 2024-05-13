@@ -7,8 +7,6 @@ telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
 client = Client()
 
-sent_message = bot.reply_to(message, 'старт...')  # ответ 1
-
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
     sent_message = bot.reply_to(message, 'Секундочку...')  # ответ 1
