@@ -1,6 +1,7 @@
 import os
 import asyncio
 import telebot
+import g4f
 from g4f.client import Client
 import unicodedata
 
@@ -26,7 +27,7 @@ def echo_all(message):
                 sent_message = bot.reply_to(message, 'Секундочку...')  # ответ 1
 
             completion = client.chat.completions.create(
-                model="gpt-3.5-turbo",
+                model=g4f.models.gpt_4,
                 messages=[
                     #{"role": "system", "content": ''},
                     {"role": "user", "content": message.text}
