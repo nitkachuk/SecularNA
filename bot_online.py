@@ -1,7 +1,6 @@
 import os
 import asyncio
 import telebot
-import g4f
 from g4f.client import Client
 import unicodedata
 
@@ -28,19 +27,19 @@ def echo_all(message):
                 sent_message = bot.reply_to(message, 'Секундочку...')  # ответ 1
 
             completion = client.chat.completions.create(
-                model=g4f.models.gpt_4,
-                messages=[
-                    #{"role": "system", "content": ''},
-                    {"role": "user", "content": message.text}
-                ],
+                model="gpt-3.5-turbo",
+                messages=[ 
+                    {"role": "system", "content": role_system},
+                    {"role": "user", "content": role_user}
+                 ],
             )
 
-            if has_glyphs(completion.choices[0].message.content):
+            if has_glyphs( completion.choices[0].message.content ):
                 bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
                 continue
 
             bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
-            bot.reply_to(message, completion.choices[0].message.content)  # ответ 2
+            bot.reply_to( message, completion.choices[0].message.content )  # ответ 2
 
             break
 
