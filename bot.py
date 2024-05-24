@@ -174,6 +174,8 @@ async def main():
         message_to_send_3 = message_to_send_3.replace(role_system, '')    # удаляем возможное присутствие системных настроек в выводе результата
         message_to_send_3 = message_to_send_3.replace('Assistant:', '')
         message_to_send_3 = message_to_send_3.replace('assistant:', '')
+        message_to_send_3 = message_to_send_3.replace('Конец', '')
+        message_to_send_3 = message_to_send_3.replace('конец', '')
 
         if has_glyphs(message_to_send_3):
             print("bullshit. try again...")
