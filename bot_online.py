@@ -35,8 +35,7 @@ def echo_all(message):
             completion = client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[ 
-                    {"role": "system", "content": role_system},
-                    {"role": "user", "content": role_user}
+                    {"role": "user", "content": message}
                  ],
             )
 
