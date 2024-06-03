@@ -178,11 +178,11 @@ async def main():
         message_to_send_3 = message_to_send_3.replace('конец', '')
 
         if has_glyphs(message_to_send_3):
-            print("bullshit. try again...")
+            print("has glyphs. try again...")
             continue
 
         if role_user in message_to_send_3:
-            print("bullshit. try again...")
+            print("role_user in message. try again...")
             continue
 
         if len( message_to_send_3.split("\n\n") ) > 3:
