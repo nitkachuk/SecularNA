@@ -185,7 +185,7 @@ async def main():
             print("bullshit. try again...")
             continue
 
-        if message_to_send_3.split("\n\n") > 3:
+        if len( message_to_send_3.split("\n\n") ) > 3:
             print("once again")
             continue
 
