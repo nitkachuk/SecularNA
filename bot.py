@@ -185,10 +185,6 @@ async def main():
             print("role_user in message. try again...")
             continue
 
-        if len( message_to_send_3.split("\n\n") ) > 3:
-            print("once again")
-            continue
-
         await bot.send_message( chat_id=chat_id_3, text=message_to_send_3 )
         break
 
