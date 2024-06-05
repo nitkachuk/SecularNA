@@ -14,19 +14,19 @@ def has_glyphs(text):
             return True
     return False
 
-def get_last_five_messages(messages, limit=3000):
-    last_five_messages = []
+def get_last_messages(messages, limit=3000):
+    last_messages = []
     char_count = 0
 
-    for message in reversed(messages[-5:]):
+    for message in reversed(messages):
         message_text = message.text
         if char_count + len(message_text) <= limit:
-            last_five_messages.append(message_text)
+            last_messages.append(message_text)
             char_count += len(message_text)
         else:
             break
 
-    return "\n".join(last_five_messages)
+    return "\n".join(last_messages)
 
 #@bot.message_handler(func=lambda message: True)
 @bot.message_handler(func=lambda message: message.from_user.username == 'kristina_superstar')
@@ -35,7 +35,10 @@ def echo_all(message):
     attempt_count = 0  # счетчик попыток отправки
     chat_id = message.chat.id
     messages = bot.get_chat_history(chat_id, limit=5)
-    last_messages_context = "Контекст предыдущих сообщений: " +get_last_five_messages(messages)
+    if len(messages) < 5:
+        last_messages_text = get_last_messages(messages)
+    else:
+        last_messages_text = get_last_messages(messages[-5:])
     
     while True:
         try:
