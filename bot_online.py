@@ -37,7 +37,7 @@ def echo_all(message):
             completion = client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
-                    {"role": "system", "content": 'Ответь по-русски без иероглифов'},
+                    {"role": "system", "content": 'Ответь по-русски без иероглифов. Запоминай контекст как если бы я говорил с психологом или другом.'},
                     {"role": "user", "content": message.text}
                 ],
             )
