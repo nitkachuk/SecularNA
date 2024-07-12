@@ -8,18 +8,18 @@ telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
 client = Client()
 
-# Переменная для хранения контекста
-context = ''
-
 def has_glyphs(text):
     for char in text:
         if unicodedata.category(char) == 'Lo':
             return True
     return False
 
+#@bot.message_handler(func=lambda message: True)
+#@bot.message_handler(func=lambda message: message.from_user.username == 'kristina_superstar')
+
 @bot.message_handler(func=lambda message: message.from_user.username in ['kristina_superstar', 'gothicspring'])
+
 def echo_all(message):
-    global context  # используем глобальную переменную
     attempt_count = 0  # счетчик попыток отправки
     while True:
         try:
@@ -34,16 +34,10 @@ def echo_all(message):
                 bot.reply_to(message, "Ошибка нейросети")  # ответ 2
                 break
 
-            # Обновляем контекст
-            context = f"{message.text}\n" + context
-            if len(context) > 3000:
-                context = context[:3000]  # обрезаем контекст до 3000 символов
-
             completion = client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
-                    {"role": "system", "content": 'Ответь по-русски без иероглифов. Запоминай контекст как если бы я говорил с психологом или другом.'},
-                    {"role": "system", "content": context},  # добавляем контекст
+                    {"role": "system", "content": ''},
                     {"role": "user", "content": message.text}
                 ],
             )
