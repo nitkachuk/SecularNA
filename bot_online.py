@@ -34,7 +34,7 @@ def echo_all(message):
                 bot.reply_to(message, "Ошибка нейросети")  # ответ 2
                 break
 
-            txt = message.text + " по-русски")
+            txt = message.text + " по-русски"
             
             completion = client.chat.completions.create(
                 model="gpt-3.5-turbo",
