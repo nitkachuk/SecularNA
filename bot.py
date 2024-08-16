@@ -68,7 +68,7 @@ async def main():
     try:
         await bot.send_message(chat_id=chat_id, text=message_to_send)
     except Exception:
-        pass
+        print( "Не удалось отправить пост в канал ежедневника" )
 
     # постинг в канал "Реалисты"
     replacements = [
@@ -154,12 +154,12 @@ async def main():
     try:
         await bot.send_message(chat_id=chat_id_realists, text=message_to_send_2)
     except Exception:
-        pass
+        print( "Не удалось отправить пост в Реалистов" )
 
     try:
         await bot.send_message(chat_id=chat_id_evolution, text=message_to_send_2)
     except Exception:
-        pass
+        print( "Не удалось отправить пост в Эволюцию" )
 
     # постинг в канал "Так говорил Билл"
     chat_id_3 = '@BillSpeaks'
@@ -199,7 +199,7 @@ async def main():
         try:
             await bot.send_message( chat_id=chat_id_3, text=message_to_send_3 )
         except Exception:
-            pass
+            print( "Не удалось отправить пост в канал Билла Уилсона" )
             
         break
 
