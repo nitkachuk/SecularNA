@@ -146,9 +146,11 @@ async def main():
     
     del lines[5]
     message_to_send_2 = '\n'.join(lines)
-    chat_id_2 = '-1002137516831'
+    chat_id_realists  = '-1002137516831'
+    chat_id_evolution = '-1002201877923'
 
-    await bot.send_message(chat_id=chat_id_2, text=message_to_send_2)
+    await bot.send_message(chat_id=chat_id_realists, text=message_to_send_2)
+    await bot.send_message(chat_id=chat_id_evolution, text=message_to_send_2)
 
 
     # постинг в канал "Так говорил Билл"
