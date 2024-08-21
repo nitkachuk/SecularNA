@@ -58,120 +58,205 @@ def get_text():
         return f"Папка для месяца {current_month} не найдена в папке 'book'."
 
 async def main():
-    # постинг в канал "Светский ежедневник"
     bot_token = os.getenv('TELEGRAM_TOKEN')
+    bot = Bot(token=bot_token)
 
-    chat_id = '@SecularNA'
+
+    # уникализация ежедневника (для всех сообществ)
+    replacements = [
+
+        {'keyword': 'Сообщество АН',  'replaceword': 'Сообщество'},
+        {'keyword': 'Сообщества АН',  'replaceword': 'Сообщества'},
+        {'keyword': 'Сообществу АН',  'replaceword': 'Сообществу'},
+        {'keyword': 'Сообществом АН', 'replaceword': 'Сообществом'},
+        {'keyword': 'Сообществе АН',  'replaceword': 'Сообществе'},
+
+        {'keyword': 'сообщество АН',  'replaceword': 'сообщество'},
+        {'keyword': 'сообщества АН',  'replaceword': 'сообщества'},
+        {'keyword': 'сообществу АН',  'replaceword': 'сообществу'},
+        {'keyword': 'сообществом АН', 'replaceword': 'сообществом'},
+        {'keyword': 'сообществе АН',  'replaceword': 'сообществе'},
+
+        {'keyword': 'АН', 'replaceword': 'Анонимные зависимые'},
+
+        {'keyword': 'Анонимные Наркоманы', 'replaceword': 'Анонимные Зависимые'},
+        {'keyword': 'Анонимные наркоманы', 'replaceword': 'Анонимные зависимые'},
+        {'keyword': 'анонимные наркоманы', 'replaceword': 'анонимные зависимые'},
+        {'keyword': 'анонимные Наркоманы', 'replaceword': 'анонимные Зависимые'},
+
+        {'keyword': 'Анонимных Наркоманов', 'replaceword': 'Анонимных Зависимых'},
+        {'keyword': 'Анонимных наркоманов', 'replaceword': 'Анонимных зависимых'},
+        {'keyword': 'анонимных наркоманов', 'replaceword': 'анонимных зависимых'},
+        {'keyword': 'анонимных Наркоманов', 'replaceword': 'анонимных Зависимых'},
+
+        {'keyword': 'Анонимным Наркоманам', 'replaceword': 'Анонимным Зависимым'},
+        {'keyword': 'Анонимным наркоманам', 'replaceword': 'Анонимным зависимым'},
+        {'keyword': 'анонимным наркоманам', 'replaceword': 'анонимным зависимым'},
+        {'keyword': 'анонимным Наркоманам', 'replaceword': 'анонимным Зависимым'},
+
+        {'keyword': 'Анонимными Наркоманами', 'replaceword': 'Анонимными Зависимыми'},
+        {'keyword': 'Анонимными наркоманами', 'replaceword': 'Анонимными зависимыми'},
+        {'keyword': 'анонимными наркоманами', 'replaceword': 'анонимными зависимыми'},
+        {'keyword': 'анонимными Наркоманами', 'replaceword': 'анонимными Зависимыми'},
+
+        {'keyword': 'Наркоманов',   'replaceword': 'Зависимых'},
+        {'keyword': 'Наркоманы',    'replaceword': 'Зависимые'},
+        {'keyword': 'Наркоман',     'replaceword': 'Зависимый'},
+        {'keyword': 'Наркоманам',   'replaceword': 'Зависимым'},
+
+        {'keyword': 'наркоманов',   'replaceword': 'зависимых'},
+        {'keyword': 'наркоманы',    'replaceword': 'зависимые'},
+        {'keyword': 'наркоман',     'replaceword': 'зависимый'},
+        {'keyword': 'наркоманам',   'replaceword': 'зависимым'},
+
+        {'keyword': 'Наркотиков',       'replaceword': 'Веществ'},
+        {'keyword': 'Наркотики',        'replaceword': 'Вещества'},
+        {'keyword': 'Наркотиками',      'replaceword': 'Веществами'},
+        {'keyword': 'Наркотикам',       'replaceword': 'Веществам'},
+        {'keyword': 'Наркотик',         'replaceword': 'Вещество'},
+
+        {'keyword': 'наркотиков',       'replaceword': 'веществ'},
+        {'keyword': 'наркотики',        'replaceword': 'вещества'},
+        {'keyword': 'наркотиками',      'replaceword': 'веществами'},
+        {'keyword': 'наркотикам',       'replaceword': 'веществам'},
+        {'keyword': 'наркотик',         'replaceword': 'вещество'},
+
+        {'keyword': 'Наркозависимость',     'replaceword': 'Зависимость'},
+        {'keyword': 'Наркозависимости',     'replaceword': 'Зависимости'},
+        {'keyword': 'Наркозависимый',       'replaceword': 'Зависимый'},
+        {'keyword': 'Наркозависимых',       'replaceword': 'Зависимых'},
+        {'keyword': 'Наркозависимому',      'replaceword': 'Зависимому'},
+        {'keyword': 'Наркозависимыми',      'replaceword': 'Зависимыми'},
+        {'keyword': 'Наркозависимым',       'replaceword': 'Зависимым'},
+        {'keyword': 'Наркозависим',         'replaceword': 'Зависим'},
+
+        {'keyword': 'наркозависимость',     'replaceword': 'зависимость'},
+        {'keyword': 'наркозависимости',     'replaceword': 'зависимости'},
+        {'keyword': 'наркозависимый',       'replaceword': 'зависимый'},
+        {'keyword': 'наркозависимых',       'replaceword': 'зависимых'},
+        {'keyword': 'наркозависимому',      'replaceword': 'зависимому'},
+        {'keyword': 'наркозависимыми',      'replaceword': 'зависимыми'},
+        {'keyword': 'наркозависимым',       'replaceword': 'зависимым'},
+        {'keyword': 'наркозависим',         'replaceword': 'зависим'},
+
+
+        {'keyword': 'Сообщество АА', 'replaceword':     'Сообщество'},
+        {'keyword': 'Сообщества АА', 'replaceword':     'Сообщества'},
+        {'keyword': 'Сообществу АА', 'replaceword':     'Сообществу'},
+        {'keyword': 'Сообществом АА', 'replaceword':    'Сообществом'},
+        {'keyword': 'Сообществе АА', 'replaceword':     'Сообществе'},
+
+        {'keyword': 'сообщество АА', 'replaceword':     'сообщество'},
+        {'keyword': 'сообщества АА', 'replaceword':     'сообщества'},
+        {'keyword': 'сообществу АА', 'replaceword':     'сообществу'},
+        {'keyword': 'сообществом АА', 'replaceword':    'сообществом'},
+        {'keyword': 'сообществе АА', 'replaceword':     'сообществе'},
+
+        {'keyword': 'АА', 'replaceword': 'Анонимные зависимые'},
+
+        {'keyword': 'Анонимные Алкоголики', 'replaceword': 'Анонимные Зависимые'},
+        {'keyword': 'Анонимные алкоголики', 'replaceword': 'Анонимные зависимые'},
+        {'keyword': 'анонимные алкоголики', 'replaceword': 'анонимные зависимые'},
+        {'keyword': 'анонимные Алкоголики', 'replaceword': 'анонимные Зависимые'},
+
+        {'keyword': 'Анонимных Алкоголиков', 'replaceword': 'Анонимных Зависимых'},
+        {'keyword': 'Анонимных алкоголиков', 'replaceword': 'Анонимных зависимых'},
+        {'keyword': 'анонимных алкоголиков', 'replaceword': 'анонимных зависимых'},
+        {'keyword': 'анонимных Алкоголиков', 'replaceword': 'анонимных Зависимых'},
+
+        {'keyword': 'Анонимным Алкоголикам', 'replaceword': 'Анонимным Зависимым'},
+        {'keyword': 'Анонимным алкоголикам', 'replaceword': 'Анонимным зависимым'},
+        {'keyword': 'анонимным алкоголикам', 'replaceword': 'анонимным зависимым'},
+        {'keyword': 'анонимным Алкоголикам', 'replaceword': 'анонимным Зависимым'},
+
+        {'keyword': 'Анонимными Алкоголиками', 'replaceword': 'Анонимными Зависимыми'},
+        {'keyword': 'Анонимными алкоголиками', 'replaceword': 'Анонимными зависимыми'},
+        {'keyword': 'анонимными алкоголиками', 'replaceword': 'анонимными зависимыми'},
+        {'keyword': 'анонимными Алкоголиками', 'replaceword': 'анонимными Зависимыми'},
+
+        {'keyword': 'Алкоголиков',   'replaceword': 'Зависимых'},
+        {'keyword': 'Алкоголики',    'replaceword': 'Зависимые'},
+        {'keyword': 'Алкоголик',     'replaceword': 'Зависимый'},
+        {'keyword': 'Алкоголикам',   'replaceword': 'Зависимым'},
+
+        {'keyword': 'алкоголиков',   'replaceword': 'зависимых'},
+        {'keyword': 'алкоголики',    'replaceword': 'зависимые'},
+        {'keyword': 'алкоголик',     'replaceword': 'зависимый'},
+        {'keyword': 'алкоголикам',   'replaceword': 'зависимым'},
+
+        {'keyword': 'Алкоголя',       'replaceword': 'Веществ'},
+        {'keyword': 'Алкоголь',       'replaceword': 'Вещества'},
+        {'keyword': 'Алкоголем',      'replaceword': 'Веществами'},
+        {'keyword': 'Алкоголю',       'replaceword': 'Веществам'},
+        {'keyword': 'Алкоголь',       'replaceword': 'Вещество'},
+
+        {'keyword': 'алкоголя',       'replaceword': 'веществ'},
+        {'keyword': 'алкоголь',       'replaceword': 'вещества'},
+        {'keyword': 'алкоголем',      'replaceword': 'веществами'},
+        {'keyword': 'алкоголю',       'replaceword': 'веществам'},
+        {'keyword': 'алкоголь',       'replaceword': 'вещество'},
+
+        {'keyword': 'Алкозависимость',     'replaceword': 'Зависимость'},
+        {'keyword': 'Алкозависимости',     'replaceword': 'Зависимости'},
+        {'keyword': 'Алкозависимый',       'replaceword': 'Зависимый'},
+        {'keyword': 'Алкозависимых',       'replaceword': 'Зависимых'},
+        {'keyword': 'Алкозависимому',      'replaceword': 'Зависимому'},
+        {'keyword': 'Алкозависимыми',      'replaceword': 'Зависимыми'},
+        {'keyword': 'Алкозависимым',       'replaceword': 'Зависимым'},
+        {'keyword': 'Алкозависим',         'replaceword': 'Зависим'},
+
+        {'keyword': 'алкозависимость',     'replaceword': 'зависимость'},
+        {'keyword': 'алкозависимости',     'replaceword': 'зависимости'},
+        {'keyword': 'алкозависимый',       'replaceword': 'зависимый'},
+        {'keyword': 'алкозависимых',       'replaceword': 'зависимых'},
+        {'keyword': 'алкозависимому',      'replaceword': 'зависимому'},
+        {'keyword': 'алкозависимыми',      'replaceword': 'зависимыми'},
+        {'keyword': 'алкозависимым',       'replaceword': 'зависимым'},
+        {'keyword': 'алкозависим',         'replaceword': 'зависим'},
+
+
+        {'keyword': '', 'replaceword': ''}
+    ]
+
     message_to_send = get_text()
 
-    bot = Bot(token=bot_token)
+    for replacement in replacements:
+        keyword = replacement['keyword']
+        replaceword = replacement['replaceword']
+        message_to_send = message_to_send.replace(keyword, replaceword)
+
+
+    # постинг в канал "Светский ежедневник"
+    chat_id = '@SecularNA'
+    
     try:
         await bot.send_message(chat_id=chat_id, text=message_to_send)
     except Exception:
         print( "Не удалось отправить пост в канал ежедневника" )
 
-    # постинг в канал "Реалисты"
-    replacements = [
-        {'keyword': 'АН', 'replaceword': 'АА'},
 
-        {'keyword': 'Анонимные Наркоманы', 'replaceword': 'Анонимные Алкоголики'},
-        {'keyword': 'Анонимные наркоманы', 'replaceword': 'Анонимные алкоголики'},
-        {'keyword': 'анонимные наркоманы', 'replaceword': 'анонимные алкоголики'},
-        {'keyword': 'анонимные Наркоманы', 'replaceword': 'анонимные Алкоголики'},
-
-        {'keyword': 'Анонимных Наркоманов', 'replaceword': 'Анонимных Алкоголиков'},
-        {'keyword': 'Анонимных наркоманов', 'replaceword': 'Анонимных алкоголиков'},
-        {'keyword': 'анонимных наркоманов', 'replaceword': 'анонимных алкоголиков'},
-        {'keyword': 'анонимных Наркоманов', 'replaceword': 'анонимных Алкоголиков'},
-
-        {'keyword': 'Анонимным Наркоманам', 'replaceword': 'Анонимным Алкоголикам'},
-        {'keyword': 'Анонимным наркоманам', 'replaceword': 'Анонимным алкоголикам'},
-        {'keyword': 'анонимным наркоманам', 'replaceword': 'анонимным алкоголикам'},
-        {'keyword': 'анонимным Наркоманам', 'replaceword': 'анонимным Алкоголикам'},
-
-        {'keyword': 'Анонимными Наркоманами', 'replaceword': 'Анонимными Алкоголиками'},
-        {'keyword': 'Анонимными наркоманами', 'replaceword': 'Анонимными алкоголиками'},
-        {'keyword': 'анонимными наркоманами', 'replaceword': 'анонимными алкоголиками'},
-        {'keyword': 'анонимными Наркоманами', 'replaceword': 'анонимными Алкоголиками'},
-
-        {'keyword': 'Наркоманов',   'replaceword': 'Алкоголиков'},
-        {'keyword': 'Наркоманы',    'replaceword': 'Алкоголики'},
-        {'keyword': 'Наркоман',     'replaceword': 'Алкоголик'},
-        {'keyword': 'Наркоманам',   'replaceword': 'Алкоголикам'},
-
-        {'keyword': 'наркоманов',   'replaceword': 'алкоголиков'},
-        {'keyword': 'наркоманы',    'replaceword': 'алкоголики'},
-        {'keyword': 'наркоман',     'replaceword': 'алкоголик'},
-        {'keyword': 'наркоманам',   'replaceword': 'алкоголикам'},
-
-        {'keyword': 'Наркотиков',       'replaceword': 'Алкоголя'},
-        {'keyword': 'Наркотики',        'replaceword': 'Алкоголь'},
-        {'keyword': 'Наркотиками',      'replaceword': 'Алкоголем'},
-        {'keyword': 'Наркотикам',       'replaceword': 'Алкоголю'},
-        {'keyword': 'Наркотик',         'replaceword': 'Алкоголь'},
-
-        {'keyword': 'наркотиков',       'replaceword': 'алкоголя'},
-        {'keyword': 'наркотики',        'replaceword': 'алкоголь'},
-        {'keyword': 'наркотиками',      'replaceword': 'алкоголем'},
-        {'keyword': 'наркотикам',       'replaceword': 'алкоголю'},
-        {'keyword': 'наркотик',         'replaceword': 'алкоголь'},
-
-        {'keyword': 'Наркозависимость',     'replaceword': 'Алкозависимость'},
-        {'keyword': 'Наркозависимости',     'replaceword': 'Алкозависимости'},
-        {'keyword': 'Наркозависимый',       'replaceword': 'Алкозависимый'},
-        {'keyword': 'Наркозависимых',       'replaceword': 'Алкозависимых'},
-        {'keyword': 'Наркозависимому',      'replaceword': 'Алкозависимому'},
-        {'keyword': 'Наркозависимыми',      'replaceword': 'Алкозависимыми'},
-        {'keyword': 'Наркозависимым',       'replaceword': 'Алкозависимым'},
-        {'keyword': 'Наркозависим',         'replaceword': 'Алкозависим'},
-
-        {'keyword': 'наркозависимость',     'replaceword': 'алкозависимость'},
-        {'keyword': 'наркозависимости',     'replaceword': 'алкозависимости'},
-        {'keyword': 'наркозависимый',       'replaceword': 'алкозависимый'},
-        {'keyword': 'наркозависимых',       'replaceword': 'алкозависимых'},
-        {'keyword': 'наркозависимому',      'replaceword': 'алкозависимому'},
-        {'keyword': 'наркозависимыми',      'replaceword': 'алкозависимыми'},
-        {'keyword': 'наркозависимым',       'replaceword': 'алкозависимым'},
-        {'keyword': 'наркозависим',         'replaceword': 'алкозависим'},
-
-        {'keyword': '', 'replaceword': ''}
-    ]
-    message_to_send_2 = get_text()
-
-    for replacement in replacements:
-        keyword = replacement['keyword']
-        replaceword = replacement['replaceword']
-        message_to_send_2 = message_to_send_2.replace(keyword, replaceword)
-
-    lines = message_to_send_2.split('\n')
-    lines.insert(0, "Атеистический ежедневник АА\n")
-    
-    del lines[5]
-    message_to_send_2 = '\n'.join(lines)
+    # постинг в каналы "Реалисты" и "Эволюция"
     chat_id_realists  = '-1002137516831'
     chat_id_evolution = '-1002201877923'
-
+    
     try:
-        await bot.send_message(chat_id=chat_id_realists, text=message_to_send_2)
+        await bot.send_message(chat_id=chat_id_realists, text=message_to_send)
     except Exception:
         print( "Не удалось отправить пост в Реалистов" )
 
     try:
-        await bot.send_message(chat_id=chat_id_evolution, text=message_to_send_2)
+        await bot.send_message(chat_id=chat_id_evolution, text=message_to_send)
     except Exception:
         print( "Не удалось отправить пост в Эволюцию" )
+    
 
     # постинг в канал "Так говорил Билл"
     chat_id_3 = '@BillSpeaks'
-    
     client = Client()
 
     while True:
-        #role_system = "Имитируй мышление анонимного зависимого, который проходит лечение от зависимости по программе 12 шагов. _Поделись опытом, силой и надеждой. Выскажись по Документу, который тебе предложат, исключая полностью бога, высшие силы, мифические существа, элементы культа, молитвы, медитации, слова по типу 'душа', 'духовность', 'дух'. Полностью светское высказывание. В высказывании не придерживайся предложенного Документа дословно или слишком близко, только бери 20-40% идеи. Говори от себя, про себя. избегая местоимений 'ты', 'вы', 'они', 'он', 'она', 'оно'. Формат вывода текста обязательно такой: сделай первую строку с точной датой из Документа, потом пустая строка, затем абзац сгенерированного тобой текста, затем пустая строка и последняя строчка сгенерированного тобой текста, как завершение. В сгенерированном тексте не должно быть слов 'только сегодня'."
-        # role_system = "Имитируй мышление Билла Уилсона, который проходит лечение от зависимости по программе 12 шагов, найдя всю возможную информацию о нем, его цитатах, интервью и тд. Поделись опытом, силой и надеждой. Выскажись по Документу, который тебе предложат, исключая полностью бога, высшие силы, мифические существа, элементы культа, молитвы, медитации, слова по типу 'душа', 'духовность', 'дух'. Полностью светское высказывание. В высказывании не повторяй и не перефразируй предложенный Документ, возьми основнуб идею и составь собственное уникальное высказывание. Говори от себя, про себя. избегая местоимений 'ты', 'вы', 'мы' 'они', 'он', 'она'. Формат вывода текста обязательно такой: сделай первую строку с точной датой из Документа, потом пустая строка, затем абзац сгенерированного тобой текста без лишних отступов между строками, затем пустая строка и последняя строчка сгенерированного тобой текста, как завершение. В сгенерированном тексте не должно быть слов 'только сегодня'. не должно быть лишних символов, сносок и тп."
-        #role_system = "Выскажись как выздоравливающий зависимый по тексту, который тебе предложат, создай свой непохожий текст, исключая полностью бога, высшие силы, мифические существа, элементы культа, молитвы, медитации, слова по типу 'душа', 'духовность', 'дух'. Полностью светское высказывание. Говори от себя, про себя. Формат вывода текста обязательно такой: сделай первую строку с точной датой из текста, потом пустая строка, затем один абзац сгенерированного тобой текста без лишних отступов между строками, затем пустая строка и последняя строчка сгенерированного тобой текста, как завершение. В сгенерированном тексте не должно быть слов 'только сегодня'. не должно быть лишних символов, сносок и тп."
-        role_system = "Выскажись по-русски, по тексту, имитируя высказывание члена АА. 1-2 небольших абзаца."
-        role_user = get_text()
+        role_system = "Выскажись по-русски, по тексту, имитируя высказывание выздоравливающего зависимого. 1-2 небольших абзаца."
+        role_user = message_to_send
 
         completion = client.chat.completions.create(
             model="gpt-3.5-turbo",
@@ -181,29 +266,28 @@ async def main():
             ],
         )
         
-        message_to_send_3 = completion.choices[0].message.content
-        message_to_send_3 = message_to_send_3.replace(role_system, '')    # удаляем возможное присутствие системных настроек в выводе результата
-        message_to_send_3 = message_to_send_3.replace('Assistant:', '')
-        message_to_send_3 = message_to_send_3.replace('assistant:', '')
-        message_to_send_3 = message_to_send_3.replace('Конец', '')
-        message_to_send_3 = message_to_send_3.replace('конец', '')
+        message_to_send = completion.choices[0].message.content
+        message_to_send = message_to_send.replace(role_system, '')    # удаляем возможное присутствие системных настроек в выводе результата
+        message_to_send = message_to_send.replace('Assistant:', '')
+        message_to_send = message_to_send.replace('assistant:', '')
+        message_to_send = message_to_send.replace('Конец', '')
+        message_to_send = message_to_send.replace('конец', '')
 
-        if has_glyphs(message_to_send_3):
+        if has_glyphs(message_to_send):
             print("has glyphs. try again...")
             continue
 
-        if role_user in message_to_send_3:
+        if role_user in message_to_send:
             print("role_user in message. try again...")
             continue
 
         try:
-            await bot.send_message( chat_id=chat_id_3, text=message_to_send_3 )
+            await bot.send_message( chat_id=chat_id_3, text=message_to_send )
         except Exception:
             print( "Не удалось отправить пост в канал Билла Уилсона" )
             
         break
 
-        #print( message_to_send_3 )
         #input()
 
 asyncio.run(main())
