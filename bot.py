@@ -255,7 +255,7 @@ async def main():
     client = Client()
 
     while True:
-        role_system = "Выскажись по-русски, по тексту, имитируя человека, который лечится от пристрастий. 1-2 небольших абзаца."
+        role_system = "Выскажись по-русски, по тексту, в духе психологии. 1-2 небольших абзаца."
         role_user = message_to_send
 
         completion = client.chat.completions.create(
