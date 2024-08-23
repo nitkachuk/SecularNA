@@ -99,6 +99,12 @@ async def main():
         {'keyword': 'анонимными наркоманами', 'replaceword': 'анонимными зависимыми'},
         {'keyword': 'анонимными Наркоманами', 'replaceword': 'анонимными Зависимыми'},
 
+        {'keyword': 'наша наркомания',     'replaceword': 'наша зависимость'},
+        {'keyword': 'нашей наркомании',     'replaceword': 'нашей зависимости'},
+        {'keyword': 'наркомания',     'replaceword': 'зависимость'},
+        {'keyword': 'наркомании',     'replaceword': 'зависимости'},
+        {'keyword': 'наркоманией',     'replaceword': 'зависимостью'},
+
         {'keyword': 'Наркоманов',   'replaceword': 'Зависимых'},
         {'keyword': 'Наркоманы',    'replaceword': 'Зависимые'},
         {'keyword': 'Наркоман',     'replaceword': 'Зависимый'},
@@ -173,6 +179,13 @@ async def main():
         {'keyword': 'Анонимными алкоголиками', 'replaceword': 'Анонимными зависимыми'},
         {'keyword': 'анонимными алкоголиками', 'replaceword': 'анонимными зависимыми'},
         {'keyword': 'анонимными Алкоголиками', 'replaceword': 'анонимными Зависимыми'},
+
+        {'keyword': 'наш алкоголизм',     'replaceword': 'наша зависимость'},
+        {'keyword': 'нашего алкоголизма',     'replaceword': 'нашей зависимости'},
+        {'keyword': 'нашему алкоголизму',     'replaceword': 'нашей зависимости'},
+        {'keyword': 'алкоголизм',     'replaceword': 'зависимость'},
+        {'keyword': 'алкоголизма',     'replaceword': 'зависимости'},
+        {'keyword': 'алкоголизму',     'replaceword': 'зависимости'},
 
         {'keyword': 'Алкоголиков',   'replaceword': 'Зависимых'},
         {'keyword': 'Алкоголики',    'replaceword': 'Зависимые'},
