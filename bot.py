@@ -77,7 +77,7 @@ async def main():
         {'keyword': 'сообществом АН', 'replaceword': 'сообществом'},
         {'keyword': 'сообществе АН',  'replaceword': 'сообществе'},
 
-        {'keyword': 'АН', 'replaceword': 'Анонимные зависимые'},
+        {'keyword': 'АН', 'replaceword': 'сообщ.'},
 
         {'keyword': 'Анонимные Наркоманы', 'replaceword': 'Анонимные Зависимые'},
         {'keyword': 'Анонимные наркоманы', 'replaceword': 'Анонимные зависимые'},
@@ -158,7 +158,7 @@ async def main():
         {'keyword': 'сообществом АА', 'replaceword':    'сообществом'},
         {'keyword': 'сообществе АА', 'replaceword':     'сообществе'},
 
-        {'keyword': 'АА', 'replaceword': 'Анонимные зависимые'},
+        {'keyword': 'АА', 'replaceword': 'сообщ.'},
 
         {'keyword': 'Анонимные Алкоголики', 'replaceword': 'Анонимные Зависимые'},
         {'keyword': 'Анонимные алкоголики', 'replaceword': 'Анонимные зависимые'},
