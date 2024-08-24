@@ -267,7 +267,12 @@ async def main():
     chat_id_3 = '@BillSpeaks'
     client = Client()
 
+    attempts = 0
     while True:
+         if attempts >= 20:
+            print("Превышено количество попыток отправки сообщения. Цикл завершен.")
+            break
+        
         role_system = "Выскажись по-русски, по тексту, в духе психологии. 1-2 небольших абзаца."
         role_user = message_to_send
 
@@ -288,10 +293,12 @@ async def main():
 
         if has_glyphs(message_to_send):
             print("has glyphs. try again...")
+            attempts += 1
             continue
 
         if role_user in message_to_send:
             print("role_user in message. try again...")
+            attempts += 1
             continue
 
         try:
@@ -299,6 +306,8 @@ async def main():
         except Exception:
             print( "Не удалось отправить пост в канал Билла Уилсона" )
             print( "Ответ от ИИ:", message_to_send )
+            attempts += 1
+            continue
             
         break
 
