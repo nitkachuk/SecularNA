@@ -1,4 +1,4 @@
-name: Run Python script
+name: Anonymous Book Channels
 
 on:
   schedule:
