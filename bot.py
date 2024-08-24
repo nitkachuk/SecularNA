@@ -298,6 +298,7 @@ async def main():
             await bot.send_message( chat_id=chat_id_3, text=message_to_send )
         except Exception:
             print( "Не удалось отправить пост в канал Билла Уилсона" )
+            print( "Ответ от ИИ:", message_to_send )
             
         break
 
