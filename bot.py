@@ -284,28 +284,33 @@ async def main():
             ],
         )
         
-        message_to_send = completion.choices[0].message.content
-        message_to_send = message_to_send.replace(role_system, '')    # удаляем возможное присутствие системных настроек в выводе результата
-        message_to_send = message_to_send.replace('Assistant:', '')
-        message_to_send = message_to_send.replace('assistant:', '')
-        message_to_send = message_to_send.replace('Конец', '')
-        message_to_send = message_to_send.replace('конец', '')
+        ai_response = completion.choices[0].message.content
+        ai_response = ai_response.replace(role_system, '')    # удаляем возможное присутствие системных настроек в выводе результата
+        ai_response = ai_response.replace('Assistant:', '')
+        ai_response = ai_response.replace('assistant:', '')
+        ai_response = ai_response.replace('Конец', '')
+        ai_response = ai_response.replace('конец', '')
 
-        if has_glyphs(message_to_send):
+        if has_glyphs(ai_response):
             print("has glyphs. try again...")
             attempts += 1
             continue
 
-        if role_user in message_to_send:
+        if role_user in ai_response:
             print("role_user in message. try again...")
             attempts += 1
             continue
 
+        if len( str(ai_response) ) < 450:
+            print("too short response. try again...")
+            attempts += 1
+            continue
+
         try:
-            await bot.send_message( chat_id=chat_id_3, text=message_to_send )
+            await bot.send_message( chat_id=chat_id_3, text=ai_response )
         except Exception:
             print( "Не удалось отправить пост в канал Билла Уилсона" )
-            print( "Ответ от ИИ:", message_to_send )
+            print( "Ответ от ИИ:", ai_response )
             attempts += 1
             continue
             
