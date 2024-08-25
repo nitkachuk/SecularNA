@@ -269,7 +269,7 @@ async def main():
 
     attempts = 0
     while True:
-         if attempts >= 20:
+        if attempts >= 20:
             print("Превышено количество попыток отправки сообщения. Цикл завершен.")
             break
         
