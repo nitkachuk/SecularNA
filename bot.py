@@ -327,6 +327,7 @@ async def main():
             
         break
 
+    print( "Количество попыток:", (attempts + 1) )
     print( "success!" )
 
 asyncio.run(main())
