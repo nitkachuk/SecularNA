@@ -255,8 +255,9 @@ async def main():
     
     try:
         await bot.send_message(chat_id=chat_id, text=message_to_send)
+        print( "Отправил пост в канал ежедневника ✅" )
     except Exception:
-        print( "Не удалось отправить пост в канал ежедневника" )
+        print( "Не удалось отправить пост в канал ежедневника ❌" )
 
 
     # постинг в каналы "Реалисты" и "Эволюция"
@@ -265,13 +266,15 @@ async def main():
     
     try:
         await bot.send_message(chat_id=chat_id_realists, text=message_to_send)
+        print( "Отправил пост в Реалистов ✅" )
     except Exception:
-        print( "Не удалось отправить пост в Реалистов" )
+        print( "Не удалось отправить пост в Реалистов ❌" )
 
     try:
         await bot.send_message(chat_id=chat_id_evolution, text=message_to_send)
+        print( "Отправил пост в Эволюцию ✅" )
     except Exception:
-        print( "Не удалось отправить пост в Эволюцию" )
+        print( "Не удалось отправить пост в Эволюцию ❌" )
     
 
     # постинг в канал "Так говорил Билл"
@@ -319,8 +322,9 @@ async def main():
 
         try:
             await bot.send_message( chat_id=chat_id_3, text=ai_response )
+            print( "Отправил пост в канал Билла Уилсона ✅" )
         except Exception:
-            print( "Не удалось отправить пост в канал Билла Уилсона" )
+            print( "Не удалось отправить пост в канал Билла Уилсона ❌" )
             print( "Ответ от ИИ:", ai_response, "\n" )
             attempts += 1
             continue
