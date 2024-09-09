@@ -306,17 +306,17 @@ async def main():
         ai_response = ai_response.replace('конец', '')
 
         if has_glyphs(ai_response):
-            print("has glyphs. try again... \n")
+            print("has glyphs. try again... ⚙️ \n")
             attempts += 1
             continue
 
         if role_user in ai_response:
-            print("role_user in message. try again... \n")
+            print("role_user in message. try again... ⚙️ \n")
             attempts += 1
             continue
 
         if len( str(ai_response) ) < 450:
-            print("too short response. try again... \n")
+            print("too short response. try again... ⚙️ \n")
             attempts += 1
             continue
 
@@ -325,7 +325,7 @@ async def main():
             print( "Отправил пост в канал Билла Уилсона ✅" )
         except Exception:
             print( "Не удалось отправить пост в канал Билла Уилсона ❌" )
-            print( "Ответ от ИИ:", ai_response, "\n" )
+            print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
             attempts += 1
             continue
             
