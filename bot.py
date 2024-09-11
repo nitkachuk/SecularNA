@@ -249,7 +249,7 @@ async def main():
         replaceword = replacement['replaceword']
         message_to_send = message_to_send.replace(keyword, replaceword)
 
-
+    '''
     # постинг в канал "Светский ежедневник"
     chat_id = '@SecularNA'
     
@@ -276,7 +276,7 @@ async def main():
     except Exception:
         print( "Не удалось отправить пост в Эволюцию ❌" )
     
-
+    '''
     # постинг в канал "Так говорил Билл"
     chat_id_3 = '@BillSpeaks'
     client = Client()
