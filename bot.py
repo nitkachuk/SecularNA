@@ -118,8 +118,8 @@ async def main():
 
         {'keyword': 'наркоманов',   'replaceword': 'зависимых'},
         {'keyword': 'наркоманы',    'replaceword': 'зависимые'},
-        {'keyword': 'наркоман',     'replaceword': 'зависимый'},
         {'keyword': 'наркоманам',   'replaceword': 'зависимым'},
+        {'keyword': 'наркоман',     'replaceword': 'зависимый'},
 
         {'keyword': 'Наркотиков',       'replaceword': 'Веществ'},
         {'keyword': 'Наркотики',        'replaceword': 'Вещества'},
@@ -204,13 +204,13 @@ async def main():
 
         {'keyword': 'Алкоголиков',   'replaceword': 'Зависимых'},
         {'keyword': 'Алкоголики',    'replaceword': 'Зависимые'},
-        {'keyword': 'Алкоголик',     'replaceword': 'Зависимый'},
         {'keyword': 'Алкоголикам',   'replaceword': 'Зависимым'},
+        {'keyword': 'Алкоголик',     'replaceword': 'Зависимый'},
 
         {'keyword': 'алкоголиков',   'replaceword': 'зависимых'},
         {'keyword': 'алкоголики',    'replaceword': 'зависимые'},
-        {'keyword': 'алкоголик',     'replaceword': 'зависимый'},
         {'keyword': 'алкоголикам',   'replaceword': 'зависимым'},
+        {'keyword': 'алкоголик',     'replaceword': 'зависимый'},
 
         {'keyword': 'Алкоголя',       'replaceword': 'Веществ'},
         {'keyword': 'Алкоголь',       'replaceword': 'Вещество'},
