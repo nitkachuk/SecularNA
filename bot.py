@@ -113,8 +113,8 @@ async def main():
 
         {'keyword': 'Наркоманов',   'replaceword': 'Зависимых'},
         {'keyword': 'Наркоманы',    'replaceword': 'Зависимые'},
-        {'keyword': 'Наркоман',     'replaceword': 'Зависимый'},
         {'keyword': 'Наркоманам',   'replaceword': 'Зависимым'},
+        {'keyword': 'Наркоман',     'replaceword': 'Зависимый'},
 
         {'keyword': 'наркоманов',   'replaceword': 'зависимых'},
         {'keyword': 'наркоманы',    'replaceword': 'зависимые'},
