@@ -125,12 +125,16 @@ async def main():
         {'keyword': 'Наркотики',        'replaceword': 'Вещества'},
         {'keyword': 'Наркотиками',      'replaceword': 'Веществами'},
         {'keyword': 'Наркотикам',       'replaceword': 'Веществам'},
+        {'keyword': 'Наркотиках',       'replaceword': 'Веществах'},
+        {'keyword': 'Наркотика',        'replaceword': 'Вещества'},
         {'keyword': 'Наркотик',         'replaceword': 'Вещество'},
 
         {'keyword': 'наркотиков',       'replaceword': 'веществ'},
         {'keyword': 'наркотики',        'replaceword': 'вещества'},
         {'keyword': 'наркотиками',      'replaceword': 'веществами'},
         {'keyword': 'наркотикам',       'replaceword': 'веществам'},
+        {'keyword': 'наркотиках',       'replaceword': 'веществах'},
+        {'keyword': 'наркотика',       'replaceword': 'вещества'},
         {'keyword': 'наркотик',         'replaceword': 'вещество'},
 
         {'keyword': 'Наркозависимость',     'replaceword': 'Зависимость'},
@@ -212,12 +216,14 @@ async def main():
         {'keyword': 'Алкоголь',       'replaceword': 'Вещество'},
         {'keyword': 'Алкоголем',      'replaceword': 'Веществами'},
         {'keyword': 'Алкоголю',       'replaceword': 'Веществам'},
+        {'keyword': 'Алкоголя',        'replaceword': 'Вещества'},
         {'keyword': 'Алкоголь',       'replaceword': 'Вещество'},
 
         {'keyword': 'алкоголя',       'replaceword': 'веществ'},
         {'keyword': 'алкоголь',       'replaceword': 'вещества'},
         {'keyword': 'алкоголем',      'replaceword': 'веществами'},
         {'keyword': 'алкоголю',       'replaceword': 'веществам'},
+        {'keyword': 'алкоголя',        'replaceword': 'вещества'},
         {'keyword': 'алкоголь',       'replaceword': 'вещество'},
 
         {'keyword': 'Алкозависимость',     'replaceword': 'Зависимость'},
