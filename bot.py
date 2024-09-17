@@ -281,8 +281,9 @@ async def main():
         print( "Отправил пост в Эволюцию ✅" )
     except Exception:
         print( "Не удалось отправить пост в Эволюцию ❌" )
-    
     '''
+
+    
     # постинг в канал "Так говорил Билл"
     chat_id_3 = '@BillSpeaks'
     client = Client()
@@ -337,6 +338,49 @@ async def main():
             
         break
 
+
+    # задание на день
+    attempts = 0
+    while True:
+        if attempts >= 10:
+            print("Превышено количество попыток отправки сообщения. Цикл завершен.")
+            break
+        
+        role_system = "Придумай 3 действия на сегодняшний день, которые я могу сделать, чтобы следовать тексту. Каждый из трех пунктов раздели интервалом."
+        role_user = message_to_send
+
+        completion = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[ 
+                {"role": "system", "content": role_system},
+                {"role": "user", "content": role_user}
+            ],
+        )
+
+        ai_response = completion.choices[0].message.content
+
+        if has_glyphs(ai_response):
+            print("has glyphs. try again... ⚙️ \n")
+            attempts += 1
+            continue
+
+        if len( str(ai_response) ) < 450:
+            print("too short response. try again... ⚙️ \n")
+            attempts += 1
+            continue
+
+        try:
+            await bot.send_message( chat_id=chat_id_3, text=ai_response )
+            print( "Отправил задание на день ✅" )
+        except Exception:
+            print( "Не удалось отправить задание на день ❌" )
+            print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
+            attempts += 1
+            continue
+            
+        break
+
+    
     print( "Количество попыток:", (attempts + 1) )
     print( "success!" )
 
