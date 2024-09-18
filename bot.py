@@ -294,7 +294,8 @@ async def main():
             print("Превышено количество попыток отправки сообщения. Цикл завершен.")
             break
         
-        role_system = "Выскажись по-русски, по тексту, в духе психологии. 1-2 небольших абзаца. Добавь 3-5 эмодзи в текст."
+        role_system = "Выскажись по-русски, по тексту, в духе психологии. \
+        1-2 небольших абзаца. Добавь 3-5 эмодзи в текст."
         role_user = message_to_send
 
         completion = client.chat.completions.create(
@@ -306,7 +307,9 @@ async def main():
         )
         
         ai_response = completion.choices[0].message.content
-        ai_response = ai_response.replace(role_system, '')    # удаляем возможное присутствие системных настроек в выводе результата
+
+        # удаляем возможное присутствие системных настроек в выводе результата
+        ai_response = ai_response.replace(role_system, '')    
         ai_response = ai_response.replace('Assistant:', '')
         ai_response = ai_response.replace('assistant:', '')
         ai_response = ai_response.replace('Конец', '')
@@ -346,7 +349,9 @@ async def main():
             print("Превышено количество попыток отправки сообщения. Цикл завершен.")
             break
         
-        role_system = "Придумай 3 действия на сегодняшний день, которые я могу сделать, чтобы следовать тексту. Каждый из трех пунктов раздели интервалом."
+        role_system = "Придумай 3 действия на сегодняшний день, которые я могу сделать, \
+        чтобы следовать тексту. Каждый из трех пунктов раздели интервалом. \
+        На каждый пункт добавь один эмодзи."
         role_user = message_to_send
 
         completion = client.chat.completions.create(
