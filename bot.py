@@ -342,6 +342,50 @@ async def main():
         break
 
 
+    # темы для собрания
+    attempts = 0
+    while True:
+        if attempts >= 10:
+            print("Превышено количество попыток отправки сообщения. Цикл завершен.")
+            break
+        
+        role_system = """ Придумай 2 темы для обсуждения, которые косвенно перекликаются с текстом, 
+                          но не повторяют его. Каждый из двух пунктов раздели интервалом. 
+                          На каждый пункт добавь один эмодзи. """
+        role_user = message_to_send
+
+        completion = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[ 
+                {"role": "system", "content": role_system},
+                {"role": "user", "content": role_user}
+            ],
+        )
+
+        ai_response = "Темы для собраний 📌 \n\n" +completion.choices[0].message.content
+
+        if has_glyphs(ai_response):
+            print("has glyphs. try again... ⚙️ \n")
+            attempts += 1
+            continue
+
+        if len( str(ai_response) ) < 450:
+            print("too short response. try again... ⚙️ \n")
+            attempts += 1
+            continue
+
+        try:
+            await bot.send_message( chat_id=chat_id_3, text=ai_response )
+            print( "Отправил темы для собраний ✅" )
+        except Exception:
+            print( "Не удалось отправить темы для собраний ❌" )
+            print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
+            attempts += 1
+            continue
+            
+        break
+    
+
     # задание на день
     attempts = 0
     while True:
