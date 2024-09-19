@@ -343,9 +343,8 @@ async def main():
 
 
     # темы для собрания
-    attempts = 0
     while True:
-        if attempts >= 10:
+        if attempts >= 20:
             print("Превышено количество попыток отправки сообщения. Цикл завершен.")
             break
         
@@ -387,9 +386,8 @@ async def main():
     
 
     # задание на день
-    attempts = 0
     while True:
-        if attempts >= 10:
+        if attempts >= 20:
             print("Превышено количество попыток отправки сообщения. Цикл завершен.")
             break
         
