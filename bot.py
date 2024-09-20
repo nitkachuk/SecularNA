@@ -342,6 +342,49 @@ async def main():
         break
 
 
+    # шаг
+    while True:
+        if attempts >= 20:
+            print("Превышено количество попыток отправки сообщения. Цикл завершен.")
+            break
+        
+        role_system = """ Приведи 1 шаг который переликается с текстом и разверни 2 
+                          предложения с расстоянием между строками (по 1 эмодзи на строку) 
+                          из литературы по этому шагу. """
+        role_user = message_to_send
+
+        completion = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[ 
+                {"role": "system", "content": role_system},
+                {"role": "user", "content": role_user}
+            ],
+        )
+
+        ai_response = "Шаги на сегодня 🐾 \n\n" +completion.choices[0].message.content
+
+        if has_glyphs(ai_response):
+            print("has glyphs. try again... ⚙️ \n")
+            attempts += 1
+            continue
+
+        if len( str(ai_response) ) < 450:
+            print("too short response. try again... ⚙️ \n")
+            attempts += 1
+            continue
+
+        try:
+            await bot.send_message( chat_id=chat_id_3, text=ai_response )
+            print( "Отправил шаги на сегодня ✅" )
+        except Exception:
+            print( "Не удалось отправить шаги на сегодня ❌" )
+            print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
+            attempts += 1
+            continue
+            
+        break
+
+
     # темы для собрания
     while True:
         if attempts >= 20:
