@@ -364,7 +364,7 @@ async def main():
             ],
         )
 
-        ai_response = "*__Принципы программы__* 🙏 \n\n" +completion.choices[0].message.content
+        ai_response = "*__Принципы программы__* 🌱 \n\n" +completion.choices[0].message.content
 
         if has_glyphs(ai_response):
             print("has glyphs. try again... ⚙️ \n")
