@@ -306,7 +306,7 @@ async def main():
             ],
         )
         
-        ai_response = "## Высказыание по книге 🗣️ \n\n" +completion.choices[0].message.content
+        ai_response = "## Высказывание по книге 🗣️ \n\n" +completion.choices[0].message.content
 
         # удаляем возможное присутствие системных настроек в выводе результата
         ai_response = ai_response.replace(role_system, '')    
