@@ -364,7 +364,7 @@ async def main():
             ],
         )
 
-        ai_response = "Принципы программы на сегодня 📍 \n\n" +completion.choices[0].message.content
+        ai_response = "## Принципы на сегодня 📍 \n\n" +completion.choices[0].message.content
 
         if has_glyphs(ai_response):
             print("has glyphs. try again... ⚙️ \n")
@@ -407,7 +407,7 @@ async def main():
             ],
         )
 
-        ai_response = "Темы для собраний 📌 \n\n" +completion.choices[0].message.content
+        ai_response = "## Темы для собраний 📌 \n\n" +completion.choices[0].message.content
 
         if has_glyphs(ai_response):
             print("has glyphs. try again... ⚙️ \n")
@@ -450,7 +450,7 @@ async def main():
             ],
         )
 
-        ai_response = "Задание на день 🌞 \n\n" +completion.choices[0].message.content
+        ai_response = "## Задание на день 🌞 \n\n" +completion.choices[0].message.content
 
         if has_glyphs(ai_response):
             print("has glyphs. try again... ⚙️ \n")
