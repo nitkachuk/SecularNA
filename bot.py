@@ -342,7 +342,7 @@ async def main():
         break
 
 
-    # принципы программы
+    # принципы программы на сегодня
     while True:
         if attempts >= 20:
             print("Превышено количество попыток отправки сообщения. Цикл завершен.")
@@ -364,7 +364,7 @@ async def main():
             ],
         )
 
-        ai_response = "Шаги на сегодня 🐾 \n\n" +completion.choices[0].message.content
+        ai_response = "Принципы программы на сегодня 📍 \n\n" +completion.choices[0].message.content
 
         if has_glyphs(ai_response):
             print("has glyphs. try again... ⚙️ \n")
@@ -378,9 +378,9 @@ async def main():
 
         try:
             await bot.send_message( chat_id=chat_id_3, text=ai_response )
-            print( "Отправил шаги на сегодня ✅" )
+            print( "Отправил принципы на сегодня ✅" )
         except Exception:
-            print( "Не удалось отправить шаги на сегодня ❌" )
+            print( "Не удалось отправить принципы на сегодня ❌" )
             print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
             attempts += 1
             continue
