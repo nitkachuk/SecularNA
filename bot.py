@@ -306,7 +306,7 @@ async def main():
             ],
         )
         
-        ai_response = "## Высказывание по книге 🗣️ \n\n" +completion.choices[0].message.content
+        ai_response = "*__Высказывание по книге__* 🗣️ \n\n" +completion.choices[0].message.content
 
         # удаляем возможное присутствие системных настроек в выводе результата
         ai_response = ai_response.replace(role_system, '')    
@@ -331,7 +331,7 @@ async def main():
             continue
 
         try:
-            await bot.send_message( chat_id=chat_id_3, text=ai_response )
+            await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
             print( "Отправил пост в канал Билла Уилсона ✅" )
         except Exception:
             print( "Не удалось отправить пост в канал Билла Уилсона ❌" )
@@ -364,7 +364,7 @@ async def main():
             ],
         )
 
-        ai_response = "## Принципы программы 🙏 \n\n" +completion.choices[0].message.content
+        ai_response = "*__Принципы программы__* 🙏 \n\n" +completion.choices[0].message.content
 
         if has_glyphs(ai_response):
             print("has glyphs. try again... ⚙️ \n")
@@ -377,7 +377,7 @@ async def main():
             continue
 
         try:
-            await bot.send_message( chat_id=chat_id_3, text=ai_response )
+            await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
             print( "Отправил принципы на сегодня ✅" )
         except Exception:
             print( "Не удалось отправить принципы на сегодня ❌" )
@@ -407,7 +407,7 @@ async def main():
             ],
         )
 
-        ai_response = "## Темы для собраний 📌 \n\n" +completion.choices[0].message.content
+        ai_response = "*__Темы для собраний__* 📌 \n\n" +completion.choices[0].message.content
 
         if has_glyphs(ai_response):
             print("has glyphs. try again... ⚙️ \n")
@@ -420,7 +420,7 @@ async def main():
             continue
 
         try:
-            await bot.send_message( chat_id=chat_id_3, text=ai_response )
+            await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
             print( "Отправил темы для собраний ✅" )
         except Exception:
             print( "Не удалось отправить темы для собраний ❌" )
@@ -450,7 +450,7 @@ async def main():
             ],
         )
 
-        ai_response = "## Задание на день 📝 \n\n" +completion.choices[0].message.content
+        ai_response = "*__Задание на день__* 📝 \n\n" +completion.choices[0].message.content
 
         if has_glyphs(ai_response):
             print("has glyphs. try again... ⚙️ \n")
@@ -463,7 +463,7 @@ async def main():
             continue
 
         try:
-            await bot.send_message( chat_id=chat_id_3, text=ai_response )
+            await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
             print( "Отправил задание на день ✅" )
         except Exception:
             print( "Не удалось отправить задание на день ❌" )
