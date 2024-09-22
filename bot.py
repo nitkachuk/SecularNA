@@ -59,7 +59,6 @@ def get_text():
                 largest_paragraph = max(paragraphs, key=len)
                 lines = largest_paragraph.splitlines()
                 formatted_paragraph = '\n' + '\n\n'.join(lines) + '\n'
-                #formatted_content = content.replace(largest_paragraph, formatted_paragraph)
                 paragraphs[paragraphs.index(largest_paragraph)] = formatted_paragraph
 
                 final_content = '\n\n'.join(paragraphs)
