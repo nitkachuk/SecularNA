@@ -273,10 +273,11 @@ async def main():
     chat_id = '@SecularNA'
     
     try:
-        await bot.send_message(chat_id=chat_id, text=message_to_send)
+        await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2')
         print( "Отправил пост в канал ежедневника 📘 ✅" )
-    except Exception:
+    except Exception as e:
         print( "Не удалось отправить пост в канал ежедневника 📘 ❌" )
+        print( "Ошибка:", e, " ⚙️ \n" )
 
     '''
     # постинг в каналы "Реалисты" и "Эволюция"
