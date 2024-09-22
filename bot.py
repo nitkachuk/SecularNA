@@ -333,8 +333,9 @@ async def main():
         try:
             await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
             print( "Отправил пост в канал Билла Уилсона 🗣️ ✅" )
-        except Exception:
+        except Exception as e:
             print( "Не удалось отправить пост в канал Билла Уилсона 🗣️ ❌" )
+            print( "Ошибка:", e, " ⚙️ \n" )
             print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
             attempts += 1
             continue
@@ -379,8 +380,9 @@ async def main():
         try:
             await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
             print( "Отправил принципы на сегодня 🌱 ✅" )
-        except Exception:
+        except Exception as e:
             print( "Не удалось отправить принципы на сегодня 🌱 ❌" )
+            print( "Ошибка:", e, " ⚙️ \n" )
             print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
             attempts += 1
             continue
@@ -422,8 +424,9 @@ async def main():
         try:
             await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
             print( "Отправил темы для собраний 📌 ✅" )
-        except Exception:
+        except Exception as e:
             print( "Не удалось отправить темы для собраний 📌 ❌" )
+            print( "Ошибка:", e, " ⚙️ \n" )
             print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
             attempts += 1
             continue
@@ -465,8 +468,9 @@ async def main():
         try:
             await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
             print( "Отправил задание на день 📝 ✅" )
-        except Exception:
+        except Exception as e:
             print( "Не удалось отправить задание на день 📝 ❌" )
+            print( "Ошибка:", e, " ⚙️ \n" )
             print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
             attempts += 1
             continue
