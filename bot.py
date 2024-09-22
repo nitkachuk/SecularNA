@@ -54,7 +54,7 @@ def get_text():
                 p_lines[4] = f"*{p_lines[4]}*"
 
                 paragraphs[0] = '\n'.join(p_lines)
-                paragraphs[2] = paragraphs[2].replace("ТОЛЬКО СЕГОДНЯ:", "**ТОЛЬКО СЕГОДНЯ:**")
+                paragraphs[2] = paragraphs[2].replace("ТОЛЬКО СЕГОДНЯ:", "*ТОЛЬКО СЕГОДНЯ:*")
 
                 largest_paragraph = max(paragraphs, key=len)
                 lines = largest_paragraph.splitlines()
