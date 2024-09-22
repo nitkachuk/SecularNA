@@ -2,6 +2,7 @@ import asyncio
 from telegram import Bot
 from g4f.client import Client
 import unicodedata
+import re
 
 import os
 import datetime
