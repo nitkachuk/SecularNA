@@ -57,6 +57,10 @@ def get_text():
     else:
         return f"Папка для месяца {current_month} не найдена в папке 'book'."
 
+def escape_markdown_v2(text):
+    return re.sub(r'([\[\]()~`>#+\-=|{}.!])', r'\\\1', text)
+    
+
 async def main():
     bot_token = os.getenv('TELEGRAM_TOKEN')
     bot = Bot(token=bot_token)
@@ -307,6 +311,7 @@ async def main():
         )
         
         ai_response = "*__Высказывание по книге__* 🗣️ \n\n" +completion.choices[0].message.content
+        ai_response = escape_markdown_v2( ai_response )
 
         # удаляем возможное присутствие системных настроек в выводе результата
         ai_response = ai_response.replace(role_system, '')    
@@ -336,7 +341,7 @@ async def main():
         except Exception as e:
             print( "Не удалось отправить пост в канал Билла Уилсона 🗣️ ❌" )
             print( "Ошибка:", e, " ⚙️ \n" )
-            print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
+            #print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
             attempts += 1
             continue
             
@@ -366,6 +371,7 @@ async def main():
         )
 
         ai_response = "*__Принципы программы__* 🌱 \n\n" +completion.choices[0].message.content
+        ai_response = escape_markdown_v2( ai_response )
 
         if has_glyphs(ai_response):
             print("has glyphs. try again... ⚙️ \n")
@@ -383,7 +389,7 @@ async def main():
         except Exception as e:
             print( "Не удалось отправить принципы на сегодня 🌱 ❌" )
             print( "Ошибка:", e, " ⚙️ \n" )
-            print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
+            #print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
             attempts += 1
             continue
             
@@ -410,6 +416,7 @@ async def main():
         )
 
         ai_response = "*__Темы для собраний__* 📌 \n\n" +completion.choices[0].message.content
+        ai_response = escape_markdown_v2( ai_response )
 
         if has_glyphs(ai_response):
             print("has glyphs. try again... ⚙️ \n")
@@ -427,7 +434,7 @@ async def main():
         except Exception as e:
             print( "Не удалось отправить темы для собраний 📌 ❌" )
             print( "Ошибка:", e, " ⚙️ \n" )
-            print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
+            #print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
             attempts += 1
             continue
             
@@ -454,6 +461,7 @@ async def main():
         )
 
         ai_response = "*__Задание на день__* 📝 \n\n" +completion.choices[0].message.content
+        ai_response = escape_markdown_v2( ai_response )
 
         if has_glyphs(ai_response):
             print("has glyphs. try again... ⚙️ \n")
@@ -471,7 +479,7 @@ async def main():
         except Exception as e:
             print( "Не удалось отправить задание на день 📝 ❌" )
             print( "Ошибка:", e, " ⚙️ \n" )
-            print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
+            #print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
             attempts += 1
             continue
             
