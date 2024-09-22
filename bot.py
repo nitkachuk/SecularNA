@@ -340,7 +340,7 @@ async def main():
             attempts += 1
             continue
 
-        if len( str(ai_response) ) < 450:
+        if len( str(ai_response) ) < 250:
             print("too short response. try again... ⚙️ \n")
             attempts += 1
             continue
@@ -388,7 +388,7 @@ async def main():
             attempts += 1
             continue
 
-        if len( str(ai_response) ) < 450:
+        if len( str(ai_response) ) < 250:
             print("too short response. try again... ⚙️ \n")
             attempts += 1
             continue
@@ -433,7 +433,7 @@ async def main():
             attempts += 1
             continue
 
-        if len( str(ai_response) ) < 450:
+        if len( str(ai_response) ) < 250:
             print("too short response. try again... ⚙️ \n")
             attempts += 1
             continue
@@ -478,7 +478,7 @@ async def main():
             attempts += 1
             continue
 
-        if len( str(ai_response) ) < 450:
+        if len( str(ai_response) ) < 250:
             print("too short response. try again... ⚙️ \n")
             attempts += 1
             continue
