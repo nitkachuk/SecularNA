@@ -1,6 +1,7 @@
 name: NA Book Channels
 
 on:
+  push:
   schedule:
     - cron: '1 21 * * *' 
 
