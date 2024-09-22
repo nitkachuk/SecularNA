@@ -43,19 +43,28 @@ def get_text():
 
         if os.path.exists(file_path):
             with open(file_path, 'r', encoding='utf-8') as file:
-                content = file.read()
-
+                content = escape_markdown_v2( file.read() )
+                
                 paragraphs = content.split('\n\n')
 
+                p_lines = paragraphs[0].split('\n')
+                p_lines[0] = f"**{p_lines[0]}**"
+                p_lines[1] = f"**{p_lines[1]}**"
+                p_lines[3] = f"**{p_lines[3]}**"
+                p_lines[4] = f"**{p_lines[4]}**"
+
+                paragraphs[0] = '\n'.join(p_lines)
+                paragraphs[2] = paragraphs[2].replace("ТОЛЬКО СЕГОДНЯ:", "**ТОЛЬКО СЕГОДНЯ:**")
+
                 largest_paragraph = max(paragraphs, key=len)
-
                 lines = largest_paragraph.splitlines()
-
                 formatted_paragraph = '\n' + '\n\n'.join(lines) + '\n'
+                #formatted_content = content.replace(largest_paragraph, formatted_paragraph)
+                paragraphs[paragraphs.index(largest_paragraph)] = formatted_paragraph
 
-                formatted_content = content.replace(largest_paragraph, formatted_paragraph)
+                final_content = '\n\n'.join(paragraphs)
 
-                return formatted_content
+                return final_content
         else:
             return f"Файл для {current_day} числа не найден в папке месяца {current_month}."
     else:
