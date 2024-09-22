@@ -310,9 +310,9 @@ async def main():
                 {"role": "user", "content": role_user}
             ],
         )
-        
-        ai_response = "*__Высказывание по книге__* 🗣️ \n\n" +completion.choices[0].message.content
-        ai_response = escape_markdown_v2( ai_response )
+
+        ai_response = escape_markdown_v2( completion.choices[0].message.content )
+        ai_response = "*__Высказывание по книге__* 🗣️ \n\n" +ai_response
 
         # удаляем возможное присутствие системных настроек в выводе результата
         ai_response = ai_response.replace(role_system, '')    
@@ -371,8 +371,8 @@ async def main():
             ],
         )
 
-        ai_response = "*__Принципы программы__* 🌱 \n\n" +completion.choices[0].message.content
-        ai_response = escape_markdown_v2( ai_response )
+        ai_response = escape_markdown_v2( completion.choices[0].message.content )
+        ai_response = "*__Принципы программы__* 🌱 \n\n" +ai_response
 
         if has_glyphs(ai_response):
             print("has glyphs. try again... ⚙️ \n")
@@ -416,8 +416,8 @@ async def main():
             ],
         )
 
-        ai_response = "*__Темы для собраний__* 📌 \n\n" +completion.choices[0].message.content
-        ai_response = escape_markdown_v2( ai_response )
+        ai_response = escape_markdown_v2( completion.choices[0].message.content )
+        ai_response = "*__Темы для собраний__* 📌 \n\n" +ai_response
 
         if has_glyphs(ai_response):
             print("has glyphs. try again... ⚙️ \n")
@@ -461,8 +461,8 @@ async def main():
             ],
         )
 
-        ai_response = "*__Задание на день__* 📝 \n\n" +completion.choices[0].message.content
-        ai_response = escape_markdown_v2( ai_response )
+        ai_response = escape_markdown_v2( completion.choices[0].message.content )
+        ai_response = "*__Задание на день__* 📝 \n\n" +ai_response
 
         if has_glyphs(ai_response):
             print("has glyphs. try again... ⚙️ \n")
