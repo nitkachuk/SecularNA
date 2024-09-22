@@ -59,7 +59,7 @@ def get_text():
         return f"Папка для месяца {current_month} не найдена в папке 'book'."
 
 def escape_markdown_v2(text):
-    return re.sub(r'([\[\]()~`>#+\-=|{}.!])', r'\\\1', text)
+    return re.sub(r'([_*\[\]()~`>#+\-=|{}.!])', r'\\\1', text)
     
 
 async def main():
