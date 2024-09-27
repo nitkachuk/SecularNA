@@ -271,6 +271,9 @@ async def main():
     
     # постинг в канал "Светский ежедневник"
     chat_id = '@SecularNA'
+
+    message_to_send = message_to_send.replace(role_system, '_{"code":200,"status":true,"model":"gpt-3.5-turbo","gpt":"')
+    message_to_send = message_to_send.replace(role_system, '","original":null}')
     message_to_send = escape_markdown_v2( message_to_send )
     
     try:
