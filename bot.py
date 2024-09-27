@@ -14,7 +14,7 @@ def has_glyphs(text):
     return False
 
 def escape_markdown_v2(text):
-    return re.sub(r'([_\[\]()~`>#+\-=|{}.!])', r'\\\1', text)
+    return re.sub(r'([_\[\]()~Ⓝ>#+\-=|{}.!])', r'\\\1', text)
 
 def get_text():
     # часы запуска скрипта на гитхабе
