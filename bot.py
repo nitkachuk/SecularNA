@@ -271,6 +271,7 @@ async def main():
     
     # постинг в канал "Светский ежедневник"
     chat_id = '@SecularNA'
+    message_to_send = escape_markdown_v2( message_to_send )
     
     try:
         await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2')
