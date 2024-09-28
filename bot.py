@@ -14,6 +14,8 @@ def has_glyphs(text):
     return False
 
 def escape_markdown_v2(text):
+    # не экранируется тг-разметка * _
+    # остальное добавкой \ в начало
     return re.sub(r'([\[\]()~Ⓝ>#+\-=|{}.!])', r'\\1', text)
 
 def escape_system_text(text):
