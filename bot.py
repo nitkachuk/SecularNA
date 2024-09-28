@@ -16,6 +16,11 @@ def has_glyphs(text):
 def escape_markdown_v2(text):
     return re.sub(r'([_\[\]()~Ⓝ>#+\-=|{}.!])', r'\\\1', text)
 
+def escape_system_text(text):
+    text = text.replace(role_system, """ _{"code":200,"status":true,"model":"gpt-3.5-turbo","gpt":" """)
+    text = text.replace(role_system, """ ","original":null} """)
+    return text
+
 def get_text():
     # часы запуска скрипта на гитхабе
     send_hour = 17
@@ -271,10 +276,7 @@ async def main():
     
     # постинг в канал "Светский ежедневник"
     chat_id = '@SecularNA'
-
-    message_to_send = message_to_send.replace(role_system, '_{"code":200,"status":true,"model":"gpt-3.5-turbo","gpt":"')
-    message_to_send = message_to_send.replace(role_system, '","original":null}')
-    message_to_send = escape_markdown_v2( message_to_send )
+    message_to_send = escape_system_text( escape_markdown_v2( message_to_send ) )
     
     try:
         await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2')
@@ -324,7 +326,7 @@ async def main():
             ],
         )
 
-        ai_response = escape_markdown_v2( completion.choices[0].message.content )
+        ai_response = escape_system_text( escape_markdown_v2( completion.choices[0].message.content ) )
         ai_response = "*__Высказывание по книге__* 🗣️ \n\n" +ai_response
 
         # удаляем возможное присутствие системных настроек в выводе результата
@@ -385,7 +387,7 @@ async def main():
             ],
         )
 
-        ai_response = escape_markdown_v2( completion.choices[0].message.content )
+        ai_response = escape_system_text( escape_markdown_v2( completion.choices[0].message.content ) )
         ai_response = "*__Принципы программы__* 🌱 \n\n" +ai_response
 
         if has_glyphs(ai_response):
@@ -430,7 +432,7 @@ async def main():
             ],
         )
 
-        ai_response = escape_markdown_v2( completion.choices[0].message.content )
+        ai_response = escape_system_text( escape_markdown_v2( completion.choices[0].message.content ) )
         ai_response = "*__Темы для собраний__* 📌 \n\n" +ai_response
 
         if has_glyphs(ai_response):
@@ -475,7 +477,7 @@ async def main():
             ],
         )
 
-        ai_response = escape_markdown_v2( completion.choices[0].message.content )
+        ai_response = escape_system_text( escape_markdown_v2( completion.choices[0].message.content ) )
         ai_response = "*__Задание на день__* 📝 \n\n" +ai_response
 
         if has_glyphs(ai_response):
