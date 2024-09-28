@@ -14,7 +14,7 @@ def has_glyphs(text):
     return False
 
 def escape_markdown_v2(text):
-    return re.sub(r'([_\[\]()~Ⓝ>#+\-=|{}.!])', r'\1', text)
+    return re.sub(r'([\[\]()~Ⓝ>#+\-=|{}.!])', r'\\1', text)
 
 def escape_system_text(text):
     text = text.replace( '_{"code":200,"status":true,"model":"gpt-3.5-turbo","gpt":"', '')
