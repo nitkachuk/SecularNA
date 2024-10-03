@@ -14,7 +14,7 @@ def has_glyphs(text):
     return False
 
 def escape_markdown_v2(text):
-    text = text.replace(".", "\.")
+    #text = text.replace("\"", "\"")
     text = text.replace("?", "\?")
     text = text.replace("-", "\-")
     #text = text.replace(" ", "\ ")
@@ -22,7 +22,6 @@ def escape_markdown_v2(text):
     text = text.replace(":", "\:")
     text = text.replace(";", "\;")
     text = text.replace("'", "\'")
-    text = text.replace("\"", "\"")
     text = text.replace("!", "\!")
     text = text.replace("@", "\@")
     text = text.replace("#", "\#")
@@ -45,13 +44,14 @@ def escape_markdown_v2(text):
     text = text.replace("/", "\/")
     text = text.replace("<", "\<")
     text = text.replace(">", "\>")
+    text = text.replace(".", "\.")
     return text
-
 
 def escape_system_text(text):
     text = text.replace( '_{"code":200,"status":true,"model":"gpt-3.5-turbo","gpt":"', '')
     text = text.replace( '","original":null}', '')
     return text
+    
 
 def get_text():
     # часы запуска скрипта на гитхабе
