@@ -14,12 +14,38 @@ def has_glyphs(text):
     return False
 
 def escape_markdown_v2(text):
-    text = re.sub(r'([\[\]()~>#+\-=|{}!])', r'\\\1', text)
-    text = re.sub(r'(?<!\\)(\.|\?)', r'\\\1', text)
-    # text = re.sub(r'(?<!\\)(\.|\?)', r'\\\1', text)     # test string !
-    text = re.sub(r'(?<!\\)(\.|\?|-|\s)', r'\\\1', text)  # test string !
-    text = re.sub(r'(?<!\\)\.', r'\\.', text)
+    text = text.replace(".", "\.")
+    text = text.replace("?", "\?")
+    text = text.replace("-", "\-")
+    #text = text.replace(" ", "\ ")
+    text = text.replace(",", "\,")
+    text = text.replace(":", "\:")
+    text = text.replace(";", "\;")
+    text = text.replace("'", "\'")
+    text = text.replace("\"", "\"")
+    text = text.replace("!", "\!")
+    text = text.replace("@", "\@")
+    text = text.replace("#", "\#")
+    text = text.replace("$", "\$")
+    text = text.replace("%", "\%")
+    text = text.replace("^", "\^")
+    text = text.replace("&", "\&")
+    text = text.replace("(", "\(")
+    text = text.replace(")", "\)")
+    #text = text.replace("_", "\_")
+    text = text.replace("+", "\+")
+    text = text.replace("=", "\=")
+    text = text.replace("{", "\{")
+    text = text.replace("}", "\}")
+    text = text.replace("[", "\\[")
+    text = text.replace("]", "\\]")
+    text = text.replace("|", "\|")
+    #text = text.replace("\\", "\\\\") # Double backslash for escaping backslash itself
+    text = text.replace("/", "\/")
+    text = text.replace("<", "\<")
+    text = text.replace(">", "\>")
     return text
+
 
 def escape_system_text(text):
     text = text.replace( '_{"code":200,"status":true,"model":"gpt-3.5-turbo","gpt":"', '')
