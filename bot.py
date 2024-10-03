@@ -15,7 +15,9 @@ def has_glyphs(text):
 
 def escape_markdown_v2(text):
     text = re.sub(r'([\[\]()~>#+\-=|{}!])', r'\\\1', text)
-    text = re.sub(r'(?<!\\)(\.|\?)', r'\\\1', text)     # test string !
+    text = re.sub(r'(?<!\\)(\.|\?)', r'\\\1', text)
+    # text = re.sub(r'(?<!\\)(\.|\?)', r'\\\1', text)     # test string !
+    text = re.sub(r'(?<!\\)(\.|\?|-|\s)', r'\\\1', text)  # test string !
     text = re.sub(r'(?<!\\)\.', r'\\.', text)
     return text
 
