@@ -80,7 +80,7 @@ def get_text():
 
         if os.path.exists(file_path):
             with open(file_path, 'r', encoding='utf-8') as file:
-                content = escape_markdown_v2( file.read() )
+                content = file.read()
                 
                 paragraphs = content.split('\n\n')
 
@@ -100,7 +100,7 @@ def get_text():
 
                 final_content = '\n\n'.join(paragraphs)
 
-                return final_content
+                return escape_markdown_v2( final_content )
         else:
             return f"Файл для {current_day} числа не найден в папке месяца {current_month}."
     else:
