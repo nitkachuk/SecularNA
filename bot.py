@@ -14,37 +14,11 @@ def has_glyphs(text):
     return False
 
 def escape_markdown_v2(text):
-    #text = text.replace("\"", "\"")
-    text = text.replace("?", "\?")
-    text = text.replace("-", "\-")
-    #text = text.replace(" ", "\ ")
-    text = text.replace(",", "\,")
-    text = text.replace(":", "\:")
-    text = text.replace(";", "\;")
-    text = text.replace("'", "\'")
-    text = text.replace("!", "\!")
-    text = text.replace("@", "\@")
-    text = text.replace("#", "\#")
-    text = text.replace("$", "\$")
-    text = text.replace("%", "\%")
-    text = text.replace("^", "\^")
-    text = text.replace("&", "\&")
-    #text = text.replace("*", "\*")
-    text = text.replace("(", "\(")
-    text = text.replace(")", "\)")
-    #text = text.replace("_", "\_")
-    text = text.replace("+", "\+")
-    text = text.replace("=", "\=")
-    text = text.replace("{", "\{")
-    text = text.replace("}", "\}")
-    text = text.replace("[", "\\[")
-    text = text.replace("]", "\\]")
-    text = text.replace("|", "\|")
-    #text = text.replace("\\", "\\\\") # Double backslash for escaping backslash itself
-    text = text.replace("/", "\/")
-    text = text.replace("<", "\<")
-    text = text.replace(">", "\>")
-    text = text.replace(".", "\.")
+    escape_chars = ['[', ']', '(', ')', '~', '`', '>', '#', '+', '-', '=', '|', '{', '}', '.', '!', '\\']
+    
+    for char in escape_chars:
+        text = text.replace(char, "\\" + char)
+    
     return text
 
 def escape_system_text(text):
