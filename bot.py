@@ -14,12 +14,14 @@ def has_glyphs(text):
     return False
 
 def escape_markdown_v2(text):
-    escape_chars = ['[', ']', '(', ')', '~', '?', '>', '#', '+', 
+    escape_chars = ['[', ']', '(', ')', '~', 'Ⓝ', '>', '#', '+',
                     '-', '=', '|', '{', '}', '.', ',', '!', '\\']
 
     for char in escape_chars:
+        # Экранируем каждый символ в шаблоне замены
         pattern = re.escape(char)
-        text = re.sub(pattern, r'\"' + char, text)
+        replacement = '\\' + char
+        text = re.sub(pattern, replacement, text)
 
     return text
 
