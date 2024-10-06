@@ -19,7 +19,7 @@ def escape_markdown_v2(text):
 
     for char in escape_chars:
         pattern = re.escape(char)
-        text = re.sub(pattern, r"\" + char, text)
+        text = re.sub(pattern, r'\"' + char, text)
 
     return text
 
