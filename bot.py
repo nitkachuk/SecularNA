@@ -14,8 +14,8 @@ def has_glyphs(text):
     return False
 
 def escape_markdown_v2(text):
-    escape_chars = ['[', ']', '(', ')', '~', 'Ⓝ', '>', '#', '+',
-                    '-', '=', '|', '{', '}', '.', ',', '!', '\\']
+    escape_chars = [  '[', ']', '(', ')', '~', 'Ⓝ', '>', '#', '+',
+                      '-', '=', '|', '{', '}', '.', ',', '!', '\\'  ]
     
     for char in escape_chars:
         pattern = re.escape(char)
@@ -27,7 +27,6 @@ def escape_markdown_v2(text):
         text = re.sub(pattern, replacement, text)
 
     text = text.replace('\\\\', '\\')
-
     return text
 
 def escape_system_text(text):
@@ -300,8 +299,8 @@ async def main():
     # постинг в канал "Светский ежедневник"
     chat_id = '@SecularNA'
     message_to_send = escape_system_text( escape_markdown_v2( message_to_send ) )
-    print( message_to_send )
-    return
+    #print( message_to_send )
+    #return
     try:
         await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2')
         print( "Отправил пост в канал ежедневника 📘 ✅" )
@@ -309,7 +308,7 @@ async def main():
         print( "Не удалось отправить пост в канал ежедневника 📘 ❌" )
         print( "Ошибка:", e, " ⚙️ \n" )
 
-    
+    return
     # постинг в канал "Так говорил Билл"
     chat_id_3 = '@BillSpeaks'
     client = Client()
