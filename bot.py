@@ -67,8 +67,8 @@ def get_text():
                 paragraphs = content.split('\n\n')
 
                 p_lines = paragraphs[0].split('\n')
-                p_lines[0] = f"*{p_lines[0]}*"
-                p_lines[1] = f"*{p_lines[1]}*"
+                p_lines[0] = f"{p_lines[0]}"
+                p_lines[1] = f"__{p_lines[1]}__"
                 p_lines[3] = f"_{p_lines[3]}_"
                 p_lines[4] = f"*{p_lines[4]}*"
 
