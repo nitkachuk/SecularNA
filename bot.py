@@ -293,7 +293,8 @@ async def main():
     # постинг в канал "Светский ежедневник"
     chat_id = '@SecularNA'
     message_to_send = escape_system_text( escape_markdown_v2( message_to_send ) )
-    
+    print( message_to_send )
+    return
     try:
         await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2')
         print( "Отправил пост в канал ежедневника 📘 ✅" )
