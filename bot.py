@@ -19,7 +19,7 @@ def escape_markdown_v2(text):
 
     for char in escape_chars:
         pattern = re.escape(char)
-        text = re.sub(pattern, "\\\\" + char, text)
+        text = re.sub(pattern, r"\\{}".format(char), text)
 
     return text
 
