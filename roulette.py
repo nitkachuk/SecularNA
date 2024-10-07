@@ -1,4 +1,6 @@
-﻿themes = """
+﻿import random
+
+themes = """
 1) Опыт в поиске спонсора
 2) Одержимость ума. Как у меня проявляется?
 3) Что мне дают шаги?
@@ -501,3 +503,6 @@
 500) Восстановление отношений с теми, кому причинил ущерб (опыт)        """
 
 themes = themes.splitlines()
+
+def getRandomTheme():
+    return themes[ random.randint(1, 500) ]
