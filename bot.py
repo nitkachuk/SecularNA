@@ -89,7 +89,7 @@ async def main():
                       обозначь каждый одним эмодзи. по-русски. """
     title = 'Задание на день 📝'
 
-    ai_response = aiRequest( client, role_system, book, title )
+    ai_response = aiRequest( role_system, book, title )
     #await telegramPost( channelBill, ai_response, title )
 
     
