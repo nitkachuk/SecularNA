@@ -40,7 +40,7 @@ def escape_system_text( text, role_system='' ):
     return text
     
 
-def get_text():
+def read_the_book():
     # часы запуска скрипта на гитхабе
     send_hour = 17
     send_minute = 0
