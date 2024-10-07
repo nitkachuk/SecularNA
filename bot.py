@@ -22,7 +22,7 @@ async def main():
     message_to_send = escape_markdown_v2( book )
 
     # постинг в канал "Светский ежедневник"
-    await telegramPost( bot, channelBook, message_to_send, 'Пост в канал ежедневника 📘')
+    await telegramPost( bot, channelBook, message_to_send, 'Пост в канал ежедневника 📘 \n')
     
 
     # высказывание по книге
