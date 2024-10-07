@@ -12,20 +12,16 @@ def has_glyphs( text ):
             return True
     return False
 
-def escape_markdown_v2( text ):
-    escape_chars = [  '[', ']', '(', ')', '~', 'Ⓝ', '>', '#', '+',
-                      '-', '=', '|', '{', '}', '.', ',', '!', '?', '\\', '""'  ]
+import re
+
+def escape_markdown_v2(text):
+    escape_chars = [  '[', ']', '(', ')', '~', 'Ⓝ', '>', '#', '+', '-', 
+                      '=', '|', '{', '}', '.', ',', '!', '?', '\\', '""'  ]
     
     for char in escape_chars:
         pattern = re.escape(char)
-        
-        if char == '\\':
-            replacement = '\\\\'
-        else:
-            replacement = '\\' + char
-        text = re.sub(pattern, replacement, text)
-
-    text = text.replace('\\\\', '\\')
+        text = re.sub(pattern, f"\\{char}", text)  # Экранирование одной косой чертой
+    
     return text
 
 def escape_system_text( text, role_system='' ):
