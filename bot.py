@@ -15,7 +15,7 @@ async def main():
     message_to_send = escape_markdown_v2( book )
     
     # постинг в канал "Светский ежедневник"
-    telegramPost( '@SecularNA', message_to_send, 'пост в канал ежедневника 📘' )
+    await telegramPost( '@SecularNA', message_to_send, 'пост в канал ежедневника 📘' )
 
     # try:
     #     await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2') 
@@ -64,7 +64,7 @@ async def main():
             attempts += 1
             continue
 
-        telegramPost( '@BillSpeaks', ai_response, 'высказывание в Билла 🗣️' )
+        await telegramPost( '@BillSpeaks', ai_response, 'высказывание в Билла 🗣️' )
 
         # try:
         #     await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
@@ -116,7 +116,7 @@ async def main():
             attempts += 1
             continue
 
-        telegramPost( '@BillSpeaks', ai_response, 'принципы в Билла 🌱' )
+        await telegramPost( '@BillSpeaks', ai_response, 'принципы в Билла 🌱' )
 
         # try:
         #     await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
@@ -164,7 +164,7 @@ async def main():
             attempts += 1
             continue
 
-        telegramPost( '@BillSpeaks', ai_response, 'темы собраний в Билла 📌' )
+        await telegramPost( '@BillSpeaks', ai_response, 'темы собраний в Билла 📌' )
 
         # try:
         #     await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
@@ -212,7 +212,7 @@ async def main():
             attempts += 1
             continue
 
-        telegramPost( '@BillSpeaks', ai_response, 'задание на день 📝' )
+        await telegramPost( '@BillSpeaks', ai_response, 'задание на день 📝' )
 
         # try:
         #     await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
