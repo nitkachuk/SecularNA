@@ -16,7 +16,7 @@ async def main():
 
     # постинг в канал "Светский ежедневник"
     chat_id = '@SecularNA'
-    message_to_send = escape_system_text( escape_markdown_v2( message_to_send ) )
+    message_to_send = escape_markdown_v2( message_to_send )
     #print( message_to_send )
     #return
     try:
