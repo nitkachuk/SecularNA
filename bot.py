@@ -8,7 +8,6 @@ from roulette import getRandomTheme   # type: ignore
 
 
 async def main():
-    global attempts
     # уникализация ежедневника (для всех сообществ)
     book = doReplacements( readTheBook() )
     message_to_send = escape_markdown_v2( book )
