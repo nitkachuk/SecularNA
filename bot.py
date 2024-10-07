@@ -8,7 +8,7 @@ import os
 import datetime
 
 import sys
-from replacements import replacements # type: ignore
+from replacements import replacements, doReplacements # type: ignore
 
 def has_glyphs(text):
     for char in text:
@@ -98,14 +98,8 @@ async def main():
 
 
     # уникализация ежедневника (для всех сообществ)
-    message_to_send = get_text()
+    message_to_send = doReplacements( get_text() )
 
-    for replacement in replacements:
-        keyword = replacement['keyword']
-        replaceword = replacement['replaceword']
-        message_to_send = message_to_send.replace(keyword, replaceword)
-
-    
     # постинг в канал "Светский ежедневник"
     chat_id = '@SecularNA'
     message_to_send = escape_system_text( escape_markdown_v2( message_to_send ) )
