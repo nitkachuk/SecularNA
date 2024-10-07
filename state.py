@@ -105,6 +105,8 @@ async def telegramPost( bot, chat_id, message_to_send, title ):
 
 
 def aiRequest( role_system, role_user, title ):
+    global attempts
+    
     while True:
         if attempts >= 20:
             print("Превышено количество попыток отправки сообщения. Цикл завершен.", flush=True)
