@@ -6,13 +6,13 @@ import datetime
 
 import sys
 
-def has_glyphs(text):
+def has_glyphs( text ):
     for char in text:
         if unicodedata.category(char) == 'Lo':
             return True
     return False
 
-def escape_markdown_v2(text):
+def escape_markdown_v2( text ):
     escape_chars = [  '[', ']', '(', ')', '~', 'Ⓝ', '>', '#', '+',
                       '-', '=', '|', '{', '}', '.', ',', '!', '?', '\\'  ]
     
@@ -28,7 +28,7 @@ def escape_markdown_v2(text):
     text = text.replace('\\\\', '\\')
     return text
 
-def escape_system_text(text, role_system=''):
+def escape_system_text( text, role_system='' ):
     text = text.replace( '_{"code":200,"status":true,"model":"gpt-3.5-turbo","gpt":"', '')
     text = text.replace( '","original":null}', '')
 
