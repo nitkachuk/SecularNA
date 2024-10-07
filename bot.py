@@ -46,7 +46,8 @@ async def main():
             ],
         )
 
-        ai_response = escape_system_text( escape_markdown_v2( doReplacements(completion.choices[0].message.content) ), role_system  )
+        ai_response = escape_system_text( escape_markdown_v2( 
+            doReplacements(completion.choices[0].message.content) ), role_system  )
         ai_response = "*__Высказывание по книге__* 🗣️ \n\n" +ai_response
 
         if has_glyphs(ai_response):
@@ -100,7 +101,8 @@ async def main():
             ],
         )
 
-        ai_response = escape_system_text( escape_markdown_v2( doReplacements(completion.choices[0].message.content) ) )
+        ai_response = escape_system_text( escape_markdown_v2( 
+            doReplacements(completion.choices[0].message.content) ) )
         ai_response = "*__Принципы программы__* 🌱 \n\n" +ai_response
 
         if has_glyphs(ai_response):
@@ -145,7 +147,8 @@ async def main():
             ],
         )
 
-        ai_response = escape_system_text( escape_markdown_v2( doReplacements(completion.choices[0].message.content) ) )
+        ai_response = escape_system_text( escape_markdown_v2( 
+            doReplacements(completion.choices[0].message.content) ) )
         ai_response = "*__Темы для собраний__* 📌 \n\n" +ai_response
 
         if has_glyphs(ai_response):
@@ -190,7 +193,8 @@ async def main():
             ],
         )
 
-        ai_response = escape_system_text( escape_markdown_v2( doReplacements(completion.choices[0].message.content) ) )
+        ai_response = escape_system_text( escape_markdown_v2( 
+            doReplacements(completion.choices[0].message.content) ) )
         ai_response = "*__Задание на день__* 📝 \n\n" +ai_response
 
         if has_glyphs(ai_response):
