@@ -93,7 +93,7 @@ def readTheBook():
     else:
         return f"Папка для месяца {current_month} не найдена в папке 'book'."
 
-def telegramPost( chat_id, message_to_send, title ):
+async def telegramPost( chat_id, message_to_send, title ):
     try:
         await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2')
         print( f"Отправил {title} ✅" )
