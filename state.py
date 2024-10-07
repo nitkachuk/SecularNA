@@ -136,7 +136,10 @@ def aiRequest( role_system, role_user, title ):
                 completion.choices[0].message.content
             ), role_system 
         )
-        ai_response = f"*__{title}__* \n\n" +ai_response
+        #ai_response = f"*__{title.split('\n\n')[0]}__* \n\n" +ai_response
+        ai_response = f"*{title.split('\n\n')[0]}* \n\n" + \
+              "\n\n".join(title.split('\n\n')[1:]) + \
+              '\n\n' + ai_response
 
         # 2 (очистка от иероглифов)
         if has_glyphs(ai_response):
