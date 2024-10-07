@@ -73,8 +73,8 @@ def readTheBook():
 
                 p_lines = paragraphs[0].split('\n')
                 p_lines[0] = f"{p_lines[0]}"        # дата
-                p_lines[1] = f"__{p_lines[1]}__"        # заголовок
-                p_lines[3] = f"_{p_lines[3]}_"    # цитата
+                p_lines[1] = f"__{p_lines[1]}__"    # заголовок
+                p_lines[3] = f"_{p_lines[3]}_"      # цитата
                 p_lines[4] = f"*{p_lines[4]}*"      # источник
 
                 paragraphs[0] = '\n'.join(p_lines)
