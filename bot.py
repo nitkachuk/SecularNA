@@ -17,7 +17,7 @@ async def main():
     book = doReplacements( readTheBook() )
     message_to_send = escape_markdown_v2( book )
     print( message_to_send )
-    return
+
     # постинг в канал "Светский ежедневник"
     await telegramPost( bot, '@SecularNA', message_to_send, 'Пост в канал ежедневника 📘')
 
