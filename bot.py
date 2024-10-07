@@ -16,7 +16,8 @@ async def main():
     # уникализация ежедневника (для всех сообществ)
     book = doReplacements( readTheBook() )
     message_to_send = escape_markdown_v2( book )
-    
+    print( message_to_send )
+    return
     # постинг в канал "Светский ежедневник"
     await telegramPost( bot, '@SecularNA', message_to_send, 'пост в канал ежедневника 📘')
 
@@ -26,7 +27,7 @@ async def main():
     # except Exception as e:
     #     print( "Не удалось отправить пост в канал ежедневника 📘 ❌" )
     #     print( "Ошибка:", e, " ⚙️ \n" )
-    return
+    
     # постинг в канал "Так говорил Билл"
     client = Client()
 
