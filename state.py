@@ -142,6 +142,7 @@ def aiRequest( role_system, role_user, title ):
             ai_response = "*" + title.split('\n\n')[0] + "*\n\n" + \
               "\n\n_".join(title.split('\n\n')[1:]) + \
               "_\n\n" + ai_response
+            ai_response = escape_markdown_v2( ai_response )
 
         except Exception as e:
             print("разметка заголовков выдает ошибку... ⚙️", flush=True)
