@@ -29,7 +29,7 @@ def has_glyphs( text ):
 
 import re
 
-def escape_markdown_v2( text ):
+def escape_markdown_v2(text):
     escape_chars = [  '[', ']', '(', ')', '~', 'Ⓝ', '>', '#', '+', '-', 
                       '=', '|', '{', '}', '.', ',', '!', '?', '\\', '""'  ]
     
@@ -37,6 +37,7 @@ def escape_markdown_v2( text ):
         text = text.replace(char, f"\\{char}")
     
     return text
+
 
 def escape_system_text( text, role_system='' ):
     text = text.replace( '_{"code":200,"status":true,"model":"gpt-3.5-turbo","gpt":"', '')
