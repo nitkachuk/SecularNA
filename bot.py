@@ -18,7 +18,7 @@ async def main():
     telegramPost( '@SecularNA', message_to_send, 'пост в канал ежедневника 📘' )
 
     # try:
-    #     await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2')
+    #     await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2') 
     #     print( "Отправил пост в канал ежедневника 📘 ✅" )
     # except Exception as e:
     #     print( "Не удалось отправить пост в канал ежедневника 📘 ❌" )
