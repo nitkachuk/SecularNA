@@ -230,7 +230,7 @@ async def main():
         break
 
     
-    print( "Количество ошибок:", (attempts + 1), "из 20" )
+    print( "Количество ошибок:", attempts, "из 20" )
     print( "Вся программа выполнена успешно! ✅ ✅ ✅ " )
 
 asyncio.run(main())
