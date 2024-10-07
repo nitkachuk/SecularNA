@@ -6,6 +6,10 @@ import datetime
 
 import sys
 
+
+attempts = 0
+
+
 def has_glyphs( text ):
     for char in text:
         if unicodedata.category(char) == 'Lo':
@@ -14,7 +18,7 @@ def has_glyphs( text ):
 
 import re
 
-def escape_markdown_v2(text):
+def escape_markdown_v2( text ):
     escape_chars = [  '[', ']', '(', ')', '~', 'Ⓝ', '>', '#', '+', '-', 
                       '=', '|', '{', '}', '.', ',', '!', '?', '\\', '""'  ]
     
@@ -89,6 +93,7 @@ def readTheBook():
     else:
         return f"Папка для месяца {current_month} не найдена в папке 'book'."
 
+
 async def telegramPost( bot, chat_id, message_to_send, title ):
     try:
         await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2')
@@ -96,3 +101,37 @@ async def telegramPost( bot, chat_id, message_to_send, title ):
     except Exception as e:
         print( f"{title} ❌", flush=True )
         print( "Ошибка тг:", e, " ⚙️ \n", flush=True )
+        attempts += 1
+
+
+def aiRequest( role_system, role_user, title ):
+    while True:
+        if attempts >= 20:
+            print("Превышено количество попыток отправки сообщения. Цикл завершен.", flush=True)
+            raise SystemExit    # завершаем всю программу по истечению попыток
+                
+        completion = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[ 
+                {"role": "system", "content": role_system},
+                {"role": "user", "content": role_user}
+            ],
+        )
+
+        # 1 (очистка от системных настроек в выводе) 
+        ai_response = escape_system_text( doReplacements(completion.choices[0].message.content) ), role_system )
+        ai_response = f"*__{title}__* \n\n" +ai_response
+
+        # 2 (очистка от иероглифов)
+        if has_glyphs(ai_response):
+            print("has glyphs. try again... ⚙️", flush=True)
+            attempts += 1
+            continue
+
+        # 3 (проверка на длину сообщения)
+        if len( str(ai_response) ) < 250:
+            print("too short response. try again... ⚙️", flush=True)
+            attempts += 1
+            continue
+
+        return ai_response
