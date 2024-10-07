@@ -13,12 +13,15 @@ async def main():
     bot_token = os.getenv('TELEGRAM_TOKEN')
     bot = Bot(token=bot_token)
 
+    channelBook = '@SecularNA'
+    channelBill = '@channelBill'
+
     # уникализация ежедневника (для всех сообществ)
     book = doReplacements( readTheBook() )
     message_to_send = escape_markdown_v2( book )
 
     # постинг в канал "Светский ежедневник"
-    await telegramPost( bot, '@SecularNA', message_to_send, 'Пост в канал ежедневника 📘')
+    await telegramPost( bot, channelBook, message_to_send, 'Пост в канал ежедневника 📘')
 
     # try:
     #     await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2') 
@@ -67,7 +70,7 @@ async def main():
             attempts += 1
             continue
 
-        await telegramPost( bot, '@BillSpeaks', ai_response, 'Высказывание по книге 🗣️' )
+        await telegramPost( bot, channelBill, ai_response, 'Высказывание по книге 🗣️' )
 
         # try:
         #     await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
@@ -119,7 +122,7 @@ async def main():
             attempts += 1
             continue
 
-        await telegramPost( bot, '@BillSpeaks', ai_response, 'Принципы программы 🌱' )
+        await telegramPost( bot, channelBill, ai_response, 'Принципы программы 🌱' )
 
         # try:
         #     await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
@@ -167,7 +170,7 @@ async def main():
             attempts += 1
             continue
 
-        await telegramPost( bot, '@BillSpeaks', ai_response, 'Темы для собраний 📌' )
+        await telegramPost( bot, channelBill, ai_response, 'Темы для собраний 📌' )
 
         # try:
         #     await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
@@ -215,7 +218,7 @@ async def main():
             attempts += 1
             continue
 
-        await telegramPost( bot, '@BillSpeaks', ai_response, 'Задание на день 📝' )
+        await telegramPost( bot, channelBill, ai_response, 'Задание на день 📝' )
 
         # try:
         #     await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
