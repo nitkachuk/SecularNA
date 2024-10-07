@@ -92,3 +92,11 @@ def get_text():
             return f"Файл для {current_day} числа не найден в папке месяца {current_month}."
     else:
         return f"Папка для месяца {current_month} не найдена в папке 'book'."
+
+def telegramPost( chat_id, message_to_send, title ):
+    try:
+        await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2')
+        print( f"Отправил пост в {title}" )
+    except Exception as e:
+        print( f"Не удалось отправить пост в {title}" )
+        print( "Ошибка:", e, " ⚙️ \n" )
