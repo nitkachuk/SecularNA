@@ -1,8 +1,5 @@
 import asyncio
-from telegram import Bot
 from g4f.client import Client
-
-import os
 
 from replacements import replacements, doReplacements  # type: ignore
 from state import attempts, has_glyphs, escape_markdown_v2, escape_system_text, \
@@ -11,19 +8,12 @@ from roulette import getRandomTheme   # type: ignore
 
 
 async def main():
-    bot_token = os.getenv('TELEGRAM_TOKEN')
-    bot = Bot(token=bot_token)
-    client = Client()
-
-    channelBook = '@SecularNA'
-    channelBill = '@BillSpeaks'
-
     # уникализация ежедневника (для всех сообществ)
     book = doReplacements( readTheBook() )
     message_to_send = escape_markdown_v2( book )
 
     # постинг в канал "Светский ежедневник"
-    await telegramPost( bot, channelBook, message_to_send, 'Пост в канал ежедневника 📘')
+    await telegramPost( channelBook, message_to_send, 'Пост в канал ежедневника 📘')
     
 
     # высказывание по книге
@@ -31,8 +21,8 @@ async def main():
                       1-2 небольших абзаца. Добавь 3-5 эмодзи в текст. По-русски. """
     title = 'Высказывание по книге 🗣️'
 
-    ai_response = aiRequest( client, role_system, book, title )
-    await telegramPost( bot, channelBill, ai_response, title )
+    ai_response = aiRequest( role_system, book, title )
+    await telegramPost( channelBill, ai_response, title )
 
     
     # темы для собраний
@@ -41,8 +31,8 @@ async def main():
                       обозначь каждый одним эмодзи. По-русски. """
     title = 'Темы для собраний 📌'
 
-    ai_response = aiRequest( client, role_system, book, title )
-    await telegramPost( bot, channelBill, ai_response, title )
+    ai_response = aiRequest( role_system, book, title )
+    await telegramPost( channelBill, ai_response, title )
 
     
     # рулетка
@@ -52,8 +42,8 @@ async def main():
     title_1 = 'Рулетка! Случайная тема 🍒'
     title_2 = title_1 + f"\n\n## {themeText}"
 
-    ai_response = aiRequest( client, role_system, themeText, title_2 )
-    await telegramPost( bot, channelBill, ai_response, title_1 )
+    ai_response = aiRequest( role_system, themeText, title_2 )
+    await telegramPost(  channelBill, ai_response, title_1 )
     
 
     # шаги и традиции
@@ -63,8 +53,8 @@ async def main():
                       традицию межстрочными отступами и обозначь каждый одним эмодзи. По-русски. """
     title = 'Шаги и традиции 🧘🏼'
 
-    ai_response = aiRequest( client, role_system, book, title )
-    await telegramPost( bot, channelBill, ai_response, title )
+    ai_response = aiRequest( role_system, book, title )
+    await telegramPost( channelBill, ai_response, title )
     
 
     # принципы программы
@@ -77,8 +67,8 @@ async def main():
                       обозначь каждый одним эмодзи. по-русски. """
     title = 'Принципы программы 🌱'
 
-    ai_response = aiRequest( client, role_system, book, title )
-    await telegramPost( bot, channelBill, ai_response, title )
+    ai_response = aiRequest( role_system, book, title )
+    await telegramPost( channelBill, ai_response, title )
 
 
     # принципы программы
@@ -89,8 +79,8 @@ async def main():
                       эмодзи. по-русски. """
     title = 'Черты характера 🎭'
 
-    ai_response = aiRequest( client, role_system, book, title )
-    await telegramPost( bot, channelBill, ai_response, title )
+    ai_response = aiRequest( role_system, book, title )
+    await telegramPost( channelBill, ai_response, title )
     
 
     # задание на день 
@@ -100,7 +90,7 @@ async def main():
     title = 'Задание на день 📝'
 
     ai_response = aiRequest( client, role_system, book, title )
-    await telegramPost( bot, channelBill, ai_response, title )
+    await telegramPost( channelBill, ai_response, title )
 
     
     # конечный вывод
