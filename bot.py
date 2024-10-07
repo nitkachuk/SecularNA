@@ -84,7 +84,7 @@ async def main():
             
         break
 
-    return
+
     # принципы программы на сегодня
     while True:
         if attempts >= 20:
