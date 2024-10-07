@@ -123,8 +123,6 @@ async def telegramPost( chat_id, message_to_send, title ):
         print( "Ошибка тг:", e, " ⚙️ \n", flush=True )
         attempts += 1
 
-        print( message_to_send )
-
 
 def aiRequest( role_system, role_user, title ):
     global attempts
@@ -169,5 +167,5 @@ def aiRequest( role_system, role_user, title ):
             print("too short response. try again... ⚙️", flush=True)
             attempts += 1
             continue
-        print( "AIREQUEST:   " +escape_markdown_v2( ai_response ) )
+
         return escape_markdown_v2( ai_response )
