@@ -28,9 +28,15 @@ def escape_markdown_v2(text):
     text = text.replace('\\\\', '\\')
     return text
 
-def escape_system_text(text):
+def escape_system_text(text, role_system=''):
     text = text.replace( '_{"code":200,"status":true,"model":"gpt-3.5-turbo","gpt":"', '')
     text = text.replace( '","original":null}', '')
+
+    ai_response = ai_response.replace(role_system, '')    
+    ai_response = ai_response.replace('Assistant:', '')
+    ai_response = ai_response.replace('assistant:', '')
+    ai_response = ai_response.replace('Конец', '')
+    ai_response = ai_response.replace('конец', '')
     return text
     
 
