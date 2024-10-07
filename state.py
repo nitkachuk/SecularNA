@@ -32,11 +32,11 @@ def escape_system_text( text, role_system='' ):
     text = text.replace( '_{"code":200,"status":true,"model":"gpt-3.5-turbo","gpt":"', '')
     text = text.replace( '","original":null}', '')
 
-    ai_response = ai_response.replace(role_system, '')    
-    ai_response = ai_response.replace('Assistant:', '')
-    ai_response = ai_response.replace('assistant:', '')
-    ai_response = ai_response.replace('Конец', '')
-    ai_response = ai_response.replace('конец', '')
+    text = text.replace(role_system, '')    
+    text = text.replace('Assistant:', '')
+    text = text.replace('assistant:', '')
+    text = text.replace('Конец', '')
+    text = text.replace('конец', '')
     return text
     
 
