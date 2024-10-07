@@ -105,7 +105,7 @@ async def telegramPost( bot, chat_id, message_to_send, title ):
 
 
 def aiRequest( role_system, role_user, title ):
-    global attempts
+    global attempts, client
     
     while True:
         if attempts >= 20:
