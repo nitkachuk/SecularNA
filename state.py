@@ -146,11 +146,11 @@ def aiRequest( role_system, role_user, title ):
                 completion.choices[0].message.content
             ), role_system 
         )
-        #ai_response = f"*__{title.split('\n\n')[0]}__* \n\n" +ai_response
+        
         try: 
             ai_response = "*" + title.split('\n\n')[0] + "*\n\n_" + \
               "\n\n".join(title.split('\n\n')[1:]) + \
-              "_\n\n" + ai_response
+              "_\n\n" + ai_response    # разметка
 
         except Exception as e:
             print("разметка заголовков выдает ошибку... ⚙️", flush=True)
@@ -167,5 +167,5 @@ def aiRequest( role_system, role_user, title ):
             print("too short response. try again... ⚙️", flush=True)
             attempts += 1
             continue
-        print( "ATTEMPS: " +attempts)
+
         return escape_markdown_v2( ai_response )
