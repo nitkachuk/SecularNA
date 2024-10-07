@@ -2,6 +2,8 @@ import asyncio
 from telegram import Bot
 from g4f.client import Client
 
+import os
+
 from replacements import replacements, doReplacements # type: ignore
 from state import has_glyphs, escape_markdown_v2, escape_system_text, readTheBook  # type: ignore
 
