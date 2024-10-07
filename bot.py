@@ -14,14 +14,14 @@ async def main():
     message_to_send = escape_markdown_v2( doReplacements( get_text() ) )
     
     # постинг в канал "Светский ежедневник"
-    chat_id = '@SecularNA'
+    telegramPost( '@SecularNA', message_to_send, 'канал ежедневника 📘 ✅' )
 
-    try:
-        await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2')
-        print( "Отправил пост в канал ежедневника 📘 ✅" )
-    except Exception as e:
-        print( "Не удалось отправить пост в канал ежедневника 📘 ❌" )
-        print( "Ошибка:", e, " ⚙️ \n" )
+    # try:
+    #     await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2')
+    #     print( "Отправил пост в канал ежедневника 📘 ✅" )
+    # except Exception as e:
+    #     print( "Не удалось отправить пост в канал ежедневника 📘 ❌" )
+    #     print( "Ошибка:", e, " ⚙️ \n" )
 
     #return
     # постинг в канал "Так говорил Билл"
