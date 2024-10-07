@@ -47,13 +47,10 @@ async def main():
     
     # рулетка
     themeText = getRandomTheme()
-    themeNumner = getRandomTheme().split(' ')[0]
-    
     role_system = """ Сочини 2-3 предложения, которые кратко опишут текст. Сделай красивые 
                       межстрочные отступы и добавь 2 эмодзи. По-русски. """
     title_1 = 'Рулетка! Случайная тема 🍒'
-    title_2 = title_1 + f"\n{themeText}"
-    
+    title_2 = title_1 + f"\n\n«{themeText}»"
 
     ai_response = aiRequest( client, role_system, themeText, title_2 )
     await telegramPost( bot, channelBill, ai_response, title_1 )
