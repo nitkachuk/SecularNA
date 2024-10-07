@@ -46,11 +46,8 @@ async def main():
             ],
         )
 
-        ai_response = escape_system_text( escape_markdown_v2( completion.choices[0].message.content ) )
+        ai_response = escape_system_text( escape_markdown_v2( completion.choices[0].message.content ), role_system  )
         ai_response = "*__Высказывание по книге__* 🗣️ \n\n" +ai_response
-
-        # удаляем возможное присутствие системных настроек в выводе результата
-        ai_response = escape_system_text( ai_response, role_system )
 
         if has_glyphs(ai_response):
             print("has glyphs. try again... ⚙️")
