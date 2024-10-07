@@ -18,7 +18,7 @@ async def main():
     message_to_send = escape_markdown_v2( book )
     
     # постинг в канал "Светский ежедневник"
-    await telegramPost( '@SecularNA', message_to_send, 'пост в канал ежедневника 📘' )
+    await telegramPost( bot, '@SecularNA', message_to_send, 'пост в канал ежедневника 📘')
 
     # try:
     #     await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2') 
