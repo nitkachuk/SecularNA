@@ -22,7 +22,7 @@ async def main():
     title = 'Высказывание по книге 🗣️'
 
     ai_response = aiRequest( role_system, book, title )
-    await telegramPost( channelBill, ai_response, title )
+    #await telegramPost( channelBill, ai_response, title )
 
     
     # темы для собраний
@@ -32,7 +32,7 @@ async def main():
     title = 'Темы для собраний 📌'
 
     ai_response = aiRequest( role_system, book, title )
-    await telegramPost( channelBill, ai_response, title )
+    #await telegramPost( channelBill, ai_response, title )
 
     
     # рулетка
@@ -54,7 +54,7 @@ async def main():
     title = 'Шаги и традиции 🧘🏼'
 
     ai_response = aiRequest( role_system, book, title )
-    await telegramPost( channelBill, ai_response, title )
+    #await telegramPost( channelBill, ai_response, title )
     
 
     # принципы программы
@@ -68,7 +68,7 @@ async def main():
     title = 'Принципы программы 🌱'
 
     ai_response = aiRequest( role_system, book, title )
-    await telegramPost( channelBill, ai_response, title )
+    #await telegramPost( channelBill, ai_response, title )
 
 
     # принципы программы
@@ -80,7 +80,7 @@ async def main():
     title = 'Черты характера 🎭'
 
     ai_response = aiRequest( role_system, book, title )
-    await telegramPost( channelBill, ai_response, title )
+    #await telegramPost( channelBill, ai_response, title )
     
 
     # задание на день 
@@ -90,7 +90,7 @@ async def main():
     title = 'Задание на день 📝'
 
     ai_response = aiRequest( client, role_system, book, title )
-    await telegramPost( channelBill, ai_response, title )
+    #await telegramPost( channelBill, ai_response, title )
 
     
     # конечный вывод
