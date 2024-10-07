@@ -16,7 +16,6 @@ async def main():
     # уникализация ежедневника (для всех сообществ)
     book = doReplacements( readTheBook() )
     message_to_send = escape_markdown_v2( book )
-    print( message_to_send )
 
     # постинг в канал "Светский ежедневник"
     await telegramPost( bot, '@SecularNA', message_to_send, 'Пост в канал ежедневника 📘')
@@ -68,7 +67,7 @@ async def main():
             attempts += 1
             continue
 
-        await telegramPost( '@BillSpeaks', ai_response, 'Высказывание по книге 🗣️' )
+        await telegramPost( bot, '@BillSpeaks', ai_response, 'Высказывание по книге 🗣️' )
 
         # try:
         #     await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
@@ -120,7 +119,7 @@ async def main():
             attempts += 1
             continue
 
-        await telegramPost( '@BillSpeaks', ai_response, 'Принципы программы 🌱' )
+        await telegramPost( bot, '@BillSpeaks', ai_response, 'Принципы программы 🌱' )
 
         # try:
         #     await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
@@ -168,7 +167,7 @@ async def main():
             attempts += 1
             continue
 
-        await telegramPost( '@BillSpeaks', ai_response, 'Темы для собраний 📌' )
+        await telegramPost( bot, '@BillSpeaks', ai_response, 'Темы для собраний 📌' )
 
         # try:
         #     await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
@@ -216,7 +215,7 @@ async def main():
             attempts += 1
             continue
 
-        await telegramPost( '@BillSpeaks', ai_response, 'Задание на день 📝' )
+        await telegramPost( bot, '@BillSpeaks', ai_response, 'Задание на день 📝' )
 
         # try:
         #     await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
