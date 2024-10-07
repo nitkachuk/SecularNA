@@ -138,9 +138,9 @@ def aiRequest( role_system, role_user, title ):
         )
         #ai_response = f"*__{title.split('\n\n')[0]}__* \n\n" +ai_response
         try: 
-            ai_response = f"*{title.split('\n\n')[0]}* \n\n" + \
-                  "\n\n".join(title.split('\n\n')[1:]) + \
-                  '\n\n' + ai_response
+            ai_response = (f"*{title.split('\n\n')[0]}* \n\n" 
+               + "\n\n".join(title.split('\n\n')[1:]) 
+               + '\n\n' + ai_response)
         except Exception as e:
             print("разметка заголовков выдает ошибку... ⚙️", flush=True)
             print( e, flush=True )
