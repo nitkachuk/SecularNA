@@ -502,7 +502,15 @@ themes = """
 499) Возместил ли я весь причиненный ущерб по 9-му шагу? Если нет, то почему?
 500) Восстановление отношений с теми, кому причинил ущерб (опыт)        """
 
+
 themes = themes.splitlines()
+
+for i, theme in enumerate(themes):
+    subTheme = theme.split(' ')
+    subTheme[0] = subTheme[0].replace(")", ".")
+
+    themes[i] = " ".join(subTheme)
+    
 
 def getRandomTheme():
     return themes[ random.randint(1, 500) ]
