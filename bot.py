@@ -14,7 +14,7 @@ async def main():
     bot = Bot(token=bot_token)
 
     channelBook = '@SecularNA'
-    channelBill = '@channelBill'
+    channelBill = '@BillSpeaks'
 
     # уникализация ежедневника (для всех сообществ)
     book = doReplacements( readTheBook() )
@@ -84,7 +84,7 @@ async def main():
             
         break
 
-
+    return
     # принципы программы на сегодня
     while True:
         if attempts >= 20:
