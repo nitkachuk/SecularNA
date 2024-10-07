@@ -167,5 +167,5 @@ def aiRequest( role_system, role_user, title ):
             print("too short response. try again... ⚙️", flush=True)
             attempts += 1
             continue
-
+        print( "ATTEMPS: " +attempts)
         return escape_markdown_v2( ai_response )
