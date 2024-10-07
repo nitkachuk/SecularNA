@@ -7,7 +7,7 @@ import datetime
 import sys
 from replacements import doReplacements 
 
-from telegram import Bot, Client
+from telegram import Bot
 
 
 bot_token = os.getenv('TELEGRAM_TOKEN')
