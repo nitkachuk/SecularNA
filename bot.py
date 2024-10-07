@@ -36,7 +36,7 @@ async def main():
     attempts = 0
     while True:
         if attempts >= 20:
-            print("Превышено количество попыток отправки сообщения. Цикл завершен.")
+            print("Превышено количество попыток отправки сообщения. Цикл завершен.", flush=True)
             break
         
         role_system = """ Выскажись по-русски, по тексту, в духе психологии. 
@@ -56,17 +56,17 @@ async def main():
         ai_response = "*__Высказывание по книге__* 🗣️ \n\n" +ai_response
 
         if has_glyphs(ai_response):
-            print("has glyphs. try again... ⚙️")
+            print("has glyphs. try again... ⚙️", flush=True)
             attempts += 1
             continue
 
         if role_user in ai_response:
-            print("role_user in message. try again... ⚙️")
+            print("role_user in message. try again... ⚙️", flush=True)
             attempts += 1
             continue
 
         if len( str(ai_response) ) < 250:
-            print("too short response. try again... ⚙️")
+            print("too short response. try again... ⚙️", flush=True)
             attempts += 1
             continue
 
@@ -88,7 +88,7 @@ async def main():
     # принципы программы на сегодня
     while True:
         if attempts >= 20:
-            print("Превышено количество попыток отправки сообщения. Цикл завершен.")
+            print("Превышено количество попыток отправки сообщения. Цикл завершен.", flush=True)
             break
         
         role_system = """ принципы программы: честность, непредубежденность, готовность, спокойствие, 
@@ -113,12 +113,12 @@ async def main():
         ai_response = "*__Принципы программы__* 🌱 \n\n" +ai_response
 
         if has_glyphs(ai_response):
-            print("has glyphs. try again... ⚙️")
+            print("has glyphs. try again... ⚙️", flush=True)
             attempts += 1
             continue
 
         if len( str(ai_response) ) < 250:
-            print("too short response. try again... ⚙️")
+            print("too short response. try again... ⚙️", flush=True)
             attempts += 1
             continue
 
@@ -140,7 +140,7 @@ async def main():
     # темы для собрания
     while True:
         if attempts >= 20:
-            print("Превышено количество попыток отправки сообщения. Цикл завершен.")
+            print("Превышено количество попыток отправки сообщения. Цикл завершен.", flush=True)
             break
         
         role_system = """ Придумай 2 темы для обсуждения, которые косвенно перекликаются с текстом, 
@@ -161,12 +161,12 @@ async def main():
         ai_response = "*__Темы для собраний__* 📌 \n\n" +ai_response
 
         if has_glyphs(ai_response):
-            print("has glyphs. try again... ⚙️")
+            print("has glyphs. try again... ⚙️", flush=True)
             attempts += 1
             continue
 
         if len( str(ai_response) ) < 250:
-            print("too short response. try again... ⚙️")
+            print("too short response. try again... ⚙️", flush=True)
             attempts += 1
             continue
 
@@ -188,7 +188,7 @@ async def main():
     # задание на день
     while True:
         if attempts >= 20:
-            print("Превышено количество попыток отправки сообщения. Цикл завершен.")
+            print("Превышено количество попыток отправки сообщения. Цикл завершен.", flush=True)
             break
         
         role_system = """ Придумай 3 действия на сегодняшний день, которые я могу сделать, 
@@ -209,12 +209,12 @@ async def main():
         ai_response = "*__Задание на день__* 📝 \n\n" +ai_response
 
         if has_glyphs(ai_response):
-            print("has glyphs. try again... ⚙️")
+            print("has glyphs. try again... ⚙️", flush=True)
             attempts += 1
             continue
 
         if len( str(ai_response) ) < 250:
-            print("too short response. try again... ⚙️")
+            print("too short response. try again... ⚙️", flush=True)
             attempts += 1
             continue
 
@@ -233,7 +233,7 @@ async def main():
         break
 
     
-    print( "Количество ошибок:", attempts, "из 20" )
-    print( "Вся программа выполнена успешно! ✅ ✅ ✅ " )
+    print( "Количество ошибок:", attempts, "из 20", flush=True )
+    print( "Вся программа выполнена успешно! ✅ ✅ ✅ ", flush=True )
 
 asyncio.run(main())
