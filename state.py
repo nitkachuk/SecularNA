@@ -163,4 +163,4 @@ def aiRequest( role_system, role_user, title ):
             attempts += 1
             continue
 
-        return escape_markdown_v2( ai_response )
+        return ai_response
