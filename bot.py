@@ -3,7 +3,7 @@ from telegram import Bot
 from g4f.client import Client
 
 from replacements import replacements, doReplacements # type: ignore
-from secondary import has_glyphs, escape_markdown_v2, escape_system_text, get_text  # type: ignore
+from secondary import has_glyphs, escape_markdown_v2, escape_system_text, read_the_book  # type: ignore
 
 
 async def main():
@@ -11,7 +11,7 @@ async def main():
     bot = Bot(token=bot_token)
 
     # уникализация ежедневника (для всех сообществ)
-    book = doReplacements( get_text() )
+    book = doReplacements( read_the_book() )
     message_to_send = escape_markdown_v2( book )
     
     # постинг в канал "Светский ежедневник"
