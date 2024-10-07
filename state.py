@@ -99,4 +99,4 @@ async def telegramPost( chat_id, message_to_send, title ):
         print( f"Отправил {title} ✅" )
     except Exception as e:
         print( f"Не удалось отправить {title} ❌" )
-        print( "Ошибка:", e, " ⚙️ \n" )
+        print( "Ошибка тг:", e, " ⚙️ \n" )
