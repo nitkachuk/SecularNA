@@ -119,7 +119,7 @@ def aiRequest( role_system, role_user, title ):
         )
 
         # 1 (очистка от системных настроек в выводе) 
-        ai_response = escape_system_text( doReplacements(completion.choices[0].message.content) ), role_system )
+        ai_response = escape_system_text( doReplacements(completion.choices[0].message.content), role_system )
         ai_response = f"*__{title}__* \n\n" +ai_response
 
         # 2 (очистка от иероглифов)
