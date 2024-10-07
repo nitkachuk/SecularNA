@@ -11,7 +11,7 @@ async def main():
     bot = Bot(token=bot_token)
 
     # уникализация ежедневника (для всех сообществ)
-    book = doReplacements( read_the_book() )
+    book = doReplacements( readTheBook() )
     message_to_send = escape_markdown_v2( book )
     
     # постинг в канал "Светский ежедневник"
