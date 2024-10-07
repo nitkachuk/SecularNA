@@ -6,12 +6,13 @@ import os
 
 from replacements import replacements, doReplacements # type: ignore
 from state import has_glyphs, escape_markdown_v2, escape_system_text, \
-    readTheBook, telegramPost  # type: ignore
+    readTheBook, telegramPost, attempts  # type: ignore
 
 
 async def main():
     bot_token = os.getenv('TELEGRAM_TOKEN')
     bot = Bot(token=bot_token)
+    client = Client()
 
     channelBook = '@SecularNA'
     channelBill = '@BillSpeaks'
@@ -23,68 +24,14 @@ async def main():
     # постинг в канал "Светский ежедневник"
     #await telegramPost( bot, channelBook, message_to_send, 'Пост в канал ежедневника 📘')
 
-    # try:
-    #     await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2') 
-    #     print( "Отправил пост в канал ежедневника 📘 ✅" )
-    # except Exception as e:
-    #     print( "Не удалось отправить пост в канал ежедневника 📘 ❌" )
-    #     print( "Ошибка:", e, " ⚙️ \n" )
-    
-    # постинг в канал "Так говорил Билл"
-    client = Client()
-
-    attempts = 0
-    while True:
-        if attempts >= 20:
-            print("Превышено количество попыток отправки сообщения. Цикл завершен.", flush=True)
-            break
-        
-        role_system = """ Выскажись по-русски, по тексту, в духе психологии. 
+    role_system = """ Выскажись по-русски, по тексту, в духе психологии. 
                           1-2 небольших абзаца. Добавь 3-5 эмодзи в текст. """
-        role_user = book
+    title = 'Высказывание по книге 🗣️'
 
-        completion = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[ 
-                {"role": "system", "content": role_system},
-                {"role": "user", "content": role_user}
-            ],
-        )
+    ai_response = aiRequest( role_system, book, title )
+    await telegramPost( bot, channelBill, ai_response, title )
 
-        ai_response = escape_system_text( escape_markdown_v2( 
-            doReplacements(completion.choices[0].message.content) ), role_system  )
-        ai_response = "*__Высказывание по книге__* 🗣️ \n\n" +ai_response
-
-        if has_glyphs(ai_response):
-            print("has glyphs. try again... ⚙️", flush=True)
-            attempts += 1
-            continue
-
-        if role_user in ai_response:
-            print("role_user in message. try again... ⚙️", flush=True)
-            attempts += 1
-            continue
-
-        if len( str(ai_response) ) < 250:
-            print("too short response. try again... ⚙️", flush=True)
-            attempts += 1
-            continue
-
-        await telegramPost( bot, channelBill, ai_response, 'Высказывание по книге 🗣️' )
-
-        # try:
-        #     await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
-        #     print( "Отправил пост в канал Билла Уилсона 🗣️ ✅" )
-        # except Exception as e:
-        #     print( "Не удалось отправить пост в канал Билла Уилсона 🗣️ ❌" )
-        #     print( "Ошибка:", e, " ⚙️ \n" )
-        #     #print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
-        #     attempts += 1
-        #     continue
-            
-        break
-
-
+    return
     # принципы программы на сегодня
     while True:
         if attempts >= 20:
