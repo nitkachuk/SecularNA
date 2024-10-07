@@ -87,7 +87,7 @@ def readTheBook():
 
                 final_content = '\n\n'.join(paragraphs)
 
-                return escape_markdown_v2( final_content )
+                return final_content
         else:
             return f"Файл для {current_day} числа не найден в папке месяца {current_month}."
     else:
