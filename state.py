@@ -5,7 +5,7 @@ import os
 import datetime
 
 import sys
-
+from replacements import doReplacements 
 
 attempts = 0
 
@@ -105,7 +105,7 @@ async def telegramPost( bot, chat_id, message_to_send, title ):
 
 
 def aiRequest( client, role_system, role_user, title ):
-    global attempts, doReplacements
+    global attempts
     
     while True:
         if attempts >= 20:
