@@ -15,7 +15,7 @@ async def main():
     message_to_send = escape_markdown_v2( book )
     
     # постинг в канал "Светский ежедневник"
-    telegramPost( '@SecularNA', message_to_send, 'канал ежедневника 📘 ✅' )
+    telegramPost( '@SecularNA', message_to_send, 'пост в канал ежедневника 📘' )
 
     # try:
     #     await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2')
@@ -24,9 +24,7 @@ async def main():
     #     print( "Не удалось отправить пост в канал ежедневника 📘 ❌" )
     #     print( "Ошибка:", e, " ⚙️ \n" )
 
-    #return
     # постинг в канал "Так говорил Билл"
-    chat_id_3 = '@BillSpeaks'
     client = Client()
 
     attempts = 0
@@ -66,15 +64,17 @@ async def main():
             attempts += 1
             continue
 
-        try:
-            await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
-            print( "Отправил пост в канал Билла Уилсона 🗣️ ✅" )
-        except Exception as e:
-            print( "Не удалось отправить пост в канал Билла Уилсона 🗣️ ❌" )
-            print( "Ошибка:", e, " ⚙️ \n" )
-            #print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
-            attempts += 1
-            continue
+        telegramPost( '@BillSpeaks', ai_response, 'высказывание в Билла 🗣️' )
+
+        # try:
+        #     await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
+        #     print( "Отправил пост в канал Билла Уилсона 🗣️ ✅" )
+        # except Exception as e:
+        #     print( "Не удалось отправить пост в канал Билла Уилсона 🗣️ ❌" )
+        #     print( "Ошибка:", e, " ⚙️ \n" )
+        #     #print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
+        #     attempts += 1
+        #     continue
             
         break
 
@@ -116,15 +116,17 @@ async def main():
             attempts += 1
             continue
 
-        try:
-            await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
-            print( "Отправил принципы на сегодня 🌱 ✅" )
-        except Exception as e:
-            print( "Не удалось отправить принципы на сегодня 🌱 ❌" )
-            print( "Ошибка:", e, " ⚙️ \n" )
-            #print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
-            attempts += 1
-            continue
+        telegramPost( '@BillSpeaks', ai_response, 'принципы в Билла 🌱' )
+
+        # try:
+        #     await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
+        #     print( "Отправил принципы на сегодня 🌱 ✅" )
+        # except Exception as e:
+        #     print( "Не удалось отправить принципы на сегодня 🌱 ❌" )
+        #     print( "Ошибка:", e, " ⚙️ \n" )
+        #     #print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
+        #     attempts += 1
+        #     continue
             
         break
 
@@ -162,15 +164,17 @@ async def main():
             attempts += 1
             continue
 
-        try:
-            await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
-            print( "Отправил темы для собраний 📌 ✅" )
-        except Exception as e:
-            print( "Не удалось отправить темы для собраний 📌 ❌" )
-            print( "Ошибка:", e, " ⚙️ \n" )
-            #print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
-            attempts += 1
-            continue
+        telegramPost( '@BillSpeaks', ai_response, 'темы собраний в Билла 📌' )
+
+        # try:
+        #     await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
+        #     print( "Отправил темы для собраний 📌 ✅" )
+        # except Exception as e:
+        #     print( "Не удалось отправить темы для собраний 📌 ❌" )
+        #     print( "Ошибка:", e, " ⚙️ \n" )
+        #     #print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
+        #     attempts += 1
+        #     continue
             
         break
     
@@ -208,15 +212,17 @@ async def main():
             attempts += 1
             continue
 
-        try:
-            await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
-            print( "Отправил задание на день 📝 ✅" )
-        except Exception as e:
-            print( "Не удалось отправить задание на день 📝 ❌" )
-            print( "Ошибка:", e, " ⚙️ \n" )
-            #print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
-            attempts += 1
-            continue
+        telegramPost( '@BillSpeaks', ai_response, 'задание на день 📝' )
+
+        # try:
+        #     await bot.send_message( chat_id=chat_id_3, text=ai_response, parse_mode='MarkdownV2' )
+        #     print( "Отправил задание на день 📝 ✅" )
+        # except Exception as e:
+        #     print( "Не удалось отправить задание на день 📝 ❌" )
+        #     print( "Ошибка:", e, " ⚙️ \n" )
+        #     #print( "Ответ от ИИ:", ai_response, " ⚙️ \n" )
+        #     attempts += 1
+        #     continue
             
         break
 
