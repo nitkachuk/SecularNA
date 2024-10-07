@@ -28,7 +28,7 @@ async def main():
                           1-2 небольших абзаца. Добавь 3-5 эмодзи в текст. """
     title = 'Высказывание по книге 🗣️'
 
-    ai_response = aiRequest( role_system, book, title )
+    ai_response = aiRequest( client, role_system, book, title )
     await telegramPost( bot, channelBill, ai_response, title )
 
     return
