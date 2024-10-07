@@ -96,7 +96,7 @@ def readTheBook():
 async def telegramPost( bot, chat_id, message_to_send, title ):
     try:
         await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2')
-        print( f"Отправил {title} ✅" )
+        print( f"{title} ✅" )
     except Exception as e:
-        print( f"Не удалось отправить {title} ❌" )
+        print( f"{title} ❌" )
         print( "Ошибка тг:", e, " ⚙️ \n" )
