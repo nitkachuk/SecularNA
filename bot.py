@@ -50,11 +50,7 @@ async def main():
         ai_response = "*__Высказывание по книге__* 🗣️ \n\n" +ai_response
 
         # удаляем возможное присутствие системных настроек в выводе результата
-        ai_response = ai_response.replace(role_system, '')    
-        ai_response = ai_response.replace('Assistant:', '')
-        ai_response = ai_response.replace('assistant:', '')
-        ai_response = ai_response.replace('Конец', '')
-        ai_response = ai_response.replace('конец', '')
+        ai_response = escape_system_text( ai_response, role_system )
 
         if has_glyphs(ai_response):
             print("has glyphs. try again... ⚙️")
