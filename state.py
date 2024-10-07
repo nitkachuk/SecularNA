@@ -34,8 +34,15 @@ def escape_markdown_v2(text):
                       '=', '|', '{', '}', '.', ',', '!', '?', '\\', '""'  ]
     
     for char in escape_chars:
-        text = text.replace(char, f"\\{char}")
-    
+        pattern = re.escape(char)
+        
+        if char == '\\':
+            replacement = '\\\\'
+        else:
+            replacement = '\\' + char
+        text = re.sub(pattern, replacement, text)
+
+    text = text.replace('\\\\', '\\')
     return text
 
 
