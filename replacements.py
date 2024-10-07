@@ -187,3 +187,9 @@ replacements = [
     {'keyword': 'алкозависимым',       'replaceword': 'зависимым'},
     {'keyword': 'алкозависим',         'replaceword': 'зависим'}
 ]
+
+def doReplacements( text ):
+    for replacement in replacements:
+        keyword = replacement['keyword']
+        replaceword = replacement['replaceword']
+        return text.replace(keyword, replaceword)
