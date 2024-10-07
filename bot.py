@@ -3,7 +3,7 @@ from telegram import Bot
 from g4f.client import Client
 
 from replacements import replacements, doReplacements # type: ignore
-from state import has_glyphs, escape_markdown_v2, escape_system_text, read_the_book  # type: ignore
+from state import has_glyphs, escape_markdown_v2, escape_system_text, readTheBook  # type: ignore
 
 
 async def main():
