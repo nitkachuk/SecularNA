@@ -115,7 +115,10 @@ def readTheBook():
 
 
 def createMessage( text, title, title2 = '' ):
-    response = title + title2 + text
+    if title2:
+        title2 = f"\n\n_{title2}_\n\n"
+        
+    return f"__{title}__{title2}{text}"
 
 
 async def telegramPost( chat_id, message_to_send, title ):
