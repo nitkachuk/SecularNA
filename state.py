@@ -115,6 +115,8 @@ def readTheBook():
 
 
 def createMessage( text, title, title2 = '' ):
+    title = escape_markdown_v2( title )
+    
     if title2:
         title2 = f"{title2}_\n\n"
     title2 = escape_markdown_v2( title2 )
