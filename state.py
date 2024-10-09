@@ -117,10 +117,10 @@ async def telegramPost( chat_id, message_to_send, title ):
     
     try:
         await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2')
-        print( f"{title} ✅", flush=True )
+        print( f"\n\n{title} ✅", flush=True )
     except Exception as e:
         print( f"{title} ❌", flush=True )
-        print( "\n\nОшибка тг:", e, " ⚙️ \n\n", flush=True )
+        print( "Ошибка тг:", e, " ⚙️", flush=True )
         attempts += 1
 
 
