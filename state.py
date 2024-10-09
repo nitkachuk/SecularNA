@@ -114,7 +114,7 @@ def readTheBook():
         return f"Папка для месяца {current_month} не найдена в папке 'book'."
 
 
-async def telegramPost( chat_id, message_to_send, title ):
+async def telegramPost( chat_id, message_to_send, title, second_title = 0 ):
     global attempts
     
     try:
@@ -149,15 +149,6 @@ def aiRequest( role_system, role_user ):
                 completion.choices[0].message.content
             ), role_system 
         )
-        
-        # try: 
-        #     ai_response = "*" + title.split('\n\n')[0] + "*\n\n_" + \
-        #       "\n\n".join(title.split('\n\n')[1:]) + \
-        #       "_\n\n" + ai_response    # разметка
-
-        # except Exception as e:
-        #     print("разметка заголовков выдает ошибку... ⚙️", flush=True)
-        #     print( e, flush=True )
 
         # 2 (очистка от иероглифов)
         if has_glyphs(ai_response):
