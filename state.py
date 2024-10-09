@@ -33,7 +33,7 @@ def escape_markdown_v2(text, plus_underline = 0):
     escape_chars = [  '[', ']', '(', ')', '~', 'Ⓝ', '>', '#', '+', '-', 
                       '=', '|', '{', '}', '.', ',', '!', '?', '\\', '""'  ]
     if plus_underline:
-        escape_chars + [ '_' ]
+        escape_chars += [ '_' ]
     
     for char in escape_chars:
         pattern = re.escape(char)
