@@ -12,7 +12,7 @@ async def main():
     # уникализация ежедневника (для всех сообществ)
     book = doReplacements( readTheBook() )
     message_to_send = escape_markdown_v2( book )
-    print( message_to_send )
+
     # постинг в канал "Светский ежедневник"
     await telegramPost( channelBook, message_to_send, 'Пост в канал ежедневника 📘')
     return    
