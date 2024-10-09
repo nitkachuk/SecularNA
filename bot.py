@@ -14,7 +14,7 @@ async def main():
     message_to_send = escape_markdown_v2( book )
 
     # постинг в канал "Светский ежедневник"
-    #await telegramPost( channelBook, message_to_send, 'Пост в канал ежедневника 📘')
+    await telegramPost( channelBook, message_to_send, 'Пост в канал ежедневника 📘')
     
 
     # высказывание по книге 🗣️
@@ -24,7 +24,7 @@ async def main():
 
     ai_response = aiRequest( role_system, book )
     ai_response = createMessage( ai_response, title )
-    #await telegramPost( channelBill, ai_response, title )
+    await telegramPost( channelBill, ai_response, title )
 
     
     # темы для собраний 📌
@@ -35,7 +35,7 @@ async def main():
 
     ai_response = aiRequest( role_system, book )
     ai_response = createMessage( ai_response, title )
-    #await telegramPost( channelBill, ai_response, title )
+    await telegramPost( channelBill, ai_response, title )
 
     
     # рулетка 🍒
@@ -60,7 +60,7 @@ async def main():
     ai_response = aiRequest( role_system, book )
     ai_response = createMessage( ai_response, title )
     
-    #await telegramPost( channelBill, ai_response, title )
+    await telegramPost( channelBill, ai_response, title )
     
 
     # принципы программы 🌱
@@ -75,7 +75,7 @@ async def main():
 
     ai_response = aiRequest( role_system, book )
     ai_response = createMessage( ai_response, title )
-    #await telegramPost( channelBill, ai_response, title )
+    await telegramPost( channelBill, ai_response, title )
 
 
     # черты характера 🎭
@@ -88,7 +88,7 @@ async def main():
 
     ai_response = aiRequest( role_system, book )
     ai_response = createMessage( ai_response, title )
-    #await telegramPost( channelBill, ai_response, title )
+    await telegramPost( channelBill, ai_response, title )
     
 
     # задание на день 
@@ -99,7 +99,7 @@ async def main():
 
     ai_response = aiRequest( role_system, book )
     ai_response = createMessage( ai_response, title )
-    #await telegramPost( channelBill, ai_response, title )
+    await telegramPost( channelBill, ai_response, title )
 
     
     # конечный вывод
