@@ -114,6 +114,10 @@ def readTheBook():
         return f"Папка для месяца {current_month} не найдена в папке 'book'."
 
 
+def createMessage( text ):
+    
+
+
 async def telegramPost( chat_id, message_to_send, title ):
     global attempts
     
