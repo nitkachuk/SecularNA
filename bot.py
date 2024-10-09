@@ -43,7 +43,7 @@ async def main():
     title_2 = title_1 + f"\n\n## {themeText}"
 
     ai_response = aiRequest( role_system, themeText )
-    await telegramPost(  channelBill, ai_response, title )
+    await telegramPost(  channelBill, ai_response, title, themeText )
     
 
     # шаги и традиции 🧘🏼
