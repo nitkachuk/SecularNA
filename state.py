@@ -29,9 +29,11 @@ def has_glyphs( text ):
 
 import re
 
-def escape_markdown_v2(text):
+def escape_markdown_v2(text, plus_underline = 0):
     escape_chars = [  '[', ']', '(', ')', '~', 'Ⓝ', '>', '#', '+', '-', 
                       '=', '|', '{', '}', '.', ',', '!', '?', '\\', '""'  ]
+    if plus_underline:
+        escape_chars + [ '_' ]
     
     for char in escape_chars:
         pattern = re.escape(char)
@@ -169,4 +171,4 @@ def aiRequest( role_system, role_user, title ):
             attempts += 1
             continue
 
-        return escape_markdown_v2( ai_response )
+        return escape_markdown_v2( ai_response, 1 )
