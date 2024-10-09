@@ -54,6 +54,8 @@ async def main():
     title = 'Шаги и традиции 🧘🏼'
 
     ai_response = aiRequest( role_system, book )
+    ai_response = createMessage( ai_response, title, title )
+    
     await telegramPost( channelBill, ai_response, title )
     
 
