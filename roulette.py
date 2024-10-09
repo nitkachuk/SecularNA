@@ -515,6 +515,3 @@ for i, theme in enumerate(themes):
 def getRandomTheme():
     return themes[ random.randint(1, 500) ]
 
-
-
-
