@@ -150,14 +150,14 @@ def aiRequest( role_system, role_user, title ):
             ), role_system 
         )
         
-        try: 
-            ai_response = "*" + title.split('\n\n')[0] + "*\n\n_" + \
-              "\n\n".join(title.split('\n\n')[1:]) + \
-              "_\n\n" + ai_response    # разметка
+        # try: 
+        #     ai_response = "*" + title.split('\n\n')[0] + "*\n\n_" + \
+        #       "\n\n".join(title.split('\n\n')[1:]) + \
+        #       "_\n\n" + ai_response    # разметка
 
-        except Exception as e:
-            print("разметка заголовков выдает ошибку... ⚙️", flush=True)
-            print( e, flush=True )
+        # except Exception as e:
+        #     print("разметка заголовков выдает ошибку... ⚙️", flush=True)
+        #     print( e, flush=True )
 
         # 2 (очистка от иероглифов)
         if has_glyphs(ai_response):
