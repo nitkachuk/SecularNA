@@ -39,11 +39,12 @@ async def main():
     themeText = getRandomTheme()
     role_system = """ Сочини 2-3 предложения, которые кратко опишут текст. Сделай красивые 
                       межстрочные пробелы и добавь 2 эмодзи. По-русски. """
-    title_1 = 'Рулетка! Случайная тема 🍒'
-    title_2 = title_1 + f"\n\n## {themeText}"
+    title = 'Рулетка! Случайная тема 🍒'
 
     ai_response = aiRequest( role_system, themeText )
-    await telegramPost(  channelBill, ai_response, title, themeText )
+    ai_response = createMessage( title, f"##{themeText}" )
+    
+    await telegramPost(  channelBill, ai_response, title )
     
 
     # шаги и традиции 🧘🏼
