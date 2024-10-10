@@ -57,6 +57,9 @@ def escape_system_text( text, role_system='' ):
     text = text.replace('assistant:', '')
     text = text.replace('Конец', '')
     text = text.replace('конец', '')
+
+    text = text.replace('Только сегодня: ', '')
+    text = text.replace('ТОЛЬКО СЕГОДНЯ: ', '')
     return text
     
 
