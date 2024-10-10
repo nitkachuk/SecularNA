@@ -45,7 +45,7 @@ async def main():
     title = 'Рулетка! Случайная тема 🍒'
 
     ai_response = aiRequest( role_system, themeText )
-    ai_response = createMessage( ai_response, title, f"##{themeText}" )
+    ai_response = createMessage( ai_response, title, f"## {themeText}" )
     await telegramPost(  channelBill, ai_response, title )
     
 
