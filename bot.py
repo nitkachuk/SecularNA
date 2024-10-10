@@ -46,7 +46,6 @@ async def main():
 
     ai_response = aiRequest( role_system, themeText )
     ai_response = createMessage( ai_response, title, f"##{themeText}" )
-    
     await telegramPost(  channelBill, ai_response, title )
     
 
@@ -59,7 +58,6 @@ async def main():
 
     ai_response = aiRequest( role_system, book )
     ai_response = createMessage( ai_response, title )
-    
     await telegramPost( channelBill, ai_response, title )
     
 
