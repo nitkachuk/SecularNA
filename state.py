@@ -117,14 +117,14 @@ def readTheBook():
         return f"Папка для месяца {current_month} не найдена в папке 'book'."
 
 
-def createMessage( text, title, emoji, title2 = '' ):
-    title = escape_markdown_v2( title )
+def createMessage( text, title, title2 = '' ):
+    title = escape_markdown_v2( title[0] ), title[1]
     
     if title2:
         title2 = f"_{title2}_\n\n"
     title2 = escape_markdown_v2( title2 )
         
-    return f"\n\n*__{title}__* {emoji}\n\n{title2}{text}"
+    return f"\n\n*__{title[0]}__* {title[1]}\n\n{title2}{text}"
 
 
 async def telegramPost( chat_id, message_to_send, title ):
