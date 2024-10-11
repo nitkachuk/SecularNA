@@ -20,10 +20,11 @@ async def main():
     # высказывание по книге 🗣️
     role_system = """ Выскажись по-русски, по тексту, в духе психологии. 
                       1-2 небольших абзаца. Добавь 3-5 эмодзи в текст. По-русски. """
-    title = 'Высказывание по книге 🗣️'
+    title = 'Высказывание по книге'
+    emoji = '🗣️'
 
     ai_response = aiRequest( role_system, book )
-    ai_response = createMessage( ai_response, title )
+    ai_response = createMessage( ai_response, title, emoji )
     await telegramPost( channelBill, ai_response, title )
 
     
@@ -31,10 +32,11 @@ async def main():
     role_system = """ Придумай 2 темы для обсуждения, которые косвенно перекликаются с текстом, 
                       но не повторяют его. Раздели эти принципы межстрочными пробелами и 
                       обозначь каждый одним эмодзи. По-русски. """
-    title = 'Темы для собраний 📌'
+    title = 'Темы для собраний'
+    emoji = '📌'
 
     ai_response = aiRequest( role_system, book )
-    ai_response = createMessage( ai_response, title )
+    ai_response = createMessage( ai_response, title, emoji )
     await telegramPost( channelBill, ai_response, title )
 
     
@@ -42,10 +44,11 @@ async def main():
     themeText = getRandomTheme()
     role_system = """ Сочини 2-3 предложения, которые кратко опишут текст. Сделай красивые 
                       межстрочные пробелы и добавь 2 эмодзи. По-русски. """
-    title = 'Рулетка! Случайная тема 🍒'
+    title = 'Рулетка! Случайная тема'
+    emoji = '🍒'
 
     ai_response = aiRequest( role_system, themeText )
-    ai_response = createMessage( ai_response, title, f"## {themeText}" )
+    ai_response = createMessage( ai_response, title, emoji, f"## {themeText}" )
     await telegramPost(  channelBill, ai_response, title )
     
 
@@ -54,10 +57,11 @@ async def main():
                       шаг перекликается с текстом. Найди одну из 12 традиций, которая соответствует 
                       тексту. Кратко опиши в чем шаг перекликается с текстом. Раздели эти шаг и 
                       традицию межстрочными пробелами и обозначь каждый одним эмодзи. По-русски. """
-    title = 'Шаги и традиции 🧘🏼'
+    title = 'Шаги и традиции'
+    emoji = '🧘🏼'
 
     ai_response = aiRequest( role_system, book )
-    ai_response = createMessage( ai_response, title )
+    ai_response = createMessage( ai_response, title, emoji )
     await telegramPost( channelBill, ai_response, title )
     
 
@@ -69,10 +73,11 @@ async def main():
                       Приведи 2 принципа по тексту, над которыми сегодня надо работать, и напиши по 
                       1 предложению описания на каждый. Раздели эти принципы межстрочными пробелами и 
                       обозначь каждый одним эмодзи. по-русски. """
-    title = 'Принципы программы 🌱'
+    title = 'Принципы программы'
+    emoji ='🌱'
 
     ai_response = aiRequest( role_system, book )
-    ai_response = createMessage( ai_response, title )
+    ai_response = createMessage( ai_response, title, emoji )
     await telegramPost( channelBill, ai_response, title )
 
 
@@ -82,10 +87,11 @@ async def main():
                       подходит для проработки негативной черты и напиши 1 предложение описания этой позитивной 
                       черты характера. Раздели эти черты межстрочными пробелами и обозначь каждый одним 
                       эмодзи. по-русски. """
-    title = 'Черты характера 🎭'
+    title = 'Черты характера'
+    emoji ='🎭'
 
     ai_response = aiRequest( role_system, book )
-    ai_response = createMessage( ai_response, title )
+    ai_response = createMessage( ai_response, title, emoji )
     await telegramPost( channelBill, ai_response, title )
     
 
@@ -93,10 +99,11 @@ async def main():
     role_system = """ Придумай 3 действия на сегодняшний день, которые я могу сделать, 
                       чтобы следовать тексту. Раздели эти принципы межстрочными пробелами и 
                       обозначь каждый одним эмодзи. по-русски. """
-    title = 'Задание на день 📝'
+    title = 'Задание на день'
+    emoji = '📝'
 
     ai_response = aiRequest( role_system, book )
-    ai_response = createMessage( ai_response, title )
+    ai_response = createMessage( ai_response, title, emoji )
     await telegramPost( channelBill, ai_response, title )
 
     
