@@ -27,7 +27,11 @@ def has_glyphs( text ):
             return True
     return False
 
-import re
+def has_latins( text ):
+    latins_count = len(re.findall(r'[a-zA-Z]', text))
+    total_count = len(text)
+    
+    return latins_count / total_count > 0.5 
 
 def escape_markdown_v2(text, plus_underline = 0):
     escape_chars = [  '[', ']', '(', ')', '~', 'Ⓝ', '>', '#', '+', '-', 
@@ -169,7 +173,13 @@ def aiRequest( role_system, role_user ):
             attempts += 1
             continue
 
-        # 3 (проверка на длину сообщения)
+        # 3 (очистка от латиницы)
+        if has_latins(ai_response):
+            print("has latins. try again... ⚙️", flush=True)
+            attempts += 1
+            continue
+
+        # 4 (проверка на длину сообщения)
         if len( str(ai_response) ) < 250:
             print("too short response. try again... ⚙️", flush=True)
             attempts += 1
