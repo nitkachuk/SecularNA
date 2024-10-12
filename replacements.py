@@ -61,8 +61,8 @@ replacements = [
     {'keyword': 'наркоманов',   'replaceword': 'зависимых'},
     {'keyword': 'наркоманы',    'replaceword': 'зависимые'},
     {'keyword': 'наркоманам',   'replaceword': 'зависимым'},
-    {'keyword': 'наркомана',   'replaceword':  'зависимого'},
-    {'keyword': 'наркоману',   'replaceword':  'зависимому'},
+    {'keyword': 'наркомана',    'replaceword': 'зависимого'},
+    {'keyword': 'наркоману',    'replaceword': 'зависимому'},
     {'keyword': 'наркоманом',   'replaceword': 'зависимым'},
     {'keyword': 'наркоман',     'replaceword': 'зависимый'},
 
@@ -103,11 +103,11 @@ replacements = [
     {'keyword': 'наркозависим',         'replaceword': 'зависим'},
 
 
-    {'keyword': 'Сообщество АА', 'replaceword':     'Сообщество'},
-    {'keyword': 'Сообщества АА', 'replaceword':     'Сообщества'},
-    {'keyword': 'Сообществу АА', 'replaceword':     'Сообществу'},
-    {'keyword': 'Сообществом АА', 'replaceword':    'Сообществом'},
-    {'keyword': 'Сообществе АА', 'replaceword':     'Сообществе'},
+    {'keyword': 'Сообщество АА',  'replaceword':     'Сообщество'},
+    {'keyword': 'Сообщества АА',  'replaceword':     'Сообщества'},
+    {'keyword': 'Сообществу АА',  'replaceword':     'Сообществу'},
+    {'keyword': 'Сообществом АА', 'replaceword':     'Сообществом'},
+    {'keyword': 'Сообществе АА',  'replaceword':     'Сообществе'},
 
     {'keyword': 'сообщество АА', 'replaceword':     'сообщество'},
     {'keyword': 'сообщества АА', 'replaceword':     'сообщества'},
@@ -143,13 +143,13 @@ replacements = [
     {'keyword': 'анонимных Алкоголиках', 'replaceword': 'анонимных'},
 
     {'keyword': 'наш алкоголизм',     'replaceword': 'наша зависимость'},
-    {'keyword': 'нашего алкоголизма',     'replaceword': 'нашей зависимости'},
-    {'keyword': 'нашему алкоголизму',     'replaceword': 'нашей зависимости'},
-    {'keyword': 'алкоголизм',     'replaceword': 'зависимость'},
+    {'keyword': 'нашего алкоголизма', 'replaceword': 'нашей зависимости'},
+    {'keyword': 'нашему алкоголизму', 'replaceword': 'нашей зависимости'},
+    {'keyword': 'алкоголизм',      'replaceword': 'зависимость'},
     {'keyword': 'алкоголизма',     'replaceword': 'зависимости'},
     {'keyword': 'алкоголизму',     'replaceword': 'зависимости'},
 
-    {'keyword': 'Алкоголизм',     'replaceword': 'Зависимость'},
+    {'keyword': 'Алкоголизм',      'replaceword': 'Зависимость'},
     {'keyword': 'Алкоголизма',     'replaceword': 'Зависимости'},
     {'keyword': 'Алкоголизму',     'replaceword': 'Зависимости'},
 
