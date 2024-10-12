@@ -1,3 +1,10 @@
+def doReplacements(text):
+    for replacement in replacements:
+        keyword = replacement['keyword']
+        replaceword = replacement['replaceword']
+        text = text.replace(keyword, replaceword)
+    return text
+
 replacements = [
 
     {'keyword': 'Сообщество АН',  'replaceword': 'Сообщество'},
@@ -197,10 +204,3 @@ replacements = [
     # {'keyword': 'алкозависимым',       'replaceword': 'зависимым'},
     {'keyword': 'алкозависим',         'replaceword': 'зависим'}
 ]
-
-def doReplacements(text):
-    for replacement in replacements:
-        keyword = replacement['keyword']
-        replaceword = replacement['replaceword']
-        text = text.replace(keyword, replaceword)
-    return text
