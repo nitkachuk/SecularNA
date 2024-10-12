@@ -32,6 +32,7 @@ def has_latins( text ):
     total_count = len(text)
     
     return latins_count / total_count > 0.5 
+    
 
 def escape_markdown_v2(text, plus_underline = 0):
     escape_chars = [  '[', ']', '(', ')', '~', 'Ⓝ', '>', '#', '+', '-', 
