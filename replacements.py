@@ -40,15 +40,15 @@ replacements = [
     {'keyword': 'анонимных Наркоманах', 'replaceword': 'анонимных'},
 
     {'keyword': 'наша наркомания',     'replaceword': 'наша зависимость'},
-    {'keyword': 'нашей наркомании',     'replaceword': 'нашей зависимости'},
-    {'keyword': 'нашей наркоманию',     'replaceword': 'нашей зависимостью'},
+    {'keyword': 'нашей наркомании',    'replaceword': 'нашей зависимости'},
+    {'keyword': 'нашей наркоманию',    'replaceword': 'нашей зависимостью'},
     {'keyword': 'наркомания',     'replaceword': 'зависимость'},
     {'keyword': 'наркомании',     'replaceword': 'зависимости'},
-    {'keyword': 'наркоманией',     'replaceword': 'зависимостью'},
+    {'keyword': 'наркоманией',    'replaceword': 'зависимостью'},
 
     {'keyword': 'Наркомания',     'replaceword': 'Зависимость'},
     {'keyword': 'Наркомании',     'replaceword': 'Зависимости'},
-    {'keyword': 'Наркоманией',     'replaceword': 'Зависимостью'},
+    {'keyword': 'Наркоманией',    'replaceword': 'Зависимостью'},
 
     {'keyword': 'Наркоманов',   'replaceword': 'Зависимых'},
     {'keyword': 'Наркоманы',    'replaceword': 'Зависимые'},
