@@ -134,12 +134,13 @@ def createMessage( text, title, title2 = '' ):
 
 async def telegramPost( chat_id, message_to_send, title ):
     global attempts
+    getTitle = title[0], title[1]
     
     try:
         await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2')
-        print( f"\n{title} ✅", flush=True )
+        print( f"\n{getTitle} ✅", flush=True )
     except Exception as e:
-        print( f"{title} ❌", flush=True )
+        print( f"{getTitle} ❌", flush=True )
         print( "Ошибка тг:", e, " ⚙️", flush=True )
         print( "Пост:", message_to_send )
         attempts += 1
