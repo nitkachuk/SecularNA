@@ -124,7 +124,7 @@ def createMessage( text, title, title2 = '' ):
         title2 = f"_{title2}_\n\n"
     title2 = escape_markdown_v2( title2 )
         
-    return f"\n\n*__{title[0]}__* {title[1]}\n\n{title2}{text}"
+    return f"*__{title[0]}__* {title[1]}\n\n{title2}{text}"
 
 
 async def telegramPost( chat_id, message_to_send, title ):
