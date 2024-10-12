@@ -109,11 +109,11 @@ replacements = [
     {'keyword': 'Сообществом АА', 'replaceword':     'Сообществом'},
     {'keyword': 'Сообществе АА',  'replaceword':     'Сообществе'},
 
-    {'keyword': 'сообщество АА', 'replaceword':     'сообщество'},
-    {'keyword': 'сообщества АА', 'replaceword':     'сообщества'},
-    {'keyword': 'сообществу АА', 'replaceword':     'сообществу'},
+    {'keyword': 'сообщество АА',  'replaceword':     'сообщество'},
+    {'keyword': 'сообщества АА',  'replaceword':     'сообщества'},
+    {'keyword': 'сообществу АА',  'replaceword':     'сообществу'},
     {'keyword': 'сообществом АА', 'replaceword':    'сообществом'},
-    {'keyword': 'сообществе АА', 'replaceword':     'сообществе'},
+    {'keyword': 'сообществе АА',  'replaceword':     'сообществе'},
 
     {'keyword': 'АА', 'replaceword': 'сообщ.'},
 
