@@ -164,9 +164,8 @@ def aiRequest( role_system, role_user ):
 
         # 1 (очистка от системных настроек в выводе) 
         ai_response = escape_system_text( 
-            doReplacements(
-                completion.choices[0].message.content
-            ), role_system 
+            completion.choices[0].message.content, 
+            role_system 
         )
 
         # 2 (очистка от иероглифов)
@@ -187,4 +186,5 @@ def aiRequest( role_system, role_user ):
             attempts += 1
             continue
 
+        ai_response = doReplacements( ai_response )
         return escape_markdown_v2( ai_response, 1 )
