@@ -102,7 +102,7 @@ async def main():
 
     
     # конечный вывод
-    print( "\nКоличество ошибок:", attempts, "из 20", flush=True )
+    print( "Количество ошибок:", attempts, "из 20", flush=True )
     print( "Вся программа выполнена успешно! ✅ ✅ ✅ ", flush=True )
 
 asyncio.run(main())
