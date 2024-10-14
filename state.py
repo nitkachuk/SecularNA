@@ -188,3 +188,24 @@ def aiRequest( role_system, role_user ):
 
         ai_response = doReplacements( ai_response )
         return escape_markdown_v2( ai_response, 1 )
+        
+
+def getEmoji( num ):
+    if num == 1:
+        month = datetime.datetime.now().month
+        day = datetime.datetime.now().strftime("%-d")
+        
+        emoji = [
+            '☃️', '🌨',            # зима
+            '☘️', '🌱', '🌺',    # весна
+            '🌞', '🏖️', '☀️',    # лето
+            '🍃', '🍂', '🍁',    # осень
+            '❄️'
+        ]
+        
+        if month == 1 and day == 14:
+            emoji =  '💌'
+        if month == 10 and day <= 3:
+            emoji =  '🎃'
+        if month == 11 and day == 31:
+            emoji =  '🎉'
