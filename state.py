@@ -190,40 +190,44 @@ def aiRequest( role_system, role_user ):
         return escape_markdown_v2( ai_response, 1 )
         
 
-def getEmoji( num, source = 'базовый' ):
-    if num == 1:
-        month = datetime.datetime.now().month
-        day = datetime.datetime.now().strftime("%-d")
-        
-        emoji = [
-            '🎄', '☃️',            # зима
-            '☘️', '🌱', '🌺',    # весна
-            '🌞', '🏖️', '☀️',    # лето
-            '🍃', '🍂', '🍁',    # осень
-            '❄️'
-        ]
+def getEmoji( source = 'базовый' ):
+    massiv = [  ]
 
-        if month == 0 and day == 7:
-            emoji =  '💌'
-        if month == 1 and day == 14:
-            emoji =  '💌'
-        if month == 10 and day <= 3:
-            emoji =  '🎃'
-        if month == 11 and day == 31:
-            emoji =  '🎉'
+    month = datetime.datetime.now().month
+    day = datetime.datetime.now().strftime("%-d")
+    
+    emoji = [
+        '🎄', '☃️',            # зима
+        '☘️', '🌱', '🌺',    # весна
+        '🌞', '🏖️', '☀️',    # лето
+        '🍃', '🍂', '🍁',    # осень
+        '❄️'
+    ]
 
-        return emoji
+    if month == 0 and day == 7:
+        emoji =  '💌'
+    if month == 1 and day == 14:
+        emoji =  '💌'
+    if month == 10 and day <= 3:
+        emoji =  '🎃'
+    if month == 11 and day == 31:
+        emoji =  '🎉'
 
-    if num == 2:
-        if 'базовый' in source.lower():
-            return '📘'
-        return '📄'
+    massiv += [ emoji ]
 
-    if num == 3:
-        emoji = [ '📖', '📑', '📌', '➡️', '👇', '✨', '⚪️', 
-                  '〰️', '•', '📚', '📓', '📕', '📗', '🗂', 
-                  '📙', '🗞', '📰', '📄', '📃', '📑', '🧾', 
-                  '📊', '📈', '📉', '🗃', '📂' ]
-        
-        return random.choice( emoji )
+    
+    if 'базовый' in source.lower():
+        massiv += [ '📘' ]
+    else:
+        massiv += [ '📄' ]
+
+
+    emoji = [ '📖', '📑', '📌', '➡️', '👇', '✨', '⚪️', 
+              '〰️', '•', '📚', '📓', '📕', '📗', '🗂', 
+              '📙', '🗞', '📰', '📄', '📃', '📑', '🧾', 
+              '📊', '📈', '📉', '🗃', '📂' ]
+    
+    massiv += [ random.choice( emoji ) ]
+
+    return massiv
         
