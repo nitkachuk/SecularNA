@@ -100,13 +100,15 @@ def readTheBook():
                 paragraphs = content.split('\n\n')
 
                 p_lines = paragraphs[0].split('\n')
-                p_lines[0] = f"{p_lines[0]}"        # дата
-                p_lines[1] = f"__{p_lines[1]}__"    # заголовок
-                p_lines[3] = f"_{p_lines[3]}_"      # цитата
-                p_lines[4] = f"*{p_lines[4]}*"      # источник
+                emoji = getEmoji( p_lines[4] )
+                
+                p_lines[0] = f"{emoji[0]} {p_lines[0]}"         # дата
+                p_lines[1] = f"__{p_lines[1]}__"                # заголовок
+                p_lines[3] = f"_{p_lines[3]}_"                  # цитата
+                p_lines[4] = f"{emoji[1]} *{p_lines[4]}*"       # источник
 
                 paragraphs[0] = '\n'.join(p_lines)
-                paragraphs[2] = paragraphs[2].replace("ТОЛЬКО СЕГОДНЯ:", "*ТОЛЬКО СЕГОДНЯ:*")
+                paragraphs[2] = paragraphs[2].replace(f"ТОЛЬКО СЕГОДНЯ:", f"{emoji[0]} *ТОЛЬКО СЕГОДНЯ:*")
 
                 largest_paragraph = max(paragraphs, key=len)
                 lines = largest_paragraph.splitlines()
@@ -193,6 +195,7 @@ def aiRequest( role_system, role_user ):
 def getEmoji( source = 'базовый' ):
     massiv = [  ]
 
+    # 0
     month = datetime.datetime.now().month
     day = datetime.datetime.now().strftime("%-d")
     
@@ -215,18 +218,20 @@ def getEmoji( source = 'базовый' ):
 
     massiv += [ emoji ]
 
-    
+
+    # 1
     if 'базовый' in source.lower():
         massiv += [ '📘' ]
     else:
         massiv += [ '📄' ]
 
 
+    # 2
     emoji = [ '📖', '📑', '📌', '➡️', '👇', '✨', '⚪️', 
               '〰️', '•', '📚', '📓', '📕', '📗', '🗂', 
               '📙', '🗞', '📰', '📄', '📃', '📑', '🧾', 
               '📊', '📈', '📉', '🗃', '📂' ]
-    
+
     massiv += [ random.choice( emoji ) ]
 
     return massiv
