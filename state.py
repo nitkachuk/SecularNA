@@ -196,8 +196,8 @@ def getEmoji( source = 'базовый' ):
     massiv = [  ]
 
     # 0
-    month = datetime.datetime.now().month
-    day = datetime.datetime.now().strftime("%-d")
+    month = int( datetime.datetime.now().month )
+    day = int( datetime.datetime.now().strftime("%-d") )
     
     emoji = [
         '🎄', '☃️',            # зима
