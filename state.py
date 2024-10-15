@@ -209,6 +209,8 @@ def getEmoji( source = 'базовый' ):
         '❄️'
     ]
 
+    emoji = [ month ]
+
     if month == 0 and day == 7:
         emoji =  '🎅'
     if month == 0 and day == 7:
