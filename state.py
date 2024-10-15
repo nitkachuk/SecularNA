@@ -10,6 +10,8 @@ from replacements import doReplacements
 from telegram import Bot
 from g4f.client import Client
 
+import random
+
 
 bot_token = os.getenv('TELEGRAM_TOKEN')
 bot = Bot(token=bot_token)
