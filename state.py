@@ -215,7 +215,9 @@ def getEmoji( source = 'базовый' ):
         emoji =  '🎁'
     if month == 1 and day == 14:
         emoji =  '💌'
-    if month == 10 and day <= 3:
+    if month == 9 and day >= 29:
+        emoji =  '🎃'
+    if month == 10 and day <= 2:
         emoji =  '🎃'
     if month == 11 and day == 31:
         emoji =  '🎅'
