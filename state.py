@@ -33,7 +33,7 @@ def has_latins( text ):
     latins_count = len(re.findall(r'[a-zA-Z]', text))
     total_count = len(text)
     
-    return latins_count / total_count > 0.5 
+    return latins_count / total_count > 0.1 
     
 
 def escape_markdown_v2(text, plus_underline = 0):
@@ -69,6 +69,10 @@ def escape_system_text( text, role_system='' ):
     text = text.replace('ТОЛЬКО СЕГОДНЯ: ', '')
     return text
     
+def escapeUnderline( text ):
+    while '_' in text or '__' in text:
+        text = text.replace('_', '').replace('__', '')
+    return text
 
 def readTheBook():
     # часы запуска скрипта на гитхабе
@@ -168,7 +172,7 @@ def aiRequest( role_system, role_user ):
 
         # 1 (очистка от системных настроек в выводе) 
         ai_response = escape_system_text( 
-            completion.choices[0].message.content, 
+            escapeUnderline( completion.choices[0].message.content ), 
             role_system 
         )
 
