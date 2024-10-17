@@ -68,11 +68,13 @@ def escape_system_text( text, role_system='' ):
     text = text.replace('Только сегодня: ', '')
     text = text.replace('ТОЛЬКО СЕГОДНЯ: ', '')
     return text
-    
+
+
 def escapeUnderline( text ):
     while '_' in text or '__' in text:
         text = text.replace('_', '').replace('__', '')
     return text
+
 
 def readTheBook():
     # часы запуска скрипта на гитхабе
