@@ -10,8 +10,8 @@ from roulette import getRandomTheme   # type: ignore
 
 async def main():
     # уникализация ежедневника (для всех сообществ)
-    book = doReplacements( readTheBook() )
-    message_to_send = escape_markdown_v2( book )
+    book = doReplacements( readTheBook( 1 ) )    # книга без разметки
+    message_to_send = escape_markdown_v2( doReplacements( readTheBook() ) )
 
     # постинг в канал "Светский ежедневник"
     title = [ 'пост в канал ежедневника', '📘' ]
