@@ -76,7 +76,7 @@ def escapeUnderline( text ):
     return text
 
 
-def readTheBook():
+def readTheBook( clean = 0 ):
     # часы запуска скрипта на гитхабе
     send_hour = 17
     send_minute = 0
@@ -109,6 +109,9 @@ def readTheBook():
 
                 p_lines = paragraphs[0].split('\n')
                 emoji = getEmoji( p_lines[4] )
+
+                if clean != 0:
+                    emoji = [''] * len(emoji)
                 
                 p_lines[0] = f"{emoji[0]} {p_lines[0]}"         # дата
                 p_lines[1] = f"__{p_lines[1]}__"                # заголовок
