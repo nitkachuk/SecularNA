@@ -113,10 +113,14 @@ def readTheBook( clean = 0 ):
                 if clean != 0:
                     emoji = [''] * len(emoji)
                 
-                p_lines[0] = f"{emoji[0]} {p_lines[0]}"         # дата
-                p_lines[1] = f"__{p_lines[1]}__"                # заголовок
-                p_lines[3] = f"_{p_lines[3]}_"                  # цитата
-                p_lines[4] = f"{emoji[1]} *{p_lines[4]}*"       # источник
+                p_lines[0] = f'{emoji[0]} {p_lines[0]}'         # дата
+                p_lines[1] = f'__{p_lines[1]}__'                # заголовок
+                p_lines[3] = f'_{p_lines[3]}_'                  # цитата
+                p_lines[4] = f'{emoji[1]} *{p_lines[4]}*'       # источник
+
+                # объединить дату и заголовок
+                p_lines[0] += " " +p_lines[1]
+                p_lines[1] = ''
 
                 paragraphs[0] = '\n'.join(p_lines)
                 paragraphs[2] = paragraphs[2].replace(f"ТОЛЬКО СЕГОДНЯ:", f"{emoji[0]} *ТОЛЬКО СЕГОДНЯ:*")
