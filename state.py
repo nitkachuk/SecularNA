@@ -254,4 +254,16 @@ def getEmoji( source = 'базовый' ):
     massiv += [ random.choice( emoji ) ]
 
     return massiv
-        
+    
+
+def checkNAholiday():
+    NAholidays = [
+        { 'month': 9, 'day': 10, 'text': '''В этот самый день, только более 70 лет 
+        назад 5 октября 1953 года состоялось самое первое собрание Анонимных Наркоманов! ⭐'''   }
+    ]
+    today = datetime.date.today()
+    title = [ 'Сегодня в NA праздник!', '🎉' ]
+    
+    for NAholiday in NAholidays:
+        if NAholidays['month'] == today.month and NAholidays['day] == today.day:
+             await telegramPost( channelBook, NAholidays['text'], title )
