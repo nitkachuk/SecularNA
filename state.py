@@ -119,7 +119,7 @@ def readTheBook( clean = 0 ):
                 p_lines[4] = f'{emoji[1]} *{p_lines[4]}*'       # источник
 
                 # объединить дату и заголовок
-                p_lines[0] += " " +p_lines[1]
+                p_lines[0] += "   " +p_lines[1]
                 p_lines[1] = ''
 
                 paragraphs[0] = '\n'.join(p_lines)
