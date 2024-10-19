@@ -4,7 +4,7 @@ from g4f.client import Client
 from replacements import replacements, doReplacements  # type: ignore
 from state import attempts, has_glyphs, escape_markdown_v2, escape_system_text, \
     readTheBook, telegramPost, aiRequest, channelBook, channelBill, \
-    createMessage   # type: ignore
+    createMessage, checkNAholiday   # type: ignore
 from roulette import getRandomTheme   # type: ignore
 
 
