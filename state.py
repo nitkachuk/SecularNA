@@ -268,7 +268,7 @@ def checkNAholiday():
     today = datetime.date.today()
     
     for NAholiday in NAholidays:
-        if NAholiday['month'] == today.month and NAholiday['day] == today.day:
+        if NAholiday['month'] == today.month and NAholiday['day'] == today.day:
             return NAholiday['text']
 
     return ''
