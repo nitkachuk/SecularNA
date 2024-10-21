@@ -19,6 +19,7 @@ client = Client()
 
 channelBook = '@SecularNA'
 channelBill = '@BillSpeaks'
+channelPoets = '@secret_poets'
 
 attempts = 0
 
