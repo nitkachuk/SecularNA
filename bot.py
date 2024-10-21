@@ -4,7 +4,7 @@ from g4f.client import Client
 from replacements import replacements, doReplacements  # type: ignore
 from state import attempts, has_glyphs, escape_markdown_v2, escape_system_text, \
     readTheBook, telegramPost, aiRequest, channelBook, channelBill, \
-    createMessage, checkNAholiday   # type: ignore
+    channelPoets, createMessage, checkNAholiday   # type: ignore
 from roulette import getRandomTheme   # type: ignore
 
 
@@ -105,6 +105,19 @@ async def main():
     ai_response = aiRequest( role_system, book )
     ai_response = createMessage( ai_response, title )
     await telegramPost( channelBill, ai_response, title )
+
+
+    # общество тайных поэтов 
+    role_system = """ По-русски. возьми один случайный жанр поэзии. дай 2 четверостишья этого 
+                      жанра поэзии и через межстрочные интервалы с разделителями-эмодзи 2-3 
+                      предложения про этот жанр и через межстрочные интервалы с разделителями
+                      -эмодзи несколько типичных поэтов-представителей жанра. первой строкой
+                      укажи жанр жирным и оступи вниз. По-русски. """
+    title = [ '', '' ]
+
+    ai_response = aiRequest( role_system, book )
+    ai_response = createMessage( ai_response, title )
+    await telegramPost( channelPoets, ai_response, title )
 
     
     # конечный вывод
