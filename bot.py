@@ -51,7 +51,7 @@ async def main():
                       межстрочные пробелы и добавь 2 эмодзи. По-русски. """
     title = [ 'Рулетка! Случайная тема', '🍒' ]
 
-    ai_response = aiRequest( role_system, themeText )
+    ai_response = aiRequest( role_system, themeText, 150 )
     ai_response = createMessage( ai_response, title, f"## {themeText}" )
     await telegramPost(  channelBill, ai_response, title )
     
@@ -116,7 +116,7 @@ async def main():
                       строчки стихов этого поэта. По-русски. """
     title = [ '', '' ]
 
-    ai_response = aiRequest( role_system, book )
+    ai_response = aiRequest( role_system, book, 150 )
     ai_response = createMessage( ai_response, title )
     await telegramPost( channelPoets, ai_response, title )
 
