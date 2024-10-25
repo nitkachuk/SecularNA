@@ -164,7 +164,7 @@ async def telegramPost( chat_id, message_to_send, title ):
         attempts += 1
 
 
-def aiRequest( role_system, role_user ):
+def aiRequest( role_system, role_user, symbols = 250 ):
     global attempts
     
     while True:
@@ -199,7 +199,7 @@ def aiRequest( role_system, role_user ):
             continue
 
         # 4 (проверка на длину сообщения)
-        if len( str(ai_response) ) < 250:
+        if len( str(ai_response) ) < symbols:
             print("too short response. try again... ⚙️", flush=True)
             attempts += 1
             continue
