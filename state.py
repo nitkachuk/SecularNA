@@ -199,7 +199,7 @@ def aiRequest( role_system, role_user, symbols = 250 ):
             continue
 
         # 4 (проверка на длину сообщения)
-        if len( str(ai_response) ) < symbols:
+        if int( len( str(ai_response) ) ) < int( symbols ):
             print("too short response. try again... ⚙️", flush=True)
             attempts += 1
             continue
