@@ -57,17 +57,16 @@ def escape_markdown_v2(text, plus_underline = 0):
 
 
 def escape_system_text( text, role_system='' ):
-    text = text.replace( '_{"code":200,"status":true,"model":"gpt-3.5-turbo","gpt":"', '')
-    text = text.replace( '","original":null}', '')
-
-    text = text.replace(role_system, '')    
-    text = text.replace('Assistant:', '')
-    text = text.replace('assistant:', '')
-    text = text.replace('Конец', '')
-    text = text.replace('конец', '')
-
-    text = text.replace('Только сегодня: ', '')
-    text = text.replace('ТОЛЬКО СЕГОДНЯ: ', '')
+    system_text = [
+        '_{"code":200,"status":true,"model":"gpt-3.5-turbo","gpt":"',
+        '","original":null}', 'Assistant:', 'assistant:', 'Конец', 'конец',
+        'Только сегодня: ', 'Только Сегодня: ', 'ТОЛЬКО СЕГОДНЯ: ', role_system
+    ]
+    
+    for item in system_text:
+        while item in text:
+            text = text.replace( item, '' )
+            
     return text
 
 
