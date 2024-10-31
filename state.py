@@ -216,7 +216,7 @@ def getEmoji( source = 'базовый' ):
 
     # 0
     month = int( datetime.datetime.now().month )
-    day = int( datetime.datetime.now().strftime("%-d") )
+    day =   int( datetime.datetime.now().day )
     
     emojis = [
         '🎄', '☃️',            # зима
@@ -228,19 +228,19 @@ def getEmoji( source = 'базовый' ):
 
     emoji = emojis[ month ]
 
-    if month == 0 and day == 7:
+    if month == 1 and day == 7:
         emoji =  '🎁'
-    if month == 1 and day == 14:
+    if month == 2 and day == 14:
         emoji =  '💌'
-    if month == 2 and day == 8:
+    if month == 3 and day == 8:
         emoji =  '🌺'
-    if month == 9 and day == 30:
+    if month == 10 and day == 30:
         emoji =  '👻'
-    if month == 9 and day ==31:
+    if month == 10 and day ==31:
         emoji = '🎃'
-    if month == 10 and day == 1:
+    if month == 11 and day == 1:
         emoji =  '💀'
-    if month == 11 and day == 31:
+    if month == 12 and day == 31:
         emoji =  '🎅'
 
     massiv += [ emoji ]
