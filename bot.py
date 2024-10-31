@@ -52,7 +52,7 @@ async def main():
                       эмодзи. По-русски. """
     title = [ 'Рулетка! Случайная тема', '🍒' ]
 
-    ai_response = aiRequest( role_system, themeText, 150 )
+    ai_response = aiRequest( role_system, themeText, 200 )
     ai_response = createMessage( ai_response, title, f"## {themeText}" )
     await telegramPost(  channelBill, ai_response, title )
     
@@ -117,7 +117,7 @@ async def main():
                       строчки стихов из литературного творчества этого поэта. По-русски. """
     title = [ '\nОбщество тайных поэтов', '🎩' ]
 
-    ai_response = aiRequest( role_system, book, 150 )
+    ai_response = aiRequest( role_system, book, 200 )
     ai_response = createMessage( ai_response, title, '', 0 )
     await telegramPost( channelPoets, ai_response, title )
 
