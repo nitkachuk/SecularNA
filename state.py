@@ -70,9 +70,13 @@ def escape_system_text( text, role_system='' ):
     return text
 
 
-def escapeUnderline( text ):
+def escapeAiMarkdown( text ):
     while '_' in text or '__' in text:
         text = text.replace('_', '').replace('__', '')
+
+    while '*' in text or '**' in text:
+        text = text.replace('*', '').replace('**', '')
+        
     return text
 
 
@@ -184,9 +188,10 @@ def aiRequest( role_system, role_user, symbols = 250 ):
 
         # 1 (очистка от системных настроек в выводе) 
         ai_response = escape_system_text( 
-            escapeUnderline( completion.choices[0].message.content ), 
-            role_system 
-        )
+                      escapeAiMarkdown( 
+                          completion.choices[0].message.content 
+                      ), role_system 
+                    )
 
         # 2 (очистка от иероглифов)
         if has_glyphs(ai_response):
