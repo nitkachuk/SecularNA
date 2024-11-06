@@ -80,6 +80,15 @@ def escapeAiMarkdown( text ):
     return text
 
 
+def has_refusal( text ):
+  text = text.lower()
+    
+  pattern = r'\bизвините\b.*\bя не могу\b.*\bвыполнить\b.*\bзапрос\b'
+  match = re.search(pattern, text, re.IGNORECASE)
+    
+  return bool(match)
+
+
 def readTheBook( clean = 0 ):
     # часы запуска скрипта на гитхабе
     send_hour = 17
@@ -208,6 +217,12 @@ def aiRequest( role_system, role_user, symbols = 250 ):
         # 4 (проверка на длину сообщения)
         if int( len( str(ai_response) ) ) < int( symbols ):
             print("too short response. try again... ⚙️", flush=True)
+            attempts += 1
+            continue
+
+        # 5 (очистка от отказа нейросети)
+        if has_refusal(ai_response):
+            print("has refusal. try again... ⚙️", flush=True)
             attempts += 1
             continue
 
