@@ -222,7 +222,7 @@ def getEmoji( source = 'базовый' ):
     month = int( datetime.datetime.now().month )
     day =   int( datetime.datetime.now().day )
     
-    emojis = [
+    emojis = [ '',
         '🎄', '☃️',            # зима
         '☘️', '🌱', '🌺',    # весна
         '🌞', '🏖️', '☀️',    # лето
