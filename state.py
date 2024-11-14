@@ -89,6 +89,15 @@ def has_refusal( text ):
   return bool(match)
 
 
+def has_g4fError( text ):
+  text = text.lower()
+    
+  pattern = r'\bmodel not found\b.*\btoo long input\b'
+  match = re.search(pattern, text, re.IGNORECASE)
+    
+  return bool(match)
+
+
 def readTheBook( clean = 0 ):
     # часы запуска скрипта на гитхабе
     send_hour = 17
@@ -209,21 +218,28 @@ def aiRequest( role_system, role_user, symbols = 250 ):
             attempts += 1
             continue
 
-        # 3 (очистка от латиницы)
+        # 3 (очистка от g4f ошибки)
+        if has_g4fError(ai_response):
+            print("has 'Model not found or too long input' try again... ⚙️", flush=True)
+            print( "''" +ai_response+ "''\n" )
+            attempts += 1
+            continue
+
+        # 4 (очистка от латиницы)
         if has_latins(ai_response):
             print("has latins. try again... ⚙️", flush=True)
             print( "''" +ai_response+ "''\n" )
             attempts += 1
             continue
 
-        # 4 (проверка на длину сообщения)
+        # 5 (проверка на длину сообщения)
         if int( len( str(ai_response) ) ) < int( symbols ):
             print("too short response. try again... ⚙️", flush=True)
             print( "''" +ai_response+ "''\n" )
             attempts += 1
             continue
 
-        # 5 (очистка от отказа нейросети)
+        # 6 (очистка от отказа нейросети)
         if has_refusal(ai_response):
             print("has refusal. try again... ⚙️", flush=True)
             print( "''" +ai_response+ "''\n" )
