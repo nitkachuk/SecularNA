@@ -205,26 +205,28 @@ def aiRequest( role_system, role_user, symbols = 250 ):
         # 2 (очистка от иероглифов)
         if has_glyphs(ai_response):
             print("has glyphs. try again... ⚙️", flush=True)
-            print( ai_response )
+            print( "''" +ai_response+ "''\n" )
             attempts += 1
             continue
 
         # 3 (очистка от латиницы)
         if has_latins(ai_response):
             print("has latins. try again... ⚙️", flush=True)
-            print( ai_response )
+            print( "''" +ai_response+ "''\n" )
             attempts += 1
             continue
 
         # 4 (проверка на длину сообщения)
         if int( len( str(ai_response) ) ) < int( symbols ):
             print("too short response. try again... ⚙️", flush=True)
+            print( "''" +ai_response+ "''\n" )
             attempts += 1
             continue
 
         # 5 (очистка от отказа нейросети)
         if has_refusal(ai_response):
             print("has refusal. try again... ⚙️", flush=True)
+            print( "''" +ai_response+ "''\n" )
             attempts += 1
             continue
 
