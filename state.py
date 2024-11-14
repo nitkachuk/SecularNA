@@ -195,7 +195,7 @@ def aiRequest( role_system, role_user, symbols = 250 ):
         if attempts >= 20:
             print("\nПревышено количество попыток \nотправки сообщения. Цикл завершен. 💀💀💀", flush=True)
             raise SystemExit    # завершаем всю программу по истечению попыток
-                
+        
         completion = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[ 
@@ -220,7 +220,7 @@ def aiRequest( role_system, role_user, symbols = 250 ):
 
         # 3 (очистка от g4f ошибки)
         if has_g4fError(ai_response):
-            print("has 'Model not found or too long input' try again... ⚙️", flush=True)
+            print("has 'Model not found or unknown error' try again... ⚙️", flush=True)
             attempts += 1
             continue
 
