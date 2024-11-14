@@ -221,7 +221,6 @@ def aiRequest( role_system, role_user, symbols = 250 ):
         # 3 (очистка от g4f ошибки)
         if has_g4fError(ai_response):
             print("has 'Model not found or too long input' try again... ⚙️", flush=True)
-            print( "''" +ai_response+ "''\n" )
             attempts += 1
             continue
 
