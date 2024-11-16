@@ -8,14 +8,13 @@ import sys
 from replacements import doReplacements 
 
 from telegram import Bot
-from g4f.client import Client
+import g4f
 
 import random
 
 
 bot_token = os.getenv('TELEGRAM_TOKEN')
 bot = Bot(token=bot_token)
-client = Client()
 
 channelBook = '@SecularNA'
 channelBill = '@BillSpeaks'
@@ -196,18 +195,18 @@ def aiRequest( role_system, role_user, symbols = 250 ):
             print("\nПревышено количество попыток \nотправки сообщения. Цикл завершен. 💀💀💀", flush=True)
             raise SystemExit    # завершаем всю программу по истечению попыток
         
-        completion = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+        response = g4f.ChatCompletion.create(
+            model=g4f.models.gpt_4,
             messages=[ 
                 {"role": "system", "content": role_system},
                 {"role": "user", "content": role_user}
-            ],
+             ],
         )
 
         # 1 (очистка от системных настроек в выводе) 
         ai_response = escape_system_text( 
                       escapeAiMarkdown( 
-                          completion.choices[0].message.content 
+                          response 
                       ), role_system 
                     )
 
