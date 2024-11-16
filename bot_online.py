@@ -1,12 +1,11 @@
 import os
 import asyncio
 import telebot
-from g4f.client import Client
+import g4f
 import unicodedata
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
-client = Client()
 
 def has_glyphs(text):
     for char in text:
@@ -36,20 +35,20 @@ def echo_all(message):
 
             txt = message.text + " по-русски"
             
-            completion = client.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {"role": "system", "content": ''},
-                    {"role": "user", "content": txt}
-                ],
+            response = g4f.ChatCompletion.create(
+                model=g4f.models.gpt_4,
+                messages=[ 
+                    {"role": "system", "content": role_system},
+                    {"role": "user", "content": role_user}
+                 ],
             )
 
-            if has_glyphs(completion.choices[0].message.content):
+            if has_glyphs( response ):
                 bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
                 continue
 
             bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
-            bot.reply_to(message, completion.choices[0].message.content)  # ответ 2
+            bot.reply_to(message, response)  # ответ 2
 
             break
 
