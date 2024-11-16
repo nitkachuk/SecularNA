@@ -38,8 +38,8 @@ def echo_all(message):
             response = g4f.ChatCompletion.create(
                 model=g4f.models.gpt_4,
                 messages=[ 
-                    {"role": "system", "content": role_system},
-                    {"role": "user", "content": role_user}
+                    {"role": "system", "content": "ответь по-русски"},
+                    {"role": "user", "content": txt}
                  ],
             )
 
