@@ -152,13 +152,13 @@ replacements = [
     {'keyword': 'наш алкоголизм',     'replaceword': 'наша зависимость'},
     {'keyword': 'нашего алкоголизма', 'replaceword': 'нашей зависимости'},
     {'keyword': 'нашему алкоголизму', 'replaceword': 'нашей зависимости'},
-    {'keyword': 'алкоголизм',      'replaceword': 'зависимость'},
     {'keyword': 'алкоголизма',     'replaceword': 'зависимости'},
     {'keyword': 'алкоголизму',     'replaceword': 'зависимости'},
+    {'keyword': 'алкоголизм',      'replaceword': 'зависимость'},
 
-    {'keyword': 'Алкоголизм',      'replaceword': 'Зависимость'},
     {'keyword': 'Алкоголизма',     'replaceword': 'Зависимости'},
     {'keyword': 'Алкоголизму',     'replaceword': 'Зависимости'},
+    {'keyword': 'Алкоголизм',      'replaceword': 'Зависимость'},
 
     {'keyword': 'Алкоголиков',   'replaceword': 'Зависимых'},
     {'keyword': 'Алкоголики',    'replaceword': 'Зависимые'},
