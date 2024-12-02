@@ -255,6 +255,7 @@ def getEmoji( source = 'базовый' ):
     month = int( datetime.datetime.now().month )
     day =   int( datetime.datetime.now().day )
 
+    # поправка на 1 день вперед (часовые пояса)
     next_day = datetime.now() + timedelta(days=1)
     month = next_day.month
     day = next_day.day
