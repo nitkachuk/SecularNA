@@ -254,6 +254,10 @@ def getEmoji( source = 'базовый' ):
     # 0
     month = int( datetime.datetime.now().month )
     day =   int( datetime.datetime.now().day )
+
+    next_day = datetime.now() + timedelta(days=1)
+    month = next_day.month
+    day = next_day.day
     
     emojis = [ '',
         '🎄', '☃️',            # зима
