@@ -182,7 +182,7 @@ async def telegramPost( chat_id, message_to_send, title ):
         print( f"{getTitle} ✅ \n", flush=True )
     except Exception as e:
         print( f"{getTitle} ❌", flush=True )
-        print( "Ошибка тг:", e, " ⚙️", flush=True )
+        print("Ошибка тг:", type(e).__name__, e, " ⚙️", flush=True)
         print( "Пост:", message_to_send )
         attempts += 1
 
