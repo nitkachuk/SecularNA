@@ -17,7 +17,7 @@ async def main():
 
     # постинг в канал "Светский ежедневник"
     title = [ 'пост в канал ежедневника', '📘' ]
-    #await telegramPost( channelBook, message_to_send, title)    
+    await telegramPost( channelBook, message_to_send, title)    
 
     # постинг NA праздников
     title = [ 'Сегодня в NA праздник!', '🎉' ]
