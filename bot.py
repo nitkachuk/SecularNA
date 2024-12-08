@@ -17,7 +17,7 @@ async def main():
 
     # постинг в канал "Светский ежедневник"
     title = [ 'пост в канал ежедневника', '📘' ]
-    await telegramPost( channelBook, message_to_send, title)    
+    #await telegramPost( channelBook, message_to_send, title)    
 
     # постинг NA праздников
     title = [ 'Сегодня в NA праздник!', '🎉' ]
@@ -33,8 +33,7 @@ async def main():
 
     ai_response = aiRequest( role_system, book )
     ai_response = createMessage( ai_response, title )
-    #await telegramPost( channelBill, ai_response, title )
-    await telegramPost( channelBook, message_to_send, title)
+    await telegramPost( channelBill, ai_response, title )
 
     
     # темы для собраний 📌
