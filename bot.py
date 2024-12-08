@@ -34,7 +34,7 @@ async def main():
     ai_response = aiRequest( role_system, book )
     ai_response = createMessage( ai_response, title )
     #await telegramPost( channelBill, ai_response, title )
-    await telegramPost( channelBook, "post to channelBook custom text", title )
+    await telegramPost( channelBook, message_to_send, title)
 
     
     # темы для собраний 📌
@@ -45,8 +45,7 @@ async def main():
 
     ai_response = aiRequest( role_system, book )
     ai_response = createMessage( ai_response, title )
-    #await telegramPost( channelBill, ai_response, title )
-    await telegramPost( channelBill, "post to channelBill custom text", title )
+    await telegramPost( channelBill, ai_response, title )
 
     
     # рулетка тем 🍒
