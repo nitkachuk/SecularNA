@@ -13,8 +13,8 @@ import g4f
 import random
 
 
-bot_token = os.getenv('TELEGRAM_TOKEN')
-bot = Bot(token=bot_token)
+# bot_token = os.getenv('TELEGRAM_TOKEN')
+# bot = Bot(token=bot_token)
 
 channelBook = '@SecularNA'
 channelBill = '@BillSpeaks'
@@ -176,6 +176,9 @@ def createMessage( text, title, title2 = '', ifPostTitles = 1 ):
 async def telegramPost( chat_id, message_to_send, title ):
     global attempts
     getTitle = title[0]+ " " +title[1]
+
+    bot_token = os.getenv('TELEGRAM_TOKEN')
+    bot = Bot(token=bot_token)
     
     try:
         await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2')
