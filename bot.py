@@ -14,7 +14,7 @@ async def main():
     # уникализация ежедневника (для всех сообществ)
     book = doReplacements( readTheBook( 1 ) )    # книга без разметки
     message_to_send = escape_markdown_v2( doReplacements( readTheBook() ) )
-    message_to_send = """13 Декабря   Членство
+    #message_to_send = """13 Декабря   Членство
 
  
 «Есть только одно условие для членства в сообщ. — это желание прекратить употреблять»
