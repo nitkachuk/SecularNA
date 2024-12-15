@@ -7,7 +7,8 @@ import datetime
 import sys
 from replacements import doReplacements 
 
-from telegram import Bot
+#from telegram import Bot
+import requests
 import g4f
 
 import random
@@ -15,7 +16,7 @@ import asyncio
 
 
 bot_token = os.getenv('TELEGRAM_TOKEN')
-bot = Bot(token=bot_token)
+# bot = Bot(token=bot_token)
 
 channelBook = '@SecularNA'
 print( channelBook )
@@ -180,11 +181,12 @@ def createMessage( text, title, title2 = '', ifPostTitles = 1 ):
 async def telegramPost( chat_id, message_to_send, title ):
     global attempts
     getTitle = title[0]+ " " +title[1]
-
-    await asyncio.sleep(10)
     
     try:
-        await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2')
+        requests.post(
+            f"https://api.telegram.org/bot{bot_token}/sendMessage",
+            data={"chat_id": chat_id, "text": message_to_send, "parse_mode": "MarkdownV2"},
+        )
         print( f"{getTitle} ✅ \n", flush=True )
     except Exception as e:
         print( f"{getTitle} ❌", flush=True )
