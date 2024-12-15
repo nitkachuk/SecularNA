@@ -19,11 +19,8 @@ bot_token = os.getenv('TELEGRAM_TOKEN')
 # bot = Bot(token=bot_token)
 
 channelBook = '@SecularNA'
-print( channelBook )
 channelBill = '@BillSpeaks'
-print( channelBill )
 channelPoets = '@secret_poets'
-print( channelPoets )
 
 attempts = 0
 
