@@ -17,10 +17,7 @@ async def main():
 
     # постинг в канал "Светский ежедневник"
     title = [ 'пост в канал ежедневника', '📘' ]
-    try:
-        await telegramPost( channelBook, message_to_send, title)
-    except Exception as e:
-        print(f"Ошибка при операции '{title}': {e}")
+    await telegramPost( channelBook, message_to_send, title)
 
     # постинг NA праздников
     title = [ 'Сегодня в NA праздник!', '🎉' ]
@@ -36,10 +33,7 @@ async def main():
 
     ai_response = aiRequest( role_system, book )
     ai_response = createMessage( ai_response, title )
-    try:
-        await telegramPost( channelBill, ai_response, title )
-    except Exception as e:
-        print(f"Ошибка при операции '{title}': {e}")
+    await telegramPost( channelBill, ai_response, title )
 
     
     # темы для собраний 📌
@@ -50,10 +44,7 @@ async def main():
 
     ai_response = aiRequest( role_system, book )
     ai_response = createMessage( ai_response, title )
-    try:
-        await telegramPost( channelBill, ai_response, title )
-    except Exception as e:
-        print(f"Ошибка при операции '{title}': {e}")
+    await telegramPost( channelBill, ai_response, title )
 
     
     # рулетка тем 🍒
@@ -65,10 +56,7 @@ async def main():
 
     ai_response = aiRequest( role_system, themeText, 200 )
     ai_response = createMessage( ai_response, title, f"## {themeText}" )
-    try:
-        await telegramPost(  channelBill, ai_response, title )
-    except Exception as e:
-        print(f"Ошибка при операции '{title}': {e}")
+    await telegramPost(  channelBill, ai_response, title )
     
 
     # шаги и традиции 🧘🏼
@@ -80,10 +68,7 @@ async def main():
 
     ai_response = aiRequest( role_system, book )
     ai_response = createMessage( ai_response, title )
-    try:
-        await telegramPost( channelBill, ai_response, title )
-    except Exception as e:
-        print(f"Ошибка при операции '{title}': {e}")
+    await telegramPost( channelBill, ai_response, title )
     
 
     # принципы программы 🌱
@@ -98,10 +83,7 @@ async def main():
 
     ai_response = aiRequest( role_system, book )
     ai_response = createMessage( ai_response, title )
-    try:
-        await telegramPost( channelBill, ai_response, title )
-    except Exception as e:
-        print(f"Ошибка при операции '{title}': {e}")
+    await telegramPost( channelBill, ai_response, title )
 
 
     # черты характера 🎭
@@ -114,10 +96,7 @@ async def main():
 
     ai_response = aiRequest( role_system, book )
     ai_response = createMessage( ai_response, title )
-    try:
-        await telegramPost( channelBill, ai_response, title )
-    except Exception as e:
-        print(f"Ошибка при операции '{title}': {e}")
+    await telegramPost( channelBill, ai_response, title )
     
 
     # задание на день 📝
@@ -128,10 +107,7 @@ async def main():
 
     ai_response = aiRequest( role_system, book )
     ai_response = createMessage( ai_response, title )
-    try:
-        await telegramPost( channelBill, ai_response, title )
-    except Exception as e:
-        print(f"Ошибка при операции '{title}': {e}")
+    await telegramPost( channelBill, ai_response, title )
 
 
     # общество тайных поэтов 
@@ -153,10 +129,7 @@ async def main():
 
     ai_response = aiRequest( role_system, book, 200 )
     ai_response = createMessage( ai_response, title, '', 0 )
-    try:
-        await telegramPost( channelPoets, ai_response, title )
-    except Exception as e:
-        print(f"Ошибка при операции '{title}': {e}")
+    await telegramPost( channelPoets, ai_response, title )
 
     
     # конечный вывод
