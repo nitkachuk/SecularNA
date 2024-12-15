@@ -176,6 +176,8 @@ def createMessage( text, title, title2 = '', ifPostTitles = 1 ):
 async def telegramPost( chat_id, message_to_send, title ):
     global attempts
     getTitle = title[0]+ " " +title[1]
+
+    await asyncio.sleep(10)
     
     try:
         await bot.send_message(chat_id=chat_id, text=message_to_send, parse_mode='MarkdownV2')
