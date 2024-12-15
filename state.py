@@ -11,6 +11,7 @@ from telegram import Bot
 import g4f
 
 import random
+import asyncio
 
 
 bot_token = os.getenv('TELEGRAM_TOKEN')
