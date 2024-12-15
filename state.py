@@ -18,8 +18,11 @@ bot_token = os.getenv('TELEGRAM_TOKEN')
 bot = Bot(token=bot_token)
 
 channelBook = os.getenv('CHANNEL_BOOK')
+print( channelBook )
 channelBill = os.getenv('CHANNEL_BILL')
+print( channelBill )
 channelPoets = os.getenv('CHANNEL_POETS')
+print( channelPoets )
 
 attempts = 0
 
