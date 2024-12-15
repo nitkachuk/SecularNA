@@ -16,9 +16,9 @@ import random
 bot_token = os.getenv('TELEGRAM_TOKEN')
 bot = Bot(token=bot_token)
 
-channelBook = '@SecularNA'
-channelBill = '@BillSpeaks'
-channelPoets = '@secret_poets'
+channelBook = os.getenv('CHANNEL_BOOK')
+channelBill = os.getenv('CHANNEL_BILL')
+channelPoets = os.getenv('CHANNEL_POETS')
 
 attempts = 0
 
