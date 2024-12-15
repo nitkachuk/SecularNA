@@ -17,11 +17,11 @@ import asyncio
 bot_token = os.getenv('TELEGRAM_TOKEN')
 bot = Bot(token=bot_token)
 
-channelBook = os.getenv('CHANNEL_BOOK')
+channelBook = '@SecularNA'
 print( channelBook )
-channelBill = os.getenv('CHANNEL_BILL')
+channelBill = '@BillSpeaks'
 print( channelBill )
-channelPoets = os.getenv('CHANNEL_POETS')
+channelPoets = '@secret_poets'
 print( channelPoets )
 
 attempts = 0
