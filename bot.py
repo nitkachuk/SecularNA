@@ -19,12 +19,12 @@ async def main():
     title = [ 'пост в канал ежедневника', '📘' ]
     await telegramPost( channelBook, message_to_send, title)
 
-    # постинг NA праздников
-    title = [ 'Сегодня в NA праздник!', '🎉' ]
-    holiday = checkNAholiday()
+    # # постинг NA праздников
+    # title = [ 'Сегодня в NA праздник!', '🎉' ]
+    # holiday = checkNAholiday()
     
-    if holiday:
-        await telegramPost( channelBook, holiday, title )
+    # if holiday:
+    #     await telegramPost( channelBook, holiday, title )
     
     # высказывание по книге 🗣️
     role_system = """ Выскажись по-русски, по тексту, в духе психологии. 
