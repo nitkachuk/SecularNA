@@ -199,14 +199,20 @@ def aiRequest( role_system, role_user, symbols = 250 ):
         if attempts >= 20:
             print("\nПревышено количество попыток \nотправки сообщения. Цикл завершен. 💀💀💀", flush=True)
             raise SystemExit    # завершаем всю программу по истечению попыток
-        
-        response = g4f.ChatCompletion.create(
-            model=g4f.models.gpt_4,
-            messages=[ 
-                {"role": "system", "content": role_system},
-                {"role": "user", "content": role_user}
-             ],
-        )
+
+        try:
+            response = g4f.ChatCompletion.create(
+                model=g4f.models.gpt_4,
+                messages=[ 
+                    {"role": "system", "content": role_system},
+                    {"role": "user", "content": role_user}
+                 ],
+            )
+        except Exception as e:
+            print( f"{getTitle} ❌", flush=True )
+            print("Ошибка g4f:", type(e).__name__, e, " ⚙️", flush=True)
+            print( "Запрос:", role_user )
+            attempts += 1
 
         # 1 (очистка от системных настроек в выводе) 
         ai_response = escape_system_text( 
