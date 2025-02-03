@@ -216,10 +216,10 @@ def aiRequest( role_system, role_user, symbols = 250 ):
 
         # 1 (очистка от системных настроек в выводе) 
         ai_response = escape_system_text( 
-                      escapeAiMarkdown( 
-                          response 
-                      ), role_system 
-                    )
+            escapeAiMarkdown( 
+                response 
+            ), role_system 
+        )
 
         # 2 (очистка от иероглифов)
         if has_glyphs(ai_response):
