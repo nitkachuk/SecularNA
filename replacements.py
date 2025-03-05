@@ -202,5 +202,56 @@ replacements = [
     # {'keyword': 'алкозависимому',      'replaceword': 'зависимому'},
     # {'keyword': 'алкозависимыми',      'replaceword': 'зависимыми'},
     # {'keyword': 'алкозависимым',       'replaceword': 'зависимым'},
-    {'keyword': 'алкозависим',         'replaceword': 'зависим'}
+    {'keyword': 'алкозависим',         'replaceword': 'зависим'},
+
+
+    
+    # {'keyword': 'спонсор',     'replaceword': 'доверенный'},
+    # {'keyword': 'спонсора',    'replaceword': 'доверенного'},
+    # {'keyword': 'спонсору',    'replaceword': 'довереному'},
+    # {'keyword': 'спонсора',    'replaceword': 'доверенного'},
+    # {'keyword': 'спонсором',   'replaceword': 'доверенным'},
+    # {'keyword': 'спонсоре',    'replaceword': 'доверенном'},
+    #     {'keyword': 'Спонсор',     'replaceword': 'Доверенный'},
+    #     {'keyword': 'Спонсора',    'replaceword': 'Доверенного'},
+    #     {'keyword': 'Спонсору',    'replaceword': 'Довереному'},
+    #     {'keyword': 'Спонсора',    'replaceword': 'Доверенного'},
+    #     {'keyword': 'Спонсором',   'replaceword': 'Доверенным'},
+    #     {'keyword': 'Спонсоре',    'replaceword': 'Доверенном'},
+    
+    # {'keyword': 'программные',     'replaceword': 'терапевтические'},
+    # {'keyword': 'программных',     'replaceword': 'терапевтических'},
+    # {'keyword': 'программным',     'replaceword': 'терапевтическим'},
+    # {'keyword': 'программными',    'replaceword': 'терапевтическими'},
+    #     {'keyword': 'Программные',     'replaceword': 'Терапевтические'},
+    #     {'keyword': 'Программных',     'replaceword': 'Терапевтических'},
+    #     {'keyword': 'Программным',     'replaceword': 'Терапевтическим'},
+    #     {'keyword': 'Программными',    'replaceword': 'Терапевтическими'},
+
+    # {'keyword': 'программный',     'replaceword': 'терапевтический'},
+    # {'keyword': 'программного',    'replaceword': 'терапевтического'},
+    # {'keyword': 'программному',    'replaceword': 'терапевтическому'},
+    # {'keyword': 'программным',     'replaceword': 'терапевтическим'},
+    # {'keyword': 'программном',     'replaceword': 'терапевтическом'},
+    #     {'keyword': 'Программный',     'replaceword': 'Терапевтический'},
+    #     {'keyword': 'Программного',    'replaceword': 'Терапевтического'},
+    #     {'keyword': 'Программному',    'replaceword': 'Терапевтическому'},
+    #     {'keyword': 'Программным',     'replaceword': 'Терапевтическим'},
+    #     {'keyword': 'Программном',     'replaceword': 'Терапевтическом'},
+
+    # {'keyword': 'по шагам',    'replaceword': ''},
+    # {'keyword': 'по шагу',     'replaceword': ''},
+    #     {'keyword': 'По шагам',    'replaceword': ''},
+    #     {'keyword': 'По шагу',     'replaceword': ''},
+
+    # {'keyword': 'бессилием',   'replaceword': 'несовершенством'},
+    # {'keyword': 'бессилие',    'replaceword': 'несовершенство'},
+    # {'keyword': 'бессилия',    'replaceword': 'несовершенства'},
+    # {'keyword': 'бессилию',    'replaceword': 'несовершенству'},
+    # {'keyword': 'бессилии',    'replaceword': 'несовершенстве'}
+    #     {'keyword': 'Бессилием',   'replaceword': 'Несовершенством'},
+    #     {'keyword': 'Бессилие',    'replaceword': 'Несовершенство'},
+    #     {'keyword': 'Бессилия',    'replaceword': 'Несовершенства'},
+    #     {'keyword': 'Бессилию',    'replaceword': 'Несовершенству'},
+    #     {'keyword': 'Бессилии',    'replaceword': 'Несовершенстве'}
 ]
