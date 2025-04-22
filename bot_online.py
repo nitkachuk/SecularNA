@@ -3,6 +3,9 @@ import asyncio
 import telebot
 import g4f
 import unicodedata
+from html import escape
+import re
+
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
@@ -44,7 +47,7 @@ def echo_all(message):
                  ],
             )
 
-            response = response.replace('```', '__')
+            response = re.sub(r'__([\s\S]*?)__', lambda m: f"<pre>{escape(m.group(1))}</pre>", response)
 
             if has_glyphs( response ):
                 bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
