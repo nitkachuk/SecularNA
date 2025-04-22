@@ -16,7 +16,8 @@ def has_glyphs(text):
 #@bot.message_handler(func=lambda message: True)
 #@bot.message_handler(func=lambda message: message.from_user.username == 'kristina_superstar')
 
-@bot.message_handler(func=lambda message: message.from_user.username in ['kristina_superstar', 'gothicspring'])
+@bot.message_handler(func=lambda message: message.from_user.username _
+            in ['kristina_superstar', 'gothicspring', 'Kungfuoko'])
 
 def echo_all(message):
     attempt_count = 0  # счетчик попыток отправки
