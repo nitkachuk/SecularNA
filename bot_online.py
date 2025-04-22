@@ -38,7 +38,7 @@ def echo_all(message):
             response = g4f.ChatCompletion.create(
                 model=g4f.models.gpt_4,
                 messages=[ 
-                    {"role": "system", "content": "ответь по-русски, если в твоем ответе есть код, то оберни его по примеру ___код___"},
+                    {"role": "system", "content": "ответь по-русски, если в твоем ответе есть код, то оберни его в тройные нижние подчеркивания по примеру ___код___"},
                     {"role": "user", "content": txt}
                  ],
             )
