@@ -20,6 +20,7 @@ def has_glyphs(text):
 
 def echo_all(message):
     attempt_count = 0  # счетчик попыток отправки
+    
     while True:
         try:
             attempt_count += 1  # увеличение счетчика попыток
@@ -42,6 +43,12 @@ def echo_all(message):
                     {"role": "user", "content": txt}
                  ],
             )
+
+            if "<pre>" in response:
+                bot.reply_to(message, response, parse_mode='HTML')
+            else:
+                bot.reply_to(message, response)
+
 
             if has_glyphs( response ):
                 bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
