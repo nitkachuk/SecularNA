@@ -42,24 +42,24 @@ def echo_all(message):
 
             start_time = time.time()
 
-            while True:    # обработчик задержки ответа от ИИ
-                try:
-                    response = g4f.ChatCompletion.create(
-                        model=g4f.models.gpt_4,
-                        messages=[ 
-                            {"role": "system", "content": "ответь по-русски, если в твоем ответе есть код, цитаты или другая подходящая информация то оберни ту часть в теги pre по примеру <pre>текст</pre>```"},
-                            {"role": "user", "content": txt}
-                         ],
-                    )
-        
-                    if time.time() - start_time < 5:
-                                break
-                except Exception:
-                    pass
-                if attempt_count >= 20:
-                    response = "Ошибка нейросети — нет ответа от сервера"
-                    break
-                attempt_count += 1
+            # обработчик задержки ответа от ИИ
+            try:
+                response = g4f.ChatCompletion.create(
+                    model=g4f.models.gpt_4,
+                    messages=[ 
+                        {"role": "system", "content": "ответь по-русски, если в твоем ответе есть код, цитаты или другая подходящая информация то оберни ту часть в теги pre по примеру <pre>текст</pre>```"},
+                        {"role": "user", "content": txt}
+                     ],
+                )
+    
+            if time.time() - start_time < 5:
+                continue
+            except Exception:
+                continue
+            if attempt_count >= 20:
+                response = "Ошибка нейросети — нет ответа от сервера"
+                break
+            attempt_count += 1
 
             #response = response.replace("```python", "<pre>").replace("```", "</pre>")
             response = response.replace("**", "<pre>").replace("**", "</pre>")
