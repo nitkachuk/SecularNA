@@ -59,10 +59,16 @@ def echo_all(message):
     while True:
         try:
             attempt_count += 1  # увеличение счетчика попыток
+            
             if attempt_count > 1:
                 sent_message = bot.reply_to(message, f'Секундочку... #{attempt_count}')  # ответ 1
             else:
                 sent_message = bot.reply_to(message, 'Секундочку...')  # ответ 1
+
+            if attempt_count >= 10:
+                bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
+                bot.reply_to(message, "Превышено количество попыток ✖️")  # ответ 2
+                break
 
             # голосовое
             if message.content_type == 'voice':
