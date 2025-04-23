@@ -6,7 +6,7 @@ import unicodedata
 from html import escape
 import re
 import concurrent.futures
-import time  # добавлено для использования time.time() 
+import time  # добавлено для использования time.time()
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
