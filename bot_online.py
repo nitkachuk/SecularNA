@@ -43,7 +43,7 @@ def echo_all(message):
 
             # Обработка голосовых сообщений
             if message.content_type == 'voice':
-                txt = ""
+                txt = "Напиши, что ты не можешь отвечать на голосовые сообщения."
             
             response = g4f.ChatCompletion.create(
                 model=g4f.models.gpt_4,
