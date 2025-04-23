@@ -43,18 +43,21 @@ def echo_all(message):
 
             start_time = time.time()
 
+            
             # обработчик задержки ответа от ИИ
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 future = executor.submit(g4f.ChatCompletion.create, model=g4f.models.gpt_4, messages=[
                     {"role": "system", "content": "ответь по-русски, если в твоем ответе есть код, цитаты или другая подходящая информация то оберни ту часть в теги pre по примеру <pre>текст</pre>```"},
                     {"role": "user", "content": txt}
                 ])
-            try:
+                
+                try:
                     response = future.result(timeout=10)  # Таймаут 10 секунд
                 except concurrent.futures.TimeoutError:
                     bot.delete_message(message.chat.id, sent_message.message_id)
                     bot.reply_to(message, "Ошибка: таймаут на ответ от сервера")
                     continue
+
     
                 if time.time() - start_time > 5:
                     continue
