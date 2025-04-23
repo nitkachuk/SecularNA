@@ -5,7 +5,8 @@ import g4f
 import unicodedata
 from html import escape
 import re
-import concurrent.futures 
+import concurrent.futures
+import time  # добавлено для использования time.time()
 
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
@@ -17,11 +18,7 @@ def has_glyphs(text):
             return True
     return False
 
-#@bot.message_handler(func=lambda message: True)
-#@bot.message_handler(func=lambda message: message.from_user.username == 'kristina_superstar')
-
 @bot.message_handler(func=lambda message: message.from_user.username in ['kristina_superstar', 'gothicspring', 'Kungfuoko'])
-
 def echo_all(message):
     attempt_count = 0  # счетчик попыток отправки
     
@@ -57,30 +54,24 @@ def echo_all(message):
                     bot.delete_message(message.chat.id, sent_message.message_id)
                     bot.reply_to(message, "Ошибка: таймаут на ответ от сервера")
                     continue
+            # обработчик задержки ответа от ИИ
+            
 
-    
-                if time.time() - start_time > 5:
-                    continue
-            except Exception:
-                continue
-                
             if attempt_count >= 20:
                 response = "Ошибка нейросети — нет ответа от сервера"
                 break
 
-            #response = response.replace("```python", "<pre>").replace("```", "</pre>")
-            response = response.replace("**", "<pre>").replace("**", "</pre>")
+            response = response.replace("**", "<pre>").replace("**", "</pre>")  # Замена для тегов pre
 
-            if has_glyphs( response ):
+            if has_glyphs(response):
                 bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
                 continue
 
             bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
             if "<pre>" in response:
-                bot.reply_to(message, response, parse_mode='HTML')  # ответ 2 (с кодом в цитате)
+                bot.reply_to(message, response, parse_mode='HTML')  # ответ с кодом в цитате
             else:
-                bot.reply_to(message, response)  # ответ 2
-
+                bot.reply_to(message, response)  # обычный ответ
 
             break
 
