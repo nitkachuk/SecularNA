@@ -23,6 +23,13 @@ def echo_all(message):
     
     while True:    
         attempt_count += 1
+
+        try:
+            last_message = bot.get_chat_history(message.chat.id, limit=1)[0]  # Получаем последнее сообщение
+            if last_message.text.lower() == "секундочку...":
+                bot.delete_message(message.chat.id, last_message.message_id)  # Удаляем, если оно "секундочку..."
+        except Exception:
+            pass  # Ошибки игнорируются, просто продолжаем выполнение
         
         try:
             if attempt_count > 1:
