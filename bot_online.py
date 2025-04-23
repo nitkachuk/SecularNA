@@ -47,6 +47,7 @@ def echo_all(message):
             )
 
             #response = response.replace("```python", "<pre>").replace("```", "</pre>")
+            response = response.replace("**", "<pre>").replace("**", "</pre>")
 
             if has_glyphs( response ):
                 bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
