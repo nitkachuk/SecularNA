@@ -53,8 +53,10 @@ def echo_all(message):
                 )
     
                 if time.time() - start_time > 5:
+                    attempt_count += 1
                     continue
             except Exception:
+                attempt_count += 1
                 continue
                 
             if attempt_count >= 20:
