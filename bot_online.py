@@ -5,7 +5,7 @@ import g4f
 import unicodedata
 from html import escape
 import re
-import time 
+import concurrent.futures 
 
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
@@ -23,9 +23,11 @@ def has_glyphs(text):
 @bot.message_handler(func=lambda message: message.from_user.username in ['kristina_superstar', 'gothicspring', 'Kungfuoko'])
 
 def echo_all(message):
-    attempt_count = 1  # счетчик попыток отправки
+    attempt_count = 0  # счетчик попыток отправки
     
     while True:    
+        attempt_count += 1
+        
         try:
             if attempt_count > 1:
                 sent_message = bot.reply_to(message, f'Секундочку... #{attempt_count}')  # ответ 1
@@ -42,26 +44,26 @@ def echo_all(message):
             start_time = time.time()
 
             # обработчик задержки ответа от ИИ
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                future = executor.submit(g4f.ChatCompletion.create, model=g4f.models.gpt_4, messages=[
+                    {"role": "system", "content": "ответь по-русски, если в твоем ответе есть код, цитаты или другая подходящая информация то оберни ту часть в теги pre по примеру <pre>текст</pre>```"},
+                    {"role": "user", "content": txt}
+                ])
             try:
-                response = g4f.ChatCompletion.create(
-                    model=g4f.models.gpt_4,
-                    messages=[ 
-                        {"role": "system", "content": "ответь по-русски, если в твоем ответе есть код, цитаты или другая подходящая информация то оберни ту часть в теги pre по примеру <pre>текст</pre>```"},
-                        {"role": "user", "content": txt}
-                     ],
-                )
+                    response = future.result(timeout=10)  # Таймаут 10 секунд
+                except concurrent.futures.TimeoutError:
+                    bot.delete_message(message.chat.id, sent_message.message_id)
+                    bot.reply_to(message, "Ошибка: таймаут на ответ от сервера")
+                    continue
     
                 if time.time() - start_time > 5:
-                    attempt_count += 1
                     continue
             except Exception:
-                attempt_count += 1
                 continue
                 
             if attempt_count >= 20:
                 response = "Ошибка нейросети — нет ответа от сервера"
                 break
-            attempt_count += 1
 
             #response = response.replace("```python", "<pre>").replace("```", "</pre>")
             response = response.replace("**", "<pre>").replace("**", "</pre>")
