@@ -41,12 +41,12 @@ def echo_all(message):
             response = g4f.ChatCompletion.create(
                 model=g4f.models.gpt_4,
                 messages=[ 
-                    {"role": "system", "content": "ответь по-русски, если в твоем ответе есть код, цитаты или другая подходящая информация то оберни ту часть в цитату по примеру ```текст```"},
+                    {"role": "system", "content": "ответь по-русски, если в твоем ответе есть код, цитаты или другая подходящая информация то оберни ту часть в теги pre по примеру <pre>текст</pre>```"},
                     {"role": "user", "content": txt}
                  ],
             )
 
-            response = response.replace("```python", "<pre>").replace("```", "</pre>")
+            #response = response.replace("```python", "<pre>").replace("```", "</pre>")
 
             if has_glyphs( response ):
                 bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
