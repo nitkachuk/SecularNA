@@ -20,6 +20,7 @@ def has_glyphs(text):
 
 def echo_all(message):
     attempt_count = 0  # счетчик попыток отправки
+    
     while True:
         try:
             attempt_count += 1  # увеличение счетчика попыток
@@ -33,7 +34,14 @@ def echo_all(message):
                 bot.reply_to(message, "Нет ответа от сервера  ✖️")  # ответ 2
                 break
 
-            txt = message.text + " по-русски"
+            
+            # Обработка текстовых сообщений
+            if message.content_type == 'text':
+                txt = message.text + " по-русски"
+
+            # Обработка голосовых сообщений
+            if message.content_type == 'voice':
+                txt = ""
             
             response = g4f.ChatCompletion.create(
                 model=g4f.models.gpt_4,
