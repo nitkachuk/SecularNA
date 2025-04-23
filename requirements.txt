@@ -3,3 +3,6 @@ nest_asyncio
 g4f
 telebot
 curl_cffi
+pyTelegramBotAPI
+SpeechRecognition
+pydub
