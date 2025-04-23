@@ -37,7 +37,6 @@ def echo_all(message):
                 break
 
             txt = message.text + " по-русски"
-
             start_time = time.time()
 
             
@@ -54,6 +53,11 @@ def echo_all(message):
                     bot.delete_message(message.chat.id, sent_message.message_id)
                     bot.reply_to(message, "Ошибка: таймаут на ответ от сервера")
                     continue
+
+                if time.time() - start_time > 5:
+                    bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
+                    bot.reply_to(message, "Ошибка: время ожидания слишком долгое")  # Краткий ответ о долгом ожидании
+                    break  # Прерываем цикл
             # обработчик задержки ответа от ИИ
             
 
