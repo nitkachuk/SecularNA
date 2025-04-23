@@ -16,15 +16,10 @@ def has_glyphs(text):
 #@bot.message_handler(func=lambda message: True)
 #@bot.message_handler(func=lambda message: message.from_user.username == 'kristina_superstar')
 
-#@bot.message_handler(func=lambda message: message.from_user.username in ['kristina_superstar', 'gothicspring'])
-@bot.message_handler(func=lambda message: 
-                     (message.from_user.username in ['kristina_superstar', 'gothicspring', 'Kungfuoko']) or 
-                     (message.content_type in ['text', 'voice']))
+@bot.message_handler(func=lambda message: message.from_user.username in ['kristina_superstar', 'gothicspring'])
 
 def echo_all(message):
-    bot.reply_to(message, f"Тип контента: {message.content_type}")
     attempt_count = 0  # счетчик попыток отправки
-    
     while True:
         try:
             attempt_count += 1  # увеличение счетчика попыток
@@ -35,19 +30,10 @@ def echo_all(message):
 
             if attempt_count >= 10:
                 bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
-                bot.reply_to(message, "Нет ответа от сервера  ✖️")  # ответ 2
+                bot.reply_to(message, "Ошибка нейросети")  # ответ 2
                 break
 
-
-            txt = 'Пустой запрос'
-            
-            # Обработка текстовых сообщений
-            if message.content_type == 'text':
-                txt = message.text + " по-русски"
-
-            # Обработка голосовых сообщений
-            if message.content_type == 'voice':
-                txt = "Напиши, что ты не можешь отвечать на голосовые сообщения."
+            txt = message.text + " по-русски"
             
             response = g4f.ChatCompletion.create(
                 model=g4f.models.gpt_4,
