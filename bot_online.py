@@ -24,7 +24,8 @@ def has_glyphs(text):
 
 def echo_all(message):
     attempt_count = 0  # счетчик попыток отправки
-    while True:
+    
+    while True:    
         try:
             attempt_count += 1  # увеличение счетчика попыток
             if attempt_count > 1:
@@ -41,7 +42,7 @@ def echo_all(message):
 
             start_time = time.time()
 
-            while True:
+            while True:    # обработчик задержки ответа от ИИ
                 try:
                     response = g4f.ChatCompletion.create(
                         model=g4f.models.gpt_4,
