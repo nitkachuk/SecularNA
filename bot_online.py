@@ -53,7 +53,7 @@ def echo_all(message):
                 )
     
                 if time.time() - start_time > 5:
-                continue
+                    continue
             except Exception:
                 continue
                 
