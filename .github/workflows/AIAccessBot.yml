@@ -2,9 +2,9 @@ name: AI Access Bot
 
 on:
   schedule:
-    - cron: '*/5 * * * *' # стояло "Запускать каждые 6 часов"
+    push:
+    #- cron: '*/5 * * * *' # стояло "Запускать каждые 6 часов"
                           # но по факту каждые 5 мин
-
 jobs:
   run_bot:
     runs-on: ubuntu-latest
