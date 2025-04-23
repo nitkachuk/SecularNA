@@ -20,27 +20,15 @@ def has_glyphs(text):
 @bot.message_handler(func=lambda message: message.from_user.username in ['kristina_superstar', 'gothicspring', 'Kungfuoko'])
 def echo_all(message):
     attempt_count = 0  # счетчик попыток отправки
-    
-    while True:    
+    sent_message = None  # Переменная для хранения ID отправленного сообщения
+
+    while attempt_count < 20:  # Ограничиваем количество попыток
         attempt_count += 1
 
         try:
-            last_message = bot.get_chat_history(message.chat.id, limit=1)[0]  # Получаем последнее сообщение
-            if last_message.text.lower() == "секундочку...":
-                bot.delete_message(message.chat.id, last_message.message_id)  # Удаляем, если оно "секундочку..."
-        except Exception:
-            pass  # Ошибки игнорируются, просто продолжаем выполнение
-        
-        try:
-            if attempt_count > 1:
-                sent_message = bot.reply_to(message, f'Секундочку... #{attempt_count}')  # ответ 1
-            else:
-                sent_message = bot.reply_to(message, 'Секундочку...')  # ответ 1
-
-            # if attempt_count >= 10:
-            #     bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
-            #     bot.reply_to(message, "Ошибка нейросети")  # ответ 2
-            #     break
+            # Отправляем сообщение "Секундочку..." только один раз
+            if sent_message is None:
+                sent_message = bot.reply_to(message, f'Секундочку... #{attempt_count}' if attempt_count > 1 else 'Секундочку...')
 
             txt = message.text + " по-русски"
             start_time = time.time()
@@ -53,49 +41,40 @@ def echo_all(message):
                 ])
                 
                 try:
-                    try:
-                        response = future.result(timeout=1)  # ждём ровно 5 секунд
-                    except concurrent.futures.TimeoutError:
-                        #bot.delete_message(message.chat.id, sent_message.message_id)
-                        continue  # считаем как неудачную попытку и пробуем заново
+                    response = future.result(timeout=1)  # ждём ровно 1 секунду
                 except concurrent.futures.TimeoutError:
-                    #bot.delete_message(message.chat.id, sent_message.message_id)
-                    #bot.reply_to(message, f"Секундочку... #{attempt_count}")
-                    continue  # Продолжаем цикл с новой попыткой
+                    continue  # Пробуем снова, если ответ не пришел вовремя
 
-            # обработка ответа
-            if attempt_count >= 20:
-                response = "Ошибка нейросети — превышено количество попыток 🕘"
-                break
-
+            # Обработка ответа
             response = response.replace("**", "<pre>").replace("**", "</pre>")  # Замена для тегов pre
 
             if has_glyphs(response):
-                bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
-                continue
+                continue  # Если в ответе есть глифы, пробуем снова
 
-            bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
+            # Удаляем сообщение "Секундочку..." перед отправкой окончательного ответа
+            if sent_message:
+                bot.delete_message(message.chat.id, sent_message.message_id)
+
+            # Отправка ответа пользователю
             if "<pre>" in response:
-                bot.reply_to(message, response, parse_mode='HTML')  # ответ с кодом в цитате
+                bot.reply_to(message, response, parse_mode='HTML')
             else:
-                bot.reply_to(message, response)  # обычный ответ
+                bot.reply_to(message, response)
 
-            break
+            break  # Прерываем цикл, если ответ успешно отправлен
 
         except telebot.apihelper.ApiTelegramException as e:
-            # Обработка исключения, чтобы скрипт не завершался при ошибке API Telegram
-            err = "Произошла ошибка API Telegram"
-            print(err, e)
-            bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
-            continue
+            # Обработка ошибки API Telegram
+            bot.delete_message(message.chat.id, sent_message.message_id)  # Удаляем сообщение "Секундочку..."
+            continue  # Пробуем снова
 
         except Exception as e:
-            # Другие исключения
-            err = "Произошла неизвестная ошибка"
-            print(err, e)
-            bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
-            continue  # Продолжаем цикл с новой попыткой
+            # Обработка других ошибок
+            bot.delete_message(message.chat.id, sent_message.message_id)  # Удаляем сообщение "Секундочку..."
+            continue  # Пробуем снова
 
-    attempt_count = 0  # сброс счетчика попыток после успешной отправки
+    else:
+        # Если попытки превышают максимальное количество
+        bot.reply_to(message, "Ошибка нейросети — превышено количество попыток 🕘")
 
 bot.polling()  # старт бота
