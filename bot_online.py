@@ -39,7 +39,6 @@ def echo_all(message):
             txt = message.text + " по-русски"
             start_time = time.time()
 
-            
             # обработчик задержки ответа от ИИ
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 future = executor.submit(g4f.ChatCompletion.create, model=g4f.models.gpt_4, messages=[
@@ -49,18 +48,16 @@ def echo_all(message):
                 
                 try:
                     response = future.result(timeout=10)  # Таймаут 10 секунд
+                    if time.time() - start_time > 5:
+                        bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
+                        bot.reply_to(message, "Ошибка: время ожидания слишком долгое")  # Краткий ответ о долгом ожидании
+                        break  # Прерываем цикл
                 except concurrent.futures.TimeoutError:
                     bot.delete_message(message.chat.id, sent_message.message_id)
-                    bot.reply_to(message, "Ошибка: таймаут на ответ от сервера")
-                    continue
+                    bot.reply_to(message, f"Ошибка: таймаут на ответ от сервера. Попытка {attempt_count}")
+                    continue  # Продолжаем цикл с новой попыткой
 
-                if time.time() - start_time > 5:
-                    bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
-                    bot.reply_to(message, "Ошибка: время ожидания слишком долгое")  # Краткий ответ о долгом ожидании
-                    break  # Прерываем цикл
-            # обработчик задержки ответа от ИИ
-            
-
+            # обработка ответа
             if attempt_count >= 20:
                 response = "Ошибка нейросети — нет ответа от сервера"
                 break
@@ -87,12 +84,3 @@ def echo_all(message):
             continue
 
         except Exception as e:
-            # Другие исключения
-            err = "Произошла неизвестная ошибка"
-            print(err, e)
-            bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
-            continue 
-
-    attempt_count = 0  # сброс счетчика попыток после успешной отправки
-
-bot.polling()
