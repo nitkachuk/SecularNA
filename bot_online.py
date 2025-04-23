@@ -5,6 +5,7 @@ import g4f
 import unicodedata
 from html import escape
 import re
+import time
 
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
@@ -37,14 +38,27 @@ def echo_all(message):
                 break
 
             txt = message.text + " по-русски"
-            
-            response = g4f.ChatCompletion.create(
-                model=g4f.models.gpt_4,
-                messages=[ 
-                    {"role": "system", "content": "ответь по-русски, если в твоем ответе есть код, цитаты или другая подходящая информация то оберни ту часть в теги pre по примеру <pre>текст</pre>```"},
-                    {"role": "user", "content": txt}
-                 ],
-            )
+
+            start_time = time.time()
+
+            while True:
+                try:
+                    response = g4f.ChatCompletion.create(
+                        model=g4f.models.gpt_4,
+                        messages=[ 
+                            {"role": "system", "content": "ответь по-русски, если в твоем ответе есть код, цитаты или другая подходящая информация то оберни ту часть в теги pre по примеру <pre>текст</pre>```"},
+                            {"role": "user", "content": txt}
+                         ],
+                    )
+        
+                    if time.time() - start_time < 5:
+                                break
+                except Exception:
+                    pass
+                if attempt_count >= 20:
+                    response = "Ошибка нейросети — нет ответа от сервера"
+                    break
+                attempt_count += 1
 
             #response = response.replace("```python", "<pre>").replace("```", "</pre>")
             response = response.replace("**", "<pre>").replace("**", "</pre>")
