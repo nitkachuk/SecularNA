@@ -49,7 +49,7 @@ def echo_all(message):
                     try:
                         response = future.result(timeout=1)  # ждём ровно 5 секунд
                     except concurrent.futures.TimeoutError:
-                        bot.delete_message(message.chat.id, sent_message.message_id)
+                        #bot.delete_message(message.chat.id, sent_message.message_id)
                         continue  # считаем как неудачную попытку и пробуем заново
                 except concurrent.futures.TimeoutError:
                     #bot.delete_message(message.chat.id, sent_message.message_id)
