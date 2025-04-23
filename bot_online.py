@@ -78,7 +78,8 @@ def echo_all(message):
                     {"role": "user", "content": txt}
                  ],
             )
-            
+
+            txt = voice_to_text( message )
 
             if has_glyphs( response ):
                 bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
