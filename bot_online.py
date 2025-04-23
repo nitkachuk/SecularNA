@@ -53,7 +53,7 @@ def echo_all(message):
                         break  # Прерываем цикл
                 except concurrent.futures.TimeoutError:
                     bot.delete_message(message.chat.id, sent_message.message_id)
-                    bot.reply_to(message, f"Секундочку... #{attempt_count}")
+                    #bot.reply_to(message, f"Секундочку... #{attempt_count}")
                     continue  # Продолжаем цикл с новой попыткой
 
             # обработка ответа
