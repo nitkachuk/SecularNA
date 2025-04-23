@@ -8,7 +8,6 @@ import re
 import concurrent.futures
 import time  # добавлено для использования time.time() 
 
-
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
 
@@ -41,8 +40,8 @@ def echo_all(message):
 
             # обработчик задержки ответа от ИИ
             with concurrent.futures.ThreadPoolExecutor() as executor:
-                future = executor.submit(g4f.ChatCompletion.create, model=g4f.models.gpt_4, messages=[
-                    {"role": "system", "content": "ответь по-русски, если в твоем ответе есть код, цитаты или другая подходящая информация то оберни ту часть в теги pre по примеру <pre>текст</pre>```"},
+                future = executor.submit(g4f.ChatCompletion.create, model=g4f.models.gpt_4, messages=[ 
+                    {"role": "system", "content": "ответь по-русски, если в твоем ответе есть код, цитаты или другая подходящая информация то оберни ту часть в теги pre по примеру <pre>текст</pre>"},
                     {"role": "user", "content": txt}
                 ])
                 
@@ -83,10 +82,13 @@ def echo_all(message):
             bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
             continue
 
-    except Exception as e:
-        # Другие исключения
-        err = "Произошла неизвестная ошибка"
-        print(err, e)
-        bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
-        continue
+        except Exception as e:
+            # Другие исключения
+            err = "Произошла неизвестная ошибка"
+            print(err, e)
+            bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
+            continue  # Продолжаем цикл с новой попыткой
 
+    attempt_count = 0  # сброс счетчика попыток после успешной отправки
+
+bot.polling()  # старт бота
