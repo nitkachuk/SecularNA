@@ -46,11 +46,11 @@ def echo_all(message):
                 ])
                 
                 try:
-                    response = future.result(timeout=10)  # Таймаут 10 секунд
-                    if time.time() - start_time > 1:
-                        bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
-                        bot.reply_to(message, "Ошибка нейросети — нет ответа от сервера ❌")  # Краткий ответ о долгом ожидании
-                        break  # Прерываем цикл
+                    try:
+                        response = future.result(timeout=1)  # ждём ровно 5 секунд
+                    except concurrent.futures.TimeoutError:
+                        bot.delete_message(message.chat.id, sent_message.message_id)
+                        continue  # считаем как неудачную попытку и пробуем заново
                 except concurrent.futures.TimeoutError:
                     bot.delete_message(message.chat.id, sent_message.message_id)
                     #bot.reply_to(message, f"Секундочку... #{attempt_count}")
