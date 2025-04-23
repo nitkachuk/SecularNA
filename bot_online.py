@@ -62,7 +62,7 @@ def echo_all(message):
 
             # голосовое
             if message.content_type == 'voice':
-                txt = voice_to_text( message.text )
+                txt = voice_to_text( message )
             if message.content_type == 'text':
                 txt = message.text
             
