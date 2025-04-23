@@ -53,7 +53,11 @@ def echo_all(message):
                 continue
 
             bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
-            bot.reply_to(message, response)  # ответ 2
+            if "<pre>" in response:
+                bot.reply_to(message, response, parse_mode='HTML')  # ответ 2 (с кодом в цитате)
+            else:
+                bot.reply_to(message, response)  # ответ 2
+
 
             break
 
