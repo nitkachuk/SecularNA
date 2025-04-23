@@ -36,6 +36,8 @@ def echo_all(message):
                 bot.reply_to(message, "Нет ответа от сервера  ✖️")  # ответ 2
                 break
 
+
+            txt = 'Пустой запрос'
             
             # Обработка текстовых сообщений
             if message.content_type == 'text':
