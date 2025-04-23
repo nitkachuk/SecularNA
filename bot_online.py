@@ -30,10 +30,10 @@ def echo_all(message):
             else:
                 sent_message = bot.reply_to(message, 'Секундочку...')  # ответ 1
 
-            if attempt_count >= 10:
-                bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
-                bot.reply_to(message, "Ошибка нейросети")  # ответ 2
-                break
+            # if attempt_count >= 10:
+            #     bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
+            #     bot.reply_to(message, "Ошибка нейросети")  # ответ 2
+            #     break
 
             txt = message.text + " по-русски"
             start_time = time.time()
