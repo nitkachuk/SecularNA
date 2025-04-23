@@ -26,7 +26,7 @@ def echo_all(message):
         
         try:
             if attempt_count > 1:
-                sent_message = bot.reply_to(message, f'Секундочку... #{attempt_count+1}')  # ответ 1
+                sent_message = bot.reply_to(message, f'Секундочку... #{attempt_count}')  # ответ 1
             else:
                 sent_message = bot.reply_to(message, 'Секундочку...')  # ответ 1
 
