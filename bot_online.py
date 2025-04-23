@@ -5,7 +5,7 @@ import g4f
 import unicodedata
 from html import escape
 import re
-import time
+import time 
 
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
