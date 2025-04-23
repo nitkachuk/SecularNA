@@ -83,10 +83,10 @@ def echo_all(message):
             bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
             continue
 
-        except Exception as e:
-            # Другие исключения
-            err = "Произошла неизвестная ошибка"
-            print(err, e)
-            bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
-            continue
+    except Exception as e:
+        # Другие исключения
+        err = "Произошла неизвестная ошибка"
+        print(err, e)
+        bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
+        continue
 
