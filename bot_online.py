@@ -22,6 +22,7 @@ def has_glyphs(text):
                      (message.content_type in ['text', 'voice']))
 
 def echo_all(message):
+    bot.reply_to(message, f"Тип контента: {message.content_type}")
     attempt_count = 0  # счетчик попыток отправки
     
     while True:
