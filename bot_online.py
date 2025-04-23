@@ -44,18 +44,16 @@ def echo_all(message):
                  ],
             )
 
-            if "<pre>" in response:
-                bot.reply_to(message, response, parse_mode='HTML')
-            else:
-                bot.reply_to(message, response)
-
 
             if has_glyphs( response ):
                 bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
                 continue
 
             bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
-            bot.reply_to(message, response)  # ответ 2
+            if "<pre>" in response:
+                bot.reply_to(message, response, parse_mode='HTML')
+            else:
+                bot.reply_to(message, response)
 
             break
 
