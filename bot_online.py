@@ -52,10 +52,11 @@ def echo_all(message):
                      ],
                 )
     
-            if time.time() - start_time < 5:
+            if time.time() - start_time > 5:
                 continue
             except Exception:
                 continue
+                
             if attempt_count >= 20:
                 response = "Ошибка нейросети — нет ответа от сервера"
                 break
