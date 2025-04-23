@@ -4,9 +4,41 @@ import telebot
 import g4f
 import unicodedata
 import threading
+import speech_recognition as sr
+from pydub import AudioSegment
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
+
+
+def voice_to_text(message):
+    try:
+        file_info = bot.get_file(message.voice.file_id)
+        downloaded_file = bot.download_file(file_info.file_path)
+
+        ogg_path = 'voice.ogg'
+        wav_path = 'voice.wav'
+
+        with open(ogg_path, 'wb') as f:
+            f.write(downloaded_file)
+
+        AudioSegment.from_ogg(ogg_path).export(wav_path, format='wav')
+
+        r = sr.Recognizer()
+        with sr.AudioFile(wav_path) as source:
+            audio = r.record(source)
+            text = r.recognize_google(audio, language="ru-RU")
+            return text
+
+    except sr.UnknownValueError:
+        return "Не понял голосовое сообщение."
+    except sr.RequestError as e:
+        return f"Ошибка сервиса распознавания: {e}"
+    except Exception as e:
+        return f"Ошибка: {e}"
+    finally:
+        if os.path.exists(ogg_path): os.remove(ogg_path)
+        if os.path.exists(wav_path): os.remove(wav_path)
 
 
 def has_glyphs(text):
@@ -28,8 +60,13 @@ def echo_all(message):
             else:
                 sent_message = bot.reply_to(message, 'Секундочку...')  # ответ 1
 
+            # голосовое
+            if message.content_type == 'voice':
+                txt = voice_to_text( message.text )
+            if message.content_type == 'text':
+                txt = message.text
             
-            txt = message.text + " по-русски"
+            txt += " по-русски"
             response = g4f.ChatCompletion.create(
                 model=g4f.models.gpt_4,
                 messages=[ 
