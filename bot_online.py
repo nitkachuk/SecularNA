@@ -44,7 +44,7 @@ def echo_all(message):
                  ],
             )
 
-            response = re.sub(r'\*\*(.*?)\*\*', r'<pre>\1</pre>', response)
+            response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
 
 
             if has_glyphs( response ):
