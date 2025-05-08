@@ -20,13 +20,13 @@ def has_glyphs(text):
 
 def echo_all(message):
     attempt_count = 0      # счетчик попыток отправки
-    sec_error_text = ''    # Текст ошибок в "Секундочку..."
+    err = ''    # Текст ошибок в "Секундочку..."
     
     while True:
         try:
             attempt_count += 1  # увеличение счетчика попыток
             if attempt_count > 1:
-                sent_message = bot.reply_to(message, f'Секундочку... #{attempt_count} ({sec_error_text})')  # ответ 1
+                sent_message = bot.reply_to(message, f'Секундочку... #{attempt_count} ({err})')  # ответ 1
                 sec_error_text = ''
             else:
                 sent_message = bot.reply_to(message, 'Секундочку...')  # ответ 1
@@ -64,16 +64,14 @@ def echo_all(message):
 
         except telebot.apihelper.ApiTelegramException as e:
             # Обработка исключения, чтобы скрипт не завершался при ошибке API Telegram
-            err = "Произошла ошибка API Telegram"
-            sec_error_text = err
+            err = "ошибка API Telegram"
             print(err, e)
             bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
             continue
 
         except Exception as e:
             # Другие исключения
-            err = "Произошла неизвестная ошибка (Exception as e)"
-            sec_error_text = err
+            err = "Exception as e"
             print(err, e)
             bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
             continue 
