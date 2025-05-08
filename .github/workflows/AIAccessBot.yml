@@ -1,7 +1,7 @@
 name: AI Access Bot
 
 on:
-  push:
+  #push:
   schedule:
     - cron: '*/5 * * * *'  # запускать каждые 5 минут (по желанию)
 
