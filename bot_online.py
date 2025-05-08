@@ -71,7 +71,7 @@ def echo_all(message):
 
         except Exception as e:
             # Другие исключения
-            err = "Exception as e"
+            err = str(e)
             print(err, e)
             bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
             continue 
