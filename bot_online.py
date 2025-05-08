@@ -3,6 +3,7 @@ import asyncio
 import telebot
 import g4f
 import unicodedata
+import re
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
