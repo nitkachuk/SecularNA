@@ -10,7 +10,11 @@ import queue
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
 
+response = None
+
 def g4f_with_timeout(txt, timeout=10):
+    global response
+    
     messages = [
                 {"role": "system", "content": "ответь по-русски, если есть блоки кода или цитат или списков, то оберни их в pre по примеру <pre>текст</pre>"},
                 {"role": "user", "content": txt}
@@ -54,6 +58,7 @@ def has_glyphs(text):
 def echo_all(message):
     attempt_count = 0      # счетчик попыток отправки
     err = ''    # Текст ошибок в "Секундочку..."
+    global response
     
     while True:
         try:
