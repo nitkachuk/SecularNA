@@ -83,7 +83,8 @@ def echo_all(message):
     while True:
         try:
             if sent_message:
-                if sent_message.text == '❌':
+                text = sent_message.text.strip()
+                if len(text) == 1 and text == '❌':
                     delete_last_message()
 
             attempt_count += 1  # увеличение счетчика попыток
