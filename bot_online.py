@@ -75,7 +75,7 @@ def echo_all(message):
     # if sent_message and "секундочку" in sent_message.text.lower():
     #     delete_last_message()
     #     return
-    bot.reply_to(message, '<code>⚪️</code>', parse_mode='HTML')
+
     
     while True:
         try:
