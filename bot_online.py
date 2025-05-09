@@ -10,6 +10,8 @@ import queue
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
 
+globalMessageObject = None
+sent_message = ""
 response = ""
 
 def g4f_with_timeout(txt, timeout=10):
@@ -44,7 +46,7 @@ def g4f_with_timeout(txt, timeout=10):
         raise result
     return result
 
-def delete_last_message():
+def delete_last_message( message, sent_message ):
     bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
 
 def has_glyphs(text):
@@ -59,6 +61,7 @@ def has_glyphs(text):
 @bot.message_handler(func=lambda message: message.from_user.username in ['kristina_superstar', 'gothicspring', 'Kungfuoko'])
 
 def echo_all(message):
+    globalMessageObject = message
     attempt_count = 0      # счетчик попыток отправки
     err = ''    # Текст ошибок в "Секундочку..."
     global response
