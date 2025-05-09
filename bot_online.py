@@ -73,7 +73,6 @@ def echo_all(message):
     global response
 
     if sent_message and "секундочку" in sent_message.text.lower():
-        print( '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' )
         delete_last_message()
         return
     
