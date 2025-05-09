@@ -16,7 +16,7 @@ def g4f_with_timeout(txt, timeout=10):
     global response
     
     messages = [
-                {"role": "system", "content": "ответь по-русски, если есть блоки кода или цитат или списков, то оберни их в pre по примеру <pre>текст</pre>"},
+                {"role": "system", "content": "ответь по-русски, если есть блоки кода или цитат или списков, то оберни их в pre по примеру <pre>текст</pre>. и запоминай контекст общения с пользователями"},
                 {"role": "user", "content": txt}
             ]
     
