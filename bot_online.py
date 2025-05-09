@@ -92,7 +92,7 @@ def echo_all(message):
                 #sent_message = bot.reply_to(message, '\n\n\n<i>⏳ Секундочку...</i>', parse_mode='HTML')  # ответ 1
                 sent_message = bot.send_message(
                         message.chat.id,
-                        "_⏳ Секундочку...  (попытка 1)_",
+                        "_⏳ Секундочку..._",
                         parse_mode='Markdown'
                     )
 
