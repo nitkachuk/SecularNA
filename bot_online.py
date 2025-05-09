@@ -84,7 +84,7 @@ def echo_all(message):
             #      ],
             # )
 
-            g4f_with_timeout( txt )
+            response = g4f_with_timeout( txt )
             
             
             response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
