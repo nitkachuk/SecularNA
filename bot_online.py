@@ -82,6 +82,7 @@ def echo_all(message):
                 continue
             
             response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
+            response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
 
 
             if has_glyphs( response ):
