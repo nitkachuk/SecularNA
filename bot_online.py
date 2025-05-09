@@ -4,6 +4,8 @@ import telebot
 import g4f
 import unicodedata
 import re
+import threading
+import queue
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
