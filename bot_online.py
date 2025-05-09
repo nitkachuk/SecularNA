@@ -44,6 +44,9 @@ def g4f_with_timeout(txt, timeout=10):
         raise result
     return result
 
+def delete_last_message():
+    bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
+
 def has_glyphs(text):
     for char in text:
         if unicodedata.category(char) == 'Lo':
@@ -64,13 +67,13 @@ def echo_all(message):
         try:
             attempt_count += 1  # увеличение счетчика попыток
             if attempt_count > 1:
-                bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
                 sent_message = bot.reply_to(message, f'<i>⚙️ Секундочку... #{attempt_count} ({err})</i>', parse_mode='HTML')  # ответ 1
                 err = ''
             else:
                 sent_message = bot.reply_to(message, '<i>⏳ Секундочку...</i>', parse_mode='HTML')  # ответ 1
 
             if attempt_count >= 5:
+                delete_last_message()
                 bot.reply_to(message, "Превышено количество попыток.")  # ответ 2
                 break
 
@@ -78,6 +81,7 @@ def echo_all(message):
 
             response = g4f_with_timeout( txt )
             if response == "":
+                delete_last_message()
                 err = 'таймаут g4f'
                 continue
             
@@ -86,10 +90,11 @@ def echo_all(message):
 
 
             if has_glyphs( response ):
+                delete_last_message()
                 err = 'иероглифы'
                 continue
 
-            bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
+            delete_last_message()
             
             if any(tag in response for tag in ['<pre>', '<b>']):
                 bot.reply_to(message, response, parse_mode='HTML')
@@ -102,12 +107,14 @@ def echo_all(message):
             # Обработка исключения, чтобы скрипт не завершался при ошибке API Telegram
             err = "ошибка API Telegram"
             print(err, e)
+            delete_last_message()
             continue
 
         except Exception as e:
             # Другие исключения
             err = str(e)
             print(err, e)
+            delete_last_message()
             continue 
 
     attempt_count = 0  # сброс счетчика попыток после успешной отправки
