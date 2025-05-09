@@ -68,6 +68,10 @@ def echo_all(message):
     attempt_count = 0      # счетчик попыток отправки
     err = ''    # Текст ошибок в "Секундочку..."
     global response
+
+    if sent_message and "секундочку" in sent_message.text.lower():
+        return
+    
     
     while True:
         try:
