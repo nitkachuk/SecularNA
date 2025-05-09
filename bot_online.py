@@ -86,6 +86,7 @@ def echo_all(message):
 
             response = g4f_with_timeout( txt )
             if response == "":
+                bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
                 err = 'таймаут g4f'
                 continue
             
