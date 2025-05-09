@@ -151,7 +151,7 @@ def echo_all(message):
             delete_last_message()
 
 
-            aiContext += message.text
+            #aiContext += message.text
             
             if any(tag in response for tag in ['<pre>', '<b>']):
                 bot.reply_to(message, response, parse_mode='HTML')
