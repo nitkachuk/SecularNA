@@ -73,7 +73,7 @@ def echo_all(message):
     global response
 
     # if sent_message and "секундочку" in sent_message.text.lower():
-    #     delete_last_message()
+    #     delete_last_message()            № невозможно тк пока пустой sent_message 
     #     return
 
 
@@ -85,7 +85,7 @@ def echo_all(message):
             if attempt_count > 1:
                 #sent_message = bot.reply_to(message, f'\n\n\n<i>⚙️ Секундочку... #{attempt_count} ({err})</i>', parse_mode='HTML')  # ответ 1
                 sent_message = bot.send_message(
-                        message,
+                        message.chat.id,
                             #f'_⚙️ Секундочку...  #{attempt_count} ({err})_',
                             clockEmodjis[ attempt_count ],
                         parse_mode='Markdown'
