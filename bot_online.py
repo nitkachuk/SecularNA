@@ -17,6 +17,7 @@ response = ""
 
 def g4f_with_timeout(txt, timeout=10):
     time.sleep(timeout)
+    return "abcde"
     global response
     
     messages = [
