@@ -39,14 +39,25 @@ def echo_all(message):
 
             txt = message.text + " по-русски"
             
-            response = g4f.ChatCompletion.create(
-                model=g4f.models.gpt_4,
-                messages=[ 
-                    {"role": "system", "content": "ответь по-русски, если есть блоки кода или цитат или списков, то оберни их в pre по примеру <pre>текст</pre>"},
-                    {"role": "user", "content": txt}
-                 ],
-            )
+            # response = g4f.ChatCompletion.create(
+            #     model=g4f.models.gpt_4,
+            #     messages=[ 
+            #         {"role": "system", "content": "ответь по-русски, если есть блоки кода или цитат или списков, то оберни их в pre по примеру <pre>текст</pre>"},
+            #         {"role": "user", "content": txt}
+            #      ],
+            # )
 
+            messages = [
+                {"role": "system", "content": "ответь по-русски, если есть блоки кода или цитат или списков, то оберни их в pre по примеру <pre>текст</pre>"},
+                {"role": "user", "content": txt}
+            ]
+
+            try:
+                response = g4f_with_timeout(messages, timeout=10)
+            except TimeoutError:
+                err = "таймаут ответа g4f"
+                continue
+            
             response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
 
 
