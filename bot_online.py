@@ -8,6 +8,36 @@ import re
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
 
+def g4f_with_timeout(txt, timeout=10):
+    messages = [
+                {"role": "system", "content": "ответь по-русски, если есть блоки кода или цитат или списков, то оберни их в pre по примеру <pre>текст</pre>"},
+                {"role": "user", "content": txt}
+            ]
+    
+    q = queue.Queue()
+
+    def worker():
+        try:
+            result = g4f.ChatCompletion.create(
+                model=g4f.models.gpt_4,
+                messages=messages
+            )
+            q.put(result)
+        except Exception as e:
+            q.put(e)
+
+    t = threading.Thread(target=worker)
+    t.start()
+    t.join(timeout)
+
+    if t.is_alive():
+        return TimeoutError("Время ожидания истекло")
+
+    result = q.get()
+    if isinstance(result, Exception):
+        raise result
+    return result
+
 def has_glyphs(text):
     for char in text:
         if unicodedata.category(char) == 'Lo':
@@ -47,16 +77,8 @@ def echo_all(message):
             #      ],
             # )
 
-            messages = [
-                {"role": "system", "content": "ответь по-русски, если есть блоки кода или цитат или списков, то оберни их в pre по примеру <pre>текст</pre>"},
-                {"role": "user", "content": txt}
-            ]
-
-            try:
-                response = g4f_with_timeout(messages, timeout=10)
-            except TimeoutError:
-                err = "таймаут ответа g4f"
-                continue
+            g4f_with_timeout( txt )
+            
             
             response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
 
