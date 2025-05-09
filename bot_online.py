@@ -84,7 +84,7 @@ def echo_all(message):
             attempt_count += 1  # увеличение счетчика попыток
             if attempt_count > 1:
                 #sent_message = bot.reply_to(message, f'\n\n\n<i>⚙️ Секундочку... #{attempt_count} ({err})</i>', parse_mode='HTML')  # ответ 1
-                sent_message = bot.reply_to(
+                sent_message = bot.send_message(
                         message,
                             #f'_⚙️ Секундочку...  #{attempt_count} ({err})_',
                             clockEmodjis[ attempt_count ],
