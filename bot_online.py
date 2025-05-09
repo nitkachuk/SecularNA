@@ -82,6 +82,10 @@ def echo_all(message):
     
     while True:
         try:
+            if sent_message:
+            if sent_message.text == '❌':
+                delete_last_message()
+
             attempt_count += 1  # увеличение счетчика попыток
             
             if attempt_count > 1:
