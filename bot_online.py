@@ -10,6 +10,7 @@ import queue
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
 
+aiContext = ""
 globalMessageObject = None
 sent_message = ""
 response = ""
@@ -82,6 +83,7 @@ def echo_all(message):
     while True:
         try:
             attempt_count += 1  # увеличение счетчика попыток
+            
             if attempt_count > 1:
                 #sent_message = bot.reply_to(message, f'\n\n\n<i>⚙️ Секундочку... #{attempt_count} ({err})</i>', parse_mode='HTML')  # ответ 1
                 sent_message = bot.send_message(
@@ -102,7 +104,9 @@ def echo_all(message):
 
             if attempt_count >= 5:
                 delete_last_message()
-                bot.reply_to(message, "Превышено количество попыток.")  # ответ 2
+                #bot.reply_to(message, "Превышено количество попыток.")  # ответ 2
+                bot.send_message(message, "❌.")
+                
                 break
 
             txt = message.text + " по-русски"
@@ -123,6 +127,9 @@ def echo_all(message):
                 continue
 
             delete_last_message()
+
+
+            aiContext += message.text
             
             if any(tag in response for tag in ['<pre>', '<b>']):
                 bot.reply_to(message, response, parse_mode='HTML')
