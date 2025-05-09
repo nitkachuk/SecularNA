@@ -64,29 +64,20 @@ def echo_all(message):
         try:
             attempt_count += 1  # увеличение счетчика попыток
             if attempt_count > 1:
+                bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
                 sent_message = bot.reply_to(message, f'Секундочку... #{attempt_count} ({err})')  # ответ 1
                 err = ''
             else:
                 sent_message = bot.reply_to(message, 'Секундочку...')  # ответ 1
 
             if attempt_count >= 10:
-                bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
                 bot.reply_to(message, "Превышено количество попыток.")  # ответ 2
                 break
 
             txt = message.text + " по-русски"
-            
-            # response = g4f.ChatCompletion.create(
-            #     model=g4f.models.gpt_4,
-            #     messages=[ 
-            #         {"role": "system", "content": "ответь по-русски, если есть блоки кода или цитат или списков, то оберни их в pre по примеру <pre>текст</pre>"},
-            #         {"role": "user", "content": txt}
-            #      ],
-            # )
 
             response = g4f_with_timeout( txt )
             if response == "":
-                bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
                 err = 'таймаут g4f'
                 continue
             
@@ -94,11 +85,9 @@ def echo_all(message):
 
 
             if has_glyphs( response ):
-                bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
                 err = 'иероглифы'
                 continue
 
-            bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
             if "<pre>" in response:
                 bot.reply_to(message, response, parse_mode='HTML')
             else:
@@ -110,14 +99,12 @@ def echo_all(message):
             # Обработка исключения, чтобы скрипт не завершался при ошибке API Telegram
             err = "ошибка API Telegram"
             print(err, e)
-            bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
             continue
 
         except Exception as e:
             # Другие исключения
             err = str(e)
             print(err, e)
-            bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
             continue 
 
     attempt_count = 0  # сброс счетчика попыток после успешной отправки
