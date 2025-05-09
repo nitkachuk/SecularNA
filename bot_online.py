@@ -72,9 +72,9 @@ def echo_all(message):
     err = ''    # Текст ошибок в "Секундочку..."
     global response
 
-    if sent_message and "секундочку" in sent_message.text.lower():
-        delete_last_message()
-        return
+    # if sent_message and "секундочку" in sent_message.text.lower():
+    #     delete_last_message()
+    #     return
     
     
     while True:
