@@ -37,7 +37,7 @@ def g4f_with_timeout(txt, timeout=10):
     t.join(timeout)
 
     if t.is_alive():
-        return TimeoutError("Время ожидания истекло")
+        return ""
 
     result = q.get()
     if isinstance(result, Exception):
@@ -65,7 +65,7 @@ def echo_all(message):
             attempt_count += 1  # увеличение счетчика попыток
             if attempt_count > 1:
                 sent_message = bot.reply_to(message, f'Секундочку... #{attempt_count} ({err})')  # ответ 1
-                sec_error_text = ''
+                err = ''
             else:
                 sent_message = bot.reply_to(message, 'Секундочку...')  # ответ 1
 
@@ -85,14 +85,16 @@ def echo_all(message):
             # )
 
             response = g4f_with_timeout( txt )
-            
+            if response == "":
+                err = 'таймаут g4f'
+                continue
             
             response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
 
 
             if has_glyphs( response ):
                 bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
-                sec_error_text = 'иероглифы'
+                err = 'иероглифы'
                 continue
 
             bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
