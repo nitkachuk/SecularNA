@@ -91,7 +91,7 @@ def echo_all(message):
 
             bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
             
-            if "<pre>" in response:
+            if any(tag in response for tag in ['<pre>', '<b>']):
                 bot.reply_to(message, response, parse_mode='HTML')
             else:
                 bot.reply_to(message, response)
