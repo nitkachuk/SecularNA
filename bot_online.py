@@ -116,10 +116,10 @@ def echo_all(message):
                         parse_mode='Markdown'
                     )
 
-            if attempt_count >= 5:
+            if attempt_count >= 2:
                 delete_last_message()
                 #bot.reply_to(message, "Превышено количество попыток.")  # ответ 2
-                bot.send_message(
+                sent_message = bot.send_message(
                         message.chat.id,
                             #"_⏳ Секундочку..._",
                             '❌',
