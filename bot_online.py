@@ -70,7 +70,7 @@ def echo_all(message):
             else:
                 sent_message = bot.reply_to(message, 'Секундочку...')  # ответ 1
 
-            if attempt_count >= 10:
+            if attempt_count >= 5:
                 bot.reply_to(message, "Превышено количество попыток.")  # ответ 2
                 break
 
