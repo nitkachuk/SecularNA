@@ -81,10 +81,10 @@ def echo_all(message):
         try:
             attempt_count += 1  # увеличение счетчика попыток
             if attempt_count > 1:
-                sent_message = bot.reply_to(message, f'<br><i>⚙️ Секундочку... #{attempt_count} ({err})</i>', parse_mode='HTML')  # ответ 1
+                sent_message = bot.reply_to(message, f'\n<i>⚙️ Секундочку... #{attempt_count} ({err})</i>', parse_mode='HTML')  # ответ 1
                 err = ''
             else:
-                sent_message = bot.reply_to(message, '<br><i>⏳ Секундочку...</i>', parse_mode='HTML')  # ответ 1
+                sent_message = bot.reply_to(message, '\n<i>⏳ Секундочку...</i>', parse_mode='HTML')  # ответ 1
 
             if attempt_count >= 5:
                 delete_last_message()
