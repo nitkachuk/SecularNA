@@ -10,7 +10,7 @@ import queue
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
 
-response = None
+response = ""
 
 def g4f_with_timeout(txt, timeout=10):
     global response
