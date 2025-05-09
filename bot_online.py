@@ -6,6 +6,7 @@ import unicodedata
 import re
 import threading
 import queue
+import time
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
@@ -16,9 +17,9 @@ sent_message = ""
 response = ""
 
 def g4f_with_timeout(txt, timeout=10):
-    time.sleep(timeout)
-    return "abcde"
     global response
+
+    time.sleep(timeout)
     
     messages = [
                 {"role": "system", "content": "ответь по-русски, если есть блоки кода или цитат или списков, то оберни их в pre по примеру <pre>текст</pre>. разнообразь с помощью эмодзи, в том числе списки, но не слишком"},
