@@ -46,8 +46,8 @@ def g4f_with_timeout(txt, timeout=10):
         raise result
     return result
 
-def delete_last_message( message, sent_message ):
-    bot.delete_message(message.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
+def delete_last_message():
+    bot.delete_message(globalMessageObject.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
 
 def has_glyphs(text):
     for char in text:
