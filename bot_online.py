@@ -29,7 +29,7 @@ def g4f_with_timeout(txt, username, timeout=10):
     except Exception as e:
         tempContext = ''
 
-    aiContext = f'{tempContext}\n\n{txt}'
+    aiContext = f'{txt}\n\n{tempContext}'
             if len(aiContext) > maxContext:
                 aiContext = aiContext[:maxContext]
 
