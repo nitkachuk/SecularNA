@@ -24,8 +24,13 @@ def g4f_with_timeout(txt, username, timeout=10):
     global maxContext
     global response
 
+    try:
+        tempContext = user_contexts.get(username, '')
+    except Exception as e:
+        tempContext = ''
+
     messages = [
-        {"role": "system", "content": f"контекст: '' {user_contexts.get(username, '')}"},
+        {"role": "system", "content": f"контекст: '' {tempContext}"},
         {"role": "system", "content": "ты девочка-альтушка, тебя зовут Оракул. ответь по-русски, если есть блоки кода или цитат или "
                                      "списков, то оберни их в pre по примеру <pre>текст</pre>. разнообразь с помощью эмодзи "
                                      "женского характера, но не слишком много, в том числе списки некрупными символьными эмодзи"},
