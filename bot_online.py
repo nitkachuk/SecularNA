@@ -158,7 +158,7 @@ def echo_all(message):
             try:
                 aiContext += "\n".join(m["content"] for m in messages[-10:])
             except Exception as e:
-                response = e
+                response = str( e )
             
             #response = aiContext
             
