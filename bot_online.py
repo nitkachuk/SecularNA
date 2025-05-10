@@ -123,18 +123,18 @@ def echo_all(message):
                 #sent_message = bot.reply_to(message, f'\n\n\n<i>⚙️  Секундочку... #{attempt_count} ({err})</i>', parse_mode='HTML')  # ответ 1
                 sent_message = bot.send_message(
                         message.chat.id,
-                            f'_⚙️  Секундочку...  #{attempt_count} ({err})_',
+                            f'<i>⚙️  Секундочку...  #{attempt_count} ({err})</i>',
                             #clockEmodjis[ attempt_count ],
-                        parse_mode='Markdown'
+                        parse_mode='HTML'
                     )
                 err = ''
             else:
                 #sent_message = bot.reply_to(message, '\n\n\n<i>⏳  Секундочку...</i>', parse_mode='HTML')  # ответ 1
                 sent_message = bot.send_message(
                         message.chat.id,
-                            "_⏳  Секундочку..._",
+                            "<i>⏳  Секундочку...</i>",
                             #clockEmodjis[ attempt_count ],
-                        parse_mode='Markdown'
+                        parse_mode='HTML'
                     )
 
             if attempt_count >= 5:
@@ -143,9 +143,9 @@ def echo_all(message):
                 #bot.reply_to(message, "Превышено количество попыток.")  # ответ 2
                 sent_message = bot.send_message(
                         message.chat.id,
-                            #"_⏳ Секундочку..._",
+                            #"<⏳ Секундочку..._",
                             '❌',
-                        parse_mode='Markdown'
+                        parse_mode='HTML'
                     )
                 
                 break
