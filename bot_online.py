@@ -102,6 +102,10 @@ def echo_all(message):
 
 
     clockEmodjis = [ '', '🕑', '🕓', '🕕', '🕗', '🕙' ]
+
+    if not aiContext.strip():
+        # Отправляем сообщение, что переписка очищена
+        bot.send_message(message.chat.id, "📜 _Переписка очищена_")
     
     while True:
         try:
