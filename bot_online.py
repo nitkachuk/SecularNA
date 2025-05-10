@@ -135,6 +135,7 @@ def echo_all(message):
                     )
 
             if attempt_count >= 5:
+                time.sleep( 2 )
                 delete_last_message()
                 #bot.reply_to(message, "Превышено количество попыток.")  # ответ 2
                 sent_message = bot.send_message(
