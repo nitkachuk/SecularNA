@@ -102,13 +102,10 @@ def echo_all(message):
     clockEmodjis = [ '', '🕑', '🕓', '🕕', '🕗', '🕙' ]
 
     username = message.from_user.username
-    try:
-        aiContext = user_contexts[username] 
-    except Exception as e:
-        aiContext = ''
-        sent_message = bot.send_message(message.chat.id, "📜  _Переписка очищена_", parse_mode='Markdown')
-        time.sleep( 2 )
-        delete_last_message()
+    if username not in user_contexts or not user_contexts[username]:
+        user_contexts[username] = ''  # Пустой контекст, если его нет
+
+    aiContext = user_contexts[username]
         
     
     while True:
