@@ -20,7 +20,6 @@ sent_message = ""
 response = ""
 
 def g4f_with_timeout(txt, timeout=10):
-    global globalMessageObject
     global aiContext
     global maxContext
     global response
@@ -94,6 +93,7 @@ def echo_all(message):
     global sent_message
     global response
 
+    global globalMessageObject
     globalMessageObject = message
 
     attempt_count = 0    
