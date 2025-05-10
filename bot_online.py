@@ -117,13 +117,6 @@ def echo_all(message):
     # 👉 вот здесь обрабатываем /d
     if message.text.strip() == '/d':
         user_contexts[username] = ''
-        try:
-            temp_msg = bot.send_message(message.chat.id, "🧹 <i>История очищена</i>", parse_mode='HTML')
-            time.sleep(2)
-            bot.delete_message(message.chat.id, temp_msg.message_id)
-        except Exception:
-            pass
-        # продолжаем выполнение — сброшенный контекст будет учтён ниже
 
     aiContext = user_contexts[username]
 
