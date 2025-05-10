@@ -158,6 +158,8 @@ def echo_all(message):
             txt = message.text + " по-русски"
 
             response = g4f_with_timeout(txt, aiContext)
+            user_contexts[user_id] = aiContext
+
             if response == "":
                 delete_last_message()
                 err = 'таймаут g4f'
