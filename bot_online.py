@@ -24,7 +24,7 @@ def g4f_with_timeout(txt, timeout=10):
     global maxContext
     global response
 
-    chat_id = message.chat.id
+    chat_id = globalMessageObject.chat.id
     messages = bot.get_chat_history(chat_id, limit=100)
     aiContext = "\n".join([msg.text for msg in messages])
 
