@@ -65,14 +65,13 @@ def g4f_with_timeout(txt, timeout=10):
 #         pass
 
 def delete_last_message():
-    print('a')
-    # global sent_message
-    # try:
-    #     bot.delete_message(globalMessageObject.chat.id, sent_message.message_id)
-    # except Exception as e:
-    #     pass
-    # finally:
-    #     sent_message = None  # обнуляем в любом случае
+    global sent_message
+    try:
+        bot.delete_message(globalMessageObject.chat.id, sent_message.message_id)
+    except Exception as e:
+        pass
+    finally:
+        sent_message = None  # обнуляем в любом случае
 
 def has_glyphs(text):
     for char in text:
