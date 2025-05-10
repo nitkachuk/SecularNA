@@ -102,8 +102,8 @@ def echo_all(message):
     clockEmodjis = [ '', '🕑', '🕓', '🕕', '🕗', '🕙' ]
 
     username = message.from_user.username
-    if username not in user_contexts or not user_contexts[username]:
-        user_contexts[username] = ''  # Пустой контекст, если его нет
+    if username not in user_contexts:
+        user_contexts[username] = ''
 
     aiContext = user_contexts[username]
         
