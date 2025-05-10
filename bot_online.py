@@ -115,6 +115,14 @@ def echo_all(message):
         user_contexts[username] = ''
 
     aiContext = user_contexts[username]
+
+    if aiContext.strip() == '':
+    try:
+        temp_msg = bot.send_message(message.chat.id, "ℹ📜  <i>История сообщений сброшена</i>", parse_mode='HTML')
+        time.sleep(2)
+        bot.delete_message(message.chat.id, temp_msg.message_id)
+    except Exception:
+        pass
         
     
     while True:
