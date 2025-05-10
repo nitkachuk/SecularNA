@@ -105,7 +105,7 @@ def echo_all(message):
 
     if not aiContext.strip():
         sent_message = bot.send_message(message.chat.id, "📜 _Переписка очищена_", parse_mode='Markdown')
-        time.sleep( 1 )
+        time.sleep( 2 )
         delete_last_message()
     
     while True:
