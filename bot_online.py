@@ -15,6 +15,7 @@ bot = telebot.TeleBot(telegram_token)
 aiContext = ''
 maxContext = 4000
 
+globalMessageObject = None
 sent_message = ""
 response = ""
 
