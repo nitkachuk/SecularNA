@@ -182,23 +182,15 @@ def echo_all(message):
             if len(response) > maxContext:
                 response = response[:maxContext]
 
-            # Убираем все HTML теги и сущности, если есть
-            response = re.sub(r'<[^>]+?>', '', response)
-            response = re.sub(r'&[a-zA-Z]+;', '', response)
-            
-            # Если текст слишком сложный, его можно очистить от эмодзи или лишних символов
-            response = re.sub(r'[^\x00-\x7F]+', '', response)  # Убираем нестандартные символы
-            
-            # Теперь отправляем текст без разметки
             bot.reply_to(message, response)
 
             delete_last_message()
 
             
-            if any(tag in response for tag in ['<pre>', '<b>']):
-                bot.reply_to(message, response)    # , parse_mode='HTML'
-            else:
-                bot.reply_to(message, response)
+            # if any(tag in response for tag in ['<pre>', '<b>']):
+            #     bot.reply_to(message, response)    # , parse_mode='HTML'
+            # else:
+            #     bot.reply_to(message, response)
 
             break
 
@@ -206,7 +198,6 @@ def echo_all(message):
             # Обработка исключения, чтобы скрипт не завершался при ошибке API Telegram
             time.sleep( 2 )
             err = f"ошибка api telegram: {e}"
-            print(err, e)
             delete_last_message()
             continue
 
@@ -214,7 +205,6 @@ def echo_all(message):
             # Другие исключения
             time.sleep( 2 )
             err = f"exeption as e: {str(e)}"
-            print(err, e)
             delete_last_message()
             continue 
 
