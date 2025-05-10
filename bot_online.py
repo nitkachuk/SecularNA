@@ -105,7 +105,7 @@ def echo_all(message):
 
     if not aiContext.strip():
         # Отправляем сообщение, что переписка очищена
-        bot.send_message(message.chat.id, "📜 _Переписка очищена_")
+        bot.send_message(message.chat.id, "📜 _Переписка очищена_", parse_mode='Markdown')
     
     while True:
         try:
