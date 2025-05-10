@@ -19,6 +19,7 @@ response = ""
 
 def g4f_with_timeout(txt, timeout=10):
     global aiContext
+    global messages
     global response
 
     messages = [
