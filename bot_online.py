@@ -23,6 +23,13 @@ def g4f_with_timeout(txt, aiContext, timeout=10):
     global maxContext
     global response
 
+    # Получаем контекст конкретного пользователя
+    aiContext = user_contexts.get(user_id, "")
+
+    # Формируем последние 100 сообщений
+    history = aiContext.strip().split("\n")[-100:]
+    history = "\n".join(history)[-maxContext:]
+
     messages = [
         #{"role": "system", "content": f"контекст: {aiContext}"},
         {"role": "system", "content": "ты девочка-альтушка, тебя зовут Оракул. ответь по-русски, если есть блоки кода или цитат или "
@@ -31,10 +38,7 @@ def g4f_with_timeout(txt, aiContext, timeout=10):
         {"role": "user", "content": txt}
     ]
 
-    aiContext += "\n".join(m["content"] for m in messages[-10:])    # reversed() ?
-    if len(aiContext) >= maxContext:
-        aiContext = aiContext[-maxContext:]
-    messages.insert(0, {"role": "system", "content": aiContext})
+    messages.insert(0, {"role": "system", "content": history})
     
     q = queue.Queue()
 
