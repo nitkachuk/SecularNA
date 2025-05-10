@@ -172,6 +172,7 @@ def echo_all(message):
             # response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
 
             response = "abcde"
+            response = escape_markdown_v2(response)
 
 
             if has_glyphs( response ):
