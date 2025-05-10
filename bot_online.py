@@ -12,20 +12,20 @@ from state import escape_markdown_v2
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
 
-aiContext = ''
+user_contexts = { }
 maxContext = 4000
 
 globalMessageObject = None
 sent_message = ""
 response = ""
 
-def g4f_with_timeout(txt, timeout=10):
-    global aiContext
+def g4f_with_timeout(txt, username timeout=10):
+    global user_contexts
     global maxContext
     global response
 
     messages = [
-        {"role": "system", "content": f"контекст: '' {aiContext}"},
+        {"role": "system", "content": f"контекст: '' {user_contexts.get(username, '')}"},
         {"role": "system", "content": "ты девочка-альтушка, тебя зовут Оракул. ответь по-русски, если есть блоки кода или цитат или "
                                      "списков, то оберни их в pre по примеру <pre>текст</pre>. разнообразь с помощью эмодзи "
                                      "женского характера, но не слишком много, в том числе списки некрупными символьными эмодзи"},
@@ -88,7 +88,7 @@ def has_glyphs(text):
 @bot.message_handler(func=lambda message: message.from_user.username in ['kristina_superstar', 'gothicspring', 'Kungfuoko'])
 
 def echo_all(message):
-    global aiContext
+    global user_contexts
     global maxContent
     global sent_message
     global response
@@ -141,7 +141,7 @@ def echo_all(message):
                 sent_message = bot.send_message(
                         message.chat.id,
                             #"<⏳ Секундочку..._",
-                            '<i>❌</i>',
+                            '❌',
                         parse_mode='HTML'
                     )
                 
@@ -149,6 +149,7 @@ def echo_all(message):
 
             txt = message.text + " по-русски"
 
+            username = message.from_user.username
             response = g4f_with_timeout(txt)
             if response == "":
                 time.sleep( 2 )
@@ -164,9 +165,9 @@ def echo_all(message):
             response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
             response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
 
-            aiContext = f"{response} \n {aiContext}" 
+            aiContext = f"{response} \n {user_contexts.get(username, '')}" 
             if len(aiContext) > maxContext:
-                aiContext = aiContext[:maxContext]
+                user_contexts[username] = aiContext
 
             bot.reply_to(message, response, parse_mode='HTML')
 
