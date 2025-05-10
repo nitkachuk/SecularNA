@@ -182,7 +182,15 @@ def echo_all(message):
             if len(response) > maxContext:
                 response = response[:maxContext]
 
-            response = re.sub(r'[\x00-\x1F\x7F]', '', response)  # Убираем все нелатинские и управляющие символы
+            # Убираем все HTML теги и сущности, если есть
+            response = re.sub(r'<[^>]+?>', '', response)
+            response = re.sub(r'&[a-zA-Z]+;', '', response)
+            
+            # Если текст слишком сложный, его можно очистить от эмодзи или лишних символов
+            response = re.sub(r'[^\x00-\x7F]+', '', response)  # Убираем нестандартные символы
+            
+            # Теперь отправляем текст без разметки
+            bot.reply_to(message, response)
 
             delete_last_message()
 
