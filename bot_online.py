@@ -176,7 +176,7 @@ def echo_all(message):
             
             
             if any(tag in response for tag in ['<pre>', '<b>']):
-                bot.reply_to(message, response, parse_mode='HTML')
+                bot.reply_to(message, response)    # , parse_mode='HTML'
             else:
                 bot.reply_to(message, response)
 
