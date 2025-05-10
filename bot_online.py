@@ -150,6 +150,7 @@ def echo_all(message):
 
             response = g4f_with_timeout(txt)
             if response == "":
+                time.sleep( 2 )
                 delete_last_message()
                 err = 'таймаут g4f'
                 continue
