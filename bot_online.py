@@ -155,7 +155,7 @@ def echo_all(message):
             txt = message.text + " по-русски"
 
             response = g4f_with_timeout(txt, username)
-            if response == "":
+            if response.strip() == '':
                 time.sleep( 2 )
                 delete_last_message()
                 err = 'таймаут g4f'
