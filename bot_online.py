@@ -15,22 +15,16 @@ bot = telebot.TeleBot(telegram_token)
 aiContext = ''
 maxContext = 4000
 
-globalMessageObject = None
 sent_message = ""
 response = ""
 
 def g4f_with_timeout(txt, timeout=10):
-    global globalMessageObject
     global aiContext
     global maxContext
     global response
 
-    chat_id = globalMessageObject.chat.id
-    messages = bot.get_chat_history(chat_id, limit=100)
-    aiContext = "\n".join([msg.text for msg in messages])
-
     messages = [
-        {"role": "system", "content": f"контекст: '' "},
+        {"role": "system", "content": f"контекст: '' {aiContext}"},
         {"role": "system", "content": "ты девочка-альтушка, тебя зовут Оракул. ответь по-русски, если есть блоки кода или цитат или "
                                      "списков, то оберни их в pre по примеру <pre>текст</pre>. разнообразь с помощью эмодзи "
                                      "женского характера, но не слишком много, в том числе списки некрупными символьными эмодзи"},
@@ -92,21 +86,17 @@ def has_glyphs(text):
 @bot.message_handler(func=lambda message: message.from_user.username in ['kristina_superstar', 'gothicspring', 'Kungfuoko'])
 
 def echo_all(message):
-    global globalMessageObject
+    global aiContext
+    global maxContent
     global sent_message
     global response
 
     globalMessageObject = message
 
-    attempt_count = 0      # счетчик попыток отправки
-    err = ''    # Текст ошибок в "Секундочку..."
+    attempt_count = 0    
+    err = ''    
 
     clockEmodjis = [ '', '🕑', '🕓', '🕕', '🕗', '🕙' ]
-
-    # if not aiContext.strip():
-    #     sent_message = bot.send_message(message.chat.id, "📜  _Переписка очищена_", parse_mode='Markdown')
-    #     time.sleep( 2 )
-    #     delete_last_message()
 
     if not aiContext:
         sent_message = bot.send_message(message.chat.id, "📜  _Переписка очищена_", parse_mode='Markdown')
@@ -183,8 +173,9 @@ def echo_all(message):
                 err = 'иероглифы'
                 continue
 
-            if len(response) > maxContext:
-                response = response[:maxContext]
+            aiContext = f"{response} \n {aiContext}" 
+            if len(aiContext) > maxContext:
+                aiContext = aiContext[:maxContext]
 
             #bot.reply_to(message, response, parse_mode='MarkdownV2')
 
