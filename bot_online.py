@@ -101,7 +101,9 @@ def echo_all(message):
 
     clockEmodjis = [ '', '🕑', '🕓', '🕕', '🕗', '🕙' ]
 
-    if not aiContext:
+    username = message.from_user.username
+
+    if not user_contexts[username]:
         sent_message = bot.send_message(message.chat.id, "📜  _Переписка очищена_", parse_mode='Markdown')
         time.sleep( 2 )
         delete_last_message()
@@ -149,7 +151,6 @@ def echo_all(message):
 
             txt = message.text + " по-русски"
 
-            username = message.from_user.username
             response = g4f_with_timeout(txt, username)
             if response == "":
                 time.sleep( 2 )
