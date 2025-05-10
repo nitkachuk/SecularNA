@@ -91,27 +91,18 @@ def has_glyphs(text):
 @bot.message_handler(func=lambda message: message.from_user.username in ['kristina_superstar', 'gothicspring', 'Kungfuoko'])
 
 def echo_all(message):
-    global globalMessageObject  
     global sent_message
-    globalMessageObject = message
-
-    global aiContext
-    global maxContext
-    
-    attempt_count = 0      # счетчик попыток отправки
-    err = ''    # Текст ошибок в "Секундочку..."
     global response
 
     user_id = message.from_user.id
+    # Инициализируем контекст для пользователя, если его нет
     if user_id not in user_contexts:
         user_contexts[user_id] = ""
-    aiContext = user_contexts[user_id]
 
-
-    # if sent_message and "секундочку" in sent_message.text.lower():
-    #     delete_last_message()            № невозможно тк пока пустой sent_message 
-    #     return
-
+    aiContext = user_contexts[user_id]  # Получаем контекст для этого пользователя
+    
+    attempt_count = 0      # счетчик попыток отправки
+    err = ''    # Текст ошибок в "Секундочку..."
 
     clockEmodjis = [ '', '🕑', '🕓', '🕕', '🕗', '🕙' ]
 
@@ -119,6 +110,7 @@ def echo_all(message):
         sent_message = bot.send_message(message.chat.id, "📜 _Переписка очищена_", parse_mode='Markdown')
         time.sleep( 2 )
         delete_last_message()
+        
     
     while True:
         try:
