@@ -155,23 +155,14 @@ def echo_all(message):
                 delete_last_message()
                 err = 'таймаут g4f'
                 continue
-            
-            response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
-            response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
-            
-            # response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', re.sub(r'```(.*?)```', r'<pre>\1</pre>', re.sub(r'[\x00-\x1F\x7F]', '', escape_html(response)), flags=re.DOTALL))
-
-            # response = escape_html(response)  # сначала экранируем
-            # response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
-            # response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
-
-            #response = "abcde"
-
 
             if has_glyphs( response ):
                 delete_last_message()
                 err = 'иероглифы'
                 continue
+
+            response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
+            response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
 
             aiContext = f"{response} \n {aiContext}" 
             if len(aiContext) > maxContext:
