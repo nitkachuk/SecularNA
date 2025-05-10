@@ -12,13 +12,14 @@ telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
 
 aiContext = ""
-maxContext = 4096
+maxContext = 4000
 globalMessageObject = None
 sent_message = ""
 response = ""
 
 def g4f_with_timeout(txt, timeout=10):
     global aiContext
+    global maxContext
     global response
 
     messages = [
@@ -30,8 +31,8 @@ def g4f_with_timeout(txt, timeout=10):
     ]
 
     aiContext += "\n".join(m["content"] for m in messages[-10:])    # reversed() ?
-    if len(aiContext) >= 4000:
-        aiContext = aiContext[-4000:]
+    if len(aiContext) >= maxContext:
+        aiContext = aiContext[-maxContext:]
     messages.insert(0, {"role": "system", "content": aiContext})
     
     q = queue.Queue()
