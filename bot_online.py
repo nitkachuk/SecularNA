@@ -13,12 +13,13 @@ bot = telebot.TeleBot(telegram_token)
 
 aiContext = ""
 maxContext = 4000
+user_contexts = {}
+
 globalMessageObject = None
 sent_message = ""
 response = ""
 
-def g4f_with_timeout(txt, timeout=10):
-    global aiContext
+def g4f_with_timeout(txt, aiContext, timeout=10):
     global maxContext
     global response
 
@@ -97,6 +98,12 @@ def echo_all(message):
     err = ''    # Текст ошибок в "Секундочку..."
     global response
 
+    user_id = message.from_user.id
+    if user_id not in user_contexts:
+        user_contexts[user_id] = ""
+    aiContext = user_contexts[user_id]
+
+
     # if sent_message and "секундочку" in sent_message.text.lower():
     #     delete_last_message()            № невозможно тк пока пустой sent_message 
     #     return
@@ -150,7 +157,7 @@ def echo_all(message):
 
             txt = message.text + " по-русски"
 
-            response = g4f_with_timeout( txt )
+            response = g4f_with_timeout(txt, aiContext)
             if response == "":
                 delete_last_message()
                 err = 'таймаут g4f'
