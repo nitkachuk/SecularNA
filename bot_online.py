@@ -11,21 +11,24 @@ import time
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
 
+aiContext = ''
+maxContext = 4000
+
 globalMessageObject = None
 sent_message = ""
 response = ""
 
 def g4f_with_timeout(txt, timeout=10):
+    global aiContext
+    global maxContext
     global response
-    maxContext = 4000
-    context = ''
 
-    
+    aiContext = '...'
     msgs = user_history[user_id][-100:][::-1]  # последние 100 сообщений в обратном порядке
-    context = "\n".join(msgs)[-max_context:]  # склеиваем и обрезаем с конца
+    aiContext = "\n".join(msgs)[-max_context:]  # склеиваем и обрезаем с конца
 
     messages = [
-        {"role": "system", "content": f"контекст: {context}"},
+        {"role": "system", "content": f"контекст: {aiContext}"},
         {"role": "system", "content": "ты девочка-альтушка, тебя зовут Оракул. ответь по-русски, если есть блоки кода или цитат или "
                                      "списков, то оберни их в pre по примеру <pre>текст</pre>. разнообразь с помощью эмодзи "
                                      "женского характера, но не слишком много, в том числе списки некрупными символьными эмодзи"},
