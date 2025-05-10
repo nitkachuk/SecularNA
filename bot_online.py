@@ -66,7 +66,9 @@ def delete_last_message():
     try:
         bot.delete_message(globalMessageObject.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
     except Exception as e:
-        pass
+        print( str(e) )
+        raise SystemExit()
+        #pass
 
 # def delete_last_message():
 #     global sent_message
