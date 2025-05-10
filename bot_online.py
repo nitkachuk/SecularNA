@@ -110,7 +110,7 @@ def echo_all(message):
 
     clockEmodjis = [ '', '🕑', '🕓', '🕕', '🕗', '🕙' ]
 
-    username = message.from_user.username or str(message.from_user.id)
+    username = str(message.from_user.id)
     if username not in user_contexts:
         user_contexts[username] = ''
 
