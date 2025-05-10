@@ -158,8 +158,14 @@ def echo_all(message):
                 err = 'таймаут g4f'
                 continue
             
+            # response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
+            # response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
+
             response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
             response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
+            
+            # Проверяем на наличие неправильных символов или тегов
+            response = r
 
 
             if has_glyphs( response ):
