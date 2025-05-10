@@ -29,7 +29,9 @@ def g4f_with_timeout(txt, timeout=10):
         {"role": "user", "content": txt}
     ]
 
-    aiContext += "\n".join(m["content"] for m in messages[-10:])
+    aiContext += "\n".join(m["content"] for m in messages[-10:])    # reversed() ?
+    if len(aiContext) >= 4000:
+        aiContext = aiContext[-4000:]
     messages.insert(0, {"role": "system", "content": aiContext})
     
     q = queue.Queue()
