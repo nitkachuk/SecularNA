@@ -122,7 +122,7 @@ def echo_all(message):
                 #sent_message = bot.reply_to(message, f'\n\n\n<i>⚙️  Секундочку... #{attempt_count} ({err})</i>', parse_mode='HTML')  # ответ 1
                 sent_message = bot.send_message(
                         message.chat.id,
-                            f'_⚙️ Секундочку...  #{attempt_count} ({err})_',
+                            f'_⚙️  Секундочку...  #{attempt_count} ({err})_',
                             #clockEmodjis[ attempt_count ],
                         parse_mode='Markdown'
                     )
@@ -131,7 +131,7 @@ def echo_all(message):
                 #sent_message = bot.reply_to(message, '\n\n\n<i>⏳  Секундочку...</i>', parse_mode='HTML')  # ответ 1
                 sent_message = bot.send_message(
                         message.chat.id,
-                            "_⏳ Секундочку..._",
+                            "_⏳  Секундочку..._",
                             #clockEmodjis[ attempt_count ],
                         parse_mode='Markdown'
                     )
