@@ -29,13 +29,17 @@ def g4f_with_timeout(txt, username, timeout=10):
     except Exception as e:
         tempContext = ''
 
+    aiContext = f'{tempContext}\n\n{txt}'
+            if len(aiContext) > maxContext:
+                aiContext = aiContext[:maxContext]
+
     messages = [
         #{"role": "system", "content": f"контекст: '' {tempContext}"},
         {"role": "system", "content": "ты девочка-альтушка, тебя зовут Оракул. ответь по-русски, если есть блоки кода или цитат или "
                                      "списков, то оберни их в pre по примеру <pre>текст</pre>. разнообразь с помощью эмодзи "
                                      "женского характера, но не слишком много, в том числе списки некрупными символьными эмодзи"},
         #{"role": "user", "content": txt}
-        {"role": "user", "content": f"{tempContext}\n\n{txt}"}
+        {"role": "user", "content": aiContext}
     ]
     
     q = queue.Queue()
