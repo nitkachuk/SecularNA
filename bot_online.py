@@ -112,13 +112,7 @@ def echo_all(message):
 
     username = str(message.from_user.id)
     if username not in user_contexts:
-        user_contexts[username] = ''
-
-    # 👉 вот здесь обрабатываем /d
-    if message.text.strip() == '/d':
-        user_contexts[username] = ''
-        
-
+        user_contexts[username] = ''        
     aiContext = user_contexts[username]
 
     if aiContext.strip() == '':
@@ -129,9 +123,6 @@ def echo_all(message):
                 bot.delete_message(message.chat.id, temp_msg.message_id)
         except Exception:
             pass
-
-    if message.text.strip() == '/d':
-        return
         
     
     while True:
@@ -175,6 +166,7 @@ def echo_all(message):
                 break
 
             txt = message.text + " по-русски"
+            
 
             response = g4f_with_timeout(txt, username)
             if response.strip() == '':
