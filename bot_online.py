@@ -7,6 +7,7 @@ import re
 import threading
 import queue
 import time
+from state import has_latins
 #from state import escape_markdown_v2
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
@@ -178,6 +179,12 @@ def echo_all(message):
                 err = 'иероглифы'
                 continue
 
+            if has_latins(response) and '<pre>' not in response and '</pre>' not in response:
+                delete_last_message()
+                err = 'латиница'
+                continue
+
+
             response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
             response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
 
@@ -190,15 +197,7 @@ def echo_all(message):
                 pass
 
             bot.reply_to(message, response, parse_mode='HTML')
-
             delete_last_message()
-
-            
-            # if any(tag in response for tag in ['<pre>', '<b>']):
-            #     bot.reply_to(message, response)    # , parse_mode='HTML'
-            # else:
-            #     bot.reply_to(message, response)
-
             break
 
         except telebot.apihelper.ApiTelegramException as e:
