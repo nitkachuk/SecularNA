@@ -172,7 +172,6 @@ def echo_all(message):
             # response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
 
             response = "abcde"
-            response = escape_markdown_v2(response)
 
 
             if has_glyphs( response ):
@@ -183,7 +182,7 @@ def echo_all(message):
             if len(response) > maxContext:
                 response = response[:maxContext]
 
-            bot.reply_to(message, response)
+            bot.reply_to(message, response, , parse_mode='MarkdownV2')
 
             delete_last_message()
 
