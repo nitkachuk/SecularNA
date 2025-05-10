@@ -19,7 +19,6 @@ response = ""
 
 def g4f_with_timeout(txt, timeout=10):
     global aiContext
-    global messages
     global response
 
     messages = [
@@ -29,6 +28,9 @@ def g4f_with_timeout(txt, timeout=10):
                                      "но не слишком, в том числе списки некрупными эмодзи"},
         {"role": "user", "content": txt}
     ]
+
+    aiContext += "\n".join(m["content"] for m in messages[-10:])
+    messages.insert(0, {"role": "system", "content": aiContext})
     
     q = queue.Queue()
 
@@ -156,15 +158,7 @@ def echo_all(message):
                 continue
 
             delete_last_message()
-
-
-            #aiContext += message.text
-            try:
-                aiContext += "\n".join(m["content"] for m in messages[-10:])
-            except Exception as e:
-                response = str( e )
             
-            #response = aiContext
             
             if any(tag in response for tag in ['<pre>', '<b>']):
                 bot.reply_to(message, response, parse_mode='HTML')
