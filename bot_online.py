@@ -19,7 +19,7 @@ globalMessageObject = None
 sent_message = ""
 response = ""
 
-def g4f_with_timeout(txt, username timeout=10):
+def g4f_with_timeout(txt, username, timeout=10):
     global user_contexts
     global maxContext
     global response
@@ -150,7 +150,7 @@ def echo_all(message):
             txt = message.text + " по-русски"
 
             username = message.from_user.username
-            response = g4f_with_timeout(txt)
+            response = g4f_with_timeout(txt, username)
             if response == "":
                 time.sleep( 2 )
                 delete_last_message()
