@@ -182,7 +182,7 @@ def echo_all(message):
             if len(response) > maxContext:
                 response = response[:maxContext]
 
-            bot.reply_to(message, response, , parse_mode='MarkdownV2')
+            bot.reply_to(message, response, parse_mode='MarkdownV2')
 
             delete_last_message()
 
