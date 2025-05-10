@@ -155,8 +155,13 @@ def echo_all(message):
 
 
             #aiContext += message.text
-            aiContext += "\n".join(m["content"] for m in messages[-10:])
-            response = aiContext
+            try    {
+                aiContext += "\n".join(m["content"] for m in messages[-10:])
+            }
+            except Exception as e:
+                response = e
+            
+            #response = aiContext
             
             if any(tag in response for tag in ['<pre>', '<b>']):
                 bot.reply_to(message, response, parse_mode='HTML')
