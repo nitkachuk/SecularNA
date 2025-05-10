@@ -92,8 +92,11 @@ def has_glyphs(text):
 @bot.message_handler(func=lambda message: message.from_user.username in ['kristina_superstar', 'gothicspring', 'Kungfuoko'])
 
 def echo_all(message):
+    global globalMessageObject
     global sent_message
     global response
+
+    globalMessageObject = message
 
     attempt_count = 0      # счетчик попыток отправки
     err = ''    # Текст ошибок в "Секундочку..."
