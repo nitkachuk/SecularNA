@@ -24,9 +24,9 @@ def g4f_with_timeout(txt, timeout=10):
     global maxContext
     global response
 
-    aiContext = '...'
-    msgs = user_history[user_id][-100:][::-1]  # последние 100 сообщений в обратном порядке
-    aiContext = "\n".join(msgs)[-max_context:]  # склеиваем и обрезаем с конца
+    chat_id = message.chat.id
+    messages = bot.get_chat_history(chat_id, limit=100)
+    aiContext = "\n".join([msg.text for msg in messages])
 
     messages = [
         {"role": "system", "content": f"контекст: '' "},
