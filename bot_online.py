@@ -7,7 +7,7 @@ import re
 import threading
 import queue
 import time
-from state import escape_markdown_v2
+#from state import escape_markdown_v2
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
@@ -36,8 +36,6 @@ def g4f_with_timeout(txt, username, timeout=10):
                                      "женского характера, но не слишком много, в том числе списки некрупными символьными эмодзи"},
         {"role": "user", "content": txt}
     ]
-
-    #messages.insert(0, {"role": "system", "content": history})
     
     q = queue.Queue()
 
