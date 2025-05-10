@@ -180,7 +180,7 @@ def echo_all(message):
         except telebot.apihelper.ApiTelegramException as e:
             # Обработка исключения, чтобы скрипт не завершался при ошибке API Telegram
             time.sleep( 2 )
-            err = "ошибка API Telegram"
+            err = f"ошибка api telegram: {e}"
             print(err, e)
             delete_last_message()
             continue
@@ -188,7 +188,7 @@ def echo_all(message):
         except Exception as e:
             # Другие исключения
             time.sleep( 2 )
-            err = str(e)
+            err = f"exeption as e: {str(e)}"
             print(err, e)
             delete_last_message()
             continue 
