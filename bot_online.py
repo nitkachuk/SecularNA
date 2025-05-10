@@ -172,6 +172,8 @@ def echo_all(message):
             if len(aiContext) > maxContext:
                 try:
                     user_contexts[username] = aiContext
+                except Exception as e:
+                    pass
 
             bot.reply_to(message, response, parse_mode='HTML')
 
