@@ -119,8 +119,7 @@ def echo_all(message):
         try:
             temp_msg = bot.send_message(message.chat.id, "🧹  <i>История очищена</i>", parse_mode='HTML')
             time.sleep(2)
-            if message.text.strip() == '/d':
-                bot.delete_message(message.chat.id, temp_msg.message_id)
+            bot.delete_message(message.chat.id, temp_msg.message_id)
         except Exception:
             pass
         
