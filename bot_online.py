@@ -176,8 +176,10 @@ def echo_all(message):
             
             
             if any(tag in response for tag in ['<pre>', '<b>']):
+                response = "abcde"
                 bot.reply_to(message, 'response', parse_mode='HTML')    # , parse_mode='HTML'
             else:
+                response = "abcde"
                 bot.reply_to(message, 'response')
 
             break
