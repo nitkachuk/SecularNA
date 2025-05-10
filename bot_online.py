@@ -11,34 +11,28 @@ import time
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
 
-aiContext = ""
-maxContext = 4000
-user_contexts = {}
-
 globalMessageObject = None
 sent_message = ""
 response = ""
 
 def g4f_with_timeout(txt, aiContext, timeout=10):
-    global maxContext
     global response
+    maxContext = 4000
+    context = ''
 
-    # Получаем контекст конкретного пользователя
-    aiContext = user_contexts.get(user_id, "")
-
-    # Формируем последние 100 сообщений
-    history = aiContext.strip().split("\n")[-100:]
-    history = "\n".join(history)[-maxContext:]
+    
+    msgs = user_history[user_id][-100:][::-1]  # последние 100 сообщений в обратном порядке
+    context = "\n".join(msgs)[-max_context:]  # склеиваем и обрезаем с конца
 
     messages = [
-        #{"role": "system", "content": f"контекст: {aiContext}"},
+        {"role": "system", "content": f"контекст: {context}"},
         {"role": "system", "content": "ты девочка-альтушка, тебя зовут Оракул. ответь по-русски, если есть блоки кода или цитат или "
                                      "списков, то оберни их в pre по примеру <pre>текст</pre>. разнообразь с помощью эмодзи "
                                      "женского характера, но не слишком много, в том числе списки некрупными символьными эмодзи"},
         {"role": "user", "content": txt}
     ]
 
-    messages.insert(0, {"role": "system", "content": history})
+    #messages.insert(0, {"role": "system", "content": history})
     
     q = queue.Queue()
 
@@ -94,21 +88,19 @@ def echo_all(message):
     global sent_message
     global response
 
-    user_id = message.from_user.id
-    # Инициализируем контекст для пользователя, если его нет
-    if user_id not in user_contexts:
-        user_contexts[user_id] = ""
-
-    aiContext = user_contexts[user_id]  # Получаем контекст для этого пользователя
-    
     attempt_count = 0      # счетчик попыток отправки
     err = ''    # Текст ошибок в "Секундочку..."
 
     clockEmodjis = [ '', '🕑', '🕓', '🕕', '🕗', '🕙' ]
 
-    if not aiContext.strip():
+    # if not aiContext.strip():
+    #     sent_message = bot.send_message(message.chat.id, "📜 _Переписка очищена_", parse_mode='Markdown')
+    #     time.sleep( 2 )
+    #     delete_last_message()
+
+    if not context:
         sent_message = bot.send_message(message.chat.id, "📜 _Переписка очищена_", parse_mode='Markdown')
-        time.sleep( 2 )
+        time.sleep(2)
         delete_last_message()
         
     
