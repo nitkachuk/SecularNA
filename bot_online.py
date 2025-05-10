@@ -182,6 +182,8 @@ def echo_all(message):
             if len(response) > maxContext:
                 response = response[:maxContext]
 
+            response = re.sub(r'[\x00-\x1F\x7F]', '', response)  # Убираем все нелатинские и управляющие символы
+
             delete_last_message()
 
             
