@@ -12,6 +12,7 @@ telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
 
 aiContext = ""
+maxContext = 4096
 globalMessageObject = None
 sent_message = ""
 response = ""
@@ -21,7 +22,7 @@ def g4f_with_timeout(txt, timeout=10):
     global response
 
     messages = [
-        #{"role": "system", "content": f"контекст {aiContext}"},
+        #{"role": "system", "content": f"контекст: {aiContext}"},
         {"role": "system", "content": "ответь по-русски, если есть блоки кода или цитат или списков, "
                                      "то оберни их в pre по примеру <pre>текст</pre>. разнообразь с помощью эмодзи, "
                                      "но не слишком, в том числе списки некрупными эмодзи"},
@@ -154,6 +155,7 @@ def echo_all(message):
 
 
             #aiContext += message.text
+            aiContext += "\n".join(m["content"] for m in messages[-10:])
             
             if any(tag in response for tag in ['<pre>', '<b>']):
                 bot.reply_to(message, response, parse_mode='HTML')
