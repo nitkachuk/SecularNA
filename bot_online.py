@@ -99,12 +99,12 @@ def echo_all(message):
     clockEmodjis = [ '', '🕑', '🕓', '🕕', '🕗', '🕙' ]
 
     # if not aiContext.strip():
-    #     sent_message = bot.send_message(message.chat.id, "📜 _Переписка очищена_", parse_mode='Markdown')
+    #     sent_message = bot.send_message(message.chat.id, "📜  _Переписка очищена_", parse_mode='Markdown')
     #     time.sleep( 2 )
     #     delete_last_message()
 
     if not aiContext:
-        sent_message = bot.send_message(message.chat.id, "📜 _Переписка очищена_", parse_mode='Markdown')
+        sent_message = bot.send_message(message.chat.id, "📜  _Переписка очищена_", parse_mode='Markdown')
         time.sleep(2)
         delete_last_message()
         
@@ -119,7 +119,7 @@ def echo_all(message):
             attempt_count += 1  # увеличение счетчика попыток
             
             if attempt_count > 1:
-                #sent_message = bot.reply_to(message, f'\n\n\n<i>⚙️ Секундочку... #{attempt_count} ({err})</i>', parse_mode='HTML')  # ответ 1
+                #sent_message = bot.reply_to(message, f'\n\n\n<i>⚙️  Секундочку... #{attempt_count} ({err})</i>', parse_mode='HTML')  # ответ 1
                 sent_message = bot.send_message(
                         message.chat.id,
                             f'_⚙️ Секундочку...  #{attempt_count} ({err})_',
@@ -128,7 +128,7 @@ def echo_all(message):
                     )
                 err = ''
             else:
-                #sent_message = bot.reply_to(message, '\n\n\n<i>⏳ Секундочку...</i>', parse_mode='HTML')  # ответ 1
+                #sent_message = bot.reply_to(message, '\n\n\n<i>⏳  Секундочку...</i>', parse_mode='HTML')  # ответ 1
                 sent_message = bot.send_message(
                         message.chat.id,
                             "_⏳ Секундочку..._",
