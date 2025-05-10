@@ -106,6 +106,11 @@ def echo_all(message):
     global globalMessageObject
     globalMessageObject = message
 
+    if sent_message:
+        text = sent_message.text.strip()
+        if '❌' in text:
+            delete_last_message()
+
     attempt_count = 0    
     err = ''    
 
@@ -127,11 +132,6 @@ def echo_all(message):
     
     while True:
         try:
-            if sent_message:
-                text = sent_message.text.strip()
-                if '❌' in text:
-                    delete_last_message()
-
             attempt_count += 1  # увеличение счетчика попыток
             
             if attempt_count > 1:
