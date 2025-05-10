@@ -1,13 +1,13 @@
 import os
 import asyncio
 import telebot
-from telebot.util import escape as escape_html
 import g4f
 import unicodedata
 import re
 import threading
 import queue
 import time
+from state import escape_markdown_v2
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
