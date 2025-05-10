@@ -105,7 +105,7 @@ def echo_all(message):
 
     if not aiContext:
         sent_message = bot.send_message(message.chat.id, "📜  _Переписка очищена_", parse_mode='Markdown')
-        time.sleep(2)
+        time.sleep( 2 )
         delete_last_message()
         
     
@@ -176,9 +176,9 @@ def echo_all(message):
             
             
             if any(tag in response for tag in ['<pre>', '<b>']):
-                bot.reply_to(message, response)    # , parse_mode='HTML'
+                bot.reply_to(message, 'response')    # , parse_mode='HTML'
             else:
-                bot.reply_to(message, response)
+                bot.reply_to(message, 'response')
 
             break
 
