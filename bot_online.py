@@ -104,7 +104,7 @@ def echo_all(message):
     username = message.from_user.username
     try:
         aiContext = user_contexts[username] 
-    except Exeption as e:
+    except Exception as e:
         aiContext = ''
         sent_message = bot.send_message(message.chat.id, "📜  _Переписка очищена_", parse_mode='Markdown')
         time.sleep( 2 )
