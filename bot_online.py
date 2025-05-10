@@ -1,6 +1,7 @@
 import os
 import asyncio
 import telebot
+from telebot.util import escape as escape_html
 import g4f
 import unicodedata
 import re
@@ -161,10 +162,14 @@ def echo_all(message):
             # response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
             # response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
 
+            # response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
+            # response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
+            
+            # response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', re.sub(r'```(.*?)```', r'<pre>\1</pre>', re.sub(r'[\x00-\x1F\x7F]', '', escape_html(response)), flags=re.DOTALL))
+
+            response = escape_html(response)  # сначала экранируем
             response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
             response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
-            
-            response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', re.sub(r'```(.*?)```', r'<pre>\1</pre>', re.sub(r'[\x00-\x1F\x7F]', '', escape_html(response)), flags=re.DOTALL))
 
 
             if has_glyphs( response ):
