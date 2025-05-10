@@ -111,7 +111,7 @@ def echo_all(message):
         try:
             if sent_message:
                 text = sent_message.text.strip()
-                if text == '❌':
+                if '❌' in text:
                     delete_last_message()
 
             attempt_count += 1  # увеличение счетчика попыток
@@ -141,7 +141,7 @@ def echo_all(message):
                 sent_message = bot.send_message(
                         message.chat.id,
                             #"<⏳ Секундочку..._",
-                            '❌',
+                            '<i>❌</i>',
                         parse_mode='HTML'
                     )
                 
