@@ -30,8 +30,8 @@ def g4f_with_timeout(txt, username, timeout=10):
         tempContext = ''
 
     aiContext = f'{txt}\n\n{tempContext}'
-        if len(aiContext) > maxContext:
-            aiContext = aiContext[:maxContext]
+    if len(aiContext) > maxContext:
+        aiContext = aiContext[:maxContext]
 
     messages = [
         #{"role": "system", "content": f"контекст: '' {tempContext}"},
