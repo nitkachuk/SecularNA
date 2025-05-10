@@ -34,11 +34,9 @@ def g4f_with_timeout(txt, username, timeout=10):
         aiContext = aiContext[:maxContext]
 
     messages = [
-        #{"role": "system", "content": f"контекст: '' {tempContext}"},
         {"role": "system", "content": "ты девочка-альтушка, тебя зовут Оракул. ответь по-русски, если есть блоки кода или цитат или "
                                      "списков, то оберни их в pre по примеру <pre>текст</pre>. разнообразь с помощью эмодзи "
                                      "женского характера, но не слишком много, в том числе списки некрупными символьными эмодзи"},
-        #{"role": "user", "content": txt}
         {"role": "user", "content": aiContext}
     ]
     
@@ -69,6 +67,7 @@ def g4f_with_timeout(txt, username, timeout=10):
 def delete_last_message():
     global globalMessageObject
     global sent_message
+    
     try:
         bot.delete_message(globalMessageObject.chat.id, sent_message.message_id)
     except Exception as e:
@@ -138,8 +137,8 @@ def echo_all(message):
                 #sent_message = bot.reply_to(message, f'\n\n\n<i>⚙️  Секундочку... #{attempt_count} ({err})</i>', parse_mode='HTML')  # ответ 1
                 sent_message = bot.send_message(
                         message.chat.id,
-                            f'<i>⚙️  Секундочку...  #{attempt_count} ({err})</i>',
-                            #clockEmodjis[ attempt_count ],
+                            #f'<i>⚙️  Секундочку...  #{attempt_count} ({err})</i>',
+                            clockEmodjis[ attempt_count ],
                         parse_mode='HTML'
                     )
                 err = ''
@@ -147,8 +146,8 @@ def echo_all(message):
                 #sent_message = bot.reply_to(message, '\n\n\n<i>⏳  Секундочку...</i>', parse_mode='HTML')  # ответ 1
                 sent_message = bot.send_message(
                         message.chat.id,
-                            "<i>⏳  Секундочку...</i>",
-                            #clockEmodjis[ attempt_count ],
+                            #"<i>⏳  Секундочку...</i>",
+                            clockEmodjis[ attempt_count ],
                         parse_mode='HTML'
                     )
 
