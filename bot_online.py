@@ -103,7 +103,7 @@ def echo_all(message):
 
     username = message.from_user.username
 
-    if not user_contexts[username]:
+    if username not in user_contexts or not user_contexts[username]:
         sent_message = bot.send_message(message.chat.id, "📜  _Переписка очищена_", parse_mode='Markdown')
         time.sleep( 2 )
         delete_last_message()
