@@ -60,7 +60,9 @@ def g4f_with_timeout(txt, timeout=10):
     return result
 
 def delete_last_message():
+    global globalMessageObject
     global sent_message
+    
     try:
         bot.delete_message(globalMessageObject.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
     except Exception as e:
