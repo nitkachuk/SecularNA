@@ -83,6 +83,9 @@ def echo_all(message):
     global globalMessageObject  
     global sent_message
     globalMessageObject = message
+
+    global aiContext
+    global maxContext
     
     attempt_count = 0      # счетчик попыток отправки
     err = ''    # Текст ошибок в "Секундочку..."
