@@ -179,8 +179,11 @@ def echo_all(message):
                 err = 'иероглифы'
                 continue
 
+            if len(response) > maxContext:
+                response = response[:maxContext]
+
             delete_last_message()
-            
+
             
             if any(tag in response for tag in ['<pre>', '<b>']):
                 bot.reply_to(message, response)    # , parse_mode='HTML'
