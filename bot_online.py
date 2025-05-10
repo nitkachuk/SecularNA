@@ -117,6 +117,7 @@ def echo_all(message):
     # 👉 вот здесь обрабатываем /d
     if message.text.strip() == '/d':
         user_contexts[username] = ''
+        
 
     aiContext = user_contexts[username]
 
@@ -124,9 +125,13 @@ def echo_all(message):
         try:
             temp_msg = bot.send_message(message.chat.id, "🧹  <i>История очищена</i>", parse_mode='HTML')
             time.sleep(2)
-            bot.delete_message(message.chat.id, temp_msg.message_id)
+            if message.text.strip() == '/d':
+                bot.delete_message(message.chat.id, temp_msg.message_id)
         except Exception:
             pass
+
+    if message.text.strip() == '/d':
+        return
         
     
     while True:
