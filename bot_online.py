@@ -102,8 +102,10 @@ def echo_all(message):
     clockEmodjis = [ '', '🕑', '🕓', '🕕', '🕗', '🕙' ]
 
     username = message.from_user.username
-
-    if username not in user_contexts or user_contexts[username] == '':
+    try:
+        aiContext = user_contexts[username] 
+    except Exeption as e:
+        aiContext = ''
         sent_message = bot.send_message(message.chat.id, "📜  _Переписка очищена_", parse_mode='Markdown')
         time.sleep( 2 )
         delete_last_message()
@@ -166,9 +168,10 @@ def echo_all(message):
             response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
             response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
 
-            aiContext = f"{response} \n {user_contexts.get(username, '')}" 
+            aiContext = f"{response} \n {aiContext}" 
             if len(aiContext) > maxContext:
-                user_contexts[username] = aiContext
+                try:
+                    user_contexts[username] = aiContext
 
             bot.reply_to(message, response, parse_mode='HTML')
 
