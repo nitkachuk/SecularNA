@@ -114,6 +114,10 @@ def echo_all(message):
     attempt_count = 0    
     err = ''    
 
+    messageText = message.text
+    if len(messageText) > maxContext:
+        messageText = messageText[:maxContext]
+
     clockEmodjis = [ '', '🕑', '🕓', '🕕', '🕗', '🕙' ]
 
     username = str(message.from_user.id)
@@ -165,7 +169,7 @@ def echo_all(message):
                 
                 break
 
-            txt = message.text + " по-русски"
+            txt = messageText + " по-русски"
             
 
             response = g4f_with_timeout(txt, username)
