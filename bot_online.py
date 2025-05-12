@@ -211,6 +211,7 @@ def echo_all(message):
             # response = re.sub(r'\s*на-?русском', '', response)
             # response = re.sub(r'\s*на ?русском', '', response)
             response = re.sub(r'\s*(по[\s-]?русски|на[\s-]?русском)', '', response, flags=re.IGNORECASE)
+            response = re.sub(r'\s*(по[\s-]?руски|на[\s-]?руском)', '', response, flags=re.IGNORECASE)
 
 
             aiContext = f"{response} \n {aiContext}" 
