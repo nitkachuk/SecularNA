@@ -42,7 +42,7 @@ def g4f_with_timeout(txt, username, timeout=10):
     if len(tempContext) > 1500:
         tempContext = tempContext[username][:1500]
 
-    aiContext = f'<br>{txt}\n\nскрытая информация для тебя, \n\информация о пользователе:{user_psyhos[username]}\nистория перепески:{tempContext}'
+    aiContext = f'<br>{txt}\n\nскрытая информация для тебя, \nинформация о пользователе:{user_psyhos[username]}\nистория перепески:{tempContext}'
     if len(aiContext) > maxContext:
         aiContext = aiContext[:maxContext]
     print(f"\n\n💬  СООБЩЕНИЕ:  {aiContext}\n\n", flush=True)
@@ -226,18 +226,13 @@ def echo_all(message):
 
             response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
             response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
-            #response = re.sub(r'\bпо-?русски\b', '', response)
-            # response = re.sub(r'\s*по-?русски', '', response)
-            # response = re.sub(r'\s*по ?русски', '', response)
-            # response = re.sub(r'\s*на-?русском', '', response)
-            # response = re.sub(r'\s*на ?русском', '', response)
             response = re.sub(r'\s*(по[\s-]?русски|на[\s-]?русском)', '', response, flags=re.IGNORECASE)
             response = re.sub(r'\s*(по[\s-]?руски|на[\s-]?руском)', '', response, flags=re.IGNORECASE)
 
             match = re.search(r'######(.*?)######', response)
             if match:
-                user_psyhos[username] = re.sub(r'скрытая информация для тебя:|информация о пользователе:', '', user_psyhos[username]).strip()
-                user_psyhos[username] += f"\n{match.group(1)}"
+                #user_psyhos[username] = re.sub(r'скрытая информация для тебя:|информация о пользователе:', '', user_psyhos[username]).strip()
+                #user_psyhos[username] += f"\n{match.group(1)}"
             response = response.replace(match.group(0), '').strip()
 
 
