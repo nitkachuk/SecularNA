@@ -24,7 +24,7 @@ response = ""
 sent_message = None 
 
 aiAnswersCount = 0
-print( f'•   ', flush=True )
+
 
 def g4f_with_timeout(txt, username, timeout=10):
     global user_contexts
@@ -119,7 +119,8 @@ def echo_all(message):
             delete_last_message()
 
     #attempt_count = 0  
-    ser_attempts[username] = 0
+    if username not in user_attempts:
+        user_attempts[username] = 0
     err = ''    
     last_response = ''
 
@@ -247,6 +248,6 @@ def echo_all(message):
             delete_last_message()
             continue 
 
-    attempt_count = 0  # сброс счетчика попыток после успешной отправки
+    user_attempts[username] = 0  # сброс счетчика попыток после успешной отправки
 
 bot.polling()
