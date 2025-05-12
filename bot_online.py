@@ -42,7 +42,7 @@ def g4f_with_timeout(txt, username, timeout=10):
     if len(tempContext) > 1500:
         tempContext = tempContext[username][:1500]
 
-    aiContext = f'<br>{txt}\n\nскрытая информация для тебя, \nинформация о пользователе:{user_psyhos[username]}\nистория перепески:{tempContext}'
+    aiContext = f'{txt}\n\nскрытая информация для тебя, \nинформация о пользователе:{user_psyhos[username]}\nистория перепески:{tempContext}'
     if len(aiContext) > maxContext:
         aiContext = aiContext[:maxContext]
     print(f"\n\n💬  СООБЩЕНИЕ:  {aiContext}\n\n", flush=True)
@@ -204,8 +204,8 @@ def echo_all(message):
                 break
 
             txt = messageText + " по-русски"
-            
 
+            
             response = str( g4f_with_timeout(txt, username) ).strip()
             if response == '':
                 time.sleep( 2 )
@@ -231,8 +231,8 @@ def echo_all(message):
 
             match = re.search(r'######(.*?)######', response)
             if match:
-                #user_psyhos[username] = re.sub(r'скрытая информация для тебя:|информация о пользователе:', '', user_psyhos[username]).strip()
-                #user_psyhos[username] += f"\n{match.group(1)}"
+                user_psyhos[username] = re.sub(r'скрытая информация для тебя:|информация о пользователе:', '', user_psyhos[username]).strip()
+                user_psyhos[username] += f"\n{match.group(1)}"
                 response = response.replace(match.group(0), '').strip()
 
 
