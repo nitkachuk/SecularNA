@@ -148,9 +148,7 @@ def echo_all(message):
 
             
             if err != '':
-                if aiAnswersCount < 1:
-                    print( f'•   ', flush=True )
-                print( f'•   attempt_count = {attempt_count}', flush=True )
+                print( f'•   ', flush=True )
                 print( f'•   {(datetime.now() + timedelta(hours=3)).strftime("[ %H:%M:%S ]")}:  {last_message}', flush=True )
                 print( f'•   error: {err}', flush=True )
                 print( f'•   ', flush=True )
