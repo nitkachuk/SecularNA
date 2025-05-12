@@ -19,6 +19,7 @@ maxContext = 4000
 globalMessageObject = None
 last_message = ""
 response = ""
+sent_message = None 
 
 def g4f_with_timeout(txt, username, timeout=10):
     global user_contexts
