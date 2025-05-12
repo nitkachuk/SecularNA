@@ -17,6 +17,7 @@ bot = telebot.TeleBot(telegram_token)
 user_contexts = { }
 maxContext = 4000
 user_attempts = { }
+user_psyhos = { }
 
 globalMessageObject = None
 last_message = ""
@@ -36,16 +37,18 @@ def g4f_with_timeout(txt, username, timeout=10):
     except Exception as e:
         tempContext = ''
 
-    aiContext = f'{txt}\n\n{tempContext}'
+    aiContext = f'{txt}\n\nинформация о пользователе:{user_psyhos[username]}\n\nконтекст:{tempContext}'
     if len(aiContext) > maxContext:
         aiContext = aiContext[:maxContext]
 
     messages = [
         {"role": "system", "content": "ты девочка-альтушка, но интеллигентная, тебя зовут Оракул. ответь по-русски, если есть "
-                                     "блоки кода или цитат или списков, то оберни их в pre по примеру <pre>текст</pre>. "
-                                     "разнообразь с помощью эмодзи женского характера, но не слишком много, в том числе"
-                                     " списки маркируй символом •  и немного символьными эмодзи"},
-        {"role": "user", "content": aiContext}
+                                      "блоки кода или цитат или списков, то оберни их в pre по примеру <pre>текст</pre>. "
+                                      "разнообразь с помощью эмодзи женского характера, но не слишком много, в том числе"
+                                      "списки маркируй символом •  и немного символьными эмодзи. "}
+                                      "В конце каждого ответа добавляй одно предложение о характере пользователя "
+                                      "для улучшения твоих ответов в формате ######предложение###### ",
+        {"role": "user", "content": f"aiContext"}
     ]
     
     q = queue.Queue()
@@ -106,6 +109,8 @@ def has_glyphs(text):
 def echo_all(message):
     global aiAnswersCount
     global user_contexts
+    global user_attempts
+    global user_psyhos
     global maxContent
     global sent_message
     global response
@@ -126,6 +131,9 @@ def echo_all(message):
     #attempt_count = 0  
     if username not in user_attempts:
         user_attempts[username] = 0
+    if username not in user_psyhos:
+        user_psyhos[username] = ''
+        
     err = ''    
     last_response = ''
 
@@ -192,8 +200,8 @@ def echo_all(message):
             txt = messageText + " по-русски"
             
 
-            response = g4f_with_timeout(txt, username)
-            if response.strip() == '':
+            response = str( g4f_with_timeout(txt, username) ).strip()
+            if response == '':
                 time.sleep( 2 )
                 delete_last_message()
                 err = 'таймаут g4f'
@@ -219,6 +227,11 @@ def echo_all(message):
             # response = re.sub(r'\s*на ?русском', '', response)
             response = re.sub(r'\s*(по[\s-]?русски|на[\s-]?русском)', '', response, flags=re.IGNORECASE)
             response = re.sub(r'\s*(по[\s-]?руски|на[\s-]?руском)', '', response, flags=re.IGNORECASE)
+
+            match = re.search(r'######(.*?)######', response)
+            if match:
+                user_psyhos[username] += f"\n{match.group(1)}"
+            response = response.replace(match.group(0), '').strip()
 
 
             aiContext = f"{response} \n {aiContext}" 
