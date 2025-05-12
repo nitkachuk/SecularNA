@@ -40,7 +40,7 @@ def g4f_with_timeout(txt, username, timeout=10):
     if len(user_psyhos[username]) > 500:
         user_psyhos[username] = user_psyhos[username][:500]
     if len(tempContext) > 1500:
-        tempContext = user_psyhos[username][:1500]
+        tempContext = tempContext[username][:1500]
 
     aiContext = f'{txt}\n\nскрытая информация для тебя:информация о пользователе:{user_psyhos[username]}\n\nистория перепески:{tempContext}'
     if len(aiContext) > maxContext:
@@ -236,6 +236,7 @@ def echo_all(message):
 
             match = re.search(r'######(.*?)######', response)
             if match:
+                user_psyhos[username] = re.sub(r'скрытая информация для тебя:|информация о пользователе:', '', user_psyhos[username]).strip()
                 user_psyhos[username] += f"\n{match.group(1)}"
             response = response.replace(match.group(0), '').strip()
 
