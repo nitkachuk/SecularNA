@@ -144,7 +144,9 @@ def echo_all(message):
             attempt_count += 1  # увеличение счетчика попыток
 
             if err != '':
-                print(  f'\n\n{datetime.now().strftime("[ %H:%M:%S ]")}:  {last_message}\n\nERROR:  {err}', flush=True  )
+                print('')
+                print(  f'{datetime.now().strftime("[ %H:%M:%S ]")}:  {last_message}\n\nERROR:  {err}', flush=True  )
+                print('')
                 print(  f'•   •   •   •   •', flush=True  )
 
             if attempt_count > 1:
