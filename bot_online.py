@@ -146,9 +146,10 @@ def echo_all(message):
             
             if err != '':
                 print( f'•  ', flush=True )
-                print( f'\n\n•  {(datetime.now() + timedelta(hours=3)).strftime("[ %H:%M:%S ]")}:  {last_message}', flush=True )
-
-                if attempt_count > 1:
+                print( f'•  {(datetime.now() + timedelta(hours=3)).strftime("[ %H:%M:%S ]")}:  {last_message}', flush=True )
+                print( f'•  error: {err}', flush=True )
+                
+                if attempt_count-1 > 1:
                     print( f'•  ', flush=True )
                 
 
