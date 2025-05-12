@@ -239,7 +239,7 @@ def echo_all(message):
             match = re.search(r'######(.*?)######', response)
             if match:
                 user_psyhos[username] = re.sub(r'скрытая информация для тебя:|информация о пользователе:', '', user_psyhos[username]).strip()
-                user_psyhos[username] += f"\n{match.group(1)}"
+                user_psyhos[username] = user_psyhos[username].strip() + f"\n{match.group(1).strip()}"
                 response = response.replace(match.group(0), '').strip()
 
 
@@ -247,7 +247,7 @@ def echo_all(message):
             if len(aiContext) > maxContext:
                 aiContext = aiContext[:maxContext]
             try:
-                user_contexts[username] = aiContext
+                user_contexts[username] = aiContext.strip()
             except Exception as e:
                 pass
 
