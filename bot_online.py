@@ -141,13 +141,13 @@ def echo_all(message):
     
     while True:
         try:
-            attempt_count += 1  # увеличение счетчика попыток
+            attempt_count += 1
 
             
             if err != '':
-                print( f'•   attempt_count = {attempt_count}', flush=True )
-                if attempt_count == 2:
+                if attempt_count > 1:
                     print( f'•   ', flush=True )
+                print( f'•   attempt_count = {attempt_count}', flush=True )
                 print( f'•   {(datetime.now() + timedelta(hours=3)).strftime("[ %H:%M:%S ]")}:  {last_message}', flush=True )
                 print( f'•   error: {err}', flush=True )
                 print( f'•   ', flush=True )
