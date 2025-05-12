@@ -112,6 +112,11 @@ def echo_all(message):
 
     global globalMessageObject
     globalMessageObject = message
+
+    username = str(message.from_user.id)
+    if username not in user_contexts:
+        user_contexts[username] = ''        
+    aiContext = user_contexts[username]
     
     if sent_message:
         text = sent_message.text.strip()
@@ -131,11 +136,7 @@ def echo_all(message):
     last_message = messageText
 
     clockEmodjis = [ '', '🕑', '🕓', '🕕', '🕗', '🕙' ]
-
-    username = str(message.from_user.id)
-    if username not in user_contexts:
-        user_contexts[username] = ''        
-    aiContext = user_contexts[username]
+    
 
     if aiContext.strip() == '':
         try:
