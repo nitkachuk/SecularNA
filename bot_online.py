@@ -42,7 +42,7 @@ def g4f_with_timeout(txt, username, timeout=10):
     if len(tempContext) > 1500:
         tempContext = tempContext[username][:1500]
 
-    aiContext = f'<br>{txt}\n\nскрытая информация для тебя:информация о пользователе:{user_psyhos[username]}\n\nистория перепески:{tempContext}'
+    aiContext = f'<br>{txt}\n\nскрытая информация для тебя, \n\информация о пользователе:{user_psyhos[username]}\nистория перепески:{tempContext}'
     if len(aiContext) > maxContext:
         aiContext = aiContext[:maxContext]
     print(f"\n\n💬  СООБЩЕНИЕ:  {aiContext}\n\n", flush=True)
