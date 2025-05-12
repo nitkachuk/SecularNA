@@ -7,6 +7,7 @@ import re
 import threading
 import queue
 import time
+from datetime import datetime
 from state import has_latins
 #from state import escape_markdown_v2
 
@@ -143,7 +144,7 @@ def echo_all(message):
             attempt_count += 1  # увеличение счетчика попыток
 
             if err != '':
-                print(  f'\nMESSAGE: {last_message}\nERROR: {err}\n', flush=True  )
+                print(  f'\nMESSAGE {datetime.now().strftime("[%H : %M : %S]")}: {last_message}ERROR: {err}\n\n', flush=True  )
 
             if attempt_count > 1:
                 #sent_message = bot.reply_to(message, f'\n\n\n<i>⚙️  Секундочку... #{attempt_count} ({err})</i>', parse_mode='HTML')  # ответ 1
