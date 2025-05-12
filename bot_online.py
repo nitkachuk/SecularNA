@@ -16,6 +16,7 @@ bot = telebot.TeleBot(telegram_token)
 
 user_contexts = { }
 maxContext = 4000
+user_attempts = { }
 
 globalMessageObject = None
 last_message = ""
@@ -23,6 +24,7 @@ response = ""
 sent_message = None 
 
 aiAnswersCount = 0
+print( f'•   ', flush=True )
 
 def g4f_with_timeout(txt, username, timeout=10):
     global user_contexts
@@ -116,7 +118,8 @@ def echo_all(message):
         if '❌' in text:
             delete_last_message()
 
-    attempt_count = 0    
+    #attempt_count = 0  
+    ser_attempts[username] = 0
     err = ''    
     last_response = ''
 
@@ -145,19 +148,20 @@ def echo_all(message):
     
     while True:
         try:
-            attempt_count += 1
+            #attempt_count += 1
+            user_attempts[username] += 1
             
             if err != '':
                 print( f'•   {(datetime.now() + timedelta(hours=3)).strftime("[ %H:%M:%S ]")}:   {last_message}', flush=True )
                 print( f'•   [ error ]:   {err}', flush=True )
                 print( f'•   ', flush=True )
 
-            if attempt_count > 1:
-                #sent_message = bot.reply_to(message, f'\n\n\n<i>⚙️  Секундочку... #{attempt_count} ({err})</i>', parse_mode='HTML')  # ответ 1
+            if user_attempts[username] > 1:
+                #sent_message = bot.reply_to(message, f'\n\n\n<i>⚙️  Секундочку... #{user_attempts[username]} ({err})</i>', parse_mode='HTML')  # ответ 1
                 sent_message = bot.send_message(
                         message.chat.id,
-                            #f'<i>⚙️  Секундочку...  #{attempt_count} ({err})</i>',
-                            clockEmodjis[ attempt_count ],
+                            #f'<i>⚙️  Секундочку...  #{user_attempts[username]} ({err})</i>',
+                            clockEmodjis[ user_attempts[username] ],
                         parse_mode='HTML'
                     )
                 err = ''
@@ -166,11 +170,11 @@ def echo_all(message):
                 sent_message = bot.send_message(
                         message.chat.id,
                             #"<i>⏳  Секундочку...</i>",
-                            clockEmodjis[ attempt_count ],
+                            clockEmodjis[ user_attempts[username] ],
                         parse_mode='HTML'
                     )
 
-            if attempt_count >= 5:
+            if user_attempts[username] >= 5:
                 time.sleep( 2 )
                 delete_last_message()
                 #bot.reply_to(message, "Превышено количество попыток.")  # ответ 2
