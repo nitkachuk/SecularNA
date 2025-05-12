@@ -206,8 +206,12 @@ def echo_all(message):
             response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
             response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
             #response = re.sub(r'\bпо-?русски\b', '', response)
-            response = re.sub(r'\s*по-?русски', '', response)
-            response = re.sub(r'\s*на-?русском', '', response)
+            # response = re.sub(r'\s*по-?русски', '', response)
+            # response = re.sub(r'\s*по ?русски', '', response)
+            # response = re.sub(r'\s*на-?русском', '', response)
+            # response = re.sub(r'\s*на ?русском', '', response)
+            response = re.sub(r'\s*(по[\s-]?русски|на[\s-]?русском)', '', response, flags=re.IGNORECASE)
+
 
             aiContext = f"{response} \n {aiContext}" 
             if len(aiContext) > maxContext:
