@@ -17,7 +17,7 @@ user_contexts = { }
 maxContext = 4000
 
 globalMessageObject = None
-sent_message = ""
+last_message = ""
 response = ""
 
 def g4f_with_timeout(txt, username, timeout=10):
@@ -113,10 +113,13 @@ def echo_all(message):
 
     attempt_count = 0    
     err = ''    
+    last_response = ''
 
     messageText = message.text
     if len(messageText) > maxContext:
         messageText = messageText[:maxContext]
+
+    last_message = messageText
 
     clockEmodjis = [ '', '🕑', '🕓', '🕕', '🕗', '🕙' ]
 
@@ -137,7 +140,8 @@ def echo_all(message):
     while True:
         try:
             attempt_count += 1  # увеличение счетчика попыток
-            
+
+            print(  f'\nMESSAGE: {last_message}\nERRO: {err}\n', flush=True  )
             if attempt_count > 1:
                 #sent_message = bot.reply_to(message, f'\n\n\n<i>⚙️  Секундочку... #{attempt_count} ({err})</i>', parse_mode='HTML')  # ответ 1
                 sent_message = bot.send_message(
@@ -203,6 +207,7 @@ def echo_all(message):
             except Exception as e:
                 pass
 
+    
             bot.reply_to(message, response, parse_mode='HTML')
             delete_last_message()
             break
