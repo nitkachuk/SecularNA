@@ -146,9 +146,9 @@ def echo_all(message):
             # if err != '':
             #     print(  f'\n\n{datetime.now().strftime("[ %H:%M:%S ]")}:  {last_message}\n\nERROR:  {err}\n\n•   •   •   •   •', flush=True  )
             if err != '':
-                print(
-                    f'{(datetime.now() + timedelta(hours=3)).strftime("[ %H:%M:%S ]")}:  {last_message}'
-                    f'\n\nERROR:  {err}\n\n•   •   •   •   •',
+                print( f'\n\n•  {(datetime.now() + timedelta(hours=3)).strftime("[ %H:%M:%S ]")}:  {last_message}' )
+                print( f'•  ERROR:  {err}\n\n•   •   •   •   •' ),
+                print( f'•  ' )
                     flush=True
                 )
 
