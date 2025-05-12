@@ -102,6 +102,7 @@ def has_glyphs(text):
 @bot.message_handler(func=lambda message: message.from_user.username in ['kristina_superstar', 'gothicspring', 'Kungfuoko'])
 
 def echo_all(message):
+    global aiAnswersCount
     global user_contexts
     global maxContent
     global sent_message
