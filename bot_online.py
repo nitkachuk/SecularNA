@@ -230,10 +230,10 @@ def echo_all(message):
             response = re.sub(r'\s*(по[\s-]?руски|на[\s-]?руском)', '', response, flags=re.IGNORECASE)
 
             match = re.search(r'######(.*?)######', response)
-            #if match:
+            if match:
                 #user_psyhos[username] = re.sub(r'скрытая информация для тебя:|информация о пользователе:', '', user_psyhos[username]).strip()
                 #user_psyhos[username] += f"\n{match.group(1)}"
-            response = response.replace(match.group(0), '').strip()
+                response = response.replace(match.group(0), '').strip()
 
 
             aiContext = f"{response} \n {aiContext}" 
