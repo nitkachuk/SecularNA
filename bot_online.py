@@ -144,8 +144,7 @@ def echo_all(message):
             attempt_count += 1  # увеличение счетчика попыток
 
             if err != '':
-                print(  f'{datetime.now().strftime("[ %H:%M:%S ]")}:  {last_message}\n\nERROR:  {err}', flush=True  )
-                print(  f'•   •   •   •   •', flush=True  )
+                print(  f'\n\n{datetime.now().strftime("[ %H:%M:%S ]")}:  {last_message}\n\nERROR:  {err}\n\n•   •   •   •   •', flush=True  )
 
             if attempt_count > 1:
                 #sent_message = bot.reply_to(message, f'\n\n\n<i>⚙️  Секундочку... #{attempt_count} ({err})</i>', parse_mode='HTML')  # ответ 1
