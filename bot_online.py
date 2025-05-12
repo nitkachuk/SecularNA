@@ -45,7 +45,7 @@ def g4f_with_timeout(txt, username, timeout=10):
     aiContext = f'{txt}\n\nинформация о пользователе:{user_psyhos[username]}\n\nконтекст:{tempContext}'
     if len(aiContext) > maxContext:
         aiContext = aiContext[:maxContext]
-    print(aiContext, mode='flush')
+    print(aiContext, flush=True)
 
     messages = [
         {"role": "system", "content": "ты девочка-альтушка, но интеллигентная, тебя зовут Оракул. ответь по-русски, если есть "
