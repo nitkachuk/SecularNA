@@ -144,8 +144,8 @@ def echo_all(message):
             attempt_count += 1  # увеличение счетчика попыток
 
             if err != '':
-                print(  f'\n\n{datetime.now().strftime("[ %H:%M:%S ]")}:  {last_message}\n\nERROR:  {err}\n\n', flush=True  )
-                #print(  f'------------------------------', flush=True  )
+                print(  f'\n\n{datetime.now().strftime("[ %H:%M:%S ]")}:  {last_message}\n\nERROR:  {err}', flush=True  )
+                print(  f'------------------------------\n\n', flush=True  )
 
             if attempt_count > 1:
                 #sent_message = bot.reply_to(message, f'\n\n\n<i>⚙️  Секундочку... #{attempt_count} ({err})</i>', parse_mode='HTML')  # ответ 1
@@ -203,6 +203,7 @@ def echo_all(message):
             response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
             #response = re.sub(r'\bпо-?русски\b', '', response)
             response = re.sub(r'\s*по-?русски', '', response)
+            response = re.sub(r'\s*на-?русском', '', response)
 
             aiContext = f"{response} \n {aiContext}" 
             if len(aiContext) > maxContext:
