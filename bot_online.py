@@ -142,7 +142,7 @@ def echo_all(message):
         try:
             attempt_count += 1  # увеличение счетчика попыток
 
-            if err:
+            if err != '':
                 print(  f'\nMESSAGE: {last_message}\nERROR: {err}\n', flush=True  )
 
             if attempt_count > 1:
