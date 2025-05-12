@@ -29,6 +29,7 @@ aiAnswersCount = 0
 
 def g4f_with_timeout(txt, username, timeout=10):
     global user_contexts
+    global tempContext
     global maxContext
     global response
 
