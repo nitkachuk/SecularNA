@@ -215,7 +215,7 @@ def echo_all(message):
             txt = messageText + " по-русски"
 
             usernameText = message.from_user.username or message.from_user.first_name or username
-            response = str( g4f_with_timeout(txt, usernameText, username) ).strip()
+            response = str( g4f_with_timeout(txt, username, usernameText) ).strip()
             if response == '':
                 time.sleep( 2 )
                 delete_last_message()
