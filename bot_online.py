@@ -41,7 +41,7 @@ def g4f_with_timeout(txt, username, usernameText, timeout=10):
     if len(user_psyhos[username]) > 500:
         user_psyhos[username] = user_psyhos[username][:500]
     if len(tempContext) > 1500:
-        tempContext = tempContext[username][:1500]
+        tempContext = tempContext[int(username)][:1500]
 
     #aiContext = f'{txt}\n·\n🧠  скрытая информация для тебя, информация о пользователе:\n   {user_psyhos[username]}\n·\n📜  история перепески:\n   {tempContext}'
     aiContext = (
