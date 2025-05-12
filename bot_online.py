@@ -27,7 +27,7 @@ sent_message = None
 aiAnswersCount = 0
 
 
-def g4f_with_timeout(txt, username, timeout=10):
+def g4f_with_timeout(txt, username, usernameText, timeout=10):
     global user_contexts
     global tempContext
     global maxContext
@@ -52,14 +52,14 @@ def g4f_with_timeout(txt, username, timeout=10):
     if len(aiContext) > maxContext:
         aiContext = aiContext[:maxContext]
     print(f'\n\n·································')
-    print(f"💬  сообщение от [ {username} ]:  \n{aiContext}\n\n", flush=True)
+    print(f"💬  сообщение от [ {usernameText} ]:  \n{aiContext}\n\n", flush=True)
 
     messages = [
         {"role": "system", "content": "ты девочка-альтушка, но интеллигентная, тебя зовут Оракул. ты мой друг. ответь по-русски, если есть "
                                       "блоки кода или цитат или списков, то оберни их в pre по примеру <pre>текст</pre>. "
                                       "разнообразь с помощью эмодзи женского характера, но не слишком много, в том числе"
                                       "списки маркируй символом •  и немного символьными эмодзи. "
-                                      "В конце каждого ответа добавляй одно предложение о характере пользователя "
+                                      "В конце каждого ответа добавляй одно предложение о характере пользователя, о нем в третьем лице "
                                       "для улучшения твоих ответов в формате ######предложение###### "},
         {"role": "user", "content": aiContext}
     ]
@@ -175,6 +175,7 @@ def echo_all(message):
             user_attempts[username] += 1
             
             if err != '':
+                print( f'•   ', flush=True )
                 print( f'•   {(datetime.now() + timedelta(hours=3)).strftime("[ %H:%M:%S ]")}:   {last_message}', flush=True )
                 print( f'•   [ error ]:   {err}', flush=True )
                 print( f'•   ', flush=True )
@@ -212,8 +213,8 @@ def echo_all(message):
 
             txt = messageText + " по-русски"
 
-            
-            response = str( g4f_with_timeout(txt, username) ).strip()
+            usernameText = message.from_user.username or message.from_user.first_name or username
+            response = str( g4f_with_timeout(txt, usernameText, username) ).strip()
             if response == '':
                 time.sleep( 2 )
                 delete_last_message()
