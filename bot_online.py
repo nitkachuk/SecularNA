@@ -22,6 +22,8 @@ last_message = ""
 response = ""
 sent_message = None 
 
+aiAnswersCount = 0
+
 def g4f_with_timeout(txt, username, timeout=10):
     global user_contexts
     global maxContext
@@ -107,7 +109,7 @@ def echo_all(message):
 
     global globalMessageObject
     globalMessageObject = message
-
+    
     if sent_message:
         text = sent_message.text.strip()
         if '❌' in text:
@@ -145,7 +147,7 @@ def echo_all(message):
 
             
             if err != '':
-                if attempt_count < 2:
+                if aiAnswersCount < 1:
                     print( f'•   ', flush=True )
                 print( f'•   attempt_count = {attempt_count}', flush=True )
                 print( f'•   {(datetime.now() + timedelta(hours=3)).strftime("[ %H:%M:%S ]")}:  {last_message}', flush=True )
@@ -219,9 +221,10 @@ def echo_all(message):
             except Exception as e:
                 pass
 
-    
+            
             bot.reply_to(message, response, parse_mode='HTML')
             delete_last_message()
+            aiAnswersCount += 1
             break
 
         except telebot.apihelper.ApiTelegramException as e:
