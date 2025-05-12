@@ -135,6 +135,10 @@ def echo_all(message):
     if username not in user_contexts:
         user_contexts[username] = ''        
     aiContext = user_contexts[username]
+
+    user_attempts[username] = 0
+    if username not in user_psyhos:
+        user_psyhos[username] = ''
     
     if sent_message:
         text = sent_message.text.strip()
@@ -142,10 +146,7 @@ def echo_all(message):
             delete_last_message()
 
     #attempt_count = 0  
-    if username not in user_attempts:
-        user_attempts[username] = 0
-    if username not in user_psyhos:
-        user_psyhos[username] = ''
+    
         
     err = ''    
     last_response = ''
