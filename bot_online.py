@@ -156,7 +156,6 @@ def echo_all(message):
     #     text = sent_message.text.strip()
     #     if '❌' in text:
     #         delete_last_message()
-    user_sent_messages[username] = None
     user_msg = user_sent_messages.get(username)
     if user_msg:
         user_text = user_msg.text.strip()
