@@ -19,6 +19,7 @@ maxContext = 4000
 user_attempts = { }
 user_psyhos = { }
 user_sent_messages = { }
+user_errors = { } 
 
 globalMessageObject = None
 last_message = ""
@@ -163,7 +164,7 @@ def echo_all(message):
             delete_last_message(username)
     
         
-    err = ''    
+    user_errors[username] = ''
     last_response = ''
 
     messageText = message.text
@@ -190,10 +191,10 @@ def echo_all(message):
             #attempt_count += 1
             user_attempts[username] += 1
             
-            if err != '':
+            if user_errors.get(username, '') != '':
                 print( f'•   ', flush=True )
                 print( f'•   {(datetime.now() + timedelta(hours=3)).strftime("[ %H:%M:%S ]")}:   {last_message}', flush=True )
-                print( f'•   [ error ]:   {err}', flush=True )
+                print( f'•   [ error ]:   {user_errors[username]}', flush=True )
                 print( f'•   ', flush=True )
 
             if user_attempts[username] > 1:
@@ -204,7 +205,7 @@ def echo_all(message):
                             clockEmodjis[ user_attempts[username] ],
                         parse_mode='HTML'
                     )
-                err = ''
+                user_errors[username] = ''
             else:
                 #sent_message = bot.reply_to(message, '\n\n\n<i>⏳  Секундочку...</i>', parse_mode='HTML')  # ответ 1
                 user_sent_messages[username] = bot.send_message(
@@ -234,17 +235,17 @@ def echo_all(message):
             if response == '':
                 time.sleep( 2 )
                 delete_last_message(username)
-                err = 'таймаут g4f'
+                user_errors[username] = 'таймаут g4f'
                 continue
 
             if has_glyphs( response ):
                 delete_last_message(username)
-                err = 'иероглифы'
+                user_errors[username] = 'иероглифы'
                 continue
 
             if has_latins(response) and '<pre>' not in response and '</pre>' not in response:
                 delete_last_message(username)
-                err = 'латиница'
+                user_errors[username] = 'латиница'
                 continue
 
 
@@ -277,14 +278,14 @@ def echo_all(message):
         except telebot.apihelper.ApiTelegramException as e:
             # Обработка исключения, чтобы скрипт не завершался при ошибке API Telegram
             time.sleep( 2 )
-            err = f"ошибка api telegram: {e}"
+            user_errors[username] = f"ошибка api telegram: {e}"
             delete_last_message(username)
             continue
 
         except Exception as e:
             # Другие исключения
             time.sleep( 2 )
-            err = f"exeption as e: {str(e)}"
+            user_errors[username] = f"exeption as e: {str(e)}"
             delete_last_message(username)
             continue 
 
