@@ -134,8 +134,8 @@ def echo_all(message):
     global user_contexts
     global user_attempts
     global user_psyhos
+    global user_contexts
     global maxContent
-    global sent_message
     global response
 
     global globalMessageObject
@@ -150,10 +150,6 @@ def echo_all(message):
     if username not in user_psyhos:
         user_psyhos[username] = ''
     
-    # if sent_message:
-    #     text = sent_message.text.strip()
-    #     if '❌' in text:
-    #         delete_last_message()
     user_msg = user_sent_messages.get(username)
     if user_msg:
         user_text = user_msg.text.strip()
@@ -185,7 +181,6 @@ def echo_all(message):
     
     while True:
         try:
-            #attempt_count += 1
             user_attempts[username] += 1
             
             if user_errors.get(username, '') != '':
@@ -196,7 +191,7 @@ def echo_all(message):
 
             if user_attempts[username] > 1:
                 #sent_message = bot.reply_to(message, f'\n\n\n<i>⚙️  Секундочку... #{user_attempts[username]} ({err})</i>', parse_mode='HTML')  # ответ 1
-                sent_message = bot.send_message(
+                user_sent_messages[username] = bot.send_message(
                         message.chat.id,
                             #f'<i>⚙️  Секундочку...  #{user_attempts[username]} ({err})</i>',
                             clockEmodjis[ user_attempts[username] ],
