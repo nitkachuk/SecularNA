@@ -266,9 +266,9 @@ def echo_all(message):
             except Exception as e:
                 pass
 
-            
-            bot.reply_to(message, response, parse_mode='HTML')
+
             delete_last_message(username)
+            bot.reply_to(message, response, parse_mode='HTML')
             aiAnswersCount += 1
             break
 
