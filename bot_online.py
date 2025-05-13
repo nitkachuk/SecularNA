@@ -18,13 +18,11 @@ user_contexts = { }
 maxContext = 4000
 user_attempts = { }
 user_psyhos = { }
+user_sent_messages = { }
 
 globalMessageObject = None
 last_message = ""
 response = ""
-
-user_sent_messages = { }
-user_sent_messages[username] = None
 
 aiAnswersCount = 0
 
@@ -157,6 +155,7 @@ def echo_all(message):
     #     text = sent_message.text.strip()
     #     if '❌' in text:
     #         delete_last_message()
+    user_sent_messages[username] = None
     user_msg = user_sent_messages.get(username)
     if user_msg:
         user_text = user_msg.text.strip()
