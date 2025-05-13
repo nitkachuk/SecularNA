@@ -126,10 +126,8 @@ def has_glyphs(text):
             return True
     return False
 
-#@bot.message_handler(func=lambda message: True)
-#@bot.message_handler(func=lambda message: message.from_user.username == 'kristina_superstar')
+@bot.message_handler(func=lambda message: True)
 
-@bot.message_handler(func=lambda message: message.from_user.username in ['kristina_superstar', 'gothicspring', 'Kungfuoko'])
 
 def echo_all(message):
     global aiAnswersCount
