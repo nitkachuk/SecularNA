@@ -22,7 +22,9 @@ user_psyhos = { }
 globalMessageObject = None
 last_message = ""
 response = ""
-sent_message = None 
+
+user_sent_messages = { }
+user_sent_messages[username] = None
 
 aiAnswersCount = 0
 
@@ -88,16 +90,27 @@ def g4f_with_timeout(txt, username, usernameText, timeout=10):
         raise result
     return result
 
-def delete_last_message():
-    global globalMessageObject
-    global sent_message
-    
+def delete_last_message(username):
+    user_msg = user_sent_messages.get(username)
+    if not user_msg:
+        return
     try:
-        bot.delete_message(globalMessageObject.chat.id, sent_message.message_id)
-    except Exception as e:
+        bot.delete_message(user_msg.chat.id, user_msg.message_id)
+    except Exception:
         pass
     finally:
-        sent_message = None  # обнуляем в любом случае
+        user_sent_messages[username] = None
+
+# def delete_last_message():
+#     global globalMessageObject
+#     global sent_message
+    
+#     try:
+#         bot.delete_message(globalMessageObject.chat.id, sent_message.message_id)
+#     except Exception as e:
+#         pass
+#     finally:
+#         sent_message = None  # обнуляем в любом случае
 
 # def delete_last_message():
 #     global globalMessageObject
@@ -140,12 +153,15 @@ def echo_all(message):
     if username not in user_psyhos:
         user_psyhos[username] = ''
     
-    if sent_message:
-        text = sent_message.text.strip()
-        if '❌' in text:
-            delete_last_message()
-
-    #attempt_count = 0  
+    # if sent_message:
+    #     text = sent_message.text.strip()
+    #     if '❌' in text:
+    #         delete_last_message()
+    user_msg = user_sent_messages.get(username)
+    if user_msg:
+        user_text = user_msg.text.strip()
+        if '❌' in user_text:
+            delete_last_message(username)
     
         
     err = ''    
@@ -192,7 +208,7 @@ def echo_all(message):
                 err = ''
             else:
                 #sent_message = bot.reply_to(message, '\n\n\n<i>⏳  Секундочку...</i>', parse_mode='HTML')  # ответ 1
-                sent_message = bot.send_message(
+                user_sent_messages[username] = bot.send_message(
                         message.chat.id,
                             #"<i>⏳  Секундочку...</i>",
                             clockEmodjis[ user_attempts[username] ],
@@ -201,9 +217,9 @@ def echo_all(message):
 
             if user_attempts[username] >= 5:
                 time.sleep( 2 )
-                delete_last_message()
+                delete_last_message(username)
                 #bot.reply_to(message, "Превышено количество попыток.")  # ответ 2
-                sent_message = bot.send_message(
+                user_sent_messages[username] = bot.send_message(
                         message.chat.id,
                             #"<⏳ Секундочку..._",
                             '❌',
@@ -218,17 +234,17 @@ def echo_all(message):
             response = str( g4f_with_timeout(txt, username, usernameText) ).strip()
             if response == '':
                 time.sleep( 2 )
-                delete_last_message()
+                delete_last_message(username)
                 err = 'таймаут g4f'
                 continue
 
             if has_glyphs( response ):
-                delete_last_message()
+                delete_last_message(username)
                 err = 'иероглифы'
                 continue
 
             if has_latins(response) and '<pre>' not in response and '</pre>' not in response:
-                delete_last_message()
+                delete_last_message(username)
                 err = 'латиница'
                 continue
 
@@ -255,7 +271,7 @@ def echo_all(message):
 
             
             bot.reply_to(message, response, parse_mode='HTML')
-            delete_last_message()
+            delete_last_message(username)
             aiAnswersCount += 1
             break
 
@@ -263,14 +279,14 @@ def echo_all(message):
             # Обработка исключения, чтобы скрипт не завершался при ошибке API Telegram
             time.sleep( 2 )
             err = f"ошибка api telegram: {e}"
-            delete_last_message()
+            delete_last_message(username)
             continue
 
         except Exception as e:
             # Другие исключения
             time.sleep( 2 )
             err = f"exeption as e: {str(e)}"
-            delete_last_message()
+            delete_last_message(username)
             continue 
 
     user_attempts[username] = 0  # сброс счетчика попыток после успешной отправки
