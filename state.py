@@ -38,6 +38,8 @@ def has_glyphs( text ):
 #     return latins_count > 10
 
 def has_latins(text):
+    text = re.sub(r'<pre>.*?</pre>', '', text, flags=re.DOTALL)
+
     latins_count = len(re.findall(r'[a-zA-Z]', text))
     total_count = len(text)
     if total_count == 0:
