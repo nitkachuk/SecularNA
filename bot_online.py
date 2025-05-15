@@ -228,9 +228,12 @@ def echo_all(message):
 
             match = re.search(r'######(.*?)######', response)
             if match:
+                new_psyho_line = match.group(1).strip()
                 user_psyhos[username] = re.sub(r'скрытая информация для тебя:|информация о пользователе:', '', user_psyhos[username]).strip()
-                user_psyhos[username] = user_psyhos[username].strip() + f"\n{match.group(1).strip()}"
+                if new_psyho_line not in user_psyhos[username]:
+                    user_psyhos[username] = user_psyhos[username].strip() + f"\n{new_psyho_line}"
                 response = response.replace(match.group(0), '').strip()
+
 
             response = re.sub(r'#{2,}', '', response)
 
