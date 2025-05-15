@@ -100,26 +100,6 @@ def delete_last_message(username):
     finally:
         user_sent_messages[username] = None
 
-# def delete_last_message():
-#     global globalMessageObject
-#     global sent_message
-    
-#     try:
-#         bot.delete_message(globalMessageObject.chat.id, sent_message.message_id)
-#     except Exception as e:
-#         pass
-#     finally:
-#         sent_message = None  # обнуляем в любом случае
-
-# def delete_last_message():
-#     global globalMessageObject
-#     global sent_message
-    
-#     try:
-#         bot.delete_message(globalMessageObject.chat.id, sent_message.message_id)  # Удаление сообщения "Секундочку..."
-#     except Exception as e:
-#         pass
-
 def has_glyphs(text):
     for char in text:
         if unicodedata.category(char) == 'Lo':
@@ -245,7 +225,7 @@ def echo_all(message):
             response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
             response = re.sub(r'\s*(по[\s-]?русски|на[\s-]?русском)', '', response, flags=re.IGNORECASE)
             response = re.sub(r'\s*(по[\s-]?руски|на[\s-]?руском)', '', response, flags=re.IGNORECASE)
-            response = re.sub(r'^(#+)\s*(.*?)\s*$', r'<b>\2</b>', response, flags=re.MULTILINE)
+            response = re.sub(r'^#{2,}\s*(.*?)\s*$', r'<b>\1</b>', response, flags=re.MULTILINE)
 
             match = re.search(r'######(.*?)######', response)
             if match:
