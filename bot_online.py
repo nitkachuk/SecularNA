@@ -225,13 +225,14 @@ def echo_all(message):
             response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
             response = re.sub(r'\s*(по[\s-]?русски|на[\s-]?русском)', '', response, flags=re.IGNORECASE)
             response = re.sub(r'\s*(по[\s-]?руски|на[\s-]?руском)', '', response, flags=re.IGNORECASE)
-            response = re.sub(r'^#{2,}\s*(.*?)\s*$', r'<b>\1</b>', response, flags=re.MULTILINE)
 
             match = re.search(r'######(.*?)######', response)
             if match:
                 user_psyhos[username] = re.sub(r'скрытая информация для тебя:|информация о пользователе:', '', user_psyhos[username]).strip()
                 user_psyhos[username] = user_psyhos[username].strip() + f"\n{match.group(1).strip()}"
                 response = response.replace(match.group(0), '').strip()
+
+            response = re.sub(r'#{2,}', '', response)
 
 
             aiContext = f"{response} \n {aiContext}" 
