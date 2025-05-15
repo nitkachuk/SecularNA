@@ -245,6 +245,7 @@ def echo_all(message):
             response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
             response = re.sub(r'\s*(по[\s-]?русски|на[\s-]?русском)', '', response, flags=re.IGNORECASE)
             response = re.sub(r'\s*(по[\s-]?руски|на[\s-]?руском)', '', response, flags=re.IGNORECASE)
+            response = re.sub(r'^(#+)\s*(.*?)\s*$', r'<b>\2</b>', response, flags=re.MULTILINE)
 
             match = re.search(r'######(.*?)######', response)
             if match:
