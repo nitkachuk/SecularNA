@@ -238,6 +238,9 @@ def echo_all(message):
             response = re.sub(r'#{2,}', '', response)
 
 
+            delete_last_message(username)
+            bot.reply_to(message, response, parse_mode='HTML')
+
             aiContext = f"{response} \n {aiContext}" 
             if len(aiContext) > maxContext:
                 aiContext = aiContext[:maxContext]
@@ -245,12 +248,10 @@ def echo_all(message):
                 user_contexts[username] = aiContext.strip()
             except Exception as e:
                 pass
-
-
-            delete_last_message(username)
-            bot.reply_to(message, response, parse_mode='HTML')
+                
             aiAnswersCount += 1
             break
+            
 
         except telebot.apihelper.ApiTelegramException as e:
             # Обработка исключения, чтобы скрипт не завершался при ошибке API Telegram
