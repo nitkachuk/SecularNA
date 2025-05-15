@@ -29,6 +29,7 @@ aiAnswersCount = 0
 
 
 def g4f_with_timeout(txt, username, usernameText, timeout=10):
+    global globalMessageObject
     global user_contexts
     global tempContext
     global maxContext
@@ -46,14 +47,15 @@ def g4f_with_timeout(txt, username, usernameText, timeout=10):
 
     #aiContext = f'{txt}\n·\n🧠  скрытая информация для тебя, информация о пользователе:\n   {user_psyhos[username]}\n·\n📜  история перепески:\n   {tempContext}'
     aiContext = (
-        f'{txt}\n·\n🧠  скрытая информация для тебя, информация о пользователе (не говори что знаешь):   \n{user_psyhos[username]}'
-        f'\n·\n📜  история перепески (не говори что знаешь):   \n{tempContext}'
+        f'{txt}\n·\n🧠  учти скрытую информацию для тебя, информацию о пользователе (не говори что знаешь):   \n{user_psyhos[username]}'
+        f'\n·\n📜  мягко учти историю перепески (не говори что знаешь):   \n{tempContext}'
     )
 
     if len(aiContext) > maxContext:
         aiContext = aiContext[:maxContext]
     print(f'\n\n·································')
-    print(f"💬  сообщение от [ {usernameText} ]:  \n{aiContext}\n\n", flush=True)
+    cleaned_aiContext = aiContext.replace(' (не говори что знаешь)', '').strip()
+    print(f"💬  сообщение от [ {globalMessageObject.from_user.username} ]:  \n{cleaned_aiContext}\n\n", flush=True)
 
     messages = [
         {"role": "system", "content": "ты девочка-альтушка, но интеллигентная, тебя зовут Оракул. ты мой друг. ответь по-русски, если есть "
@@ -202,7 +204,7 @@ def echo_all(message):
 
             txt = messageText + " по-русски"
 
-            usernameText = message.from_user.username or message.from_user.first_name or username
+            #usernameText = message.from_user.username or message.from_user.first_name or username
             response = str( g4f_with_timeout(txt, username, usernameText) ).strip()
             if response == '':
                 time.sleep( 2 )
