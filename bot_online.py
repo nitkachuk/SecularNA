@@ -28,7 +28,7 @@ response = ""
 aiAnswersCount = 0
 
 
-def g4f_with_timeout(txt, username, usernameText, timeout=10):
+def g4f_with_timeout(txt, username, timeout=10):
     global globalMessageObject
     global user_contexts
     global tempContext
@@ -205,7 +205,7 @@ def echo_all(message):
             txt = messageText + " по-русски"
 
             #usernameText = message.from_user.username or message.from_user.first_name or username
-            response = str( g4f_with_timeout(txt, username, usernameText) ).strip()
+            response = str( g4f_with_timeout(txt, username) ).strip()
             if response == '':
                 time.sleep( 2 )
                 delete_last_message(username)
