@@ -30,6 +30,27 @@ response = ""
 aiAnswersCount = 0
 
 
+# Загрузка сохранённых данных при запуске
+def load_data():
+    global user_contexts, user_psyhos
+    try:
+        if os.path.exists('data/user_contexts.txt'):
+            with open('data/user_contexts.txt', 'r', encoding='utf-8') as f:
+                user_contexts = json.load(f)
+    except Exception as e:
+        print(f"\n\n[load_data] Ошибка загрузки user_contexts: {e}\n\n")
+
+    try:
+        if os.path.exists('data/user_psyhos.txt'):
+            with open('data/user_psyhos.txt', 'r', encoding='utf-8') as f:
+                user_psyhos = json.load(f)
+    except Exception as e:
+        print(f"\n\n[load_data] Ошибка загрузки user_psyhos: {e}\n\n")
+
+# Вызов при запуске
+load_data()
+
+
 def save_data():
     os.makedirs('data', exist_ok=True)
     with open('data/user_contexts.txt', 'w', encoding='utf-8') as f:
@@ -38,11 +59,8 @@ def save_data():
         json.dump(user_psyhos, f, ensure_ascii=False, indent=2)
 
 def g4f_with_timeout(txt, username, timeout=10):
-    global globalMessageObject
-    global user_contexts
-    global tempContext
-    global maxContext
-    global response
+    global globalMessageObject, user_contexts, tempContext, \
+        maxContext, response
 
     try:
         tempContext = user_contexts.get(username, '')
@@ -121,15 +139,8 @@ def has_glyphs(text):
 
 
 def echo_all(message):
-    global aiAnswersCount
-    global user_contexts
-    global user_attempts
-    global user_psyhos
-    global user_contexts
-    global maxContent
-    global response
-
-    global globalMessageObject
+    global aiAnswersCount, user_contexts, user_attempts, \
+       user_psyhos, maxContent, response, globalMessageObject
     globalMessageObject = message
 
     username = str(message.from_user.id)
@@ -179,19 +190,6 @@ def echo_all(message):
                 print( f'•   [ error ]:   {user_errors[username]}', flush=True )
                 print( f'•   ', flush=True )
 
-            # if user_attempts[username] > 1:    # секундочку 
-            #     user_sent_messages[username] = bot.send_message(
-            #             message.chat.id,
-            #                 clockEmodjis[ user_attempts[username] ],
-            #             parse_mode='HTML'
-            #         )
-            #     user_errors[username] = ''
-            # else:
-            #     user_sent_messages[username] = bot.send_message(
-            #             message.chat.id,
-            #                 clockEmodjis[ user_attempts[username] ],
-            #             parse_mode='HTML'
-            #         )
 
             user_sent_messages[username] = bot.send_message(
                 message.chat.id,
