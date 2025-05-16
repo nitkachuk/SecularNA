@@ -145,6 +145,8 @@ def echo_all(message):
         user_contexts[username] = ''
     aiContext = user_contexts[username]
 
+    if len()
+
     if user_busy.get(username, False):
         try:
             bot.delete_message(message.chat.id, message.message_id)
@@ -173,6 +175,12 @@ def echo_all(message):
     last_response = ''
 
     messageText = message.text
+    if len(messageText) < 10:
+        time.sleep( 2 )
+        user_errors[username] = 'слишком короткий ответ'
+        delete_last_message(username)
+        continue
+        
     if len(messageText) > maxContext:
         messageText = messageText[:maxContext]
 
