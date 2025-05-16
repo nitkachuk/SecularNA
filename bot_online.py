@@ -8,10 +8,9 @@ import threading
 import queue
 import time
 from datetime import datetime, timedelta
-from state import has_latins 
-from state import escape_system_text
+from state import has_latins, escape_system_text
 import json
-#from state import escape_markdown_v2
+
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
@@ -266,7 +265,8 @@ def echo_all(message):
             delete_last_message(username)
             bot.reply_to(message, response, parse_mode='HTML')
 
-            aiContext = f"{response} \n{aiContext}" 
+            #aiContext = f"{response} \n{aiContext}" 
+            aiContext = f"Пользователь: {messageText}\nОракул: {response}\n{aiContext}"
             if len(aiContext) > maxContext:
                 aiContext = aiContext[:maxContext]
             try:
