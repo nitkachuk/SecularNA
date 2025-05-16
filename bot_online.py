@@ -17,11 +17,15 @@ telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
 
 user_contexts = { }
-maxContext = 4000
 user_attempts = { }
 user_psyhos = { }
 user_sent_messages = { }
 user_errors = { } 
+
+maxContext = 4000
+contextLimit = 1500
+psyhoLimit = 500
+consoleLimit = 350
 
 globalMessageObject = None
 last_message = ""
@@ -68,10 +72,10 @@ def g4f_with_timeout(txt, username, timeout=10):
     except Exception as e:
         tempContext = ''
 
-    if len(user_psyhos[username]) > 350:
-        user_psyhos[username] = user_psyhos[username][:350]
-    if len(tempContext) > 350:
-        tempContext = tempContext[:350]
+    if len(user_psyhos[username]) > consoleLimit:    # обрезка для консоли
+        user_psyhos[username] = user_psyhos[username][:consoleLimit]    
+    if len(tempContext) > consoleLimit:    # обрезка для консоли
+        tempContext = tempContext[:consoleLimit]
 
     aiContext = (
         f'{txt}\n·\n🧠  учти скрытую информацию для тебя, информацию о пользователе (не говори что знаешь):   \n{user_psyhos[username]}'
@@ -248,7 +252,7 @@ def echo_all(message):
                 user_psyhos[username] = re.sub(r'скрытая информация для тебя:|информация о пользователе:', '', user_psyhos[username]).strip()
                 if len(new_psyho_line) > 5 and new_psyho_line not in user_psyhos[username]:
                     user_psyhos[username] = f"{new_psyho_line}\n{user_psyhos[username].strip()}"
-                    user_psyhos[username] = user_psyhos[username][:500]    # обрезка psyho 
+                    user_psyhos[username] = user_psyhos[username][:psyhoLimit]    # обрезка psyho 
                 response = response.replace(match.group(0), '').strip()
 
 
@@ -263,7 +267,7 @@ def echo_all(message):
                 aiContext = aiContext[:maxContext]
             try:
                 user_contexts[username] = aiContext.strip()
-                user_contexts[username] = aiContext.strip()[:1500]    # обрезка контекста 
+                user_contexts[username] = aiContext.strip()[:contextLimit]    # обрезка контекста 
             except Exception as e:
                 bot.reply_to(message, f"error: {e}", parse_mode='HTML')
 
