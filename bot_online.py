@@ -9,6 +9,7 @@ import queue
 import time
 from datetime import datetime, timedelta
 from state import has_latins
+from state import escape_system_text
 #from state import escape_markdown_v2
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
@@ -225,7 +226,7 @@ def echo_all(message):
                 user_errors[username] = 'латиница'
                 continue
 
-
+            response = escape_system_text( response )
             response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
             response = re.sub(r'```(.*?)```', r'<pre>\1</pre>', response, flags=re.DOTALL)
             response = re.sub(r'\s*(по[\s-]?русски|на[\s-]?русском)', '', response, flags=re.IGNORECASE)
