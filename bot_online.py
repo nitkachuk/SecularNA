@@ -231,7 +231,7 @@ def echo_all(message):
             if len(response) < 10:
                 time.sleep(2)
                 delete_last_message(username)
-                user_errors[username] = 'слишком короткий ответ'
+                user_errors[username] = 'слишком короткий ответ' 
                 continue
 
             if response == '':
