@@ -84,7 +84,7 @@ def g4f_with_timeout(txt, username, timeout=10):
 
     if len(aiContext) > maxContext:
         aiContext = aiContext[:maxContext]
-    print(f'\n\n·································')
+    print(f'\n\n·································································') 
     
     cleaned_aiContext = aiContext.replace(' (не говори что знаешь)', '').strip()
     print(f"💬  сообщение от [ {globalMessageObject.from_user.username} ]:  \n{cleaned_aiContext}\n\n", flush=True)
