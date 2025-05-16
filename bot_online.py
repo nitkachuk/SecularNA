@@ -28,6 +28,7 @@ last_message = ""
 response = ""
 
 aiAnswersCount = 0
+first_message = True
 
 
 # Загрузка сохранённых данных при запуске
@@ -140,7 +141,8 @@ def has_glyphs(text):
 
 def echo_all(message):
     global aiAnswersCount, user_contexts, user_attempts, \
-       user_psyhos, maxContent, response, globalMessageObject
+       user_psyhos, maxContent, response, globalMessageObject, \
+       first_message
     globalMessageObject = message
 
     username = str(message.from_user.id)
@@ -170,11 +172,12 @@ def echo_all(message):
     clockEmodjis = [ '', '🕑', '🕓', '🕕', '🕗', '🕙' ]
     
 
-    if aiContext.strip() == '':
+    if first_message:
         try:
             temp_msg = bot.send_message(message.chat.id, "🔄", parse_mode='HTML')
             time.sleep(2)
             bot.delete_message(message.chat.id, temp_msg.message_id)
+            first_message = False
         except Exception:
             pass
         
