@@ -10,6 +10,7 @@ import time
 from datetime import datetime, timedelta
 from state import has_latins
 from state import escape_system_text
+import json
 #from state import escape_markdown_v2
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
@@ -28,6 +29,13 @@ response = ""
 
 aiAnswersCount = 0
 
+
+def save_data():
+    os.makedirs('data', exist_ok=True)
+    with open('data/user_contexts.txt', 'w', encoding='utf-8') as f:
+        json.dump(user_contexts, f, ensure_ascii=False, indent=2)
+    with open('data/user_psyhos.txt', 'w', encoding='utf-8') as f:
+        json.dump(user_psyhos, f, ensure_ascii=False, indent=2)
 
 def g4f_with_timeout(txt, username, timeout=10):
     global globalMessageObject
@@ -252,6 +260,12 @@ def echo_all(message):
                 aiContext = aiContext[:maxContext]
             try:
                 user_contexts[username] = aiContext.strip()
+            except Exception as e:
+                pass
+
+            
+            try:
+                save_data()
             except Exception as e:
                 pass
                 
