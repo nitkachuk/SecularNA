@@ -20,7 +20,8 @@ user_contexts = { }
 user_attempts = { }
 user_psyhos = { }
 user_sent_messages = { }
-user_errors = { } 
+user_errors = { }
+user_first_message = {}
 
 maxContext = 4000
 contextLimit = 1500
@@ -32,7 +33,6 @@ last_message = ""
 response = ""
 
 aiAnswersCount = 0
-first_message = True
 
 
 # Загрузка сохранённых данных при запуске
@@ -146,7 +146,7 @@ def has_glyphs(text):
 def echo_all(message):
     global aiAnswersCount, user_contexts, user_attempts, \
        user_psyhos, maxContent, response, globalMessageObject, \
-       first_message
+       use_first_message
     globalMessageObject = message
 
     username = str(message.from_user.id)
@@ -163,6 +163,9 @@ def echo_all(message):
         user_text = user_msg.text.strip()
         if '❌' in user_text:
             delete_last_message(username)
+
+    if username not in user_first_message:
+        user_first_message[username] = True
     
         
     user_errors[username] = ''
@@ -175,13 +178,21 @@ def echo_all(message):
     last_message = messageText
     clockEmodjis = [ '', '🕑', '🕓', '🕕', '🕗', '🕙' ]
     
+    # if first_message:
+    #     try:
+    #         temp_msg = bot.send_message(message.chat.id, "🔄", parse_mode='HTML')
+    #         time.sleep(2)
+    #         bot.delete_message(message.chat.id, temp_msg.message_id)
+    #         first_message = False
+    #     except Exception:
+    #         pass
 
-    if first_message:
+    if user_first_message.get(username, True):
         try:
             temp_msg = bot.send_message(message.chat.id, "🔄", parse_mode='HTML')
             time.sleep(2)
             bot.delete_message(message.chat.id, temp_msg.message_id)
-            first_message = False
+            user_first_message[username] = False
         except Exception:
             pass
         
