@@ -173,12 +173,6 @@ def echo_all(message):
     last_response = ''
 
     messageText = message.text
-    if len(messageText) < 10:
-        time.sleep( 2 )
-        user_errors[username] = 'слишком короткий ответ'
-        delete_last_message(username)
-        continue
-        
     if len(messageText) > maxContext:
         messageText = messageText[:maxContext]
 
@@ -230,8 +224,16 @@ def echo_all(message):
                 break
 
             txt = messageText + " по-русски"
+            
 
             response = str( g4f_with_timeout(txt, username) ).strip()
+            
+            if len(response) < 10:
+                time.sleep(2)
+                delete_last_message(username)
+                user_errors[username] = 'слишком короткий ответ'
+                continue
+
             if response == '':
                 time.sleep( 2 )
                 delete_last_message(username)
