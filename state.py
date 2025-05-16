@@ -65,17 +65,38 @@ def escape_markdown_v2(text, plus_underline = 0):
     return text
 
 
-def escape_system_text( text, role_system='' ):
+# def escape_system_text( text, role_system='' ):
+#     system_text = [
+#         '_{"code":200,"status":true,"model":"gpt-3.5-turbo","gpt":"',
+#         '","original":null}', 'Assistant:', 'assistant:', 'Конец', 'конец',
+#         'Только сегодня: ', 'Только Сегодня: ', 'ТОЛЬКО СЕГОДНЯ: ', role_system
+#     ]
+    
+#     for item in system_text:
+#         while item in text:
+#             text = text.replace( item, '' )
+            
+#     return text
+
+def escape_system_text(text, role_system=''):
     system_text = [
         '_{"code":200,"status":true,"model":"gpt-3.5-turbo","gpt":"',
         '","original":null}', 'Assistant:', 'assistant:', 'Конец', 'конец',
-        'Только сегодня: ', 'Только Сегодня: ', 'ТОЛЬКО СЕГОДНЯ: ', role_system
+        'Только сегодня: ', 'Только Сегодня: ', 'ТОЛЬКО СЕГОДНЯ: ', role_system,
+        'Создай своего интеллектуального друга',  # начало рекламы
+        'HeyReal',
+        'узнай больше',  # ссылка
+        'https://',  # URL
+        'https://pollinations.ai'  # URL
+        'pollinations'
     ]
-    
-    for item in system_text:
-        while item in text:
-            text = text.replace( item, '' )
-            
+
+    for pattern in system_text:
+        text = text.replace(pattern, '')
+
+    # Удаляем всё после рекламного блока, если вдруг осталось
+    text = re.split(r'Создай своего|HeyReal\.ai|узнай больше|https?://', text)[0].strip()
+
     return text
 
 
