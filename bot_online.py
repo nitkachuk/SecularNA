@@ -261,7 +261,7 @@ def echo_all(message):
             try:
                 user_contexts[username] = aiContext.strip()
             except Exception as e:
-                pass
+                bot.reply_to(message, f"error: {e}", parse_mode='HTML')
 
             
             try:
