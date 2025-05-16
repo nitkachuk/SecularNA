@@ -225,11 +225,13 @@ def echo_all(message):
                 continue
 
             if has_glyphs( response ):
+                time.sleep( 2 )
                 delete_last_message(username)
                 user_errors[username] = 'иероглифы'
                 continue
 
             if has_latins(response) and '<pre>' not in response and '</pre>' not in response:
+                time.sleep( 2 )
                 delete_last_message(username)
                 user_errors[username] = 'латиница'
                 continue
@@ -244,8 +246,8 @@ def echo_all(message):
             if match:
                 new_psyho_line = match.group(1).strip()
                 user_psyhos[username] = re.sub(r'скрытая информация для тебя:|информация о пользователе:', '', user_psyhos[username]).strip()
-                if new_psyho_line not in user_psyhos[username]:
-                    user_psyhos[username] = user_psyhos[username].strip() + f"\n{new_psyho_line}"
+                if len(new_psyho_line) > 5 and new_psyho_line not in user_psyhos[username]:
+                    user_psyhos[username] = f"{new_psyho_line}\n{user_psyhos[username].strip()}"
                 response = response.replace(match.group(0), '').strip()
 
 
