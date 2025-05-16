@@ -7,13 +7,8 @@ from telebot.apihelper import ApiTelegramException
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
 
-user_contexts = { }
-user_attempts = { }
-user_psyhos = { }
-user_sent_messages = { }
-user_errors = { }
-user_first_message = {}
-user_busy = {}
+user_contexts, user_attempts, user_psyhos, user_sent_messages, user_errors, \ 
+    user_first_message, user_busy = {}, {}, {}, {}, {}, {}, {}
 
 maxContext = 4000
 contextLimit = 1500
