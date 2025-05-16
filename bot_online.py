@@ -8,7 +8,7 @@ import threading
 import queue
 import time
 from datetime import datetime, timedelta
-from state import has_latins
+from state import has_latins 
 from state import escape_system_text
 import json
 #from state import escape_markdown_v2
