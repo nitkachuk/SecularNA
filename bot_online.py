@@ -22,6 +22,7 @@ user_psyhos = { }
 user_sent_messages = { }
 user_errors = { }
 user_first_message = {}
+user_busy = {}
 
 maxContext = 4000
 contextLimit = 1500
@@ -157,6 +158,11 @@ def echo_all(message):
         user_contexts[username] = ''
     aiContext = user_contexts[username]
 
+    if user_busy.get(username, False):
+        return
+    else:
+        user_busy[username] = True
+
     user_attempts[username] = 0
     if username not in user_psyhos:
         user_psyhos[username] = ''
@@ -282,6 +288,7 @@ def echo_all(message):
                 pass
                 
             aiAnswersCount += 1
+            user_busy[username] = False
             break
             
 
