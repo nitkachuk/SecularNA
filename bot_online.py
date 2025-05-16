@@ -246,7 +246,7 @@ def echo_all(message):
             delete_last_message(username)
             bot.reply_to(message, response, parse_mode='HTML')
 
-            aiContext = f"{response} \n {aiContext}" 
+            aiContext = f"{response} \n{aiContext}" 
             if len(aiContext) > maxContext:
                 aiContext = aiContext[:maxContext]
             try:
