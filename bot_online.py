@@ -10,6 +10,7 @@ import time
 from datetime import datetime, timedelta
 from state import has_latins, escape_system_text
 import json
+from telebot.apihelper import ApiTelegramException
 
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
@@ -300,4 +301,13 @@ def echo_all(message):
 
     user_attempts[username] = 0      # сброс счетчика попыток после успешной отправки
 
-bot.polling()
+#bot.polling()
+while True:
+    try:
+        bot.polling(none_stop=True)
+    except ApiTelegramException as e:
+        if e.result.status_code == 409:
+            print("\n\nОшибка 409: конфликт getUpdates, жду и повторяю...\n\n")
+            time.sleep(10)
+        else:
+            raise
