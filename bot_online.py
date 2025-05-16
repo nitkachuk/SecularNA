@@ -67,10 +67,10 @@ def g4f_with_timeout(txt, username, timeout=10):
     except Exception as e:
         tempContext = ''
 
-    if len(user_psyhos[username]) > 500:
-        user_psyhos[username] = user_psyhos[username][:500]
-    if len(tempContext) > 1500:
-        tempContext = tempContext[:1500]
+    # if len(user_psyhos[username]) > 500:
+    #     user_psyhos[username] = user_psyhos[username][:500]
+    # if len(tempContext) > 1500:
+    #     tempContext = tempContext[:1500]
 
     aiContext = (
         f'{txt}\n·\n🧠  учти скрытую информацию для тебя, информацию о пользователе (не говори что знаешь):   \n{user_psyhos[username]}'
@@ -245,6 +245,7 @@ def echo_all(message):
                 user_psyhos[username] = re.sub(r'скрытая информация для тебя:|информация о пользователе:', '', user_psyhos[username]).strip()
                 if len(new_psyho_line) > 5 and new_psyho_line not in user_psyhos[username]:
                     user_psyhos[username] = f"{new_psyho_line}\n{user_psyhos[username].strip()}"
+                    user_psyhos[username] = user_psyhos[username][:500]    # обрезка psyho 
                 response = response.replace(match.group(0), '').strip()
 
 
@@ -259,6 +260,7 @@ def echo_all(message):
                 aiContext = aiContext[:maxContext]
             try:
                 user_contexts[username] = aiContext.strip()
+                user_contexts[username] = aiContext.strip()[:1500]    # обрезка контекста 
             except Exception as e:
                 bot.reply_to(message, f"error: {e}", parse_mode='HTML')
 
