@@ -172,8 +172,7 @@ def echo_all(message):
 
     if aiContext.strip() == '':
         try:
-            #temp_msg = bot.send_message(message.chat.id, "🧹  <i>История очищена</i>", parse_mode='HTML')
-            temp_msg = bot.send_message(message.chat.id, "🧹", parse_mode='HTML')
+            temp_msg = bot.send_message(message.chat.id, "🔄", parse_mode='HTML')
             time.sleep(2)
             bot.delete_message(message.chat.id, temp_msg.message_id)
         except Exception:
