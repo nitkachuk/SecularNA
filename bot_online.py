@@ -159,6 +159,11 @@ def echo_all(message):
     aiContext = user_contexts[username]
 
     if user_busy.get(username, False):
+        try:
+            bot.delete_message(message.chat.id, message.message_id)
+        except Exception as e:
+            pass
+            
         return
     else:
         user_busy[username] = True
