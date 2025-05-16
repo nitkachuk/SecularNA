@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Просмотр данных</title>
+  <style>
+    body {
+      font-family: monospace;
+      background: #121212;
+      color: #f0f0f0;
+      padding: 20px;
+    }
+    h2 {
+      color: #ffcc00;
+    }
+    .user-block {
+      background: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      padding: 15px;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: #2a2a2a;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Контекст и психо по пользователям</h1>
+  <div id="output">Загрузка данных...</div>
+
+  <script>
+    async function loadData() {
+      const [ctxResp, psyhoResp] = await Promise.all([
+        fetch('data/user_contexts.txt'),
+        fetch('data/user_psyhos.txt')
+      ]);
+
+      const ctxJson = await ctxResp.json();
+      const psyhoJson = await psyhoResp.json();
+
+      const output = document.getElementById('output');
+      output.innerHTML = '';
+
+      Object.keys(ctxJson).forEach(user => {
+        const ctx = ctxJson[user];
+        const psy = psyhoJson[user] || '';
+
+        const block = document.createElement('div');
+        block.className = 'user-block';
+        block.innerHTML = `
+          <h2>Пользователь ID: ${user}</h2>
+          <h3>🧠 Контекст:</h3>
+          <pre>${ctx}</pre>
+          <h3>🪞 Психо:</h3>
+          <pre>${psy}</pre>
+        `;
+        output.appendChild(block);
+      });
+    }
+
+    loadData().catch(err => {
+      document.getElementById('output').textContent = 'Ошибка загрузки: ' + err;
+    });
+  </script>
+</body>
+</html>
