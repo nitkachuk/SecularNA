@@ -44,23 +44,47 @@ def escape_markdown_v2(text, plus_underline = 0):
     text = text.replace('\\\\', '\\')
     return text
 
+# def escape_system_text(text, role_system=''):
+#     system_text = [
+#         '_{"code":200,"status":true,"model":"gpt-3.5-turbo","gpt":"',
+#         '","original":null}', 'Assistant:', 'assistant:', 'Конец', 'конец',
+#         'Только сегодня: ', 'Только Сегодня: ', 'ТОЛЬКО СЕГОДНЯ: ', role_system,
+#         'Создай своего интеллектуального друга',  # начало рекламы
+#         'HeyReal',
+#         'узнай больше',  # ссылка
+#         'https://',  # URL
+#         'https://pollinations.ai'  # URL
+#         'pollinations'
+#     ]
+
+#     for pattern in system_text:
+#         text = text.replace(pattern, '')
+
+#     # Удаляем всё после рекламного блока, если вдруг осталось
+#     text = re.split(r'Создай своего|HeyReal\.ai|узнай больше|https?://', text)[0].strip()
+
+#     return text
+
 def escape_system_text(text, role_system=''):
-    system_text = [
+    # Фразы, при наличии которых строка полностью удаляется
+    ad_phrases = ['Создай своего', 'HeyReal', 'узнай больше', 'https://', 'pollinations']
+
+    # Удаляем строки с рекламой
+    text = '\n'.join(
+        line for line in text.splitlines()
+        if not any(p in line for p in ad_phrases)
+    )
+
+    # Простой список заменяемых фрагментов
+    patterns = [
         '_{"code":200,"status":true,"model":"gpt-3.5-turbo","gpt":"',
         '","original":null}', 'Assistant:', 'assistant:', 'Конец', 'конец',
-        'Только сегодня: ', 'Только Сегодня: ', 'ТОЛЬКО СЕГОДНЯ: ', role_system,
-        'Создай своего интеллектуального друга',  # начало рекламы
-        'HeyReal',
-        'узнай больше',  # ссылка
-        'https://',  # URL
-        'https://pollinations.ai'  # URL
-        'pollinations'
+        'Только сегодня: ', 'Только Сегодня: ', 'ТОЛЬКО СЕГОДНЯ: ', role_system
     ]
+    for p in patterns:
+        text = text.replace(p, '')
 
-    for pattern in system_text:
-        text = text.replace(pattern, '')
-
-    # Удаляем всё после рекламного блока, если вдруг осталось
+    # Удалить всё после первых признаков рекламы
     text = re.split(r'Создай своего|HeyReal\.ai|узнай больше|https?://', text)[0].strip()
 
     return text
