@@ -145,7 +145,7 @@ def echo_all(message):
 
     username = str(message.from_user.id)
     if username not in user_contexts:
-        user_contexts[username] = ''        
+        user_contexts[username] = ''
     aiContext = user_contexts[username]
 
     user_attempts[username] = 0
