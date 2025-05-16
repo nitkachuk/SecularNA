@@ -1,22 +1,8 @@
-import unicodedata
-import re 
-
-import os
-import datetime
-
-import sys
+import unicodedata, re, os, datetime, sys, requests, g4f, random, asyncio
 from replacements import doReplacements 
-
-#from telegram import Bot
-import requests
-import g4f
-
-import random
-import asyncio
 
 
 bot_token = os.getenv('TELEGRAM_TOKEN')
-# bot = Bot(token=bot_token)
 
 channelBook = '@SecularNA'
 channelBill = '@BillSpeaks'
@@ -30,12 +16,6 @@ def has_glyphs( text ):
         if unicodedata.category(char) == 'Lo':
             return True
     return False
-
-# def has_latins( text ):
-#     latins_count = len(re.findall(r'[a-zA-Z]', text))
-#     #total_count = len(text)
-    
-#     return latins_count > 10
 
 def has_latins(text):
     text = re.sub(r'<pre>.*?</pre>', '', text, flags=re.DOTALL)
@@ -63,20 +43,6 @@ def escape_markdown_v2(text, plus_underline = 0):
 
     text = text.replace('\\\\', '\\')
     return text
-
-
-# def escape_system_text( text, role_system='' ):
-#     system_text = [
-#         '_{"code":200,"status":true,"model":"gpt-3.5-turbo","gpt":"',
-#         '","original":null}', 'Assistant:', 'assistant:', 'Конец', 'конец',
-#         'Только сегодня: ', 'Только Сегодня: ', 'ТОЛЬКО СЕГОДНЯ: ', role_system
-#     ]
-    
-#     for item in system_text:
-#         while item in text:
-#             text = text.replace( item, '' )
-            
-#     return text
 
 def escape_system_text(text, role_system=''):
     system_text = [
@@ -165,10 +131,10 @@ def readTheBook( clean = 0 ):
                 if clean != 0:
                     emoji = [''] * len(emoji)
                 
-                p_lines[0] = f'{emoji[0]}   {p_lines[0]}'         # дата
-                p_lines[1] = f'__{p_lines[1]}__'                # заголовок
-                p_lines[3] = f'_{p_lines[3]}_'                  # цитата
-                p_lines[4] = f'{emoji[1]}   *{p_lines[4]}*'       # источник
+                p_lines[0] = f'{emoji[0]}   {p_lines[0]}'        # дата
+                p_lines[1] = f'__{p_lines[1]}__'                 # заголовок
+                p_lines[3] = f'_{p_lines[3]}_'                   # цитата
+                p_lines[4] = f'{emoji[1]}   *{p_lines[4]}*'      # источник
 
                 # объединить дату и заголовок
                 p_lines[0] += "   " +p_lines[1]
