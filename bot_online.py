@@ -179,19 +179,10 @@ def echo_all(message):
 
     last_message = messageText
     clockEmodjis = [ '', '🕑', '🕓', '🕕', '🕗', '🕙' ]
-    
-    # if first_message:
-    #     try:
-    #         temp_msg = bot.send_message(message.chat.id, "🔄", parse_mode='HTML')
-    #         time.sleep(2)
-    #         bot.delete_message(message.chat.id, temp_msg.message_id)
-    #         first_message = False
-    #     except Exception:
-    #         pass
 
     if user_first_message.get(username, True):
         try:
-            temp_msg = bot.send_message(message.chat.id, "🔄", parse_mode='HTML')
+            temp_msg = bot.send_message(message.chat.id, "⬇️", parse_mode='HTML')    # 🔄
             time.sleep(2)
             bot.delete_message(message.chat.id, temp_msg.message_id)
             user_first_message[username] = False
