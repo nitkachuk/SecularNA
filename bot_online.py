@@ -64,14 +64,15 @@ def g4f_with_timeout(txt, username, timeout=10):
     except Exception as e:
         tempContext = ''
 
-    if len(user_psyhos[username]) > consoleLimit:    # обрезка для консоли
-        user_psyhos[username] = user_psyhos[username][:consoleLimit]    
-    if len(tempContext) > consoleLimit:    # обрезка для консоли
-        tempContext = tempContext[:consoleLimit]
+    # if len(user_psyhos[username]) > consoleLimit:    # обрезка для консоли
+    #     user_psyhos[username] = user_psyhos[username][:consoleLimit]    
+    # if len(tempContext) > consoleLimit:    # обрезка для консоли
+    #     tempContext = tempContext[:consoleLimit]
 
     aiContext = (
-        f'{txt}\n·\n🧠  учти скрытую информацию для тебя, информацию о пользователе (не говори что знаешь):   \n{user_psyhos[username]}'
-        f'\n·\n📜  мягко учти СТАРУЮ историю перепески (не говори что знаешь):   \n{tempContext}'
+        f'{txt}\n·\n🧠  учти скрытую информацию для тебя, информацию о пользователе (не говори что знаешь): \
+            \n{user_psyhos[username][:consoleLimit] }'
+        f'\n·\n📜  мягко учти СТАРУЮ историю перепески (не говори что знаешь):   \n{tempContext[:consoleLimit] }'
     )
 
     if len(aiContext) > maxContext:
@@ -274,7 +275,7 @@ def echo_all(message):
             if len(aiContext) > maxContext:
                 aiContext = aiContext[:maxContext]
             try:
-                user_contexts[username] = aiContext.strip()[:contextLimit]    # обрезка контекста 
+                user_contexts[username] = aiContext.strip()    # обрезка контекста 
             except Exception as e:
                 pass
 
