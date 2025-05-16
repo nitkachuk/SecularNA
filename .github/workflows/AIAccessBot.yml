@@ -40,14 +40,13 @@ jobs:
           
           git add data/user_contexts.txt data/user_psyhos.txt || true
           
-          # Проверяем есть ли изменения для коммита
+          # Проверка на наличие изменений
           git diff --cached --quiet && echo "No changes to commit" || git commit -m "Обновление данных бота"
+
+          # Обновляем main без ребейза — используем стратегию theirs
+          git fetch origin
+          git merge -X theirs origin/main || true
           
-          # Подтягиваем последние изменения с удалённого репозитория и обновляем локальный репозиторий
-          git pull --rebase
-          
-          # Теперь пушим обновления
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
