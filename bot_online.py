@@ -45,7 +45,6 @@ def g4f_with_timeout(txt, username, timeout=10):
     if len(tempContext) > 1500:
         tempContext = tempContext[:1500]
 
-    #aiContext = f'{txt}\n·\n🧠  скрытая информация для тебя, информация о пользователе:\n   {user_psyhos[username]}\n·\n📜  история перепески:\n   {tempContext}'
     aiContext = (
         f'{txt}\n·\n🧠  учти скрытую информацию для тебя, информацию о пользователе (не говори что знаешь):   \n{user_psyhos[username]}'
         f'\n·\n📜  мягко учти историю перепески (не говори что знаешь):   \n{tempContext}'
@@ -54,6 +53,7 @@ def g4f_with_timeout(txt, username, timeout=10):
     if len(aiContext) > maxContext:
         aiContext = aiContext[:maxContext]
     print(f'\n\n·································')
+    
     cleaned_aiContext = aiContext.replace(' (не говори что знаешь)', '').strip()
     print(f"💬  сообщение от [ {globalMessageObject.from_user.username} ]:  \n{cleaned_aiContext}\n\n", flush=True)
 
@@ -147,7 +147,6 @@ def echo_all(message):
         messageText = messageText[:maxContext]
 
     last_message = messageText
-
     clockEmodjis = [ '', '🕑', '🕓', '🕕', '🕗', '🕙' ]
     
 
@@ -171,31 +170,36 @@ def echo_all(message):
                 print( f'•   [ error ]:   {user_errors[username]}', flush=True )
                 print( f'•   ', flush=True )
 
+            # if user_attempts[username] > 1:    # секундочку 
+            #     user_sent_messages[username] = bot.send_message(
+            #             message.chat.id,
+            #                 clockEmodjis[ user_attempts[username] ],
+            #             parse_mode='HTML'
+            #         )
+            #     user_errors[username] = ''
+            # else:
+            #     user_sent_messages[username] = bot.send_message(
+            #             message.chat.id,
+            #                 clockEmodjis[ user_attempts[username] ],
+            #             parse_mode='HTML'
+            #         )
+
+            user_sent_messages[username] = bot.send_message(
+                message.chat.id,
+                clockEmodjis[user_attempts[username]],
+                parse_mode='HTML'
+            )
+            
             if user_attempts[username] > 1:
-                #sent_message = bot.reply_to(message, f'\n\n\n<i>⚙️  Секундочку... #{user_attempts[username]} ({err})</i>', parse_mode='HTML')  # ответ 1
-                user_sent_messages[username] = bot.send_message(
-                        message.chat.id,
-                            #f'<i>⚙️  Секундочку...  #{user_attempts[username]} ({err})</i>',
-                            clockEmodjis[ user_attempts[username] ],
-                        parse_mode='HTML'
-                    )
                 user_errors[username] = ''
-            else:
-                #sent_message = bot.reply_to(message, '\n\n\n<i>⏳  Секундочку...</i>', parse_mode='HTML')  # ответ 1
-                user_sent_messages[username] = bot.send_message(
-                        message.chat.id,
-                            #"<i>⏳  Секундочку...</i>",
-                            clockEmodjis[ user_attempts[username] ],
-                        parse_mode='HTML'
-                    )
+            
 
             if user_attempts[username] >= 5:
                 time.sleep( 2 )
                 delete_last_message(username)
-                #bot.reply_to(message, "Превышено количество попыток.")  # ответ 2
+
                 user_sent_messages[username] = bot.send_message(
                         message.chat.id,
-                            #"<⏳ Секундочку..._",
                             '❌',
                         parse_mode='HTML'
                     )
@@ -204,7 +208,6 @@ def echo_all(message):
 
             txt = messageText + " по-русски"
 
-            #usernameText = message.from_user.username or message.from_user.first_name or username
             response = str( g4f_with_timeout(txt, username) ).strip()
             if response == '':
                 time.sleep( 2 )
@@ -269,6 +272,6 @@ def echo_all(message):
             delete_last_message(username)
             continue 
 
-    user_attempts[username] = 0  # сброс счетчика попыток после успешной отправки
+    user_attempts[username] = 0      # сброс счетчика попыток после успешной отправки
 
 bot.polling()
