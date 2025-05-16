@@ -227,7 +227,8 @@ def echo_all(message):
                             '❌',
                         parse_mode='HTML'
                     )
-                
+
+                user_busy[username] = False
                 break
 
             txt = messageText + " по-русски"
