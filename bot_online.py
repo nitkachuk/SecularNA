@@ -68,10 +68,10 @@ def g4f_with_timeout(txt, username, timeout=10):
     except Exception as e:
         tempContext = ''
 
-    # if len(user_psyhos[username]) > 500:
-    #     user_psyhos[username] = user_psyhos[username][:500]
-    # if len(tempContext) > 1500:
-    #     tempContext = tempContext[:1500]
+    if len(user_psyhos[username]) > 350:
+        user_psyhos[username] = user_psyhos[username][:350]
+    if len(tempContext) > 350:
+        tempContext = tempContext[:350]
 
     aiContext = (
         f'{txt}\n·\n🧠  учти скрытую информацию для тебя, информацию о пользователе (не говори что знаешь):   \n{user_psyhos[username]}'
