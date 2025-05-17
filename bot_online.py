@@ -60,15 +60,10 @@ def g4f_with_timeout(txt, username, timeout=10):
     except Exception as e:
         tempContext = ''
 
-    # if len(user_psyhos[username]) > consoleLimit:    # обрезка для консоли
-    #     user_psyhos[username] = user_psyhos[username][:consoleLimit]    
-    # if len(tempContext) > consoleLimit:    # обрезка для консоли
-    #     tempContext = tempContext[:consoleLimit]
-
     aiContext = (
         f'{txt}\n·\n🧠  учти скрытую информацию для тебя, информацию о пользователе (не говори что знаешь): \
-            \n{user_psyhos[username][:consoleLimit] }'
-        f'\n·\n📜  мягко учти СТАРУЮ историю перепески (не говори что знаешь):   \n{tempContext[:consoleLimit] }'
+            \n{user_psyhos[username][:consoleLimit] }.....'
+        f'\n·\n📜  мягко учти СТАРУЮ историю перепески (не говори что знаешь):   \n{tempContext[:consoleLimit] }.....'
     )
 
     if len(aiContext) > maxContext:
