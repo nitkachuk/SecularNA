@@ -1,7 +1,7 @@
 import os, asyncio, telebot, g4f, unicodedata, re, threading, queue, time, json
 from datetime import datetime, timedelta
 from state import has_latins, escape_system_text
-from telebot.apihelper import ApiTelegramException 
+from telebot.apihelper import ApiTelegramException
 
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
