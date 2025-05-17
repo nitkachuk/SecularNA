@@ -253,17 +253,17 @@ def echo_all(message):
                 user_errors[username] = 'таймаут g4f'
                 continue
 
-            # if has_glyphs( response ):
-            #     time.sleep( 2 )
-            #     delete_last_message(username)
-            #     user_errors[username] = 'иероглифы'
-            #     continue
+            if has_glyphs( response ):
+                time.sleep( 2 )
+                delete_last_message(username)
+                user_errors[username] = 'иероглифы'
+                continue
 
-            # if has_latins(response) and '<pre>' not in response and '</pre>' not in response:
-            #     time.sleep( 2 )
-            #     delete_last_message(username)
-            #     user_errors[username] = 'латиница'
-            #     continue
+            if has_latins(response) and '<pre>' not in response and '</pre>' not in response:
+                time.sleep( 2 )
+                delete_last_message(username)
+                user_errors[username] = 'латиница'
+                continue
 
             response = escape_system_text( response )
             response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
