@@ -141,13 +141,14 @@ def echo_all(message):
        use_first_message
     globalMessageObject = message
 
+    # 🛑 Игнорируем любые сообщения от каналов
+    if message.chat.type == 'channel':
+        return
+
     username = str(message.from_user.id)
     if username not in user_contexts:
         user_contexts[username] = ''
     aiContext = user_contexts[username]
-
-    if username == channel_book:
-        return
 
     if user_busy.get(username, False):
         try:
@@ -271,7 +272,7 @@ def echo_all(message):
                     user_psyhos[username] = f"{new_psyho_line}\n{user_psyhos[username].strip()}"
                     user_psyhos[username] = user_psyhos[username][:psyhoLimit]    # обрезка psyho 
                 response = response.replace(match.group(0), '').strip()
-
+    
 
             response = re.sub(r'#{2,}', '', response)
 
