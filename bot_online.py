@@ -28,6 +28,11 @@ def cleanup_clock_messages():
         if message and message.text.strip() in [ '🕑', '🕓', '🕕', '🕗', '🕙' ]:
             try:
                 bot.delete_message(message.chat.id, message.message_id)
+                user_sent_messages[username] = bot.send_message(
+                        message.chat.id,
+                            '❌',
+                        parse_mode='HTML'
+                    )
             except Exception:
                 pass
 
