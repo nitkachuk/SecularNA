@@ -1,4 +1,4 @@
-import os, asyncio, telebot, g4f, unicodedata, re, threading, queue, time, jsonб atexit
+import os, asyncio, telebot, g4f, unicodedata, re, threading, queue, time, json, atexit
 from datetime import datetime, timedelta
 from state import has_latins, escape_system_text
 from telebot.apihelper import ApiTelegramException
