@@ -6,6 +6,7 @@ from telebot.apihelper import ApiTelegramException
 
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(telegram_token)
+channel_book = os.getenv('CHANNEL_BOOK')
 
 user_contexts, user_attempts, user_psyhos, user_sent_messages, user_errors, \
 user_first_message, user_busy = {}, {}, {}, {}, {}, {}, {}
@@ -144,6 +145,9 @@ def echo_all(message):
     if username not in user_contexts:
         user_contexts[username] = ''
     aiContext = user_contexts[username]
+
+    if username == channel_bill:
+        return
 
     if user_busy.get(username, False):
         try:
