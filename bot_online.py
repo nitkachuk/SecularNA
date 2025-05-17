@@ -146,7 +146,7 @@ def echo_all(message):
         user_contexts[username] = ''
     aiContext = user_contexts[username]
 
-    if username == channel_bill:
+    if username == channel_book:
         return
 
     if user_busy.get(username, False):
