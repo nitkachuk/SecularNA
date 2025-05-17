@@ -1,4 +1,4 @@
-import os, asyncio, telebot, g4f, unicodedata, re, threading, queue, time, json
+import os, asyncio, telebot, g4f, unicodedata, re, threading, queue, time, jsonб atexit
 from datetime import datetime, timedelta
 from state import has_latins, escape_system_text
 from telebot.apihelper import ApiTelegramException
@@ -22,6 +22,14 @@ response = ""
 
 aiAnswersCount = 0
 
+
+def cleanup_clock_messages():
+    for username, message in user_sent_messages.items():
+        if message and message.text.strip() in [ '🕑', '🕓', '🕕', '🕗', '🕙' ]:
+            try:
+                bot.delete_message(message.chat.id, message.message_id)
+            except Exception:
+                pass
 
 # Загрузка сохранённых данных при запуске
 def load_data():
@@ -310,4 +318,5 @@ def echo_all(message):
 
     user_attempts[username] = 0      # сброс счетчика попыток после успешной отправки
 
+atexit.register(cleanup_clock_messages)
 bot.polling()
