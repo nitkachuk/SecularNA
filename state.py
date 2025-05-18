@@ -17,14 +17,22 @@ def has_glyphs( text ):
             return True
     return False
 
+# def has_latins(text):
+#     text = re.sub(r'<pre>.*?</pre>', '', text, flags=re.DOTALL)
+
+#     latins_count = len(re.findall(r'[a-zA-Z]', text))
+#     total_count = len(text)
+#     if total_count == 0:
+#         return False
+#     return latins_count / total_count > 0.5  
+
 def has_latins(text):
     text = re.sub(r'<pre>.*?</pre>', '', text, flags=re.DOTALL)
-
-    latins_count = len(re.findall(r'[a-zA-Z]', text))
-    total_count = len(text)
-    if total_count == 0:
+    letters = re.findall(r'[a-zA-Zа-яА-Я]', text)
+    if not letters:
         return False
-    return latins_count / total_count > 0.5    
+    latins = re.findall(r'[a-zA-Z]', ''.join(letters))
+    return len(latins) / len(letters) > 0.5
 
 def escape_markdown_v2(text, plus_underline = 0):
     escape_chars = [  '[', ']', '(', ')', '~', 'Ⓝ', '>', '#', '+', '-', 
