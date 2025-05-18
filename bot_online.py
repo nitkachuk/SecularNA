@@ -37,19 +37,53 @@ def cleanup_clock_messages():
                 pass
 
 # Загрузка сохранённых данных при запуске
+# def load_data():
+#     global user_contexts, user_psyhos
+#     try:
+#         if os.path.exists('data/user_contexts.txt'):
+#             with open('data/user_contexts.txt', 'r', encoding='utf-8') as f:
+#                 user_contexts = json.load(f)
+#     except Exception as e:
+#         print(f"\n\n[load_data] Ошибка загрузки user_contexts: {e}\n\n")
+
+#     try:
+#         if os.path.exists('data/user_psyhos.txt'):
+#             with open('data/user_psyhos.txt', 'r', encoding='utf-8') as f:
+#                 user_psyhos = json.load(f)
+#     except Exception as e:
+#         print(f"\n\n[load_data] Ошибка загрузки user_psyhos: {e}\n\n")
+
 def load_data():
     global user_contexts, user_psyhos
     try:
         if os.path.exists('data/user_contexts.txt'):
             with open('data/user_contexts.txt', 'r', encoding='utf-8') as f:
-                user_contexts = json.load(f)
+                raw_contexts = json.load(f)
+
+            for name, context in raw_contexts.items():
+                try:
+                    user = bot.get_chat(name)  # работает если это username (например: @nickname)
+                    user_id = str(user.id)
+                    user_contexts[user_id] = context
+                except Exception:
+                    continue  # если не удалось найти — пропускаем
+
     except Exception as e:
         print(f"\n\n[load_data] Ошибка загрузки user_contexts: {e}\n\n")
 
     try:
         if os.path.exists('data/user_psyhos.txt'):
             with open('data/user_psyhos.txt', 'r', encoding='utf-8') as f:
-                user_psyhos = json.load(f)
+                raw_psyhos = json.load(f)
+
+            for name, psyho in raw_psyhos.items():
+                try:
+                    user = bot.get_chat(name)
+                    user_id = str(user.id)
+                    user_psyhos[user_id] = psyho
+                except Exception:
+                    continue
+
     except Exception as e:
         print(f"\n\n[load_data] Ошибка загрузки user_psyhos: {e}\n\n")
 
