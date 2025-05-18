@@ -53,7 +53,7 @@ def cleanup_clock_messages():
 #     except Exception as e:
 #         print(f"\n\n[load_data] Ошибка загрузки user_psyhos: {e}\n\n")
 
-def load_data():
+def load_data(): 
     global user_contexts, user_psyhos
     try:
         if os.path.exists('data/user_contexts.txt'):
