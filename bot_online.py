@@ -306,7 +306,7 @@ def echo_all(message):
 
             response = str( g4f_with_timeout(txt, username) ).strip()
             
-            if len(response) < 10:
+            if len(response) < 5:
                 time.sleep(2)
                 delete_last_message(username)
                 user_errors[username] = 'слишком короткий ответ' 
