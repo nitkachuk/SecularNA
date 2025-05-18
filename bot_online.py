@@ -57,12 +57,43 @@ def load_data():
 load_data()
 
 
+# def save_data():
+#     os.makedirs('data', exist_ok=True)
+#     with open('data/user_contexts.txt', 'w', encoding='utf-8') as f:
+#         json.dump(user_contexts, f, ensure_ascii=False, indent=2)
+#     with open('data/user_psyhos.txt', 'w', encoding='utf-8') as f:
+#         json.dump(user_psyhos, f, ensure_ascii=False, indent=2)
+
 def save_data():
     os.makedirs('data', exist_ok=True)
+
+    context_with_names = {}
+    psyhos_with_names = {}
+
+    for user_id in user_contexts:
+        try:
+            user_info = bot.get_chat(int(user_id))
+            name = user_info.username or user_info.first_name or str(user_id)
+        except Exception:
+            name = str(user_id)
+
+        context_with_names[name] = user_contexts[user_id]
+
+    for user_id in user_psyhos:
+        try:
+            user_info = bot.get_chat(int(user_id))
+            name = user_info.username or user_info.first_name or str(user_id)
+        except Exception:
+            name = str(user_id)
+
+        psyhos_with_names[name] = user_psyhos[user_id]
+
     with open('data/user_contexts.txt', 'w', encoding='utf-8') as f:
-        json.dump(user_contexts, f, ensure_ascii=False, indent=2)
+        json.dump(context_with_names, f, ensure_ascii=False, indent=2)
+
     with open('data/user_psyhos.txt', 'w', encoding='utf-8') as f:
-        json.dump(user_psyhos, f, ensure_ascii=False, indent=2)
+        json.dump(psyhos_with_names, f, ensure_ascii=False, indent=2)
+        
 
 def g4f_with_timeout(txt, username, timeout=10):
     global globalMessageObject, user_contexts, tempContext, \
