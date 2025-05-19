@@ -205,7 +205,20 @@ def echo_all(message):
     if message.text.strip() == 'пук':
         try:
             bot.reply_to(message, "Я пукнула 💅🏻")
-            user_busy[username] = False   # разблокируем флаг занятости
+            user_busy[username] = False
+            return
+        except Exception as e:
+            user_busy[username] = False
+            return
+
+    if message.text.strip() == '!c' or message.text.strip() == '!с':
+        try:
+            user_contexts[username] = ''
+            user_psyho[username] = ''
+            save_data()
+            
+            bot.reply_to(message, "🧹")
+            user_busy[username] = False
             return
         except Exception as e:
             user_busy[username] = False
