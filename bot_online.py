@@ -204,10 +204,12 @@ def echo_all(message):
             
     if message.text.strip() == 'пук':
         try:
-            bot.send_message(message.chat.id, "Я пукнула 💅🏻")
+            bot.reply_to(message, "Я пукнула 💅🏻")
+            user_busy[username] = False   # разблокируем флаг занятости
             return
         except Exception as e:
-            pass
+            user_busy[username] = False
+            return
     # команды
             
 
