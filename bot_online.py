@@ -238,7 +238,7 @@ def echo_all(message):
         
 
     # команды
-    if message.text.strip() == 'пук':
+    if message.text.strip().lower() in ['пук', 'пукь']:
         try:
             bot.reply_to(message, "Я пукнула 💅🏻")
             user_busy[username] = False
