@@ -1,4 +1,4 @@
-import os, asyncio, telebot, g4f, unicodedata, re, threading, queue, time, json, atexit
+import os, asyncio, telebot, g4f, unicodedata, re, threading, queue, time, json, atexit, sys
 from datetime import datetime, timedelta
 from state import has_latins, escape_system_text
 from telebot.apihelper import ApiTelegramException
@@ -30,7 +30,7 @@ def cleanup_clock_messages():
                 bot.delete_message(message.chat.id, message.message_id)
                 user_sent_messages[username] = bot.send_message(
                         message.chat.id,
-                            '❌',
+                            '💥',    # после краша прошлого скрипта
                         parse_mode='HTML'
                     )
             except Exception:
@@ -64,6 +64,7 @@ def save_data():
     with open('data/user_psyhos.txt', 'w', encoding='utf-8') as f:
         json.dump(user_psyhos, f, ensure_ascii=False, indent=2)
 
+
 def g4f_with_timeout(txt, username, timeout=10):
     global globalMessageObject, user_contexts, tempContext, \
         maxContext, response
@@ -76,7 +77,8 @@ def g4f_with_timeout(txt, username, timeout=10):
     aiContext = (
         f'{txt}\n·\n🧠  учти скрытую информацию для тебя, информацию о пользователе (не говори что знаешь): \
             \n{user_psyhos[username][:consoleLimit] }.....'
-        f'\n·\n📜  мягко учти СТАРУЮ историю перепески (не говори что знаешь):   \n{tempContext[:consoleLimit] }.....'
+        f'\n·\n📜  мягко учти СТАРУЮ историю перепески если РЕЛЕВАНТНА сообщению пользователя \
+            (не говори что знаешь):   \n{tempContext[:consoleLimit] }.....'
     )
 
     if len(aiContext) > maxContext:
@@ -95,6 +97,7 @@ def g4f_with_timeout(txt, username, timeout=10):
                                       "разнообразь с помощью эмодзи женского характера, но не слишком много, в том числе"
                                       "списки маркируй символом •  и немного символьными эмодзи. "
                                       "В конце каждого ответа добавляй одно ключевое предложение о пользователе, о нем в третьем лице "
+                                      "ответь ПО-РУССКИ, кратко, но не слишком "
                                       "для улучшения твоих ответов в формате ######предложение###### "},
         {"role": "user", "content": aiContext}
     ]
@@ -175,7 +178,7 @@ def echo_all(message):
     user_msg = user_sent_messages.get(username)
     if user_msg:
         user_text = user_msg.text.strip()
-        if '❌' in user_text:
+        if '❌' in user_text or '💥' in user_text:
             delete_last_message(username)
 
     if username not in user_first_message:
@@ -188,6 +191,27 @@ def echo_all(message):
     messageText = message.text
     if len(messageText) > maxContext:
         messageText = messageText[:maxContext]
+        
+
+    # команды
+    if message.text.strip() == '!f':
+        try:
+            bot.send_message(message.chat.id, "🏁")
+            bot.stop_polling()
+            sys.exit(0)
+        except Exception as e:
+            sys.exit(1)
+            
+    if message.text.strip() == 'пук':
+        try:
+            bot.reply_to(message, "Я пукнула 💅🏻")
+            user_busy[username] = False   # разблокируем флаг занятости
+            return
+        except Exception as e:
+            user_busy[username] = False
+            return
+    # команды
+            
 
     last_message = messageText
     clockEmodjis = [ '', '🕑', '🕓', '🕕', '🕗', '🕙' ]
@@ -241,10 +265,10 @@ def echo_all(message):
 
             response = str( g4f_with_timeout(txt, username) ).strip()
             
-            if len(response) < 10:
+            if len(response) < 5:
                 time.sleep(2)
                 delete_last_message(username)
-                user_errors[username] = 'слишком короткий ответ' 
+                user_errors[username] = f'слишком короткий ответ:  {response}' 
                 continue
 
             if response == '':
@@ -288,11 +312,10 @@ def echo_all(message):
             delete_last_message(username)
             bot.reply_to(message, response, parse_mode='HTML')
 
-            aiContext = f"Пользователь: {messageText}\nОракул: {response}\n{aiContext}"
-            if len(aiContext) > maxContext:
-                aiContext = aiContext[:maxContext]
+            aiContext = user_contexts.get(username, '').strip()
+            aiContext = f"Пользователь: {messageText}\nОракул: {response}\n" + aiContext
             try:
-                user_contexts[username] = aiContext.strip()    # обрезка контекста 
+                user_contexts[username] = aiContext[-maxContext:].strip()    # обрезка контекста 
             except Exception as e:
                 pass
 
@@ -300,7 +323,7 @@ def echo_all(message):
             try:
                 save_data()
             except Exception as e:
-                pass
+                print( f'\n\nошибка сохранения данных в /data/:{e}\n\n' )
                 
             aiAnswersCount += 1
             user_busy[username] = False
