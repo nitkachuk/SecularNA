@@ -192,6 +192,10 @@ def echo_all(message):
     if len(messageText) > maxContext:
         messageText = messageText[:maxContext]
 
+    if message.text.strip() == '!f':
+        print('\n\nПользователь завершил работу бота с помощью команды\n\n')
+        raise SystemExit
+
     last_message = messageText
     clockEmodjis = [ '', '🕑', '🕓', '🕕', '🕗', '🕙' ]
 
