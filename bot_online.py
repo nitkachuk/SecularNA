@@ -355,11 +355,10 @@ def echo_all(message):
             delete_last_message(username)
             bot.reply_to(message, response, parse_mode='HTML')
 
-            aiContext = f"Пользователь: {messageText}\nОракул: {response}\n{aiContext}"
-            if len(aiContext) > maxContext:
-                aiContext = aiContext[:maxContext]
+            aiContext = user_contexts.get(username, '').strip()
+            aiContext += f"\nПользователь: {messageText}\nОракул: {response}"
             try:
-                user_contexts[username] = aiContext.strip()    # обрезка контекста 
+                user_contexts[username] = aiContext[-maxContext:].strip()    # обрезка контекста 
             except Exception as e:
                 pass
 
