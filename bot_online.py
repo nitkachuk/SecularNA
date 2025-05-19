@@ -170,17 +170,17 @@ def handle_clear(message):
 @bot.message_handler(commands=['dev'])
 def handle_dev(message):
     global user_busy, user_contexts, user_psyhos
-    
+
     try:
         username = str(message.from_user.id)
-        user_contexts[username] = ''
-        user_psyhos[username] = ''
-        
+        user_context = user_contexts.get(username, '')
+        user_psyho = user_psyhos.get(username, '')
+
         save_data()
         bot.send_message(
             message.chat.id,
-            f"\n\n<i>Контекст:  {len(user_contexts)} символов\n"
-            f"Психоанализ:  {len(user_psyhos)} символов</i>\n\n",
+            f"<i>Контекст:  {len(user_context)} символов\n"
+            f"Психоанализ:  {len(user_psyho)} символов</i>",
             parse_mode='HTML'
         )
         user_busy[username] = False
