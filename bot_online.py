@@ -194,7 +194,7 @@ def echo_all(message):
         
 
     # команды
-    if message.text.strip() == '/f' or message.text.strip() == '/finish':
+    if message.text.strip() in ['/f', '/finish']:
         try:
             bot.send_message(message.chat.id, "🏁")
             bot.stop_polling()
@@ -211,8 +211,7 @@ def echo_all(message):
             user_busy[username] = False
             return
 
-    if message.text.strip() == '/c' or message.text.strip() == '/с' or / 
-                message.text.strip() == '/clear':
+    if message.text.strip() in ['/c', '/с', '/clear']:
         try:
             user_contexts[username] = ''
             user_psyho[username] = ''
