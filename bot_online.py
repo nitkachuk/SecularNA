@@ -144,8 +144,6 @@ def has_glyphs(text):
     return False
     
 
-@bot.message_handler(func=lambda message: True)
-
 @bot.message_handler(commands=['f', 'finish'])
 def handle_finish(message):
     try:
@@ -163,6 +161,8 @@ def handle_clear(message):
     save_data()
     bot.reply_to(message, "🧹")
     user_busy[username] = False
+
+@bot.message_handler(func=lambda message: True)
 
 
 def echo_all(message):
