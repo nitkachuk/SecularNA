@@ -193,9 +193,18 @@ def echo_all(message):
         messageText = messageText[:maxContext]
         
 
+    # команды
     if message.text.strip() == '!f':
         try:
             bot.send_message(message.chat.id, "🏁")
+            bot.stop_polling()
+            sys.exit(0)
+        except Exception as e:
+            sys.exit(1)
+            
+    if message.text.strip() == 'пук':
+        try:
+            bot.send_message(message.chat.id, "Я пукнула 💅🏻")
             bot.stop_polling()
             sys.exit(0)
         except Exception as e:
@@ -257,7 +266,7 @@ def echo_all(message):
             if len(response) < 5:
                 time.sleep(2)
                 delete_last_message(username)
-                user_errors[username] = 'слишком короткий ответ' 
+                user_errors[username] = f'слишком короткий ответ:  {response}' 
                 continue
 
             if response == '':
