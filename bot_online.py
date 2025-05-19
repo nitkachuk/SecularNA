@@ -181,6 +181,7 @@ def handle_dev(message):
             message.chat.id,
             f"\n\n<i>Контекст:  {len(user_contexts)} символов\n"
             f"Психоанализ:  {len(user_psyhos)} символов</i>\n\n",
+            parse_mode='HTML'
         )
         user_busy[username] = False
     except Exception:
