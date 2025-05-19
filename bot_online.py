@@ -162,7 +162,7 @@ def handle_clear(message):
         user_contexts[username] = ''
         user_psyhos[username] = ''
         save_data()
-        bot.send_message(message, "🧹")
+        bot.send_message(message.chat.id, "🧹")
         user_busy[username] = False
     except Exception:
         pass
@@ -178,7 +178,7 @@ def handle_dev(message):
         
         save_data()
         bot.send_message(
-            message,
+            message.chat.id,
             f"\n\n<i>Контекст:  {len(user_contexts)} символов\n"
             f"Психоанализ:  {len(user_psyhos)} символов</i>\n\n",
         )
