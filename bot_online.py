@@ -142,8 +142,27 @@ def has_glyphs(text):
         if unicodedata.category(char) == 'Lo':
             return True
     return False
+    
 
 @bot.message_handler(func=lambda message: True)
+
+@bot.message_handler(commands=['f', 'finish'])
+def handle_finish(message):
+    try:
+        bot.send_message(message.chat.id, "🏁")
+        bot.stop_polling()
+        sys.exit(0)
+    except Exception:
+        sys.exit(1)
+
+@bot.message_handler(commands=['c', 'с', 'clear'])
+def handle_clear(message):
+    username = str(message.from_user.id)
+    user_contexts[username] = ''
+    user_psyhos[username] = ''
+    save_data()
+    bot.reply_to(message, "🧹")
+    user_busy[username] = False
 
 
 def echo_all(message):
@@ -194,30 +213,9 @@ def echo_all(message):
         
 
     # команды
-    if message.text.strip() in ['/f', '/finish']:
-        try:
-            bot.send_message(message.chat.id, "🏁")
-            bot.stop_polling()
-            sys.exit(0)
-        except Exception as e:
-            sys.exit(1)
-            
     if message.text.strip() == 'пук':
         try:
             bot.reply_to(message, "Я пукнула 💅🏻")
-            user_busy[username] = False
-            return
-        except Exception as e:
-            user_busy[username] = False
-            return
-
-    if message.text.strip() in ['/c', '/с', '/clear']:
-        try:
-            user_contexts[username] = ''
-            user_psyho[username] = ''
-            save_data()
-            
-            bot.reply_to(message, "🧹")
             user_busy[username] = False
             return
         except Exception as e:
