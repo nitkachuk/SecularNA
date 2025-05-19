@@ -30,7 +30,7 @@ def cleanup_clock_messages():
                 bot.delete_message(message.chat.id, message.message_id)
                 user_sent_messages[username] = bot.send_message(
                         message.chat.id,
-                            '❌',
+                            '💥',    # после краша прошлого скрипта
                         parse_mode='HTML'
                     )
             except Exception:
@@ -178,7 +178,7 @@ def echo_all(message):
     user_msg = user_sent_messages.get(username)
     if user_msg:
         user_text = user_msg.text.strip()
-        if '❌' in user_text:
+        if '❌' in user_text or '💥' in user_text:
             delete_last_message(username)
 
     if username not in user_first_message:
