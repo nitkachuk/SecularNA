@@ -292,7 +292,7 @@ def echo_all(message):
             bot.reply_to(message, response, parse_mode='HTML')
 
             aiContext = user_contexts.get(username, '').strip()
-            aiContext += f"\nПользователь: {messageText}\nОракул: {response}"
+            aiContext = f"Пользователь: {messageText}\nОракул: {response}\n" + aiContext
             try:
                 user_contexts[username] = aiContext[-maxContext:].strip()    # обрезка контекста 
             except Exception as e:
