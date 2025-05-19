@@ -179,8 +179,8 @@ def handle_dev(message):
         save_data()
         bot.send_message(
             message.chat.id,
-            f"<i>📜 Контекст:  {len(user_context)} символов\n"
-            f"🧠 Психоанализ:  {len(user_psyho)} символов</i>",
+            f"<i>📜  Контекст:  {len(user_context)} символов\n"
+            f"🧠  Психоанализ:  {len(user_psyho)} символов</i>",
             parse_mode='HTML'
         )
         user_busy[username] = False
