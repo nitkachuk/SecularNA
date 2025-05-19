@@ -302,7 +302,7 @@ def echo_all(message):
             try:
                 save_data()
             except Exception as e:
-                pass
+                print( f'\n\nошибка сохранения данных в /data/:{e}\n\n' )
                 
             aiAnswersCount += 1
             user_busy[username] = False
