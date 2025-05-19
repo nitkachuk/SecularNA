@@ -205,10 +205,10 @@ def echo_all(message):
     if message.text.strip() == 'пук':
         try:
             bot.send_message(message.chat.id, "Я пукнула 💅🏻")
-            bot.stop_polling()
-            sys.exit(0)
+            return
         except Exception as e:
-            sys.exit(1)
+            pass
+    # команды
             
 
     last_message = messageText
