@@ -37,53 +37,19 @@ def cleanup_clock_messages():
                 pass
 
 # Загрузка сохранённых данных при запуске
-# def load_data():
-#     global user_contexts, user_psyhos
-#     try:
-#         if os.path.exists('data/user_contexts.txt'):
-#             with open('data/user_contexts.txt', 'r', encoding='utf-8') as f:
-#                 user_contexts = json.load(f)
-#     except Exception as e:
-#         print(f"\n\n[load_data] Ошибка загрузки user_contexts: {e}\n\n")
-
-#     try:
-#         if os.path.exists('data/user_psyhos.txt'):
-#             with open('data/user_psyhos.txt', 'r', encoding='utf-8') as f:
-#                 user_psyhos = json.load(f)
-#     except Exception as e:
-#         print(f"\n\n[load_data] Ошибка загрузки user_psyhos: {e}\n\n")
-
-def load_data(): 
+def load_data():
     global user_contexts, user_psyhos
     try:
         if os.path.exists('data/user_contexts.txt'):
             with open('data/user_contexts.txt', 'r', encoding='utf-8') as f:
-                raw_contexts = json.load(f)
-
-            for name, context in raw_contexts.items():
-                try:
-                    user = bot.get_chat(name)  # работает если это username (например: @nickname)
-                    user_id = str(user.id)
-                    user_contexts[user_id] = context
-                except Exception:
-                    continue  # если не удалось найти — пропускаем
-
+                user_contexts = json.load(f)
     except Exception as e:
         print(f"\n\n[load_data] Ошибка загрузки user_contexts: {e}\n\n")
 
     try:
         if os.path.exists('data/user_psyhos.txt'):
             with open('data/user_psyhos.txt', 'r', encoding='utf-8') as f:
-                raw_psyhos = json.load(f)
-
-            for name, psyho in raw_psyhos.items():
-                try:
-                    user = bot.get_chat(name)
-                    user_id = str(user.id)
-                    user_psyhos[user_id] = psyho
-                except Exception:
-                    continue
-
+                user_psyhos = json.load(f)
     except Exception as e:
         print(f"\n\n[load_data] Ошибка загрузки user_psyhos: {e}\n\n")
 
@@ -91,43 +57,13 @@ def load_data():
 load_data()
 
 
-# def save_data():
-#     os.makedirs('data', exist_ok=True)
-#     with open('data/user_contexts.txt', 'w', encoding='utf-8') as f:
-#         json.dump(user_contexts, f, ensure_ascii=False, indent=2)
-#     with open('data/user_psyhos.txt', 'w', encoding='utf-8') as f:
-#         json.dump(user_psyhos, f, ensure_ascii=False, indent=2)
-
 def save_data():
     os.makedirs('data', exist_ok=True)
-
-    context_with_names = {}
-    psyhos_with_names = {}
-
-    for user_id in user_contexts:
-        try:
-            user_info = bot.get_chat(int(user_id))
-            name = user_info.username or user_info.first_name or str(user_id)
-        except Exception:
-            name = str(user_id)
-
-        context_with_names[name] = user_contexts[user_id]
-
-    for user_id in user_psyhos:
-        try:
-            user_info = bot.get_chat(int(user_id))
-            name = user_info.username or user_info.first_name or str(user_id)
-        except Exception:
-            name = str(user_id)
-
-        psyhos_with_names[name] = user_psyhos[user_id]
-
     with open('data/user_contexts.txt', 'w', encoding='utf-8') as f:
-        json.dump(context_with_names, f, ensure_ascii=False, indent=2)
-
+        json.dump(user_contexts, f, ensure_ascii=False, indent=2)
     with open('data/user_psyhos.txt', 'w', encoding='utf-8') as f:
-        json.dump(psyhos_with_names, f, ensure_ascii=False, indent=2)
-        
+        json.dump(user_psyhos, f, ensure_ascii=False, indent=2)
+
 
 def g4f_with_timeout(txt, username, timeout=10):
     global globalMessageObject, user_contexts, tempContext, \
