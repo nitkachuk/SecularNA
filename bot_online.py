@@ -155,12 +155,36 @@ def handle_finish(message):
 
 @bot.message_handler(commands=['c', 'с', 'clear'])
 def handle_clear(message):
-    username = str(message.from_user.id)
-    user_contexts[username] = ''
-    user_psyhos[username] = ''
-    save_data()
-    bot.delete_message(message, "🧹")
-    user_busy[username] = False
+    global user_busy, user_contexts, user_psyhos
+    
+    try:
+        username = str(message.from_user.id)
+        user_contexts[username] = ''
+        user_psyhos[username] = ''
+        save_data()
+        bot.send_message(message, "🧹")
+        user_busy[username] = False
+    except Exception:
+        pass
+
+@bot.message_handler(commands=['dev'])
+def handle_dev(message):
+    global user_busy, user_contexts, user_psyhos
+    
+    try:
+        username = str(message.from_user.id)
+        user_contexts[username] = ''
+        user_psyhos[username] = ''
+        
+        save_data()
+        bot.send_message(
+            message,
+            f"\n\n<i>Контекст:  {len(user_contexts)} символов\n"
+            f"Психоанализ:  {len(user_psyhos)} символов</i>\n\n",
+        )
+        user_busy[username] = False
+    except Exception:
+        pass
 
 @bot.message_handler(func=lambda message: True)
 
@@ -221,7 +245,6 @@ def echo_all(message):
         except Exception as e:
             user_busy[username] = False
             return
-    # команды
             
 
     last_message = messageText
