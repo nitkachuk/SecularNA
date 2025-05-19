@@ -147,7 +147,7 @@ def has_glyphs(text):
 @bot.message_handler(commands=['f', 'finish'])
 def handle_finish(message):
     try:
-        bot.send_message(message.chat.id, "🏁")
+        bot.delete_message(message.chat.id, "🏁")
         bot.stop_polling()
         sys.exit(0)
     except Exception:
@@ -159,7 +159,7 @@ def handle_clear(message):
     user_contexts[username] = ''
     user_psyhos[username] = ''
     save_data()
-    bot.reply_to(message, "🧹")
+    bot.delete_message(message, "🧹")
     user_busy[username] = False
 
 @bot.message_handler(func=lambda message: True)
