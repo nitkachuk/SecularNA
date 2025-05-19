@@ -1,4 +1,4 @@
-import os, asyncio, telebot, g4f, unicodedata, re, threading, queue, time, json, atexit
+import os, asyncio, telebot, g4f, unicodedata, re, threading, queue, time, json, atexit, sys
 from datetime import datetime, timedelta
 from state import has_latins, escape_system_text
 from telebot.apihelper import ApiTelegramException
@@ -191,10 +191,16 @@ def echo_all(message):
     messageText = message.text
     if len(messageText) > maxContext:
         messageText = messageText[:maxContext]
+        
 
     if message.text.strip() == '!f':
-        print('\n\nПользователь завершил работу бота с помощью команды\n\n')
-        raise SystemExit
+        try:
+            bot.send_message(message.chat.id, "🏁")
+            bot.stop_polling()
+            sys.exit(0)
+        except Exception as e:
+            sys.exit(1)
+            
 
     last_message = messageText
     clockEmodjis = [ '', '🕑', '🕓', '🕕', '🕗', '🕙' ]
