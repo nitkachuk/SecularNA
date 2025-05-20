@@ -202,7 +202,7 @@ def handle_info(message):
              f"  | |             | | \n"
              f"  | |  ChatGPT-4  | | \n"
              f"  | |             | | \n"
-             f"  | | AI ALT-FIRL | | \n"
+             f"  | | AI ALT-GIRL | | \n"
              f"  |_________________| \n"
              f"      _[_______]_ \n"
              f"  ___[___________]___ \n"
