@@ -189,7 +189,7 @@ def handle_dev(message):
         user_busy[username] = False
 
 @bot.message_handler(commands=['psy', 'psyho'])
-def handle_dev(message):
+def handle_psy(message):
     global user_busy, user_psyhos
 
     try:
@@ -200,7 +200,7 @@ def handle_dev(message):
         save_data()
         bot.send_message(
             message.chat.id,
-            f"🧠  Психоанализ [{len(user_psyho)}]:\n\n{user_psyho} символов</i>",
+            f"🧠  <i>Психоанализ [{len(user_psyhos)}]:\n\n{user_psyhos}</i>",
             parse_mode='HTML'
         )
         user_busy[username] = False
