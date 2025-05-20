@@ -166,7 +166,7 @@ def handle_clear(message):
         bot.send_message(message.chat.id, "🧹")
         user_busy[username] = False
     except Exception:
-        pass
+        user_busy[username] = False
 
 @bot.message_handler(commands=['dev'])
 def handle_dev(message):
@@ -186,7 +186,26 @@ def handle_dev(message):
         )
         user_busy[username] = False
     except Exception:
-        pass
+        user_busy[username] = False
+
+@bot.message_handler(commands=['psy', 'psyho'])
+def handle_dev(message):
+    global user_busy, user_psyhos
+
+    try:
+        username = str(message.from_user.id)
+        user_context = user_contexts.get(username, '')
+        user_psyho = user_psyhos.get(username, '')
+
+        save_data()
+        bot.send_message(
+            message.chat.id,
+            f"🧠  Психоанализ [{len(user_psyho)}]:\n\n{user_psyho} символов</i>",
+            parse_mode='HTML'
+        )
+        user_busy[username] = False
+    except Exception:
+        user_busy[username] = False
 
 @bot.message_handler(func=lambda message: True)
 
