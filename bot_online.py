@@ -65,7 +65,7 @@ def save_data():
         json.dump(user_psyhos, f, ensure_ascii=False, indent=2)
 
 
-def g4f_with_timeout(txt, username, timeout=10):
+def g4f_with_timeout(txt, username, timeout=20):
     global globalMessageObject, user_contexts, tempContext, \
         maxContext, response
 
@@ -123,6 +123,7 @@ def g4f_with_timeout(txt, username, timeout=10):
 
     result = q.get()
     if isinstance(result, Exception):
+        print(f"[g4f too short ERROR]:  {result}")
         raise result
     return result
 
