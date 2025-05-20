@@ -175,7 +175,7 @@ def handle_psy(message):
     try:
         username = str(message.from_user.id)
         user_context = user_contexts.get(username, '')
-        user_psyho = f"<pre>{user_psyhos.get(username, '')}</pre>"
+        user_psyho = f"<code>{user_psyhos.get(username, '')}</code>"
 
         save_data()
         bot.send_message(
