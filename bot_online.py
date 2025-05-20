@@ -302,17 +302,17 @@ def echo_all(message):
             
 
             response = str( g4f_with_timeout(txt, username) ).strip()
-            
-            if len(response) < 5:
-                time.sleep(2)
-                delete_last_message(username)
-                user_errors[username] = f'слишком короткий ответ:  {response}' 
-                continue
 
             if response == '':
                 time.sleep( 2 )
                 delete_last_message(username)
-                user_errors[username] = 'таймаут g4f'
+                user_errors[username] = f'таймаут g4f:  {response}'
+                continue
+                
+            if len(response) < 5:
+                time.sleep(2)
+                delete_last_message(username)
+                user_errors[username] = f'слишком короткий ответ:  {response}' 
                 continue
 
             if has_glyphs( response ):
