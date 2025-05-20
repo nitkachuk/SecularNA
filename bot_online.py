@@ -195,12 +195,12 @@ def handle_psy(message):
     try:
         username = str(message.from_user.id)
         user_context = user_contexts.get(username, '')
-        user_psyho = user_psyhos.get(username, '')
+        user_psyho = f"<pre>{user_psyhos.get(username, '')}</pre>"
 
         save_data()
         bot.send_message(
             message.chat.id,
-            f"🧠  <i>Психоанализ [{len(user_psyhos)}]:\n\n{user_psyhos}</i>",
+            f"🧠  <i>Психоанализ [{len(user_psyho)}]:</i>\n\n{user_psyho}",
             parse_mode='HTML'
         )
         user_busy[username] = False
