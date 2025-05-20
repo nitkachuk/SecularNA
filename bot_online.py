@@ -188,9 +188,37 @@ def handle_psy(message):
     except Exception:
         user_busy[username] = False
 
+@bot.message_handler(commands=['i', 'info'])
+def handle_info(message):
+    try:
+        username = str(message.from_user.id)
+
+        bot.send_message(
+            message.chat.id,
+             f"  ___________________ "
+             f"  | _______________ | "
+             f"  | |    ORACLE   | | "
+             f"  | |             | | "
+             f"  | |  ChatGPT-4  | | "
+             f"  | |             | | "
+             f"  | | AI ALT-FIRL | | "
+             f"  |_________________| "
+             f"      _[_______]_ "
+             f"  ___[___________]___ "
+             f" |         [_____] []|__ "
+             f" |         [_____] []|  \__ "
+             f" L___________________J     \ \___\/ "
+             f"  ___________________      /\ "
+             f" /###################\    (__) ",
+            parse_mode='HTML'
+        )
+        user_busy[username] = False
+    except Exception:
+        user_busy[username] = False
+
+
+
 @bot.message_handler(func=lambda message: True)
-
-
 def echo_all(message):
     global aiAnswersCount, user_contexts, user_attempts, \
        user_psyhos, maxContent, response, globalMessageObject, \
