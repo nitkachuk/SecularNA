@@ -195,7 +195,7 @@ def handle_info(message):
 
         bot.send_message(
             message.chat.id,
-             f"<pre>"
+             f"<code>"
              f"  ___________________ \n"
              f"  | _______________ | \n"
              f"  | |    ORACLE   | | \n"
@@ -211,7 +211,7 @@ def handle_info(message):
              f" L___________________J     \ \___\/ \n"
              f"  ___________________      /\ \n"
              f" /###################\    (__)"
-             f"</pre>",
+             f"</code>",
             parse_mode='HTML'
         )
         user_busy[username] = False
