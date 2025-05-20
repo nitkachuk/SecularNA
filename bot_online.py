@@ -181,7 +181,7 @@ def handle_psy(message):
         bot.send_message(
             message.chat.id,
             f"<i>📜  Контекст [{len(user_context)}] \n"
-            f"🧠  Психоанализ [{len(user_psyho)}]:</i>\n\n{user_psyho}",
+            f"🧠  Психоанализ [{len(user_psyho) - 11}]:</i>\n\n{user_psyho}",    # теги
             parse_mode='HTML'
         )
         user_busy[username] = False
