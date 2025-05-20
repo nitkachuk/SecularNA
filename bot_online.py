@@ -199,6 +199,8 @@ def echo_all(message):
     # 🛑 Игнорируем любые сообщения от каналов
     if message.chat.type == 'channel':
         return
+    if message.sender_chat is not None:
+        return
 
     username = str(message.from_user.id)
     if username not in user_contexts:
